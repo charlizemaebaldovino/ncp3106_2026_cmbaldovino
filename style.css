@@ -1,0 +1,841 @@
+
+
+/* BASIC RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Bebas Neue", sans-serif;
+}
+
+
+/* PAGE */
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+
+body{
+    position:relative;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #ffffff 0%,
+        #f7f0ea 34%,
+        #ead9ca 70%,
+        #c5a087 100%
+    );
+}
+
+
+/* DARK BROWN CORNERS */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(
+        circle at top left,
+        rgba(75,45,30,.70),
+        rgba(112,72,46,.45) 14%,
+        transparent 32%
+    ),
+
+    radial-gradient(
+        circle at top right,
+        rgba(75,45,30,.65),
+        rgba(112,72,46,.40) 14%,
+        transparent 32%
+    ),
+
+    radial-gradient(
+        circle at bottom left,
+        rgba(75,45,30,.75),
+        rgba(112,72,46,.45) 15%,
+        transparent 34%
+    ),
+
+    radial-gradient(
+        circle at bottom right,
+        rgba(75,45,30,.70),
+        rgba(112,72,46,.40) 15%,
+        transparent 34%
+    );
+
+    filter:blur(35px);
+    z-index:-2;
+}
+
+
+/* BACKGROUND BLOBS */
+
+.blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(100px);
+    z-index:-1;
+}
+
+
+.blob1{
+    width:400px;
+    height:400px;
+    background:#8b5e3c;
+    top:-150px;
+    left:-120px;
+    opacity:.40;
+}
+
+
+.blob2{
+    width:450px;
+    height:450px;
+    background:#d6b79f;
+    bottom:-160px;
+    right:-120px;
+    opacity:.45;
+}
+
+
+/* SCROLLABLE PAGE */
+
+.page{
+    position:relative;
+    width:100%;
+    height:100vh;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    padding-bottom:0;
+}
+
+
+/* SCROLLBAR */
+
+.page::-webkit-scrollbar{
+    width:8px;
+}
+
+.page::-webkit-scrollbar-track{
+    background:rgba(75,45,30,.10);
+}
+
+.page::-webkit-scrollbar-thumb{
+    background:#6a4733;
+    border-radius:20px;
+}
+
+.page::-webkit-scrollbar-thumb:hover{
+    background:#4B2D1E;
+}
+
+
+/* COLOR PALETTE */
+
+.palette{
+    position:absolute;
+    top:50px;
+    left:50px;
+
+    display:flex;
+    gap:12px;
+
+    z-index:100;
+}
+
+
+.palette span{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    border:2px solid white;
+}
+
+
+.c1{
+    background:#E6C7AA;
+}
+
+.c2{
+    background:#57321B;
+}
+
+.c3{
+    background:#90716B;
+}
+
+
+/* HELLO CURSIVE */
+
+.hello{
+    position:absolute;
+    top:25px;
+    left:30%;
+    font-family:"Allura", cursive;
+    font-size:200px;
+    font-weight:350;
+    color:white;
+   -webkit-text-stroke:3px rgba(112,72,46,.40);
+    transform:rotate(-8deg);
+    z-index:10;
+    white-space:nowrap;
+}
+
+
+/* ALL ABOUT MIA */
+
+.outline{
+    position:absolute;
+    top:140px;
+    left:60%;
+    width:50%;
+    transform:translateX(-50%);
+    margin:0;
+    background:#4B2D1E;
+    padding:22px 40px;
+    border-radius:50px;
+    color:white;
+    font-size:100px;
+    font-weight:750;
+    letter-spacing:4px;
+    line-height:1;
+    white-space:nowrap;
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.25);
+
+    z-index:5;
+}
+
+
+/* MAIN DESIGN */
+
+.design{
+    position:relative;
+    width:100%;
+    height:1600px;
+    margin-top:120px;
+}
+
+
+/* BROWN ABOUT CARD */
+
+.about{
+    position:absolute;
+    top:170px;
+    left:55%;
+    transform:translateX(-50%);
+    width:1200px;
+    min-height:350px;
+    background:#4B2D1E;
+    color:white;
+    padding:40px;
+    border-radius:10px;
+    line-height:1.7;
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.28);
+    z-index:5;
+}
+
+
+/* ABOUT TITLE */
+
+.about h2{
+    margin-bottom:18px;
+    font-size:50px;
+}
+
+
+/* ABOUT PARAGRAPH */
+
+.about p{
+    width:1500px;
+    max-width:1000px;
+    font-size:20px;
+    font-family:"Playfair Display", serif;
+}
+
+
+.highlight{
+    color:#E6C7AA;
+    font-weight:700;
+}
+
+
+/* CIRCLE PHOTO */
+
+.circle{
+    position:absolute;
+    top:-70px;
+    left:calc(50% + 440px);
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    overflow:hidden;
+    background:white;
+    border:7px solid white;
+    box-shadow:
+        0 0 0 3px #6a4733,
+        0 20px 35px rgba(0,0,0,.28);
+    z-index:30;
+    cursor:pointer;
+    transition:transform .3s ease;
+}
+
+
+.circle:hover{
+    transform:scale(1.03);
+}
+
+
+.circle img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+
+/* LARGE PHOTO */
+
+.photo{
+    position:absolute;
+    top:100px;
+    left:calc(50% - 1000px);
+    width:830px;
+    height:1060px;
+    border-radius:28px;
+    overflow:hidden;
+    background:transparent;
+    box-shadow:none;
+    z-index:20;
+    cursor:pointer;
+    transition:transform .3s ease;
+}
+
+
+.photo:hover{
+    transform:scale(1.02);
+}
+
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+
+/* LOWER PHOTO 1 */
+
+.photo-lower1{
+    position:absolute;
+    top:550px;
+    left:calc(50% - 25px);
+    width:900px;
+    height:600px;
+    border-radius:0;
+    overflow:visible;
+    background:transparent;
+    box-shadow:none;
+    z-index:15;
+}
+
+
+.photo-lower1 img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+
+/* LOWER PHOTO 2 */
+
+.photo-lower2{
+    position:absolute;
+    top:560px;
+    left:calc(50% - 500px);
+    width:900px;
+    height:525px;
+    overflow:visible;
+    background:transparent;
+    z-index:18;
+}
+
+
+.photo-lower2 img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    transform:scale(1.35);
+    transform-origin:center center;
+}
+
+
+/* LOWER PHOTO 3 */
+
+.photo-dots{
+    position:absolute;
+    top:30px;
+    left:calc(50% - 400px);
+    width:290px;
+    height:240px;
+    overflow:visible;
+    background:transparent;
+    z-index:20;
+}
+
+
+.photo-dots img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+
+/* LOWER PHOTO 4 */
+
+.photo-cam{
+    position:absolute;
+    top:760px;
+    left:calc(50% + 550px);
+    width:500px;
+    height:400px;
+    overflow:visible;
+    background:transparent;
+    z-index:21;
+}
+
+
+.photo-cam img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+/* LOWER PHOTO 5 */
+
+.photo-heart{
+    position:absolute;
+    top:1060px;
+    left:calc(50% + 550px);
+    width:500px;
+    height:400px;
+    overflow:visible;
+    background:transparent;
+    z-index:21;
+}
+
+
+.photo-heart img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+/* LOWER PHOTO 6 */
+
+.photo-bling{
+    position:absolute;
+    top:1500px;
+    left:calc(50% + -1160px);
+    width:500px;
+    height:400px;
+    overflow:visible;
+    background:transparent;
+    z-index:21;
+}
+
+
+.photo-bling img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+/* INFO CARD */
+
+.info{
+    position:absolute;
+    top:450px;
+    left:calc(50% + 500px);
+    width:350px;
+    background:white;
+    padding:28px;
+    border-radius:30px;
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.18);
+    z-index:25;
+}
+
+
+.info h1{
+    color:#4B2D1E;
+    margin-bottom:10px;
+    font-size:30px;
+    letter-spacing:1px;
+    font-family:"Bebas Neue", sans-serif;
+}
+
+
+.title{
+    color:#777;
+    line-height:1.6;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* SOCIAL ICONS */
+
+.socials{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    margin-top:20px;
+}
+
+
+.socials a{
+    color:#4B2D1E;
+    font-size:35px;
+    transition:.3s;
+}
+
+
+.socials a:hover{
+    transform:scale(1.2);
+    color:#8B5E3C;
+}
+
+
+
+/* THINGS I DID + THINGS I LOVE **/
+
+.things-wrapper{
+    position:absolute;
+    top:1200px;
+    left:3%;
+    width:94%;
+    height:370px;
+    display:flex;
+    gap:45px;
+    z-index:10;
+}
+
+
+/* EACH BOX */
+
+.things-section{
+    position:relative;
+    width:50%;
+    height:500px;
+    background:#E6C7AA;
+    border-radius:35px;
+    margin-top:50px;
+}
+
+
+/* TITLES */
+
+.things-title{
+    position:absolute;
+    top:-50px;
+    left:30px;
+    font-family:"Allura", cursive;
+    font-size:75px;
+    font-weight:300px;
+    color:#362111;
+    z-index:15;
+    white-space:nowrap;
+}
+
+
+/* SINGLE CLICKABLE IMAGE */
+
+.thing{
+    position:absolute;
+    top:35px;
+    left:50%;
+    transform:translateX(-50%);
+    width:75%;
+    height:400px;
+    overflow:hidden;
+     border:4px solid #362111;   /* Border color and thickness */
+    box-sizing:border-box; 
+    border-radius:25px;
+    z-index:10;
+    cursor:pointer;
+    transition:transform .3s ease;
+}
+
+.thing img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:25px;
+}
+
+
+.thing:hover{
+    transform:translateX(-50%) scale(1.04);
+}
+
+
+
+/* CLICK IMAGE TEXT */
+
+.things-caption{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:"Bebas Neue", sans-serif;
+    font-size:18px;
+    color:#362111;
+    white-space:nowrap;
+    z-index:20;
+}
+
+
+/* EXTRA SPACE */
+
+.bottom-space{
+    height:200px;
+}
+
+
+/* TABLET */
+
+
+@media(max-width:1100px){
+    .outline{
+        font-size:40px;
+    }
+
+    .about{
+        width:70%;
+    }
+
+    .circle{
+        left:auto;
+        right:5%;
+    }
+
+    .photo{
+        left:5%;
+    }
+
+    .info{
+        left:auto;
+        right:5%;
+    }
+
+    .things-wrapper{
+        width:90%;
+        left:5%;
+        gap:25px;
+    }
+
+    .things-title{
+        font-size:60px;
+    }
+
+    .thing{
+        width:85%;
+        height:240px;
+    }
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:700px){
+
+    .palette{
+        left:20px;
+        top:20px;
+    }
+
+
+    .palette span{
+        width:22px;
+        height:22px;
+    }
+
+
+    .outline{
+        top:65px;
+        font-size:25px;
+        padding:18px 25px;
+        letter-spacing:2px;
+    }
+
+
+    .design{
+        margin-top:120px;
+        height:2550px;
+    }
+
+
+    .about{
+        top:100px;
+        width:88%;
+        min-height:430px;
+        padding:30px 25px;
+    }
+
+
+    .about p{
+        width:100%;
+    }
+
+
+    .circle{
+        top:45px;
+        right:5%;
+        left:auto;
+        width:190px;
+        height:190px;
+    }
+
+
+    .photo{
+        top:450px;
+        left:7%;
+        width:280px;
+        height:360px;
+    }
+
+
+    .photo-lower1{
+        top:730px;
+        left:10%;
+        width:320px;
+        height:290px;
+    }
+
+
+    .photo-lower2{
+        top:850px;
+        left:15%;
+        width:320px;
+        height:290px;
+    }
+
+    .photo-lower3{
+        top:850px;
+        left:15%;
+        width:320px;
+        height:290px;
+    }
+
+
+    .photo-dots{
+        top:1050px;
+        left:10%;
+        width:320px;
+        height:250px;
+    }
+
+
+    .photo-cam{
+        top:1200px;
+        left:15%;
+        width:320px;
+        height:250px;
+    } 
+
+    .photo-heart{
+        top:1200px;
+        left:15%;
+        width:320px;
+        height:250px;
+    }
+
+     .photo-bling{
+        top:1200px;
+        left:15%;
+        width:320px;
+        height:250px;
+    }
+
+
+    .info{
+        top:1450px;
+        left:7%;
+        right:auto;
+        width:86%;
+    }
+
+
+    /* THINGS I DID + THINGS I LOVE */
+
+    .things-wrapper{
+        top:1750px;
+        left:5%;
+        width:90%;
+        height:700px;
+        display:block;
+    }
+
+
+    .things-section{
+        width:100%;
+        height:320px;
+        margin-top:60px;
+        border-radius:25px;
+    }
+
+
+    .things-section + .things-section{
+        margin-top:100px;
+    }
+
+
+    .things-title{
+        top:-55px;
+        left:15px;
+        font-size:55px;
+    }
+
+
+    .thing{
+        top:25px;
+        left:50%;
+        width:85%;
+        height:235px;
+    }
+
+
+    .things-caption{
+        bottom:15px;
+        font-size:18px;
+    }
+
+}
+

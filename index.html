@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All About Mia</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- BACKGROUND -->
+
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+
+
+    <!-- COLOR PALETTE -->
+
+    <div class="palette">
+
+        <span class="c1"></span>
+        <span class="c2"></span>
+        <span class="c3"></span>
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h2 class="hello">
+        hello
+    </h2>
+
+
+    <h1 class="outline">
+        &nbsp; &nbsp; &nbsp; &nbsp; THIS IS MIA!
+    </h1>
+
+
+    <!-- MAIN DESIGN -->
+
+    <div class="design">
+
+
+        <!-- BROWN ABOUT CARD -->
+
+        <div class="about">
+
+            <h2>
+                &nbsp; &nbsp; &nbsp; About Me
+            </h2>
+
+
+            <p>
+
+                <span class="highlight">
+                     &nbsp; Charlize Mae "Mia" Baldovino
+                </span>
+
+                is a third-year Bachelor of Science in Computer Engineering
+                student at the University &nbsp; &nbsp; &nbsp;of the East – Manila. She enjoys
+                learning about computer hardware and participating in projects
+                that create &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; technology-based solutions for the community.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+
+                She continues to explore different areas of computer engineering
+                while improving her technical
+                skills &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and preparing for a future
+                career in the technology industry.
+
+            </p>
+
+        </div>
+
+
+        <!-- CIRCLE PHOTO -->
+
+        <div
+            class="circle"
+            onmouseenter="changeCircleImage()"
+            onmouseleave="resetCircleImage()"
+        >
+
+            <img
+                id="circleImage"
+                src="assets/mia4.jpg"
+                alt="Mia"
+            >
+
+        </div>
+
+
+        <!-- LARGE PHOTO -->
+
+        <div
+            class="photo"
+            onmouseenter="changeMainImage()"
+            onmouseleave="resetMainImage()"
+        >
+
+            <img
+                id="mainImage"
+                src="assets/mia1.png"
+                alt="Mia"
+            >
+
+        </div>
+
+
+        <!-- LOWER PHOTO 1 -->
+
+        <div class="photo-lower1">
+
+            <img
+                src="assets/miadown1.png"
+                alt="Mia"
+            >
+
+        </div>
+
+
+        <!-- LOWER PHOTO 2 -->
+
+        <div class="photo-lower2">
+
+            <img
+                src="assets/miadown2.png"
+                alt="Mia"
+            >
+
+        </div>
+
+
+        <!-- LOWER PHOTO 3 -->
+
+        <div class="photo-dots">
+
+            <img
+                src="assets/dots.png"
+                alt="Dots"
+            >
+
+        </div>
+
+
+        <!-- LOWER PHOTO 4 -->
+
+        <div class="photo-cam">
+
+            <img
+                src="assets/cam.png"
+                alt="Cam"
+            >
+
+        </div>
+
+         <div class="photo-heart">
+
+            <img
+                src="assets/heart.png"
+                alt="heart"
+            >
+
+        </div>
+
+        <div class="photo-bling">
+
+            <img
+                src="assets/bling.png"
+                alt="bling"
+            >
+
+        </div>
+
+
+        <!-- INFO CARD -->
+
+        <div class="info">
+
+            <h1>
+                &nbsp; &nbsp; &nbsp; Know more about me!
+            </h1>
+
+
+            <div class="title">
+                &nbsp; &nbsp; &nbsp; Check out my Socials
+            </div>
+
+
+            <div class="socials">
+
+                <a
+                    href="https://www.facebook.com/share/1BoECoS2tP/"
+                    target="_blank"
+                >
+
+                    <i class="fab fa-facebook"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.instagram.com/charlizebaldovino"
+                    target="_blank"
+                >
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    href="https://www.tiktok.com/@miatrolly"
+                    target="_blank"
+                >
+
+                    <i class="fab fa-tiktok"></i>
+
+                </a>
+
+
+                <a
+                    href="https://open.spotify.com/user/31hzo47lct6ffko6i6k4xaalh5am"
+                    target="_blank"
+                >
+
+                    <i class="fab fa-spotify"></i>
+
+                </a>
+
+
+                <a
+                    href="mailto:baldovino.charlizemae@ue.edu.ph"
+                >
+
+                    <i class="fas fa-envelope"></i>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- THINGS I DID + THINGS I LOVE -->
+        <!-- ================================================= -->
+
+        <div class="things-wrapper">
+
+
+            <!-- THINGS THAT I DID -->
+
+            <div class="things-section">
+
+                <h2 class="things-title">
+                    things that i did
+                </h2>
+
+
+                <!-- SINGLE IMAGE -->
+
+                <div
+                    class="thing"
+                    onclick="changeThingImage('did')"
+                >
+
+                    <img
+                        id="didImage"
+                        src="assets/work3.jpg"
+                        alt="Things I Did"
+                    >
+
+                </div>
+
+
+                <!-- CLICK TEXT -->
+
+                <div class="things-caption">
+                    click image to see more
+                </div>
+
+
+            </div>
+
+
+            <!-- THINGS I LOVE -->
+
+            <div class="things-section">
+
+                <h2 class="things-title">
+                    things i love
+                </h2>
+
+
+                <!-- SINGLE IMAGE -->
+
+                <div
+                    class="thing"
+                    onclick="changeThingImage('love')"
+                >
+
+                    <img
+                        id="loveImage"
+                        src="assets/love1.jpg"
+                        alt="Things I Love"
+                    >
+
+                </div>
+
+
+                <!-- CLICK TEXT -->
+
+                <div class="things-caption">
+                    click image to see more
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="bottom-space"></div>
+
+
+</div>
+
+
+<script>
+
+
+/* HOVER PHOTO CHANGES */
+
+const mainOriginal = "assets/mia1.png";
+const mainHover = "assets/mia2.png";
+
+
+function changeMainImage(){
+
+    document.getElementById("mainImage").src = mainHover;
+
+}
+
+
+function resetMainImage(){
+
+    document.getElementById("mainImage").src = mainOriginal;
+
+}
+
+
+/* CIRCLE PHOTO */
+
+const circleOriginal = "assets/mia3.jpg";
+const circleHover = "assets/mia4.jpg";
+
+
+function changeCircleImage(){
+
+    document.getElementById("circleImage").src = circleHover;
+
+}
+
+
+function resetCircleImage(){
+
+    document.getElementById("circleImage").src = circleOriginal;
+
+}
+
+
+/* THINGS I DID */
+
+const workImages = [
+    
+    "assets/work1.png",
+    
+    "assets/work3.jpg",
+    "assets/work8.jpg",
+    "assets/work5.png",
+    "assets/work6.jpg",
+    "assets/work7.jpg",
+    "assets/work9.jpg",
+    "assets/work4.jpg"
+
+];
+
+let workIndex = 0;
+
+
+/* THINGS I LOVE */
+
+const loveImages = [
+    "assets/love1.jpg",
+    "assets/love2.jpg",
+    "assets/love3.jpg",
+    "assets/love4.jpg",
+    "assets/love5.jpg",
+    "assets/love6.jpg",
+    "assets/love7.jpg",
+    "assets/love8.jpg",
+    "assets/love9.JPG",
+    "assets/love10.jpg",
+    "assets/love11.JPG",
+    "assets/love12.JPG"
+];
+
+let loveIndex = 0;
+
+
+/* CLICK IMAGE TO CONTINUE */
+
+function changeThingImage(type){
+
+    if(type === "did"){
+
+        workIndex++;
+
+        if(workIndex >= workImages.length){
+            workIndex = 0;
+        }
+
+        document.getElementById("didImage").src = workImages[workIndex];
+
+    }
+
+
+    if(type === "love"){
+
+        loveIndex++;
+
+        if(loveIndex >= loveImages.length){
+            loveIndex = 0;
+        }
+
+        document.getElementById("loveImage").src = loveImages[loveIndex];
+
+    }
+
+}
+</script>
+</body>
+</html>
