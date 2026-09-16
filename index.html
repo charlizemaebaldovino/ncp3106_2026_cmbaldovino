@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UE Manila — Computer Engineering</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<script>
+(function () {
+
+    const savedTheme =
+        localStorage.getItem("cpe-theme") || "light";
+
+    document.documentElement.dataset.theme = savedTheme;
+    document.documentElement.dataset.introTheme = savedTheme;
+
+})();
+</script>
+
+
+<!-- =========================================================
+     INTRO
+========================================================= -->
+
+<div id="intro">
+
+    <div class="intro-sheet">
+
+        <div class="intro-video-wrap">
+
+            <video
+                id="introVideo"
+                class="intro-video"
+                autoplay
+                muted
+                playsinline
+                preload="auto"
+            >
+                <source
+                    id="introVideoSource"
+                    src="assets/light.mp4"
+                    type="video/mp4"
+                >
+            </video>
+
+        </div>
+
+        <div class="intro-label">
+            UNIVERSITY OF THE EAST / MANILA
+        </div>
+
+        <div class="intro-code">
+            SYSTEM 01<br>
+            COMPUTER ENGINEERING<br>
+            INITIALIZING...
+        </div>
+
+    </div>
+
+    <div class="intro-wipe"></div>
+
+</div>
+
+
+<!-- =========================================================
+     SHARED ANIMATED TITLE
+========================================================= -->
+
+<div
+    id="sharedTitle"
+    class="intro-position"
+    aria-hidden="true"
+>
+
+    <span class="computer">
+        COMPUTER
+    </span>
+
+    <span class="engineering">
+        ENGINEERING
+    </span>
+
+</div>
+
+
+<!-- =========================================================
+     WEBSITE
+========================================================= -->
+
+<div id="site">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="topbar">
+
+        <div class="live">
+            <span class="dot"></span>
+            UE MANILA / CPE DEPARTMENT
+        </div>
+
+        <div class="right">
+            BS COMPUTER ENGINEERING
+            &nbsp; / &nbsp;
+            SYSTEM STATUS: ONLINE
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav>
+
+        <div class="nav-inner">
+
+            <a
+                class="logo"
+                href="#home"
+            >
+                CpE
+                <small>UE MANILA</small>
+            </a>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="#program">
+                        PROGRAM
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#projects">
+                        PROJECTS
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#about">
+                        ABOUT
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#faq">
+                        FAQ
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="nav-right">
+
+                <div
+                    class="clock"
+                    id="clock"
+                >
+                    MANILA 00:00:00
+                </div>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch color theme"
+                >
+                    <span class="sun">☀</span>
+                    <span class="moon">☾</span>
+                </button>
+
+                <a
+                    class="cta"
+                    href="#contact"
+                >
+                    EXPLORE →
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main id="home">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <!-- HELLO IMAGE -->
+
+            <img
+                class="hero-hello"
+                src="assets/hello.png"
+                alt=""
+                aria-hidden="true"
+            >
+
+            <div class="container hero-content">
+
+
+                <!-- KICKER -->
+
+                <div class="hero-kicker reveal">
+
+                    <div class="kicker">
+                        <span></span>
+                        BUILDING HARDWARE + SOFTWARE
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     TITLE DESTINATION
+                ================================================== -->
+
+                <div
+                    id="heroTitleTarget"
+                    aria-hidden="true"
+                >
+
+                    <span class="target-computer">
+                        COMPUTER
+                    </span>
+
+                    <span class="target-engineering">
+                        ENGINEERING
+                    </span>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="hero-desc reveal">
+
+                    <strong>
+                        UE / MANILA
+                    </strong>
+
+                    <p>
+                        A technology-driven program where electronics,
+                        computing, embedded systems, networks, and
+                        software meet. Learn to design systems that
+                        move from an idea to a working prototype.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MARQUEE
+        ================================================== -->
+
+        <div class="marquee">
+
+            <div class="marquee-track">
+
+                <span>HARDWARE</span>
+                <span>✦</span>
+
+                <span>SOFTWARE</span>
+                <span>✦</span>
+
+                <span>EMBEDDED SYSTEMS</span>
+                <span>✦</span>
+
+                <span>NETWORKING</span>
+                <span>✦</span>
+
+                <span>ROBOTICS</span>
+                <span>✦</span>
+
+                <span>IoT</span>
+                <span>✦</span>
+
+                <span>HARDWARE</span>
+                <span>✦</span>
+
+                <span>SOFTWARE</span>
+                <span>✦</span>
+
+                <span>EMBEDDED SYSTEMS</span>
+                <span>✦</span>
+
+                <span>NETWORKING</span>
+                <span>✦</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PROGRAM
+        ================================================== -->
+
+        <section
+            class="section"
+            id="program"
+        >
+
+            <div class="container">
+
+                <div class="section-head reveal">
+
+                    <div class="section-label">
+                        01 / PROGRAM SYSTEM
+                    </div>
+
+                    <h2 class="section-title">
+                        WHAT WE<br>
+                        <em>BUILD</em>
+                    </h2>
+
+                </div>
+
+
+                <div class="bento">
+
+
+                    <article class="card dark reveal">
+
+                        <span class="card-tag">
+                            01 / CORE
+                        </span>
+
+                        <h3>
+                            Embedded Systems
+                        </h3>
+
+                        <p>
+                            Microcontrollers, sensors, actuators,
+                            real-time control, and intelligent devices.
+                        </p>
+
+                        <div class="chips">
+
+                            <span class="chip">
+                                ESP32
+                            </span>
+
+                            <span class="chip">
+                                ARDUINO
+                            </span>
+
+                            <span class="chip">
+                                C/C++
+                            </span>
+
+                        </div>
+
+                        <span class="corner">
+                            01—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card orange reveal">
+
+                        <span class="card-tag">
+                            02 / SYSTEMS
+                        </span>
+
+                        <h3>
+                            Digital & Computer Systems
+                        </h3>
+
+                        <p>
+                            Understand the architecture behind computers,
+                            digital logic, processors, memory, and
+                            hardware interfaces.
+                        </p>
+
+                        <div class="pixel-box"></div>
+
+                        <span class="corner">
+                            02—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card reveal">
+
+                        <span class="card-tag">
+                            03 / SOFTWARE
+                        </span>
+
+                        <h3>
+                            Programming
+                        </h3>
+
+                        <p>
+                            Build applications and system-level software
+                            using modern programming concepts.
+                        </p>
+
+                        <span class="corner">
+                            03—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card reveal">
+
+                        <span class="card-tag">
+                            04 / NETWORK
+                        </span>
+
+                        <h3>
+                            Networking
+                        </h3>
+
+                        <p>
+                            Design, configure, and troubleshoot connected
+                            systems and computer networks.
+                        </p>
+
+                        <span class="corner">
+                            04—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card reveal">
+
+                        <span class="card-tag">
+                            05 / INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            AI + IoT
+                        </h3>
+
+                        <p>
+                            Connect physical devices with data,
+                            automation, intelligent decisions,
+                            and monitoring.
+                        </p>
+
+                        <span class="corner">
+                            05—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card reveal">
+
+                        <span class="card-tag">
+                            06 / DESIGN
+                        </span>
+
+                        <h3>
+                            Engineering Design
+                        </h3>
+
+                        <p>
+                            Turn requirements into prototypes through
+                            analysis, simulation, testing, documentation,
+                            and iteration.
+                        </p>
+
+                        <span class="corner">
+                            06—07
+                        </span>
+
+                    </article>
+
+
+                    <article class="card reveal">
+
+                        <span class="card-tag">
+                            07 / FUTURE
+                        </span>
+
+                        <h3>
+                            Innovation Lab
+                        </h3>
+
+                        <p>
+                            Experiment with robotics, automation,
+                            smart environments, and emerging technologies.
+                        </p>
+
+                        <span class="corner">
+                            07—07
+                        </span>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section
+            class="section stats-section"
+        >
+
+            <div class="stats container">
+
+                <div class="stat reveal">
+                    <strong>01</strong>
+                    <span>ENGINEERING MINDSET</span>
+                </div>
+
+                <div class="stat reveal">
+                    <strong>02</strong>
+                    <span>HARDWARE + SOFTWARE</span>
+                </div>
+
+                <div class="stat reveal">
+                    <strong>∞</strong>
+                    <span>PROJECT POSSIBILITIES</span>
+                </div>
+
+                <div class="stat reveal">
+                    <strong>24/7</strong>
+                    <span>LEARNING MODE</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECTS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="projects"
+        >
+
+            <div class="container">
+
+                <div class="section-head reveal">
+
+                    <div class="section-label">
+                        02 / PROJECT ARCHIVE
+                    </div>
+
+                    <h2 class="section-title">
+                        FROM IDEA<br>
+                        TO <em>PROTOTYPE</em>
+                    </h2>
+
+                </div>
+
+
+                <div class="project-grid">
+
+
+                    <article class="project-main reveal">
+
+                        <div class="circuit"></div>
+
+                        <div class="project-meta">
+
+                            <span>
+                                PROJECT / CPE-001
+                            </span>
+
+                            <span>
+                                SMART SYSTEM
+                            </span>
+
+                            <span>
+                                ACTIVE
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            SMART<br>
+                            ENVIRONMENT<br>
+                            SYSTEM
+                        </h3>
+
+
+                        <div class="node n1"></div>
+                        <div class="node n2"></div>
+                        <div class="node n3"></div>
+
+                    </article>
+
+
+                    <div class="project-side">
+
+                        <article class="mini-project reveal">
+
+                            <span class="card-tag">
+                                PROJECT / 002
+                            </span>
+
+                            <h4>
+                                IoT Monitoring
+                            </h4>
+
+                            <p>
+                                Sensor-based monitoring systems that
+                                collect environmental data and turn
+                                readings into useful information.
+                            </p>
+
+                        </article>
+
+
+                        <article class="mini-project reveal">
+
+                            <span class="card-tag">
+                                PROJECT / 003
+                            </span>
+
+                            <h4>
+                                Automation
+                            </h4>
+
+                            <p>
+                                Combine sensors, controllers, software,
+                                and actuators to create responsive
+                                automated systems.
+                            </p>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ABOUT
+        ================================================== -->
+
+        <section
+            class="section"
+            id="about"
+        >
+
+            <div class="container">
+
+                <div class="section-head reveal">
+
+                    <div class="section-label">
+                        03 / ABOUT CPE
+                    </div>
+
+                    <h2 class="section-title">
+                        ENGINEERS<br>
+                        WHO <em>CREATE</em>
+                    </h2>
+
+                </div>
+
+
+                <div class="about-grid">
+
+                    <div class="about-copy reveal">
+
+                        Computer Engineering connects
+                        the <em>physical world</em>
+                        with the digital one.
+
+                    </div>
+
+
+                    <div class="about-details reveal">
+
+                        <p>
+                            The program develops students who can
+                            understand both the hardware that powers
+                            computing systems and the software that
+                            makes them useful. It is a field for people
+                            who enjoy building, testing, debugging,
+                            and improving things.
+                        </p>
+
+
+                        <div class="list">
+
+                            <div class="list-item">
+                                <span>01</span>
+                                <b>DESIGN</b>
+                                <span>IDEA → SYSTEM</span>
+                            </div>
+
+                            <div class="list-item">
+                                <span>02</span>
+                                <b>BUILD</b>
+                                <span>SCHEMATIC → PROTOTYPE</span>
+                            </div>
+
+                            <div class="list-item">
+                                <span>03</span>
+                                <b>TEST</b>
+                                <span>DATA → VALIDATION</span>
+                            </div>
+
+                            <div class="list-item">
+                                <span>04</span>
+                                <b>ITERATE</b>
+                                <span>DEBUG → IMPROVE</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FAQ
+        ================================================== -->
+
+        <section
+            class="section"
+            id="faq"
+        >
+
+            <div class="container faq">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        04 / QUESTIONS
+                    </div>
+
+                    <h2
+                        class="section-title"
+                        style="margin-top:20px"
+                    >
+                        FAQ<br>
+                        <em>MODULE</em>
+                    </h2>
+
+                </div>
+
+
+                <div class="faq-list reveal">
+
+                    <details open>
+
+                        <summary>
+                            What is Computer Engineering?
+                        </summary>
+
+                        <p>
+                            Computer Engineering is an engineering
+                            field that combines computer hardware,
+                            software, electronics, digital systems,
+                            networking, and embedded technologies.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What can I build as a CpE student?
+                        </summary>
+
+                        <p>
+                            You can work on embedded devices,
+                            IoT systems, automation, robotics,
+                            networking projects, software,
+                            digital systems, and other
+                            hardware-software solutions.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Is Computer Engineering only programming?
+                        </summary>
+
+                        <p>
+                            No. Programming is one part of the field.
+                            Computer Engineering also involves electronics,
+                            digital logic, computer architecture, hardware,
+                            networking, embedded systems, and system integration.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What skills should a CpE student develop?
+                        </summary>
+
+                        <p>
+                            Problem solving, programming, electronics,
+                            debugging, technical documentation, system design,
+                            teamwork, and hands-on prototyping are all
+                            valuable skills.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Where can Computer Engineering lead?
+                        </summary>
+
+                        <p>
+                            Possible directions include embedded systems,
+                            hardware engineering, software development,
+                            networking, automation, robotics, IoT,
+                            systems engineering, cybersecurity, and
+                            other technology roles.
+                        </p>
+
+                    </details>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTACT
+        ================================================== -->
+
+        <section
+            class="contact"
+            id="contact"
+        >
+
+            <div class="container contact-grid">
+
+                <div>
+
+                    <div class="section-label">
+                        05 / CONNECT
+                    </div>
+
+                    <h2>
+                        BUILD<br>
+                        <em>WHAT'S NEXT</em>
+                    </h2>
+
+                    <p class="contact-copy">
+                        Computer Engineering is about turning
+                        ideas into systems that work.
+                        Keep learning, keep building,
+                        and keep improving.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-links">
+
+                    <a
+                        class="contact-link"
+                        href="#program"
+                    >
+                        <span>
+                            EXPLORE THE PROGRAM
+                        </span>
+                        <span>→</span>
+                    </a>
+
+
+                    <a
+                        class="contact-link"
+                        href="#projects"
+                    >
+                        <span>
+                            VIEW PROJECTS
+                        </span>
+                        <span>→</span>
+                    </a>
+
+
+                    <a
+                        class="contact-link"
+                        href="#about"
+                    >
+                        <span>
+                            ABOUT COMPUTER ENGINEERING
+                        </span>
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <span>
+                UE MANILA / COMPUTER ENGINEERING
+            </span>
+
+            <span>
+                CORE CPE © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+(function () {
+
+    const intro =
+        document.getElementById("intro");
+
+    const introVideo =
+        document.getElementById("introVideo");
+
+    const introVideoSource =
+        document.getElementById("introVideoSource");
+
+    const sharedTitle =
+        document.getElementById("sharedTitle");
+
+    const heroTarget =
+        document.getElementById("heroTitleTarget");
+
+    const site =
+        document.getElementById("site");
+
+    const themeToggle =
+        document.getElementById("themeToggle");
+
+    const clock =
+        document.getElementById("clock");
+
+
+    /* =====================================================
+       ANIMATION SETTINGS
+    ===================================================== */
+
+    const TITLE_APPEAR_DELAY = 5200;
+
+    const TITLE_MOVE_DELAY = 650;
+
+    const TITLE_MOVE_DURATION = 1800;
+
+
+    /* =====================================================
+       POSITION ADJUSTMENT
+    ===================================================== */
+
+    const TITLE_LOWER_SPACE = 45;
+
+
+    /* =====================================================
+       LOAD INTRO VIDEO
+    ===================================================== */
+
+    const introTheme =
+        document.documentElement.dataset.introTheme || "light";
+
+
+    if (introVideoSource) {
+
+        introVideoSource.src =
+            introTheme === "dark"
+                ? "assets/dark.mp4"
+                : "assets/light.mp4";
+
+    }
+
+
+    if (introVideo) {
+
+        introVideo.load();
+
+        introVideo.play().catch(function () {});
+
+    }
+
+
+    /* =====================================================
+       THEME
+    ===================================================== */
+
+    if (themeToggle) {
+
+        themeToggle.addEventListener(
+            "click",
+            function () {
+
+                const current =
+                    document.documentElement.dataset.theme;
+
+                const next =
+                    current === "dark"
+                        ? "light"
+                        : "dark";
+
+                document.documentElement.dataset.theme =
+                    next;
+
+                localStorage.setItem(
+                    "cpe-theme",
+                    next
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOCK
+    ===================================================== */
+
+    function updateClock() {
+
+        if (!clock) {
+            return;
+        }
+
+        const now =
+            new Date();
+
+        const formatter =
+            new Intl.DateTimeFormat(
+                "en-PH",
+                {
+                    timeZone: "Asia/Manila",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false
+                }
+            );
+
+        clock.textContent =
+            "MANILA " +
+            formatter.format(now);
+
+    }
+
+
+    updateClock();
+
+    setInterval(
+        updateClock,
+        1000
+    );
+
+
+    /* =====================================================
+       TITLE ANIMATION
+    ===================================================== */
+
+    function animateTitleToHero() {
+
+        if (!sharedTitle || !heroTarget) {
+            return;
+        }
+
+
+        sharedTitle.classList.add("show");
+
+
+        const titleRect =
+            sharedTitle.getBoundingClientRect();
+
+
+        const startLeft =
+            (window.innerWidth - titleRect.width) / 2;
+
+
+        const startTop =
+            (window.innerHeight - titleRect.height) / 2;
+
+
+        sharedTitle.style.left =
+            startLeft + "px";
+
+        sharedTitle.style.top =
+            startTop + "px";
+
+        sharedTitle.style.transform =
+            "scale(0.72)";
+
+
+        setTimeout(
+            function () {
+
+                const destination =
+                    heroTarget.getBoundingClientRect();
+
+
+                const finalLeft =
+                    destination.left;
+
+
+                const finalTop =
+                    destination.top +
+                    TITLE_LOWER_SPACE;
+
+
+                const current =
+                    sharedTitle.getBoundingClientRect();
+
+
+                const animation =
+                    sharedTitle.animate(
+
+                        [
+
+                            {
+                                left:
+                                    current.left + "px",
+
+                                top:
+                                    current.top + "px",
+
+                                transform:
+                                    "scale(0.72)"
+                            },
+
+                            {
+
+                                left:
+                                    finalLeft + "px",
+
+                                top:
+                                    finalTop + "px",
+
+                                transform:
+                                    "scale(1)"
+                            }
+
+                        ],
+
+                        {
+
+                            duration:
+                                TITLE_MOVE_DURATION,
+
+                            easing:
+                                "cubic-bezier(.16,.84,.24,1)",
+
+                            fill:
+                                "forwards"
+
+                        }
+
+                    );
+
+
+                animation.finished.then(
+                    function () {
+
+                        const documentTop =
+                            finalTop +
+                            window.scrollY;
+
+
+                        sharedTitle.style.position =
+                            "absolute";
+
+
+                        sharedTitle.style.left =
+                            finalLeft + "px";
+
+
+                        sharedTitle.style.top =
+                            documentTop + "px";
+
+
+                        sharedTitle.style.transform =
+                            "scale(1)";
+
+
+                        sharedTitle.style.animation =
+                            "none";
+
+
+                        sharedTitle.classList.add(
+                            "title-landed"
+                        );
+
+
+                        site.classList.add(
+                            "home-ready"
+                        );
+
+
+                        intro.classList.add(
+                            "go-home"
+                        );
+
+
+                        setTimeout(
+                            function () {
+
+                                intro.style.display =
+                                    "none";
+
+                            },
+                            2200
+                        );
+
+                    }
+                );
+
+            },
+            TITLE_MOVE_DELAY
+        );
+
+    }
+
+
+    /* =====================================================
+       START TITLE ANIMATION
+    ===================================================== */
+
+    window.addEventListener(
+        "load",
+        function () {
+
+            setTimeout(
+                function () {
+
+                    animateTitleToHero();
+
+                },
+                TITLE_APPEAR_DELAY
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+
+            );
+
+
+        revealElements.forEach(
+            function (element) {
+
+                observer.observe(
+                    element
+                );
+
+            }
+        );
+
+    }
+    else {
+
+        revealElements.forEach(
+            function (element) {
+
+                element.classList.add(
+                    "visible"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PAGE RESTORE SAFETY
+    ===================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        function () {
+
+            if (window.scrollY > 20) {
+
+                intro.style.display =
+                    "none";
+
+                site.classList.add(
+                    "home-ready"
+                );
+
+            }
+
+        }
+    );
+
+
+})();
+
+</script>
+
+</body>
+</html>
