@@ -1608,7 +1608,7 @@ details p {
     background:
         var(--ink);
 
-    color: #fff;
+    color: #0f1a2b;
 
     padding:
         100px 0;
@@ -2062,4 +2062,529 @@ footer {
         flex-direction:
             column;
     }
+}
+
+/* =========================================================
+   HAOQI-INSPIRED MOTION LAYER — EFFECTS ONLY
+   Existing intro, homepage layout, colors and sections remain intact.
+========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(110,105,102,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(110,105,102,.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent 0, #000 15%, #000 88%, transparent 100%);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: min(52vw, 760px);
+    aspect-ratio: 1;
+    left: -18vw;
+    top: 35vh;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--orange) 8%, transparent) 0%, transparent 67%);
+    filter: blur(24px);
+}
+
+
+/* =========================================================
+   HAOQI-INSPIRED INTERACTION LAYER — V2
+   Keeps the original layout; adds motion, depth and texture.
+========================================================= */
+
+/* A subtle technical texture in both themes */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--line) 20%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--line) 20%, transparent) 1px, transparent 1px),
+        radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--orange) 8%, transparent), transparent 24%),
+        radial-gradient(circle at 18% 72%, color-mix(in srgb, var(--ink) 5%, transparent), transparent 28%);
+    background-size: 72px 72px, 72px 72px, auto, auto;
+    mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 92%, transparent 100%);
+}
+
+body::after {
+    content: "CPE  /  UE  /  BUILD  /  CREATE";
+    position: fixed;
+    right: -110px;
+    bottom: 18vh;
+    z-index: -1;
+    pointer-events: none;
+    font: 700 10px "Space Mono", monospace;
+    letter-spacing: .45em;
+    writing-mode: vertical-rl;
+    color: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+/* =========================================================
+   CURSOR TRAIL
+   Light mode = dark navy circles
+   Dark mode  = cream circles
+========================================================= */
+.cursor-trail-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--trail-size, 14px);
+    height: var(--trail-size, 14px);
+    border-radius: 50%;
+    background: #0f1a2b;
+    pointer-events: none;
+    z-index: 10050;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.75);
+    will-change: left, top, opacity, transform;
+    transition: opacity .18s ease;
+}
+
+html[data-theme="dark"] .cursor-trail-dot {
+    background: #fffcf3;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .cursor-trail-dot { display: none !important; }
+}
+
+/* Keep real site content above the background interaction */
+#site { position: relative; z-index: 1; }
+
+/* What We Build now has visual artwork */
+.build-image {
+    width: 100%;
+    height: 120px;
+    margin-top: 18px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+    background: color-mix(in srgb, var(--paper) 20%, transparent);
+}
+.build-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(.72) contrast(1.04);
+    transition: transform .8s cubic-bezier(.16,.84,.24,1), filter .6s ease;
+}
+.card:hover .build-image img { transform: scale(1.08); filter: saturate(1) contrast(1.08); }
+.card h3 { margin-top: 22px; }
+
+/* Mouse-local highlight stays INSIDE cards, not across the whole screen */
+.card, .mini-project, .project-main { isolation: isolate; }
+.card::before, .mini-project::before, .project-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle 180px at var(--card-x,50%) var(--card-y,50%), rgba(255,255,255,.13), transparent 72%);
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+.card:hover::before, .mini-project:hover::before, .project-main:hover::before { opacity: 1; }
+
+/* Scroll entrance: soft blur + rise, closer to the reference's restrained motion */
+.motion-item {
+    opacity: 0;
+    transform: translateY(34px);
+    filter: blur(7px);
+    transition: opacity .9s cubic-bezier(.16,.84,.24,1) var(--motion-delay,0ms), transform 1s cubic-bezier(.16,.84,.24,1) var(--motion-delay,0ms), filter .9s ease var(--motion-delay,0ms);
+}
+.motion-item.motion-in { opacity: 1; transform: translateY(0); filter: blur(0); }
+.card, .mini-project, .project-main { transition: transform .6s cubic-bezier(.16,.84,.24,1), border-color .4s ease; }
+.card:hover, .mini-project:hover { transform: translateY(-5px); }
+
+/* Six destination cards before the final message/contact transition */
+.page-portal { overflow: hidden; }
+.page-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+.page-card {
+    position: relative;
+    min-height: 330px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--card);
+    isolation: isolate;
+    transition: transform .6s cubic-bezier(.16,.84,.24,1), border-color .35s ease;
+}
+.page-card:hover { transform: translateY(-6px); border-color: var(--ink); }
+.page-art {
+    position: absolute;
+    inset: 0;
+    transition: transform .9s cubic-bezier(.16,.84,.24,1), filter .7s ease, opacity .6s ease;
+    opacity: .82;
+}
+.page-card:hover .page-art { transform: scale(1.06); filter: blur(2px); opacity: .52; }
+.page-no, .page-arrow {
+    position: absolute;
+    z-index: 3;
+    top: 18px;
+    font: 700 9px "Space Mono", monospace;
+}
+.page-no { left: 18px; }
+.page-arrow { right: 18px; font-size: 18px; transition: transform .4s ease; }
+.page-card:hover .page-arrow { transform: translate(3px,-3px); }
+.page-name {
+    position: absolute;
+    z-index: 4;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    font: 800 clamp(20px,2.1vw,34px)/.95 Inter,sans-serif;
+    letter-spacing: -.055em;
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(5px);
+    transition: opacity .45s ease, transform .55s cubic-bezier(.16,.84,.24,1), filter .45s ease;
+}
+.page-card:hover .page-name { opacity: 1; transform: translateY(0); filter: blur(0); }
+.page-card::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    background: linear-gradient(to top, color-mix(in srgb, var(--paper) 94%, transparent), transparent 62%);
+    opacity:0;
+    transition:opacity .5s ease;
+}
+.page-card:hover::after { opacity:1; }
+
+/* Individual abstract art so every destination feels different */
+.art-cpe { background: radial-gradient(circle at 65% 40%, var(--orange) 0 8%, transparent 9%), repeating-radial-gradient(circle at 65% 40%, transparent 0 24px, color-mix(in srgb,var(--ink) 18%,transparent) 25px 26px), var(--soft); }
+.art-ue { background: linear-gradient(120deg, transparent 48%, color-mix(in srgb,var(--orange) 70%,transparent) 49% 52%, transparent 53%), repeating-linear-gradient(90deg, color-mix(in srgb,var(--ink) 9%,transparent) 0 1px, transparent 1px 38px), var(--soft); }
+.art-spec { background: conic-gradient(from 40deg at 50% 50%, var(--orange), transparent 20%, color-mix(in srgb,var(--ink) 20%,transparent) 35%, transparent 60%, var(--orange)); }
+.art-career { background: linear-gradient(145deg, transparent 0 38%, var(--orange) 39% 48%, transparent 49%), linear-gradient(35deg, var(--soft), color-mix(in srgb,var(--ink) 15%,var(--soft))); }
+.art-faculty { background: radial-gradient(ellipse at 30% 60%, color-mix(in srgb,var(--ink) 22%,transparent) 0 18%, transparent 19%), radial-gradient(ellipse at 70% 45%, color-mix(in srgb,var(--orange) 65%,transparent) 0 16%, transparent 17%), var(--soft); }
+.art-scpes { background: repeating-linear-gradient(135deg, transparent 0 22px, color-mix(in srgb,var(--ink) 12%,transparent) 23px 24px), radial-gradient(circle at 50% 50%, var(--orange) 0 14%, transparent 15%), var(--soft); }
+
+html[data-theme="dark"] .page-card::after { background: linear-gradient(to top, rgba(15,26,43,.96), transparent 62%); }
+
+@media (max-width: 980px) {
+    .page-card-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 620px) {
+    .page-card-grid { grid-template-columns: 1fr; }
+    .page-card { min-height: 250px; }
+    .page-name { opacity:1; transform:none; filter:none; }
+    .page-card::after { opacity:.78; }
+    .build-image { height: 105px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .motion-item { opacity:1; transform:none; filter:none; transition:none; }
+}
+
+/* =========================================================
+   REQUESTED CARD REVEAL — COVER IMAGE OPENS TO CONTENT
+   Added as overrides only. Existing section/content structure remains.
+========================================================= */
+
+/* WHAT WE BUILD: the artwork is the full initial card face. */
+.bento .card {
+    min-height: 330px;
+    isolation: isolate;
+}
+
+.bento .card .build-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 8;
+    border: 0;
+    background: var(--soft);
+    clip-path: inset(0 0 0 0 round 0px);
+    transition: clip-path .85s cubic-bezier(.77,0,.18,1), transform .85s cubic-bezier(.16,.84,.24,1);
+}
+
+.bento .card .build-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.01);
+    filter: none;
+    transition: transform 1s cubic-bezier(.16,.84,.24,1);
+}
+
+/* The cover opens from the middle like two sides pulling apart. */
+.bento .card:hover .build-image,
+.bento .card:focus-within .build-image {
+    clip-path: inset(0 49.5% 0 49.5% round 18px);
+    transform: scale(.985);
+}
+
+.bento .card:hover .build-image img,
+.bento .card:focus-within .build-image img {
+    transform: scale(1.08);
+    filter: none;
+}
+
+/* Actual card content waits underneath the image. */
+.bento .card > :not(.build-image) {
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .38s ease .28s, transform .55s cubic-bezier(.16,.84,.24,1) .24s;
+}
+
+.bento .card:hover > :not(.build-image),
+.bento .card:focus-within > :not(.build-image) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bento .card h3 { margin-top: 45px; }
+
+/* GO DEEPER: simple full-cover visual first; hover opens to the page title.
+   No lift, blur, zoom, decorative gradient overlay, or cover-page effects. */
+.page-card {
+    min-height: 320px;
+    transform: none !important;
+    border-color: var(--line);
+}
+
+.page-card:hover { border-color: var(--line); }
+
+.page-card .page-art {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: inset(0 0 0 0 round 0px);
+    transition: clip-path .85s cubic-bezier(.77,0,.18,1);
+}
+
+.page-card:hover .page-art,
+.page-card:focus-visible .page-art {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: inset(0 49.5% 0 49.5% round 18px);
+}
+
+.page-card::after { display: none; }
+
+.page-card .page-no,
+.page-card .page-name,
+.page-card .page-arrow {
+    z-index: 3;
+    opacity: 0;
+    filter: none;
+    transform: translateY(12px);
+    transition: opacity .4s ease .28s, transform .5s cubic-bezier(.16,.84,.24,1) .25s;
+}
+
+.page-card:hover .page-no,
+.page-card:hover .page-name,
+.page-card:hover .page-arrow,
+.page-card:focus-visible .page-no,
+.page-card:focus-visible .page-name,
+.page-card:focus-visible .page-arrow {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-card .page-name {
+    left: 22px;
+    right: 50px;
+    bottom: 24px;
+}
+
+/* Touch screens cannot hover: tapping/focusing still exposes the destination,
+   while the cards remain usable and responsive. */
+@media (hover: none), (pointer: coarse) {
+    .bento .card .build-image {
+        clip-path: inset(0 0 42% 0);
+    }
+    .bento .card > :not(.build-image) {
+        opacity: 1;
+        transform: none;
+    }
+    .page-card .page-art {
+        clip-path: inset(0 0 34% 0);
+    }
+    .page-card .page-no,
+    .page-card .page-name,
+    .page-card .page-arrow {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 620px) {
+    .bento .card { min-height: 300px; }
+    .page-card { min-height: 270px; }
+}
+
+
+/* =========================================================
+   FAQ — THEME CONTRAST FIX
+========================================================= */
+#faq {
+    background: var(--paper);
+    color: var(--ink);
+}
+#faq .section-title,
+#faq summary {
+    color: var(--ink);
+}
+#faq .faq-list,
+#faq details {
+    border-color: var(--line);
+}
+#faq details p {
+    color: var(--muted);
+}
+#faq summary::after {
+    color: var(--orange);
+}
+html[data-theme="light"] #faq {
+    background: #fffcf3;
+    color: #120c0c;
+}
+html[data-theme="light"] #faq summary,
+html[data-theme="light"] #faq .section-title {
+    color: #120c0c;
+}
+html[data-theme="light"] #faq details p {
+    color: #6e6966;
+}
+html[data-theme="dark"] #faq {
+    background: #0f1a2b;
+    color: #f8f2e8;
+}
+html[data-theme="dark"] #faq summary,
+html[data-theme="dark"] #faq .section-title {
+    color: #f8f2e8;
+}
+html[data-theme="dark"] #faq details p {
+    color: #a8b3c4;
+}
+
+/* =========================================================
+   GO DEEPER — TWO REAL IMAGES PER CARD
+   Default: cover image. Hover: cover leaves completely,
+   revealing the second image + existing page label.
+========================================================= */
+.page-card {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--card);
+    border: 1px solid var(--line);
+    transform: none !important;
+}
+.page-card:hover { transform: none !important; border-color: var(--line); }
+
+.page-card .page-cover-image,
+.page-card .page-inside-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.page-card .page-inside-image {
+    z-index: 1;
+    transform: scale(1.02);
+    transition: transform .9s cubic-bezier(.16,.84,.24,1);
+}
+
+.page-card .page-cover-image {
+    z-index: 5;
+    transform: translateX(0);
+    transition: transform .8s cubic-bezier(.77,0,.18,1);
+    will-change: transform;
+}
+
+/* IMPORTANT: cover exits 100%; it does NOT stay in the middle. */
+.page-card:hover .page-cover-image,
+.page-card:focus-visible .page-cover-image {
+    transform: translateX(-101%);
+}
+.page-card:hover .page-inside-image,
+.page-card:focus-visible .page-inside-image {
+    transform: scale(1.07);
+}
+
+/* Dark readable layer only over the second image. */
+.page-card-info {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    color: #fffcf3;
+    background: linear-gradient(to top, rgba(15,26,43,.78), rgba(15,26,43,.04) 65%);
+    opacity: 0;
+    transition: opacity .35s ease .22s;
+    pointer-events: none;
+}
+.page-card:hover .page-card-info,
+.page-card:focus-visible .page-card-info { opacity: 1; }
+
+.page-card .page-no {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 4;
+    opacity: 1;
+    transform: none;
+    color: inherit;
+}
+.page-card .page-arrow {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 4;
+    opacity: 1;
+    transform: none;
+    color: inherit;
+}
+.page-card .page-name {
+    position: absolute;
+    left: 22px;
+    right: 48px;
+    bottom: 24px;
+    z-index: 4;
+    opacity: 1;
+    transform: translateY(10px);
+    filter: none;
+    color: inherit;
+    transition: transform .5s cubic-bezier(.16,.84,.24,1) .22s;
+}
+.page-card:hover .page-name,
+.page-card:focus-visible .page-name { transform: translateY(0); }
+
+/* Disable the old abstract .page-art layer if old markup is ever cached. */
+.page-card .page-art { display: none !important; }
+.page-card::after { display: none !important; }
+
+@media (hover: none), (pointer: coarse) {
+    .page-card .page-cover-image { transform: translateX(0); }
+    .page-card.is-open .page-cover-image { transform: translateX(-101%); }
+    .page-card .page-card-info { opacity: 0; }
+    .page-card.is-open .page-card-info { opacity: 1; }
+    .page-card.is-open .page-inside-image { transform: scale(1.07); }
 }

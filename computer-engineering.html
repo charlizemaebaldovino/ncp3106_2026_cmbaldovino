@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        What is Computer Engineering? | UE Computer Engineering
+    </title>
+
+    <!-- GOOGLE FONTS -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="computer-engineering.css"
+    >
+
+    <!-- APPLY SAVED THEME BEFORE PAGE LOAD -->
+    <script>
+        (function () {
+
+            const savedTheme =
+                localStorage.getItem("cpe-theme") || "light";
+
+            document.documentElement.dataset.theme =
+                savedTheme;
+
+        })();
+    </script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     PAGE TRANSITION
+========================================================= -->
+
+<div
+    class="page-transition"
+    id="pageTransition"
+></div>
+
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <span class="status-dot"></span>
+
+        <span>
+            UE MANILA / COMPUTER ENGINEERING
+        </span>
+
+    </div>
+
+
+    <div class="topbar-right">
+
+        <span>
+            WHAT IS CPE?
+        </span>
+
+        <span id="clock">
+            MANILA 00:00:00
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+    <div class="nav-inner">
+
+        <a
+            href="index.html"
+            class="logo page-link"
+        >
+            CPE
+
+            <small>
+                UNIVERSITY OF THE EAST
+            </small>
+        </a>
+
+
+        <ul class="nav-links">
+
+            <li>
+                <a
+                    href="computer-engineering.html"
+                    class="active"
+                >
+                    CPE
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="ue-program.html"
+                    class="page-link"
+                >
+                    UE PROGRAM
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="specializations.html"
+                    class="page-link"
+                >
+                    SPECIALIZATIONS
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="careers.html"
+                    class="page-link"
+                >
+                    CAREERS
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="faculty.html"
+                    class="page-link"
+                >
+                    FACULTY
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="scpes.html"
+                    class="page-link"
+                >
+                    SCPES
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="nav-right">
+
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle theme"
+            >
+                <span class="sun">☀</span>
+                <span class="moon">◐</span>
+            </button>
+
+
+            <a
+                href="index.html"
+                class="home-button page-link"
+            >
+                HOME ↗
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="cpe-hero">
+
+    <div class="hero-meta reveal">
+
+        <span>
+            01 / UNDERSTANDING CPE
+        </span>
+
+        <span>
+            HARDWARE × SOFTWARE
+        </span>
+
+    </div>
+
+
+    <div class="hero-title">
+
+        <span class="hero-word word-computer">
+            COMPUTER
+        </span>
+
+        <span class="hero-word word-engineering">
+            <em>ENGINEERING</em>
+        </span>
+
+    </div>
+
+
+    <div class="hero-bottom">
+
+        <div class="hero-number reveal">
+            CPE
+        </div>
+
+
+        <div class="hero-description reveal">
+
+            <p>
+                A field where physical computing
+                systems meet the software that
+                controls them.
+            </p>
+
+
+            <button
+                class="explore-button"
+                id="exploreButton"
+            >
+                <span>
+                    EXPLORE THE SYSTEM
+                </span>
+
+                <span>
+                    ↓
+                </span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MARQUEE
+========================================================= -->
+
+<div class="tech-marquee">
+
+    <div class="marquee-track">
+
+        <span>HARDWARE</span><i>✦</i>
+        <span>SOFTWARE</span><i>✦</i>
+        <span>EMBEDDED SYSTEMS</span><i>✦</i>
+        <span>NETWORKS</span><i>✦</i>
+        <span>ROBOTICS</span><i>✦</i>
+        <span>CYBERSECURITY</span><i>✦</i>
+        <span>ARTIFICIAL INTELLIGENCE</span><i>✦</i>
+
+        <span>HARDWARE</span><i>✦</i>
+        <span>SOFTWARE</span><i>✦</i>
+        <span>EMBEDDED SYSTEMS</span><i>✦</i>
+        <span>NETWORKS</span><i>✦</i>
+        <span>ROBOTICS</span><i>✦</i>
+        <span>CYBERSECURITY</span><i>✦</i>
+        <span>ARTIFICIAL INTELLIGENCE</span><i>✦</i>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     01 — DEFINITION
+========================================================= -->
+
+<section
+    class="section definition-section"
+    id="definition"
+>
+
+    <div class="section-heading reveal">
+
+        <span class="section-number">
+            01
+        </span>
+
+
+        <div>
+
+            <span class="section-label">
+                DEFINITION
+            </span>
+
+            <h2>
+                WHAT IS<br>
+                <em>COMPUTER ENGINEERING?</em>
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="definition-grid">
+
+        <div class="definition-main reveal">
+
+            <span class="giant-quote">
+                “
+            </span>
+
+            <p>
+                Computer Engineering
+                <strong>(Comp Eng or CpE)</strong>
+                is a branch of engineering that combines
+                computer science and electrical engineering.
+            </p>
+
+        </div>
+
+
+        <div class="definition-side reveal">
+
+            <p>
+                It focuses on the design, development,
+                implementation, maintenance, and integration
+                of both <strong>hardware</strong> and
+                <strong>software</strong> in modern computer
+                systems and computer-controlled devices.
+            </p>
+
+
+            <div class="definition-tags">
+
+                <span>DESIGN</span>
+                <span>DEVELOP</span>
+                <span>IMPLEMENT</span>
+                <span>INTEGRATE</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     02 — HARDWARE + SOFTWARE BRIDGE
+========================================================= -->
+
+<section class="bridge-section">
+
+    <div class="bridge-heading reveal">
+
+        <span class="section-label">
+            02 / THE CONNECTION
+        </span>
+
+        <h2>
+            TWO WORLDS.<br>
+            <em>ONE SYSTEM.</em>
+        </h2>
+
+        <p>
+            Computer engineers connect hardware
+            with software so they work together
+            efficiently.
+        </p>
+
+    </div>
+
+
+    <div class="system-bridge reveal">
+
+        <!-- SOFTWARE -->
+
+        <div
+            class="system-panel software-panel"
+            data-system="software"
+        >
+
+            <div class="panel-number">
+                01
+            </div>
+
+            <div class="system-symbol">
+                &lt;/&gt;
+            </div>
+
+            <div>
+
+                <span class="panel-label">
+                    SOFTWARE
+                </span>
+
+                <h3>
+                    Programs &
+                    Applications
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- CENTER -->
+
+        <div class="engineer-core">
+
+            <span class="core-small">
+                THE BRIDGE
+            </span>
+
+            <div class="core-circle">
+                CPE
+            </div>
+
+            <strong>
+                COMPUTER<br>
+                ENGINEERS
+            </strong>
+
+            <span class="flow-line"></span>
+
+        </div>
+
+
+        <!-- HARDWARE -->
+
+        <div
+            class="system-panel hardware-panel"
+            data-system="hardware"
+        >
+
+            <div class="panel-number">
+                02
+            </div>
+
+            <div class="system-symbol">
+                CPU
+            </div>
+
+            <div>
+
+                <span class="panel-label">
+                    HARDWARE
+                </span>
+
+                <h3>
+                    CPU, Sensors &
+                    Circuit Boards
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SMARTPHONE EXAMPLE -->
+
+    <div class="phone-example reveal">
+
+        <div class="phone-copy">
+
+            <span class="section-label">
+                REAL-WORLD EXAMPLE
+            </span>
+
+            <h3>
+                A SMARTPHONE
+                NEEDS BOTH.
+            </h3>
+
+        </div>
+
+
+        <div class="phone-parts">
+
+            <div class="phone-part">
+
+                <span>HARDWARE</span>
+
+                <p>
+                    Processor, camera,
+                    memory and sensors.
+                </p>
+
+            </div>
+
+
+            <div class="plus">
+                +
+            </div>
+
+
+            <div class="phone-part">
+
+                <span>SOFTWARE</span>
+
+                <p>
+                    Android or iOS
+                    applications and programs.
+                </p>
+
+            </div>
+
+
+            <div class="equals">
+                =
+            </div>
+
+
+            <div class="phone-result">
+
+                <span>
+                    COMPUTER ENGINEERING
+                </span>
+
+                <p>
+                    Ensures the hardware
+                    and software communicate
+                    correctly.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     03 — MAJOR AREAS
+========================================================= -->
+
+<section class="section areas-section">
+
+    <div class="section-heading reveal">
+
+        <span class="section-number">
+            03
+        </span>
+
+
+        <div>
+
+            <span class="section-label">
+                MAJOR AREAS
+            </span>
+
+            <h2>
+                WHAT DOES CPE<br>
+                <em>WORK WITH?</em>
+            </h2>
+
+        </div>
+
+
+        <p class="heading-note">
+            Hover over each field to reveal
+            the technologies behind it.
+        </p>
+
+    </div>
+
+
+    <div class="area-grid">
+
+
+        <!-- HARDWARE -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    01
+                </span>
+
+                <div class="area-icon">
+                    CPU
+                </div>
+
+                <h3>
+                    COMPUTER<br>
+                    HARDWARE
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    01
+                </span>
+
+                <h3>
+                    Computer Hardware
+                </h3>
+
+                <ul>
+                    <li>Circuit design</li>
+                    <li>Motherboards</li>
+                    <li>Processors (CPU)</li>
+                    <li>Computer architecture</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+        <!-- EMBEDDED -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    02
+                </span>
+
+                <div class="area-icon">
+                    MCU
+                </div>
+
+                <h3>
+                    EMBEDDED<br>
+                    SYSTEMS
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    02
+                </span>
+
+                <h3>
+                    Embedded Systems
+                </h3>
+
+                <ul>
+                    <li>Microcontrollers</li>
+                    <li>IoT devices</li>
+                    <li>Smart appliances</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+        <!-- NETWORKS -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    03
+                </span>
+
+                <div class="area-icon">
+                    NET
+                </div>
+
+                <h3>
+                    COMPUTER<br>
+                    NETWORKS
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    03
+                </span>
+
+                <h3>
+                    Computer Networks
+                </h3>
+
+                <ul>
+                    <li>Networking</li>
+                    <li>Data communication</li>
+                    <li>Internet infrastructure</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+        <!-- AI + ROBOTICS -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    04
+                </span>
+
+                <div class="area-icon">
+                    AI
+                </div>
+
+                <h3>
+                    AI &<br>
+                    ROBOTICS
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    04
+                </span>
+
+                <h3>
+                    AI & Robotics
+                </h3>
+
+                <ul>
+                    <li>Intelligent machines</li>
+                    <li>Automation</li>
+                    <li>Machine learning applications</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+        <!-- CYBERSECURITY -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    05
+                </span>
+
+                <div class="area-icon">
+                    SEC
+                </div>
+
+                <h3>
+                    CYBER<br>
+                    SECURITY
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    05
+                </span>
+
+                <h3>
+                    Cybersecurity
+                </h3>
+
+                <ul>
+                    <li>Secure computer systems</li>
+                    <li>Data protection</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+        <!-- SOFTWARE -->
+
+        <article class="area-card reveal">
+
+            <div class="area-front">
+
+                <span class="area-no">
+                    06
+                </span>
+
+                <div class="area-icon">
+                    FW
+                </div>
+
+                <h3>
+                    SOFTWARE &<br>
+                    FIRMWARE
+                </h3>
+
+                <span class="area-open">
+                    EXPLORE +
+                </span>
+
+            </div>
+
+
+            <div class="area-back">
+
+                <span class="area-no">
+                    06
+                </span>
+
+                <h3>
+                    Software & Firmware
+                </h3>
+
+                <ul>
+                    <li>Operating systems</li>
+                    <li>Device drivers</li>
+                    <li>Embedded software</li>
+                    <li>System programming</li>
+                </ul>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     04 — ROLE IN MODERN TECHNOLOGY
+========================================================= -->
+
+<section class="role-section">
+
+    <div class="role-title reveal">
+
+        <span class="section-label">
+            04 / ROLE IN MODERN TECHNOLOGY
+        </span>
+
+        <h2>
+            THEY DON'T JUST<br>
+            USE TECHNOLOGY.<br>
+            <em>THEY BUILD IT.</em>
+        </h2>
+
+    </div>
+
+
+    <div class="role-list">
+
+        <div class="role-item reveal">
+            <span>01</span>
+            <strong>DESIGN COMPUTER SYSTEMS</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>02</span>
+            <strong>DEVELOP EMBEDDED SYSTEMS</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>03</span>
+            <strong>BUILD SMART DEVICES</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>04</span>
+            <strong>IMPROVE COMPUTER PERFORMANCE</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>05</span>
+            <strong>CREATE AUTOMATION SYSTEMS</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>06</span>
+            <strong>DEVELOP ROBOTICS</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>07</span>
+            <strong>SUPPORT COMMUNICATION NETWORKS</strong>
+            <i>↗</i>
+        </div>
+
+        <div class="role-item reveal">
+            <span>08</span>
+            <strong>INTEGRATE AI INTO MODERN DEVICES</strong>
+            <i>↗</i>
+        </div>
+
+    </div>
+
+
+    <div class="role-statement reveal">
+
+        <span>
+            WITHOUT CPE
+        </span>
+
+        <p>
+            Technologies such as smartphones,
+            smart homes, autonomous vehicles,
+            and industrial automation would not
+            function effectively.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     05 — APPLICATIONS
+========================================================= -->
+
+<section class="section application-section">
+
+    <div class="section-heading reveal">
+
+        <span class="section-number">
+            05
+        </span>
+
+
+        <div>
+
+            <span class="section-label">
+                APPLICATIONS
+            </span>
+
+            <h2>
+                WHERE CPE<br>
+                <em>SHOWS UP.</em>
+            </h2>
+
+        </div>
+
+
+        <p class="heading-note">
+            Select a card to see how Computer
+            Engineering connects to that technology.
+        </p>
+
+    </div>
+
+
+    <div class="application-grid">
+
+        <button
+            class="application-card reveal"
+            data-title="Smartphones & Tablets"
+            data-code="MOBILE"
+            data-description="Computer engineering brings together processors, memory, sensors, cameras, connectivity, and software in modern mobile devices."
+        >
+            <span>01</span>
+            <strong>SMARTPHONES<br>& TABLETS</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Smart & Autonomous Vehicles"
+            data-code="AUTO"
+            data-description="Modern vehicles use embedded controllers, sensors, computing systems, communication technologies, and automation."
+        >
+            <span>02</span>
+            <strong>SMART & AUTONOMOUS<br>VEHICLES</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Medical Equipment"
+            data-code="MED"
+            data-description="Computing hardware, embedded software, sensors, and digital systems are used in many modern medical devices."
+        >
+            <span>03</span>
+            <strong>MEDICAL<br>EQUIPMENT</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Industrial Automation"
+            data-code="IND"
+            data-description="Computer-controlled equipment helps monitor, automate, and coordinate machines and industrial processes."
+        >
+            <span>04</span>
+            <strong>INDUSTRIAL<br>AUTOMATION</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Smart Home Systems"
+            data-code="HOME"
+            data-description="Sensors, embedded controllers, networks, and software allow household devices to communicate and automate everyday tasks."
+        >
+            <span>05</span>
+            <strong>SMART HOME<br>SYSTEMS</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Internet of Things"
+            data-code="IoT"
+            data-description="IoT connects sensors, processors, devices, software, and networks so physical objects can collect and exchange information."
+        >
+            <span>06</span>
+            <strong>INTERNET OF<br>THINGS</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Robotics"
+            data-code="ROB"
+            data-description="Robotic systems combine processors, sensors, actuators, embedded software, control systems, and intelligent algorithms."
+        >
+            <span>07</span>
+            <strong>ROBOTICS</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Cloud Computing & Data Centers"
+            data-code="CLD"
+            data-description="Large computing systems depend on servers, networks, storage, system software, and reliable infrastructure."
+        >
+            <span>08</span>
+            <strong>CLOUD COMPUTING<br>& DATA CENTERS</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Aerospace & Defense"
+            data-code="AERO"
+            data-description="Embedded computing, communication systems, sensors, control technologies, and reliable hardware are used in aerospace applications."
+        >
+            <span>09</span>
+            <strong>AEROSPACE<br>& DEFENSE</strong>
+            <i>+</i>
+        </button>
+
+
+        <button
+            class="application-card reveal"
+            data-title="Banking & Security Systems"
+            data-code="FIN"
+            data-description="Secure computing systems, networks, software, authentication, and data protection support modern banking technologies."
+        >
+            <span>10</span>
+            <strong>BANKING &<br>SECURITY SYSTEMS</strong>
+            <i>+</i>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     APPLICATION POPUP
+========================================================= -->
+
+<div
+    class="app-modal"
+    id="appModal"
+    aria-hidden="true"
+>
+
+    <div class="modal-backdrop"></div>
+
+
+    <div class="modal-card">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-top">
+
+            <span>
+                CPE / APPLICATION
+            </span>
+
+            <span>
+                [ SYSTEM ]
+            </span>
+
+        </div>
+
+
+        <div
+            class="modal-code"
+            id="modalCode"
+        >
+            IoT
+        </div>
+
+
+        <div class="modal-copy">
+
+            <span class="section-label">
+                APPLICATION
+            </span>
+
+            <h3 id="modalTitle">
+                Internet of Things
+            </h3>
+
+            <p id="modalDescription">
+                Description
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     06 — IMPORTANCE
+========================================================= -->
+
+<section class="importance-section">
+
+    <div class="importance-intro reveal">
+
+        <span class="section-label">
+            06 / WHY IT MATTERS
+        </span>
+
+        <h2>
+            WHY IS CPE<br>
+            <em>IMPORTANT?</em>
+        </h2>
+
+    </div>
+
+
+    <div class="importance-grid">
+
+        <div class="importance-item reveal">
+            <span>01</span>
+            <strong>BRIDGES</strong>
+            <p>Hardware and software.</p>
+        </div>
+
+        <div class="importance-item reveal">
+            <span>02</span>
+            <strong>DRIVES</strong>
+            <p>Technological innovation.</p>
+        </div>
+
+        <div class="importance-item reveal">
+            <span>03</span>
+            <strong>IMPROVES</strong>
+            <p>Communication systems.</p>
+        </div>
+
+        <div class="importance-item reveal">
+            <span>04</span>
+            <strong>ENABLES</strong>
+            <p>Automation.</p>
+        </div>
+
+        <div class="importance-item reveal">
+            <span>05</span>
+            <strong>ENHANCES</strong>
+            <p>Cybersecurity.</p>
+        </div>
+
+        <div class="importance-item reveal">
+            <span>06</span>
+            <strong>CREATES</strong>
+            <p>Efficient computing solutions.</p>
+        </div>
+
+    </div>
+
+
+    <div class="importance-final reveal">
+
+        <p>
+            Computer engineers play a key role
+            in shaping the
+            <em>digital world</em>
+            and solving
+            <em>real-world engineering problems.</em>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NEXT PAGE
+========================================================= -->
+
+<section class="next-section">
+
+    <span class="section-label">
+        CONTINUE EXPLORING
+    </span>
+
+
+    <a
+        href="ue-program.html"
+        class="next-link page-link"
+    >
+
+        <span>
+            COMPUTER ENGINEERING
+            <em>IN UE</em>
+        </span>
+
+        <span class="next-arrow">
+            →
+        </span>
+
+    </a>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <span>
+            UE MANILA / COMPUTER ENGINEERING
+        </span>
+
+        <span>
+            WHAT IS COMPUTER ENGINEERING?
+        </span>
+
+        <span>
+            CORE CPE © 2026
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="computer-engineering.js"></script>
+
+</body>
+
+</html>
