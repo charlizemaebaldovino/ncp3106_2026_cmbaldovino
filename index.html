@@ -15,24 +15,10 @@
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-
-<script>
-(function () {
-
-    const savedTheme =
-        localStorage.getItem("cpe-theme") || "light";
-
-    document.documentElement.dataset.theme = savedTheme;
-    document.documentElement.dataset.introTheme = savedTheme;
-
-})();
-</script>
-
-
 <!-- =========================================================
      INTRO
 ========================================================= -->
@@ -358,6 +344,8 @@
                             01 / CORE
                         </span>
 
+                        <div class="build-image"><img src="assets/build-embedded.svg" alt="Embedded Systems visual"></div>
+
                         <h3>
                             Embedded Systems
                         </h3>
@@ -396,6 +384,8 @@
                             02 / SYSTEMS
                         </span>
 
+                        <div class="build-image"><img src="assets/build-digital.svg" alt="Digital & Computer Systems visual"></div>
+
                         <h3>
                             Digital & Computer Systems
                         </h3>
@@ -421,6 +411,8 @@
                             03 / SOFTWARE
                         </span>
 
+                        <div class="build-image"><img src="assets/build-software.svg" alt="Programming visual"></div>
+
                         <h3>
                             Programming
                         </h3>
@@ -443,6 +435,8 @@
                             04 / NETWORK
                         </span>
 
+                        <div class="build-image"><img src="assets/build-network.svg" alt="Networking visual"></div>
+
                         <h3>
                             Networking
                         </h3>
@@ -464,6 +458,8 @@
                         <span class="card-tag">
                             05 / INTELLIGENCE
                         </span>
+
+                        <div class="build-image"><img src="assets/build-ai.svg" alt="AI + IoT visual"></div>
 
                         <h3>
                             AI + IoT
@@ -488,6 +484,8 @@
                             06 / DESIGN
                         </span>
 
+                        <div class="build-image"><img src="assets/build-design.svg" alt="Engineering Design visual"></div>
+
                         <h3>
                             Engineering Design
                         </h3>
@@ -510,6 +508,8 @@
                         <span class="card-tag">
                             07 / FUTURE
                         </span>
+
+                        <div class="build-image"><img src="assets/build-innovation.svg" alt="Innovation Lab visual"></div>
 
                         <h3>
                             Innovation Lab
@@ -678,6 +678,52 @@
             </div>
 
         </section>
+
+
+        <!-- =================================================
+             EXPLORE PAGES
+        ================================================== -->
+        <section class="section page-portal" id="explore-pages">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div class="section-label">05 / EXPLORE CPE</div>
+                    <h2 class="section-title">GO<br><em>DEEPER</em></h2>
+                </div>
+                <div class="page-card-grid reveal">
+                    <a class="page-card" href="computer-engineering.html">
+                        <img class="page-cover-image" src="assets/go-cpe.jpg" alt="Computer Engineering">
+                        <img class="page-inside-image" src="assets/go-cpe-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">01</span><span class="page-name">COMPUTER ENGINEERING</span><span class="page-arrow">↗</span></div>
+                    </a>
+                    <a class="page-card" href="ue-program.html">
+                        <img class="page-cover-image" src="assets/go-ue.jpg" alt="Computer Engineering in UE">
+                        <img class="page-inside-image" src="assets/go-ue-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">02</span><span class="page-name">COMPUTER ENGINEERING IN UE</span><span class="page-arrow">↗</span></div>
+                    </a>
+                    <a class="page-card" href="specializations.html">
+                        <img class="page-cover-image" src="assets/go-specialization.jpg" alt="Computer Engineering Specializations">
+                        <img class="page-inside-image" src="assets/go-specialization-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">03</span><span class="page-name">SPECIALIZATION</span><span class="page-arrow">↗</span></div>
+                    </a>
+                    <a class="page-card" href="careers.html">
+                        <img class="page-cover-image" src="assets/go-career.jpg" alt="Career and Job Opportunities">
+                        <img class="page-inside-image" src="assets/go-career-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">04</span><span class="page-name">CAREER &amp; JOB OPPORTUNITIES</span><span class="page-arrow">↗</span></div>
+                    </a>
+                    <a class="page-card" href="faculty.html">
+                        <img class="page-cover-image" src="assets/go-faculty.jpg" alt="Faculty">
+                        <img class="page-inside-image" src="assets/go-faculty-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">05</span><span class="page-name">FACULTY</span><span class="page-arrow">↗</span></div>
+                    </a>
+                    <a class="page-card" href="scpes.html">
+                        <img class="page-cover-image" src="assets/go-scpes.jpg" alt="SCPES">
+                        <img class="page-inside-image" src="assets/go-scpes-inside.jpg" alt="">
+                        <div class="page-card-info"><span class="page-no">06</span><span class="page-name">SCPES</span><span class="page-arrow">↗</span></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
 
 
         <!-- =================================================
@@ -984,438 +1030,11 @@
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
-
-<script>
-
-(function () {
-
-    const intro =
-        document.getElementById("intro");
-
-    const introVideo =
-        document.getElementById("introVideo");
-
-    const introVideoSource =
-        document.getElementById("introVideoSource");
-
-    const sharedTitle =
-        document.getElementById("sharedTitle");
-
-    const heroTarget =
-        document.getElementById("heroTitleTarget");
-
-    const site =
-        document.getElementById("site");
-
-    const themeToggle =
-        document.getElementById("themeToggle");
-
-    const clock =
-        document.getElementById("clock");
-
-
-    /* =====================================================
-       ANIMATION SETTINGS
-    ===================================================== */
-
-    const TITLE_APPEAR_DELAY = 5200;
-
-    const TITLE_MOVE_DELAY = 650;
-
-    const TITLE_MOVE_DURATION = 1800;
-
-
-    /* =====================================================
-       POSITION ADJUSTMENT
-    ===================================================== */
-
-    const TITLE_LOWER_SPACE = 45;
-
-
-    /* =====================================================
-       LOAD INTRO VIDEO
-    ===================================================== */
-
-    const introTheme =
-        document.documentElement.dataset.introTheme || "light";
-
-
-    if (introVideoSource) {
-
-        introVideoSource.src =
-            introTheme === "dark"
-                ? "assets/dark.mp4"
-                : "assets/light.mp4";
-
-    }
-
-
-    if (introVideo) {
-
-        introVideo.load();
-
-        introVideo.play().catch(function () {});
-
-    }
-
-
-    /* =====================================================
-       THEME
-    ===================================================== */
-
-    if (themeToggle) {
-
-        themeToggle.addEventListener(
-            "click",
-            function () {
-
-                const current =
-                    document.documentElement.dataset.theme;
-
-                const next =
-                    current === "dark"
-                        ? "light"
-                        : "dark";
-
-                document.documentElement.dataset.theme =
-                    next;
-
-                localStorage.setItem(
-                    "cpe-theme",
-                    next
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CLOCK
-    ===================================================== */
-
-    function updateClock() {
-
-        if (!clock) {
-            return;
-        }
-
-        const now =
-            new Date();
-
-        const formatter =
-            new Intl.DateTimeFormat(
-                "en-PH",
-                {
-                    timeZone: "Asia/Manila",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                    hour12: false
-                }
-            );
-
-        clock.textContent =
-            "MANILA " +
-            formatter.format(now);
-
-    }
-
-
-    updateClock();
-
-    setInterval(
-        updateClock,
-        1000
-    );
-
-
-    /* =====================================================
-       TITLE ANIMATION
-    ===================================================== */
-
-    function animateTitleToHero() {
-
-        if (!sharedTitle || !heroTarget) {
-            return;
-        }
-
-
-        sharedTitle.classList.add("show");
-
-
-        const titleRect =
-            sharedTitle.getBoundingClientRect();
-
-
-        const startLeft =
-            (window.innerWidth - titleRect.width) / 2;
-
-
-        const startTop =
-            (window.innerHeight - titleRect.height) / 2;
-
-
-        sharedTitle.style.left =
-            startLeft + "px";
-
-        sharedTitle.style.top =
-            startTop + "px";
-
-        sharedTitle.style.transform =
-            "scale(0.72)";
-
-
-        setTimeout(
-            function () {
-
-                const destination =
-                    heroTarget.getBoundingClientRect();
-
-
-                const finalLeft =
-                    destination.left;
-
-
-                const finalTop =
-                    destination.top +
-                    TITLE_LOWER_SPACE;
-
-
-                const current =
-                    sharedTitle.getBoundingClientRect();
-
-
-                const animation =
-                    sharedTitle.animate(
-
-                        [
-
-                            {
-                                left:
-                                    current.left + "px",
-
-                                top:
-                                    current.top + "px",
-
-                                transform:
-                                    "scale(0.72)"
-                            },
-
-                            {
-
-                                left:
-                                    finalLeft + "px",
-
-                                top:
-                                    finalTop + "px",
-
-                                transform:
-                                    "scale(1)"
-                            }
-
-                        ],
-
-                        {
-
-                            duration:
-                                TITLE_MOVE_DURATION,
-
-                            easing:
-                                "cubic-bezier(.16,.84,.24,1)",
-
-                            fill:
-                                "forwards"
-
-                        }
-
-                    );
-
-
-                animation.finished.then(
-                    function () {
-
-                        const documentTop =
-                            finalTop +
-                            window.scrollY;
-
-
-                        sharedTitle.style.position =
-                            "absolute";
-
-
-                        sharedTitle.style.left =
-                            finalLeft + "px";
-
-
-                        sharedTitle.style.top =
-                            documentTop + "px";
-
-
-                        sharedTitle.style.transform =
-                            "scale(1)";
-
-
-                        sharedTitle.style.animation =
-                            "none";
-
-
-                        sharedTitle.classList.add(
-                            "title-landed"
-                        );
-
-
-                        site.classList.add(
-                            "home-ready"
-                        );
-
-
-                        intro.classList.add(
-                            "go-home"
-                        );
-
-
-                        setTimeout(
-                            function () {
-
-                                intro.style.display =
-                                    "none";
-
-                            },
-                            2200
-                        );
-
-                    }
-                );
-
-            },
-            TITLE_MOVE_DELAY
-        );
-
-    }
-
-
-    /* =====================================================
-       START TITLE ANIMATION
-    ===================================================== */
-
-    window.addEventListener(
-        "load",
-        function () {
-
-            setTimeout(
-                function () {
-
-                    animateTitleToHero();
-
-                },
-                TITLE_APPEAR_DELAY
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       SCROLL REVEAL
-    ===================================================== */
-
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-
-    if (
-        "IntersectionObserver"
-        in window
-    ) {
-
-        const observer =
-            new IntersectionObserver(
-
-                function (entries) {
-
-                    entries.forEach(
-                        function (entry) {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry.target.classList.add(
-                                    "visible"
-                                );
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
-                    );
-
-                },
-
-                {
-                    threshold: 0.12
-                }
-
-            );
-
-
-        revealElements.forEach(
-            function (element) {
-
-                observer.observe(
-                    element
-                );
-
-            }
-        );
-
-    }
-    else {
-
-        revealElements.forEach(
-            function (element) {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       PAGE RESTORE SAFETY
-    ===================================================== */
-
-    window.addEventListener(
-        "pageshow",
-        function () {
-
-            if (window.scrollY > 20) {
-
-                intro.style.display =
-                    "none";
-
-                site.classList.add(
-                    "home-ready"
-                );
-
-            }
-
-        }
-    );
-
-
-})();
-
-</script>
+<!-- =========================================================
+     INTERACTION EFFECTS ONLY — ADDED WITHOUT CHANGING LAYOUT
+========================================================= -->
+
+<script src="index.js"></script>
 
 </body>
 </html>
