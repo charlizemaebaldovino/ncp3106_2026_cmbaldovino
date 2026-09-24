@@ -11,8 +11,8 @@
 
 :root {
 
-    --paper: #fffcf3;
-    --soft: #e8e3d8;
+    --paper: #d1cfc9;
+    --soft: #d1cfc9;
     --ink: #120c0c;
     --muted: #6e6966;
     --orange: #c63108;
@@ -20,27 +20,27 @@
     --card: #f0eadf;
 
     --nav-bg:
-        rgba(255, 252, 243, .94);
+        rgba(209, 207, 201, .94);
 
     --opposite: #0f1a2b;
-    --opposite-text: #fffcf3;
+    --opposite-text: #d1cfc9;
 }
 
 
 html[data-theme="dark"] {
 
     --paper: #0f1a2b;
-    --soft: #16243a;
-    --ink: #f8f2e8;
+    --soft: #0f1a2b;
+    --ink: #d1cfc9;
     --muted: #a8b3c4;
     --orange: #d45b32;
     --line: #314158;
-    --card: #17253a;
+    --card: #0f1a2b;
 
     --nav-bg:
         rgba(15, 26, 43, .94);
 
-    --opposite: #fffcf3;
+    --opposite: #d1cfc9;
     --opposite-text: #0f1a2b;
 }
 
@@ -53,13 +53,12 @@ html {
 body {
 
     background: var(--paper);
+    background-image: linear-gradient(135deg, var(--paper), color-mix(in srgb, var(--opposite) 14%, var(--paper)) 58%, var(--paper));
     color: var(--ink);
 
     font-family:
         "Inter",
         sans-serif;
-
-    overflow-x: hidden;
 
     transition:
         background .45s ease,
@@ -741,6 +740,8 @@ body.loaded
 
 .faculty-marquee {
 
+    display: none;
+
     overflow: hidden;
 
     padding:
@@ -1162,7 +1163,7 @@ body.loaded
         );
 
     color:
-        #fffcf3;
+        #d1cfc9;
 
     opacity: 0;
 

@@ -3,36 +3,27 @@
 ========================================================= */
 
 :root {
-
-    --paper: #fffcf3;
-    --soft: #e8e3d8;
+    --paper: #d1cfc9;
+    --soft: #d1cfc9;
     --ink: #120c0c;
     --muted: #6e6966;
     --orange: #c63108;
     --orange2: #d59945;
     --line: #c9c1b5;
     --card: #f0eadf;
-
-    --white: #fff;
-
-    --nav-bg: rgba(255, 252, 243, .94);
+    --nav-bg: rgba(209, 207, 201, .94);
 }
-
-
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 html[data-theme="dark"] {
 
     --paper: #0f1a2b;
-    --soft: #16243a;
-    --ink: #f8f2e8;
+    --soft: #0f1a2b;
+    --ink: #d1cfc9;
     --muted: #a8b3c4;
     --orange: #d45b32;
     --orange2: #d59945;
     --line: #314158;
-    --card: #17253a;
+    --card: #0f1a2b;
 
     --nav-bg: rgba(15, 26, 43, .94);
 }
@@ -55,6 +46,7 @@ html {
 body {
 
     background: var(--paper);
+    background-image: linear-gradient(135deg, var(--paper), color-mix(in srgb, var(--orange) 8%, var(--paper)) 58%, var(--paper));
     color: var(--ink);
 
     font-family:
@@ -92,7 +84,7 @@ button {
 
     z-index: 9999;
 
-    background: #fffcf3;
+    background: #d1cfc9;
 
     overflow: hidden;
 
@@ -251,7 +243,7 @@ button {
 
     border-radius: 50%;
 
-    background: #fffcf3;
+    background: #d1cfc9;
 
     left: 50%;
 
@@ -279,7 +271,7 @@ html[data-intro-theme="dark"] .intro-wipe {
 
 html[data-intro-theme="dark"] .intro-label,
 html[data-intro-theme="dark"] .intro-code {
-    color: #fffcf3;
+    color: #d1cfc9;
 }
 
 
@@ -360,7 +352,7 @@ html[data-intro-theme="dark"] .intro-code {
 ========================================================= */
 
 html[data-intro-theme="dark"] #sharedTitle {
-    color: #fffcf3;
+    color: #d1cfc9;
 }
 
 
@@ -1608,7 +1600,7 @@ details p {
     background:
         var(--ink);
 
-    color: #0f1a2b;
+    color: var(--paper);
 
     padding:
         100px 0;
@@ -1645,7 +1637,7 @@ details p {
 
 .contact-copy {
 
-    color: #aaa;
+    color: var(--muted);
 
     font-size: 13px;
 
@@ -1668,7 +1660,7 @@ details p {
 .contact-link {
 
     border-top:
-        1px solid #444;
+        1px solid var(--line);
 
     padding:
         15px 0;
@@ -1698,10 +1690,10 @@ footer {
     background:
         var(--ink);
 
-    color: #fff;
+    color: var(--paper);
 
     border-top:
-        1px solid #444;
+        1px solid var(--line);
 }
 
 .footer-inner {
@@ -1724,7 +1716,7 @@ footer {
         "Space Mono",
         monospace;
 
-    color: #888;
+    color: var(--muted);
 }
 
 
@@ -2153,7 +2145,7 @@ body::after {
 }
 
 html[data-theme="dark"] .cursor-trail-dot {
-    background: #fffcf3;
+    background: #d1cfc9;
 }
 
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
@@ -2459,7 +2451,7 @@ html[data-theme="dark"] .page-card::after { background: linear-gradient(to top, 
     color: var(--orange);
 }
 html[data-theme="light"] #faq {
-    background: #fffcf3;
+    background: #d1cfc9;
     color: #120c0c;
 }
 html[data-theme="light"] #faq summary,
@@ -2535,7 +2527,7 @@ html[data-theme="dark"] #faq details p {
     position: absolute;
     inset: 0;
     z-index: 3;
-    color: #fffcf3;
+    color: #d1cfc9;
     background: linear-gradient(to top, rgba(15,26,43,.78), rgba(15,26,43,.04) 65%);
     opacity: 0;
     transition: opacity .35s ease .22s;

@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
        THEME
     ===================================================== */
 
-    const savedTheme =
-        localStorage.getItem("cpe-theme") || "light";
+    // Start every preview in the light theme; the toggle still changes the active session.
+    const savedTheme = "light";
 
     document.documentElement.dataset.theme = savedTheme;
     document.documentElement.dataset.introTheme = savedTheme;
@@ -72,6 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     : "dark";
 
             document.documentElement.dataset.theme =
+                newTheme;
+
+            document.documentElement.dataset.introTheme =
                 newTheme;
 
             localStorage.setItem(
@@ -708,7 +711,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const cursorColor =
                 theme === "dark"
-                    ? "#fffcf3"
+                    ? "#d1cfc9"
                     : "#0f1a2b";
 
 
