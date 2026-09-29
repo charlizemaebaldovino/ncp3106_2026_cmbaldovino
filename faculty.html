@@ -1,23 +1,35 @@
 <!DOCTYPE html>
+
+
 <html lang="en" data-theme="light">
+
 
 <head>
 
+
     <meta charset="UTF-8">
+
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
+
     <title>
         Faculty | UE Computer Engineering
     </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
 
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
     >
+
 
     <link
         rel="preconnect"
@@ -25,17 +37,50 @@
         crossorigin
     >
 
+
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet"
     >
+
+
+    <!-- =====================================================
+         BOOTSTRAP 5
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+         Used by the Index footer
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         FACULTY CSS
+    ====================================================== -->
 
     <link
         rel="stylesheet"
         href="faculty.css"
     >
 
+
+    <!-- =====================================================
+         LOAD SAVED THEME BEFORE PAGE APPEARS
+    ====================================================== -->
+
     <script>
+
         (function () {
 
             const savedTheme =
@@ -45,7 +90,9 @@
                 savedTheme;
 
         })();
+
     </script>
+
 
 </head>
 
@@ -53,1039 +100,1093 @@
 <body>
 
 
-<!-- =========================================================
-     PAGE TRANSITION
-========================================================= -->
-
-<div
-    class="page-transition"
-    id="pageTransition"
-></div>
-
-
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-
-<div class="topbar">
-
-    <div class="topbar-left">
-
-        <span class="status-dot"></span>
-
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
-
-    </div>
-
-
-    <div class="topbar-right">
-
-        <span>
-            FACULTY
-        </span>
-
-        <span id="clock">
-            MANILA 00:00:00
-        </span>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav>
-
-    <div class="nav-inner">
-
-        <a
-            href="index.html"
-            class="logo page-link"
-        >
-            CPE
-
-            <small>
-                UNIVERSITY OF THE EAST
-            </small>
-        </a>
-
-
-        <ul class="nav-links">
-
-            <li>
-                <a
-                    href="computer-engineering.html"
-                    class="page-link"
-                >
-                    CPE
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="ue-program.html"
-                    class="page-link"
-                >
-                    UE PROGRAM
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="specializations.html"
-                    class="page-link"
-                >
-                    SPECIALIZATIONS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="careers.html"
-                    class="page-link"
-                >
-                    CAREERS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="faculty.html"
-                    class="active"
-                >
-                    FACULTY
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="scpes.html"
-                    class="page-link"
-                >
-                    SCPES
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="nav-right">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle theme"
-            >
-                <span class="sun">☀</span>
-                <span class="moon">◐</span>
-            </button>
-
-
-            <a
-                href="index.html"
-                class="home-button page-link"
-            >
-                HOME ↗
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<main>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="faculty-hero">
-
-    <div class="hero-meta reveal">
-
-        <span>
-            05 / FACULTY
-        </span>
-
-        <span>
-            COMPUTER ENGINEERING
-        </span>
-
-    </div>
-
-
-    <div class="hero-title">
-
-        <span class="hero-line hero-line-one">
-            MEET THE
-        </span>
-
-        <span class="hero-line hero-line-two">
-            PEOPLE
-        </span>
-
-        <span class="hero-line hero-line-three">
-            <em>BEHIND CPE.</em>
-        </span>
-
-    </div>
-
-
-    <div class="hero-bottom">
-
-        <div class="hero-code reveal">
-            04
-        </div>
-
-
-        <div class="hero-description reveal">
-
-            <p>
-                Meet the Computer Engineering faculty
-                whose technical interests span embedded
-                systems, networking, engineering mathematics,
-                software design, electronics, and sensors.
-            </p>
-
-
-            <button
-                class="explore-button"
-                id="exploreFaculty"
-            >
-
-                <span>
-                    MEET THE FACULTY
-                </span>
-
-                <span>
-                    ↓
-                </span>
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     MARQUEE
-========================================================= -->
-
-<div class="faculty-marquee">
-
-    <div class="marquee-track">
-
-        <span>KNOWLEDGE</span><i>✦</i>
-        <span>EXPERIENCE</span><i>✦</i>
-        <span>GUIDANCE</span><i>✦</i>
-        <span>ENGINEERING</span><i>✦</i>
-        <span>TECHNOLOGY</span><i>✦</i>
-        <span>LEARNING</span><i>✦</i>
-
-        <span>KNOWLEDGE</span><i>✦</i>
-        <span>EXPERIENCE</span><i>✦</i>
-        <span>GUIDANCE</span><i>✦</i>
-        <span>ENGINEERING</span><i>✦</i>
-        <span>TECHNOLOGY</span><i>✦</i>
-        <span>LEARNING</span><i>✦</i>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     INTRO
-========================================================= -->
-
-<section
-    class="faculty-intro"
-    id="faculty"
->
-
-    <div class="intro-heading reveal">
-
-        <span class="section-number">
-            01
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                OUR FACULTY
-            </span>
-
-            <h2>
-                FOUR PERSPECTIVES.<br>
-                <em>ONE PROGRAM.</em>
-            </h2>
-
-        </div>
-
-
-        <p>
-            Each faculty member brings a different
-            technical focus to Computer Engineering,
-            creating a learning environment that connects
-            hardware, software, mathematics, communication,
-            and electronic systems.
-        </p>
-
-    </div>
-
-
-    <div class="faculty-focus-strip reveal">
-
-        <span>
-            EMBEDDED SYSTEMS
-        </span>
-
-        <span>
-            NETWORKING
-        </span>
-
-        <span>
-            ENGINEERING MATH
-        </span>
-
-        <span>
-            ELECTRONICS
-        </span>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FACULTY GRID
-========================================================= -->
-
-<section class="faculty-section">
-
-    <div class="faculty-grid">
-
-
-        <!-- =================================================
-             ENGR. ERROL JOHN M. ANTONIO
-        ================================================== -->
-
-        <article
-            class="faculty-card faculty-card-01 reveal"
-            tabindex="0"
-        >
-
-            <div class="faculty-photo">
-
-                <img
-                    src="assets/faculty-errol-antonio.jpg"
-                    alt="Engr. Errol John M. Antonio"
-                >
-
-                <span class="faculty-number">
-                    01
-                </span>
-
-
-                <div class="photo-tag">
-                    EMBEDDED / IoT
-                </div>
-
-
-                <div class="photo-overlay">
-
-                    <span>
-                        FACULTY / 01
-                    </span>
-
-                    <strong>
-                        HARDWARE.<br>
-                        SOFTWARE.<br>
-                        CONNECTED.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="faculty-card-content">
-
-                <span class="faculty-role">
-                    COMPUTER ENGINEERING FACULTY
-                </span>
-
-                <h3>
-                    ENGR. ERROL JOHN<br>
-                    M. ANTONIO
-                </h3>
-
-
-                <div class="faculty-mini-info">
-
-                    <div>
-
-                        <span>
-                            FOCUS
-                        </span>
-
-                        <p>
-                            Embedded Systems · IoT ·
-                            Microcontrollers · Sensors
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="profile-button"
-                    data-profile="antonio"
-                >
-                    <span>
-                        VIEW PROFILE
-                    </span>
-
-                    <span>
-                        ↗
-                    </span>
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- =================================================
-             ENGR. MARYANN LIMKIAN
-        ================================================== -->
-
-        <article
-            class="faculty-card faculty-card-02 reveal"
-            tabindex="0"
-        >
-
-            <div class="faculty-photo">
-
-                <img
-                    src="assets/faculty-maryann-limkian.jpg"
-                    alt="Engr. Maryann Limkian"
-                >
-
-                <span class="faculty-number">
-                    02
-                </span>
-
-
-                <div class="photo-tag">
-                    NETWORKS / DATA
-                </div>
-
-
-                <div class="photo-overlay">
-
-                    <span>
-                        FACULTY / 02
-                    </span>
-
-                    <strong>
-                        CONNECT.<br>
-                        COMMUNICATE.<br>
-                        LOGIC.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="faculty-card-content">
-
-                <span class="faculty-role">
-                    COMPUTER ENGINEERING FACULTY
-                </span>
-
-                <h3>
-                    ENGR. MARYANN<br>
-                    LIMKIAN
-                </h3>
-
-
-                <div class="faculty-mini-info">
-
-                    <div>
-
-                        <span>
-                            FOCUS
-                        </span>
-
-                        <p>
-                            Networking · Logic Circuits ·
-                            Data Communications
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="profile-button"
-                    data-profile="limkian"
-                >
-                    <span>
-                        VIEW PROFILE
-                    </span>
-
-                    <span>
-                        ↗
-                    </span>
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- =================================================
-             ENGR. JOHN JOEMHEL D. CORAL
-        ================================================== -->
-
-        <article
-            class="faculty-card faculty-card-03 reveal"
-            tabindex="0"
-        >
-
-            <div class="faculty-photo">
-
-                <img
-                    src="assets/faculty-john-coral.jpg"
-                    alt="Engr. John Joemhel D. Coral"
-                >
-
-                <span class="faculty-number">
-                    03
-                </span>
-
-
-                <div class="photo-tag">
-                    MATH / DATA
-                </div>
-
-
-                <div class="photo-overlay">
-
-                    <span>
-                        FACULTY / 03
-                    </span>
-
-                    <strong>
-                        ANALYZE.<br>
-                        MODEL.<br>
-                        DESIGN.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="faculty-card-content">
-
-                <span class="faculty-role">
-                    COMPUTER ENGINEERING FACULTY
-                </span>
-
-                <h3>
-                    ENGR. JOHN JOEMHEL<br>
-                    D. CORAL
-                </h3>
-
-
-                <div class="faculty-mini-info">
-
-                    <div>
-
-                        <span>
-                            FOCUS
-                        </span>
-
-                        <p>
-                            Engineering Mathematics ·
-                            Data Analysis · Software Design
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="profile-button"
-                    data-profile="coral"
-                >
-                    <span>
-                        VIEW PROFILE
-                    </span>
-
-                    <span>
-                        ↗
-                    </span>
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- =================================================
-             ENGR. ONOFRE CORPUZ
-        ================================================== -->
-
-        <article
-            class="faculty-card faculty-card-04 reveal"
-            tabindex="0"
-        >
-
-            <div class="faculty-photo">
-
-                <img
-                    src="assets/faculty-onofre-corpuz.jpg"
-                    alt="Engr. Onofre Corpuz"
-                >
-
-                <span class="faculty-number">
-                    04
-                </span>
-
-
-                <div class="photo-tag">
-                    ELECTRONICS / SENSORS
-                </div>
-
-
-                <div class="photo-overlay">
-
-                    <span>
-                        FACULTY / 04
-                    </span>
-
-                    <strong>
-                        SENSE.<br>
-                        MEASURE.<br>
-                        CONNECT.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="faculty-card-content">
-
-                <span class="faculty-role">
-                    COMPUTER ENGINEERING FACULTY
-                </span>
-
-                <h3>
-                    ENGR. ONOFRE<br>
-                    CORPUZ
-                </h3>
-
-
-                <div class="faculty-mini-info">
-
-                    <div>
-
-                        <span>
-                            FOCUS
-                        </span>
-
-                        <p>
-                            Electronics · Mixed-Signal
-                            Systems · Sensors
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="profile-button"
-                    data-profile="corpuz"
-                >
-                    <span>
-                        VIEW PROFILE
-                    </span>
-
-                    <span>
-                        ↗
-                    </span>
-                </button>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FACULTY DISCIPLINES
-========================================================= -->
-
-<section class="disciplines-section">
-
-    <div class="disciplines-heading reveal">
-
-        <span class="section-label">
-            02 / AREAS OF KNOWLEDGE
-        </span>
-
-        <h2>
-            DIFFERENT FIELDS.<br>
-            <em>CONNECTED THINKING.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="discipline-list">
-
-
-        <div class="discipline-row reveal">
-
-            <span>
-                01
-            </span>
-
-            <strong>
-                EMBEDDED SYSTEMS
-                & INTERNET OF THINGS
-            </strong>
-
-            <i>
-                EJ
-            </i>
-
-        </div>
-
-
-        <div class="discipline-row reveal">
-
-            <span>
-                02
-            </span>
-
-            <strong>
-                NETWORKING &
-                DATA COMMUNICATIONS
-            </strong>
-
-            <i>
-                ML
-            </i>
-
-        </div>
-
-
-        <div class="discipline-row reveal">
-
-            <span>
-                03
-            </span>
-
-            <strong>
-                ENGINEERING MATHEMATICS
-                & DATA ANALYSIS
-            </strong>
-
-            <i>
-                JC
-            </i>
-
-        </div>
-
-
-        <div class="discipline-row reveal">
-
-            <span>
-                04
-            </span>
-
-            <strong>
-                ELECTRONICS &
-                SENSOR SYSTEMS
-            </strong>
-
-            <i>
-                OC
-            </i>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CLOSING
-========================================================= -->
-
-<section class="faculty-closing">
-
-    <div class="closing-small reveal">
-        COMPUTER ENGINEERING FACULTY
-    </div>
-
-
-    <div class="closing-title reveal">
-
-        <span>
-            KNOWLEDGE.
-        </span>
-
-        <span>
-            EXPERIENCE.
-        </span>
-
-        <span>
-            <em>GUIDANCE.</em>
-        </span>
-
-    </div>
-
-
-    <div class="closing-bottom reveal">
-
-        <p>
-            From circuits and connected systems to
-            mathematical analysis and software design,
-            Computer Engineering brings together multiple
-            areas of knowledge.
-        </p>
-
-
-        <a
-            href="scpes.html"
-            class="next-page page-link"
-        >
-
-            <span>
-                NEXT / SCPES
-            </span>
-
-            <strong>
-                STUDENT
-                COMMUNITY
-            </strong>
-
-            <i>
-                →
-            </i>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     PROFILE VIEWER
-========================================================= -->
-
-<div
-    class="profile-viewer"
-    id="profileViewer"
-    aria-hidden="true"
->
+    <!-- =====================================================
+         PAGE TRANSITION
+    ====================================================== -->
 
     <div
-        class="profile-backdrop"
-        id="profileBackdrop"
+        class="page-transition"
+        id="pageTransition"
     ></div>
 
 
-    <div class="profile-modal">
+    <!-- =====================================================
+         NAVIGATION
+         No top bar above this navigation
+    ====================================================== -->
 
-        <div class="profile-modal-top">
+    <nav class="main-navigation">
 
-            <span id="profileNumber">
-                FACULTY / 01
-            </span>
+        <div class="nav-inner">
 
 
-            <button
-                class="profile-close"
-                id="profileClose"
-                aria-label="Close faculty profile"
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo page-link"
             >
-                ×
-            </button>
+
+                CPE
+
+                <small>
+                    UNIVERSITY OF THE EAST
+                </small>
+
+            </a>
+
+
+            <!-- NAVIGATION LINKS -->
+
+            <ul class="nav-links">
+
+                <li>
+
+                    <a
+                        href="computer-engineering.html"
+                        class="page-link"
+                    >
+                        CPE
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="ue-program.html"
+                        class="page-link"
+                    >
+                        UE PROGRAM
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="specializations.html"
+                        class="page-link"
+                    >
+                        SPECIALIZATIONS
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="careers.html"
+                        class="page-link"
+                    >
+                        CAREERS
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="faculty.html"
+                        class="active"
+                    >
+                        FACULTY
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="scpes.html"
+                        class="page-link"
+                    >
+                        SCPES
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="nav-right">
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle light and dark mode"
+                >
+
+                    <span class="sun">
+                        ☀
+                    </span>
+
+                    <span class="moon">
+                        ◐
+                    </span>
+
+                </button>
+
+
+                <a
+                    href="index.html"
+                    class="home-button page-link"
+                >
+                    HOME ↗
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+             KEEP: MEET THE PEOPLE BEHIND CPE.
+        ================================================== -->
+
+        <div class="hero-title reveal">
+
+            <h1>
+
+                <span class="title-explore">
+                    EXPLORE
+                </span>
+
+                <span class="title-faculty">
+                    FACULTY
+                </span>
+
+            </h1>
 
         </div>
 
 
-        <div class="profile-modal-layout">
+        <div class="hero-introduction reveal">
+
+            <h2 class="hero-subtitle">
+                BUILT BY BRILLIANT MINDS.
+            </h2>
+
+            <p>
+                Behind the Computer Engineering program are educators
+                who bring together knowledge from hardware, software,
+                embedded systems, networking, electronics, mathematics,
+                and emerging technologies. Meet the faculty members who
+                guide students in developing the skills, curiosity, and
+                technical foundation needed to transform ideas into
+                meaningful engineering solutions.
+            </p>
+
+        </div>
 
 
-            <div class="profile-modal-photo">
+        <!-- =================================================
+             FACULTY CARDS
+             No extra disciplines/focus sections between them
+        ================================================== -->
 
-                <img
-                    id="profileImage"
-                    src=""
-                    alt=""
+        <section
+            class="faculty-section"
+            id="faculty"
+        >
+
+
+            <!-- =================================================
+                 FACULTY GRID
+            ================================================== -->
+
+            <div class="faculty-grid">
+
+
+                <!-- =============================================
+                     FACULTY 01
+                ============================================== -->
+
+                <article
+                    class="faculty-card reveal"
+                    data-profile="antonio"
                 >
 
-                <div class="profile-image-code">
-                    CPE / UE
+                    <div class="faculty-photo">
+
+                        <img
+                            src="assets/sirej.jpg"
+                            alt="Engr. Errol John M. Antonio"
+                        >
+
+
+                        <span class="faculty-number">
+                            01
+                        </span>
+
+
+                        <span class="photo-tag">
+                            EMBEDDED / IOT
+                        </span>
+
+
+                        <div class="photo-overlay">
+
+                            <span>
+                                FACULTY / 01
+                            </span>
+
+
+                            <strong>
+                                BUILDING
+                                <br>
+                                CONNECTED
+                                <br>
+                                SYSTEMS.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faculty-card-content">
+
+                        <span class="faculty-role">
+                            DEPARTMENT CHAIRPERSON
+                        </span>
+
+
+                        <h2>
+                            ENGR. ERROL JOHN
+                            <br>
+                            M. ANTONIO
+                        </h2>
+
+
+                        <div class="faculty-mini-info">
+
+                            <span>
+                                FOCUS
+                            </span>
+
+
+                            <p>
+                                Embedded Systems /
+                                Internet of Things
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="profile-button"
+                            type="button"
+                            data-profile-button="antonio"
+                        >
+
+                            <span>
+                                VIEW PROFILE
+                            </span>
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =============================================
+                     FACULTY 02
+                ============================================== -->
+
+                <article
+                    class="faculty-card reveal"
+                    data-profile="limkian"
+                >
+
+                    <div class="faculty-photo">
+
+                        <img
+                            src="assets/mamlim.JPG"
+                            alt="Engr. Maryann Limkian"
+                        >
+
+
+                        <span class="faculty-number">
+                            02
+                        </span>
+
+
+                        <span class="photo-tag">
+                            NETWORKS
+                        </span>
+
+
+                        <div class="photo-overlay">
+
+                            <span>
+                                FACULTY / 02
+                            </span>
+
+
+                            <strong>
+                                CONNECTING
+                                <br>
+                                PEOPLE AND
+                                <br>
+                                SYSTEMS.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faculty-card-content">
+
+                        <span class="faculty-role">
+                            COMPUTER ENGINEERING FACULTY
+                        </span>
+
+
+                        <h2>
+                            ENGR. MARYANN
+                            <br>
+                            LIMKIAN
+                        </h2>
+
+
+                        <div class="faculty-mini-info">
+
+                            <span>
+                                FOCUS
+                            </span>
+
+
+                            <p>
+                                Networking /
+                                Logic Circuits /
+                                Data Communication
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="profile-button"
+                            type="button"
+                            data-profile-button="limkian"
+                        >
+
+                            <span>
+                                VIEW PROFILE
+                            </span>
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+                                <!-- =============================================
+                     FACULTY 03
+                ============================================== -->
+
+                <article
+                    class="faculty-card reveal"
+                    data-profile="coral"
+                >
+
+                    <div class="faculty-photo">
+
+                        <img
+                            src="assets/sircoral.JPG"
+                            alt="Engr. John Joemhel D. Coral"
+                        >
+
+
+                        <span class="faculty-number">
+                            03
+                        </span>
+
+
+                        <span class="photo-tag">
+                            ANALYSIS / SOFTWARE
+                        </span>
+
+
+                        <div class="photo-overlay">
+
+                            <span>
+                                FACULTY / 03
+                            </span>
+
+
+                            <strong>
+                                ANALYZE.
+                                <br>
+                                DESIGN.
+                                <br>
+                                SOLVE.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faculty-card-content">
+
+                        <span class="faculty-role">
+                            COMPUTER ENGINEERING FACULTY
+                        </span>
+
+
+                        <h2>
+                            ENGR. JOHN JOEMHEL
+                            <br>
+                            D. CORAL
+                        </h2>
+
+
+                        <div class="faculty-mini-info">
+
+                            <span>
+                                FOCUS
+                            </span>
+
+
+                            <p>
+                                Engineering Mathematics /
+                                Data Analysis /
+                                Software Design
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="profile-button"
+                            type="button"
+                            data-profile-button="coral"
+                        >
+
+                            <span>
+                                VIEW PROFILE
+                            </span>
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =============================================
+                     FACULTY 04
+                ============================================== -->
+
+                <article
+                    class="faculty-card reveal"
+                    data-profile="corpuz"
+                >
+
+                    <div class="faculty-photo">
+
+                        <img
+                            src="assets/faculty-onofre-corpuz.jpg"
+                            alt="Engr. Onofre Corpuz"
+                        >
+
+
+                        <span class="faculty-number">
+                            04
+                        </span>
+
+
+                        <span class="photo-tag">
+                            ELECTRONICS / SENSORS
+                        </span>
+
+
+                        <div class="photo-overlay">
+
+                            <span>
+                                FACULTY / 04
+                            </span>
+
+
+                            <strong>
+                                SENSE.
+                                <br>
+                                MEASURE.
+                                <br>
+                                CREATE.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faculty-card-content">
+
+                        <span class="faculty-role">
+                            COMPUTER ENGINEERING FACULTY
+                        </span>
+
+
+                        <h2>
+                            ENGR. ONOFRE
+                            <br>
+                            CORPUZ
+                        </h2>
+
+
+                        <div class="faculty-mini-info">
+
+                            <span>
+                                FOCUS
+                            </span>
+
+
+                            <p>
+                                Electronics /
+                                Mixed Signals /
+                                Sensors
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="profile-button"
+                            type="button"
+                            data-profile-button="corpuz"
+                        >
+
+                            <span>
+                                VIEW PROFILE
+                            </span>
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+   <!-- =====================================================
+     DIVE DEEPER
+====================================================== -->
+
+<section class="faculty-deeper-section">
+
+    <div class="faculty-deeper-label">
+        04 / EXPLORE FURTHER
+    </div>
+
+    <h2 class="faculty-deeper-heading">
+        DIVE DEEPER
+    </h2>
+
+
+    <div class="faculty-deeper-list">
+
+        <!-- 01 -->
+        <a
+            href="index.html"
+            class="faculty-deeper-card"
+        >
+
+            <span class="faculty-deeper-number">
+                01
+            </span>
+
+            <div class="faculty-deeper-content">
+
+                <h3>
+                    Computer Engineering
+                </h3>
+
+                <p>
+                    Discover the field and the relationship between hardware and software.
+                </p>
+
+            </div>
+
+            <span class="faculty-deeper-arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- 02 -->
+        <a
+            href="cpe-at-ue.html"
+            class="faculty-deeper-card"
+        >
+
+            <span class="faculty-deeper-number">
+                02
+            </span>
+
+            <div class="faculty-deeper-content">
+
+                <h3>
+                    Computer Engineering in UE
+                </h3>
+
+                <p>
+                    Explore the learning experience, technical skills, projects, and engineering environment.
+                </p>
+
+            </div>
+
+            <span class="faculty-deeper-arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- 03 -->
+        <a
+            href="specialization.html"
+            class="faculty-deeper-card"
+        >
+
+            <span class="faculty-deeper-number">
+                03
+            </span>
+
+            <div class="faculty-deeper-content">
+
+                <h3>
+                    Specialization
+                </h3>
+
+                <p>
+                    Explore embedded systems, IoT, computer networks, cybersecurity, AI, robotics, data, and more.
+                </p>
+
+            </div>
+
+            <span class="faculty-deeper-arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- 04 -->
+        <a
+            href="careers.html"
+            class="faculty-deeper-card"
+        >
+
+            <span class="faculty-deeper-number">
+                04
+            </span>
+
+            <div class="faculty-deeper-content">
+
+                <h3>
+                    Career & Job Opportunities
+                </h3>
+
+                <p>
+                    Discover career paths and professional opportunities available to Computer Engineering graduates.
+                </p>
+
+            </div>
+
+            <span class="faculty-deeper-arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- 05 -->
+        <a
+            href="scpes.html"
+            class="faculty-deeper-card"
+        >
+
+            <span class="faculty-deeper-number">
+                05
+            </span>
+
+            <div class="faculty-deeper-content">
+
+                <h3>
+                    SCPES
+                </h3>
+
+                <p>
+                    Discover the organization, officers, activities, events, and student involvement.
+                </p>
+
+            </div>
+
+            <span class="faculty-deeper-arrow">
+                →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+    <!-- =====================================================
+         BOTTOM / FOOTER
+         SAME AS INDEX
+    ====================================================== -->
+
+    <footer class="cpe-footer reveal">
+
+
+        <!-- BACKGROUND IMAGE -->
+
+        <img
+            src="assets/footer.png"
+            alt=""
+            class="cpe-footer-pattern"
+            aria-hidden="true"
+        >
+
+
+        <!-- MAIN FOOTER CONTENT -->
+
+        <div class="cpe-footer-content">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="cpe-footer-brand">
+
+                <img
+                    src="assets/cpelogo.png"
+                    alt="Computer Engineering Logo"
+                    class="cpe-footer-logo"
+                >
+
+
+                <div class="cpe-footer-divider"></div>
+
+
+                <div class="cpe-footer-name">
+
+                    <span>
+                        University of the East - Manila
+                    </span>
+
+                    <strong>
+                        COMPUTER ENGINEERING
+                    </strong>
+
                 </div>
 
             </div>
 
 
-            <div class="profile-modal-info">
+            <!-- RIGHT SIDE -->
 
-                <span
-                    class="profile-modal-role"
-                    id="profileRole"
-                >
-                    COMPUTER ENGINEERING FACULTY
+            <div class="cpe-footer-social">
+
+                <div class="cpe-footer-follow">
+                    follow us!
+                </div>
+
+
+                <div class="cpe-footer-icons">
+
+
+                    <!-- FACEBOOK -->
+
+                    <a
+                        href="#"
+                        class="cpe-social-link"
+                        aria-label="Facebook"
+                    >
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="#"
+                        class="cpe-social-link"
+                        aria-label="Instagram"
+                    >
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <!-- EMAIL -->
+
+                    <a
+                        href="mailto:"
+                        class="cpe-social-link"
+                        aria-label="Email"
+                    >
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="cpe-footer-bottom">
+
+            <span>
+                CPE @ 2026 ALL RIGHTS RESERVED
+            </span>
+
+            <span>
+                BY: BALDOVINO | LANDAYAN
+            </span>
+
+        </div>
+
+    </footer>
+        <!-- =====================================================
+         FACULTY PROFILE VIEWER
+    ====================================================== -->
+
+    <div
+        class="profile-viewer"
+        id="profileViewer"
+        aria-hidden="true"
+    >
+
+
+        <!-- DARK BACKDROP -->
+
+        <div
+            class="profile-backdrop"
+            id="profileBackdrop"
+        ></div>
+
+
+        <!-- PROFILE MODAL -->
+
+        <div class="profile-modal">
+
+
+            <!-- TOP -->
+
+            <div class="profile-modal-top">
+
+                <span id="profileNumber">
+                    FACULTY / 01
                 </span>
 
 
-                <h2 id="profileName">
-                    FACULTY NAME
-                </h2>
+                <button
+                    class="profile-close"
+                    id="profileClose"
+                    type="button"
+                    aria-label="Close faculty profile"
+                >
+                    ×
+                </button>
+
+            </div>
 
 
-                <div class="profile-information">
+            <!-- CONTENT -->
+
+            <div class="profile-modal-layout">
 
 
-                    <div class="profile-detail">
+                <!-- IMAGE -->
 
-                        <span>
-                            AREAS OF SPECIALIZATION
-                        </span>
+                <div class="profile-modal-photo">
+
+                    <img
+                        id="profileImage"
+                        src=""
+                        alt=""
+                    >
+
+
+                    <div class="profile-image-code">
+                        CPE / UE
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="profile-modal-info">
+
+                    <span
+                        class="profile-modal-role"
+                        id="profileRole"
+                    >
+                        COMPUTER ENGINEERING FACULTY
+                    </span>
+
+
+                    <h2 id="profileName">
+                        FACULTY NAME
+                    </h2>
+
+
+                    <div class="profile-information">
+
+
+                        <!-- SPECIALIZATIONS -->
+
+                        <div class="profile-detail">
+
+                            <span>
+                                AREAS OF SPECIALIZATION
+                            </span>
+
+                        </div>
+
+
+                        <!-- COURSES / INTERESTS -->
+
+                        <div class="profile-detail">
+
+                            <span>
+                                COURSES /
+                                TECHNICAL INTERESTS
+                            </span>
+
+
+                            <ul id="profileCourses"></ul>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
 
                         <div
-                            class="profile-tags"
-                            id="profileSpecializations"
-                        ></div>
+                            class="profile-detail
+                                   profile-description"
+                        >
+
+                            <span>
+                                PROFILE
+                            </span>
+
+
+                            <p id="profileDescription"></p>
+
+                        </div>
 
                     </div>
-
-
-                    <div class="profile-detail">
-
-                        <span>
-                            COURSES /
-                            TECHNICAL INTERESTS
-                        </span>
-
-                        <ul
-                            id="profileCourses"
-                        ></ul>
-
-                    </div>
-
-
-                    <div class="profile-detail profile-description">
-
-                        <span>
-                            PROFILE
-                        </span>
-
-                        <p
-                            id="profileDescription"
-                        ></p>
-
-                    </div>
-
 
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- PROFILE NAVIGATION -->
+
+            <div class="profile-modal-bottom">
+
+                <button
+                    id="profilePrev"
+                    class="profile-navigation"
+                    type="button"
+                >
+                    ← PREVIOUS
+                </button>
 
 
-        <div class="profile-modal-bottom">
-
-            <button
-                id="profilePrev"
-                class="profile-navigation"
-            >
-                ← PREVIOUS
-            </button>
+                <span id="profileCounter">
+                    01 / 04
+                </span>
 
 
-            <span id="profileCounter">
-                01 / 04
-            </span>
+                <button
+                    id="profileNext"
+                    class="profile-navigation"
+                    type="button"
+                >
+                    NEXT →
+                </button>
 
-
-            <button
-                id="profileNext"
-                class="profile-navigation"
-            >
-                NEXT →
-            </button>
+            </div>
 
         </div>
 
     </div>
 
-</div>
+
+    <!-- =====================================================
+         BOOTSTRAP JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+    <!-- =====================================================
+         FACULTY JAVASCRIPT
+    ====================================================== -->
 
-<footer>
+    <script src="faculty.js"></script>
 
-    <span>
-        UNIVERSITY OF THE EAST — MANILA
-    </span>
-
-    <span>
-        COMPUTER ENGINEERING
-    </span>
-
-    <span>
-        FACULTY
-    </span>
-
-</footer>
-
-
-<script src="faculty.js"></script>
 
 </body>
+
 
 </html>

@@ -1,372 +1,566 @@
 /* =========================================================
    FACULTY PAGE
+   UE COMPUTER ENGINEERING
+
+   CLEAN VERSION
+
+   Contains only:
+   - Navigation
+   - Meet the People Hero
+   - Faculty Cards
+   - Faculty Profile Viewer
+   - Index Footer
 ========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* =========================================================
+   01. ROOT
+========================================================= */
 
 :root {
 
-    --paper: #d1cfc9;
-    --soft: #d1cfc9;
-    --ink: #120c0c;
-    --muted: #6e6966;
-    --orange: #c63108;
-    --line: #c9c1b5;
-    --card: #f0eadf;
+    --cream:
+        #fffaf0;
 
-    --nav-bg:
-        rgba(209, 207, 201, .94);
+    --navy:
+        #071f3f;
 
-    --opposite: #0f1a2b;
-    --opposite-text: #d1cfc9;
+    --navy-deep:
+        #03162d;
+
+    --blue:
+        #0c315c;
+
+    --ice:
+        #e6f2f4;
+
+    --teal:
+        #6ca7a5;
+
+    --teal-dark:
+        #3f7778;
+
+
+    --bg:
+        #fffaf0;
+
+    --text:
+        #071f3f;
+
+    --text-soft:
+        rgba(7, 31, 63, 0.62);
+
+    --border:
+        rgba(7, 31, 63, 0.15);
+
+    --border-strong:
+        rgba(7, 31, 63, 0.28);
+
+    --card:
+        rgba(255, 255, 255, 0.42);
+
+
+    --shadow:
+        0 25px 70px
+        rgba(7, 31, 63, 0.07);
+
+
+    --transition:
+        cubic-bezier(
+            .16,
+            1,
+            .3,
+            1
+        );
+
 }
 
 
+/* =========================================================
+   02. DARK MODE
+========================================================= */
+
 html[data-theme="dark"] {
 
-    --paper: #0f1a2b;
-    --soft: #0f1a2b;
-    --ink: #d1cfc9;
-    --muted: #a8b3c4;
-    --orange: #d45b32;
-    --line: #314158;
-    --card: #0f1a2b;
+    --bg:
+        #03162d;
 
-    --nav-bg:
-        rgba(15, 26, 43, .94);
+    --text:
+        #fffaf0;
 
-    --opposite: #d1cfc9;
-    --opposite-text: #0f1a2b;
+    --text-soft:
+        rgba(255, 250, 240, 0.63);
+
+    --border:
+        rgba(255, 250, 240, 0.13);
+
+    --border-strong:
+        rgba(255, 250, 240, 0.27);
+
+    --card:
+        rgba(13, 48, 72, 0.42);
+
+
+    --shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.18);
+
+}
+
+
+/* =========================================================
+   03. RESET
+========================================================= */
+
+* {
+
+    box-sizing:
+        border-box;
+
 }
 
 
 html {
-    scroll-behavior: smooth;
+
+    scroll-behavior:
+        smooth;
+
 }
 
 
 body {
 
-    background: var(--paper);
-    background-image: linear-gradient(135deg, var(--paper), color-mix(in srgb, var(--opposite) 14%, var(--paper)) 58%, var(--paper));
-    color: var(--ink);
+    margin:
+        0;
+
+    min-height:
+        100vh;
+
+    overflow-x:
+        hidden;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
 
     font-family:
         "Inter",
         sans-serif;
 
     transition:
-        background .45s ease,
-        color .45s ease;
+        background-color .6s ease,
+        color .6s ease;
+
 }
 
 
 body.profile-open {
-    overflow: hidden;
+
+    overflow:
+        hidden;
+
 }
 
 
 a {
-    color: inherit;
-    text-decoration: none;
+
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+
+}
+
+
+a:hover {
+
+    color:
+        inherit;
+
 }
 
 
 button {
-    font: inherit;
+
+    color:
+        inherit;
+
+    font:
+        inherit;
+
+}
+
+
+img {
+
+    display:
+        block;
+
+    max-width:
+        100%;
+
+}
+
+
+ul {
+
+    margin:
+        0;
+
+    padding:
+        0;
+
 }
 
 
 /* =========================================================
-   GRID BACKGROUND
+   04. SAME GENERAL BACKGROUND LANGUAGE AS HOME
 ========================================================= */
 
 body::before {
 
-    content: "";
+    content:
+        "";
 
-    position: fixed;
-    inset: 0;
+    position:
+        fixed;
 
-    z-index: -5;
+    z-index:
+        -10;
 
-    pointer-events: none;
+    inset:
+        0;
 
-    background-image:
+    pointer-events:
+        none;
 
-        linear-gradient(
-            color-mix(
-                in srgb,
-                var(--line) 17%,
-                transparent
-            )
-            1px,
-            transparent 1px
+    background:
+
+        radial-gradient(
+            circle at 80% 16%,
+            rgba(105, 171, 177, .18),
+            transparent 29%
+        ),
+
+        radial-gradient(
+            circle at 14% 57%,
+            rgba(174, 211, 221, .22),
+            transparent 31%
         ),
 
         linear-gradient(
-            90deg,
-            color-mix(
-                in srgb,
-                var(--line) 17%,
-                transparent
-            )
-            1px,
-            transparent 1px
+            135deg,
+            #fffaf0 0%,
+            #f2f8f7 48%,
+            #dceef0 100%
         );
 
-    background-size:
-        72px 72px;
+}
 
-    mask-image:
+
+html[data-theme="dark"]
+body::before {
+
+    background:
+
+        radial-gradient(
+            circle at 80% 16%,
+            rgba(60, 136, 142, .27),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 14% 57%,
+            rgba(19, 78, 108, .31),
+            transparent 33%
+        ),
+
         linear-gradient(
-            to bottom,
-            transparent,
-            black 12%,
-            black 90%,
-            transparent
+            135deg,
+            #03162d 0%,
+            #062641 53%,
+            #063a46 100%
         );
+
 }
 
 
 /* =========================================================
-   PAGE TRANSITION
+   05. PAGE TRANSITION
 ========================================================= */
 
 .page-transition {
 
-    position: fixed;
-    inset: 0;
+    position:
+        fixed;
 
-    z-index: 999999;
+    z-index:
+        99999;
 
-    background: var(--opposite);
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    background:
+        var(--navy);
 
     transform:
-        translateY(-100%);
+        scaleY(0);
 
-    pointer-events: none;
+    transform-origin:
+        bottom;
+
 }
 
 
-.page-transition.entering {
+.page-transition.active {
 
     animation:
-        pageEnter 1s
-        cubic-bezier(.77, 0, .18, 1)
+        pageTransitionIn
+        .75s
+        var(--transition)
         forwards;
+
 }
 
 
-.page-transition.leaving {
-
-    pointer-events: auto;
-
-    animation:
-        pageLeave .75s
-        cubic-bezier(.77, 0, .18, 1)
-        forwards;
-}
-
-
-@keyframes pageEnter {
+@keyframes pageTransitionIn {
 
     from {
+
         transform:
-            translateY(0);
+            scaleY(0);
+
     }
+
 
     to {
+
         transform:
-            translateY(100%);
-    }
-}
+            scaleY(1);
 
-
-@keyframes pageLeave {
-
-    from {
-        transform:
-            translateY(-100%);
     }
 
-    to {
-        transform:
-            translateY(0);
-    }
 }
 
 
 /* =========================================================
-   TOPBAR
+   06. NAVIGATION
+   NOTHING IS ABOVE THIS
 ========================================================= */
 
-.topbar {
+.main-navigation {
 
-    height: 32px;
+    position:
+        sticky;
 
-    padding:
-        0 3vw;
+    z-index:
+        1000;
 
-    display: flex;
+    top:
+        0;
 
-    align-items: center;
-    justify-content: space-between;
+    width:
+        100%;
 
     border-bottom:
-        1px solid var(--line);
-
-    font:
-        700 8px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .12em;
-}
-
-
-.topbar-left,
-.topbar-right {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 22px;
-}
-
-
-.status-dot {
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
+        1px solid
+        var(--border);
 
     background:
-        var(--orange);
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-nav {
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
-    background:
-        var(--nav-bg);
+        color-mix(
+            in srgb,
+            var(--bg) 80%,
+            transparent
+        );
 
     backdrop-filter:
-        blur(18px);
+        blur(22px);
 
-    border-bottom:
-        1px solid var(--line);
+    -webkit-backdrop-filter:
+        blur(22px);
+
 }
 
 
 .nav-inner {
 
     width:
-        min(1440px, 94vw);
+        min(
+            100%,
+            1600px
+        );
 
-    min-height: 74px;
+    min-height:
+        76px;
 
-    margin: auto;
+    margin:
+        0 auto;
 
-    display: grid;
+    padding:
+        0 3.5vw;
+
+    display:
+        grid;
 
     grid-template-columns:
-        1fr auto 1fr;
+        auto 1fr auto;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 24px;
+    gap:
+        40px;
+
 }
 
 
+/* =========================================================
+   NAV LOGO
+========================================================= */
+
 .logo {
 
-    width: max-content;
+    display:
+        flex;
 
-    display: flex;
+    align-items:
+        center;
 
-    align-items: center;
+    gap:
+        10px;
 
-    gap: 12px;
+    color:
+        var(--text);
 
-    font-size: 25px;
-    font-weight: 900;
+    font-size:
+        24px;
 
-    letter-spacing: -.07em;
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        -.06em;
+
 }
 
 
 .logo small {
 
-    max-width: 90px;
+    max-width:
+        75px;
 
-    font:
-        700 7px
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    line-height: 1.2;
+    font-size:
+        6px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        .04em;
+
 }
 
 
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
 .nav-links {
 
-    display: flex;
+    list-style:
+        none;
 
-    gap: 24px;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    list-style: none;
+    justify-content:
+        center;
+
+    gap:
+        clamp(
+            16px,
+            2vw,
+            34px
+        );
+
 }
 
 
 .nav-links a {
 
-    position: relative;
+    position:
+        relative;
 
-    padding: 8px 0;
+    display:
+        inline-block;
 
-    font:
-        700 8px
+    padding:
+        29px 0 27px;
+
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .08em;
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .04em;
+
+    transition:
+        color .3s ease;
+
 }
 
 
 .nav-links a::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left:
+        0;
 
-    height: 1px;
+    bottom:
+        19px;
+
+    width:
+        100%;
+
+    height:
+        1px;
 
     background:
-        var(--orange);
+        var(--text);
 
     transform:
         scaleX(0);
@@ -375,7 +569,18 @@ nav {
         right;
 
     transition:
-        transform .4s ease;
+        transform .35s
+        var(--transition);
+
+}
+
+
+.nav-links a:hover,
+.nav-links a.active {
+
+    color:
+        var(--text);
+
 }
 
 
@@ -387,16 +592,25 @@ nav {
 
     transform-origin:
         left;
+
 }
 
 
+/* =========================================================
+   NAV RIGHT
+========================================================= */
+
 .nav-right {
 
-    justify-self: end;
+    display:
+        flex;
 
-    display: flex;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        12px;
+
 }
 
 
@@ -406,625 +620,604 @@ nav {
 
 .theme-toggle {
 
-    width: 42px;
-    height: 42px;
+    position:
+        relative;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    padding:
+        0;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    overflow:
+        hidden;
 
     border:
-        1px solid var(--line);
+        1px solid
+        var(--border-strong);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         transparent;
 
-    color:
-        var(--ink);
-
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
-        background .4s ease,
-        color .4s ease,
-        transform .4s ease;
+        transform .3s ease,
+        background-color .3s ease;
+
 }
 
 
 .theme-toggle:hover {
 
     transform:
-        rotate(15deg);
+        rotate(8deg);
 
     background:
-        var(--opposite);
+        var(--card);
 
-    color:
-        var(--opposite-text);
 }
 
 
-.moon {
-    display: none;
+.theme-toggle span {
+
+    position:
+        absolute;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+
+.theme-toggle .sun {
+
+    opacity:
+        1;
+
+    transform:
+        scale(1);
+
+}
+
+
+.theme-toggle .moon {
+
+    opacity:
+        0;
+
+    transform:
+        scale(.5);
+
 }
 
 
 html[data-theme="dark"]
-.sun {
+.theme-toggle .sun {
 
-    display: none;
+    opacity:
+        0;
+
+    transform:
+        scale(.5);
+
 }
 
 
 html[data-theme="dark"]
-.moon {
+.theme-toggle .moon {
 
-    display: inline;
+    opacity:
+        1;
+
+    transform:
+        scale(1);
+
 }
 
+
+/* =========================================================
+   HOME BUTTON
+========================================================= */
 
 .home-button {
 
-    position: relative;
-
-    overflow: hidden;
-
-    isolation: isolate;
+    min-height:
+        42px;
 
     padding:
-        12px 18px;
+        0 18px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     border:
-        1px solid var(--ink);
+        1px solid
+        var(--border-strong);
 
-    font:
-        700 9px
+    border-radius:
+        100px;
+
+    color:
+        var(--text);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    transition:
-        color .4s ease;
-}
+    font-size:
+        8px;
 
+    font-weight:
+        700;
 
-.home-button::before {
-
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: -1;
-
-    background:
-        var(--opposite);
-
-    transform:
-        translateX(-101%);
+    letter-spacing:
+        .04em;
 
     transition:
-        transform .55s
-        cubic-bezier(.16, .84, .24, 1);
+        background-color .35s ease,
+        color .35s ease,
+        transform .35s ease;
+
 }
 
 
 .home-button:hover {
 
+    background:
+        var(--text);
+
     color:
-        var(--opposite-text);
-}
-
-
-.home-button:hover::before {
+        var(--bg);
 
     transform:
-        translateX(0);
+        translateY(-2px);
+
 }
 
 
 /* =========================================================
-   HERO
+   07. MAIN
+========================================================= */
+
+main {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
+}
+
+
+/* =========================================================
+   08. MEET THE PEOPLE HERO
 ========================================================= */
 
 .faculty-hero {
 
     width:
-        min(1440px, 94vw);
+        min(
+            100%,
+            1600px
+        );
 
     min-height:
-        calc(100vh - 106px);
+        calc(
+            100vh - 76px
+        );
 
-    margin: auto;
+    margin:
+        0 auto;
 
     padding:
-        clamp(60px, 8vw, 120px)
-        0
-        60px;
+        55px 3.5vw 70px;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     justify-content:
         space-between;
+
 }
 
+
+/* =========================================================
+   HERO META
+========================================================= */
 
 .hero-meta {
 
-    display: flex;
+    display:
+        flex;
+
+    align-items:
+        center;
 
     justify-content:
         space-between;
 
-    padding-bottom: 17px;
+    padding-bottom:
+        18px;
 
     border-bottom:
-        1px solid var(--line);
+        1px solid
+        var(--border);
 
-    font:
-        700 9px
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .08em;
+
 }
 
+
+/* =========================================================
+   HERO MAIN TITLE
+========================================================= */
 
 .hero-title {
 
-    padding:
-        clamp(45px, 6vw, 85px)
-        0;
-
-    overflow: hidden;
-}
-
-
-.hero-line {
-
-    display: block;
-
-    font-size:
-        clamp(70px, 12vw, 175px);
-
-    font-weight: 900;
-
-    line-height: .72;
-
-    letter-spacing:
-        -.095em;
-
-    opacity: 0;
-
-    transform:
-        translateY(120%);
-
-    transition:
-        opacity 1s ease,
-        transform 1.2s
-        cubic-bezier(.16, .84, .24, 1);
-}
-
-
-body.loaded
-.hero-line {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-.hero-line-two {
-
-    padding-left: 12vw;
-
-    transition-delay: .1s;
-}
-
-
-.hero-line-three {
-
-    text-align: right;
-
-    transition-delay: .2s;
-}
-
-
-.hero-line-three em {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-weight: 500;
-
-    color:
-        var(--orange);
-}
-
-
-.hero-bottom {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 330px;
-
-    gap: 50px;
-
-    align-items: end;
-}
-
-
-.hero-code {
-
-    font-size:
-        clamp(80px, 14vw, 190px);
-
-    font-weight: 900;
-
-    line-height: .65;
-
-    letter-spacing:
-        -.1em;
-
-    color:
-        color-mix(
-            in srgb,
-            var(--ink) 9%,
-            transparent
+    width:
+        min(
+            92%,
+            1350px
         );
-}
 
-
-.hero-description p {
-
-    color:
-        var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-.explore-button {
-
-    width: 100%;
-
-    margin-top: 28px;
+    margin:
+        0 auto;
 
     padding:
-        16px 0;
-
-    border: 0;
-
-    border-top:
-        1px solid var(--line);
+        55px 0 45px;
 
     border-bottom:
-        1px solid var(--line);
+        1px solid
+        rgba(255, 255, 255, 0.22);
 
-    background:
-        transparent;
-
-    color:
-        var(--ink);
-
-    cursor: pointer;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-
-    transition:
-        padding .4s ease;
 }
 
 
-.explore-button:hover {
+.hero-title h1 {
 
-    padding-left: 12px;
-    padding-right: 12px;
+    width:
+        100%;
+
+    margin:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    color:
+        var(--text);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            75px,
+            10.5vw,
+            160px
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        .76;
+
+    letter-spacing:
+        -.08em;
+
+    text-transform:
+        uppercase;
+
 }
 
 
 /* =========================================================
-   MARQUEE
+   EXPLORE
 ========================================================= */
 
-.faculty-marquee {
+.title-explore {
 
-    display: none;
+    align-self:
+        flex-start;
 
-    overflow: hidden;
+    opacity:
+        0;
 
-    padding:
-        17px 0;
-
-    background:
-        var(--opposite);
-
-    color:
-        var(--opposite-text);
-}
-
-
-.marquee-track {
-
-    width: max-content;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 30px;
+    transform:
+        translateY(60px);
 
     animation:
-        marqueeMove 25s
-        linear infinite;
+        heroTitleIn
+        1s
+        var(--transition)
+        forwards;
 
-    font:
-        700 10px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .1em;
 }
 
 
-.marquee-track i {
+/* =========================================================
+   FACULTY
+========================================================= */
 
-    color:
-        var(--orange);
+.title-faculty {
+
+    align-self:
+        flex-end;
+
+    padding-right:
+        4%;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(60px);
+
+    animation:
+        heroTitleIn
+        1s
+        var(--transition)
+        .15s
+        forwards;
+
 }
 
 
-@keyframes marqueeMove {
+@keyframes heroTitleIn {
 
     to {
 
+        opacity:
+            1;
+
         transform:
-            translateX(-50%);
+            translateY(0);
+
     }
+
 }
 
 
 /* =========================================================
-   INTRO
+   HERO PARAGRAPH
 ========================================================= */
 
-.faculty-intro {
+.hero-introduction {
 
     width:
-        min(1440px, 94vw);
+        min(
+            92%,
+            1350px
+        );
 
-    margin: auto;
+    margin:
+        0 auto;
 
     padding:
-        130px 0;
+        75px 0 25px;
+
 }
-
-
-.intro-heading {
-
-    display: grid;
-
-    grid-template-columns:
-        80px 1fr .45fr;
-
-    gap: 4vw;
-
-    align-items: end;
-}
-
-
-.section-number {
-
-    align-self: start;
-
-    color:
-        var(--orange);
-
-    font:
-        700 11px
-        "Space Mono",
-        monospace;
-}
-
-
-.section-label {
-
-    color:
-        var(--orange);
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .13em;
-}
-
-
-.intro-heading h2,
-.disciplines-heading h2 {
-
-    margin-top: 18px;
-
-    font-size:
-        clamp(48px, 7vw, 100px);
-
-    line-height: .83;
-
-    letter-spacing:
-        -.075em;
-}
-
-
-.intro-heading h2 em,
-.disciplines-heading h2 em {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-weight: 500;
-}
-
-
-.intro-heading > p {
-
-    color:
-        var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-
-.faculty-focus-strip {
-
-    margin-top: 70px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    border-top:
-        1px solid var(--line);
-
-    border-left:
-        1px solid var(--line);
-}
-
-
-.faculty-focus-strip span {
-
-    min-height: 110px;
-
-    padding: 18px;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    border-right:
-        1px solid var(--line);
-
-    border-bottom:
-        1px solid var(--line);
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-
-    transition:
-        background .5s ease,
-        color .5s ease,
-        padding .5s ease;
-}
-
-
-.faculty-focus-strip span:hover {
-
-    padding-bottom: 30px;
-
-    background:
-        var(--opposite);
-
-    color:
-        var(--opposite-text);
-}
-
 
 /* =========================================================
-   FACULTY SECTION
+   HERO SUBTITLE
+========================================================= */
+
+.hero-subtitle {
+
+    margin:
+        0 0 25px;
+
+    color:
+        var(--text);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            24px,
+            2.4vw,
+            38px
+        );
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        -0.04em;
+
+    text-transform:
+        uppercase;
+
+}
+
+.hero-introduction p {
+
+    width:
+        min(
+            100%,
+            850px
+        );
+
+    margin:
+        0;
+
+    color:
+        var(--text-soft);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            14px,
+            1vw,
+            16px
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.75;
+
+    letter-spacing:
+        -0.01em;
+
+    text-align:
+        justify;
+
+    text-justify:
+        inter-word;
+
+}
+/* =========================================================
+   09. FACULTY CARDS SECTION
+
+   Hero goes directly into faculty cards.
 ========================================================= */
 
 .faculty-section {
 
     width:
-        min(1440px, 94vw);
+        min(
+            100%,
+            1600px
+        );
 
-    margin: auto;
+    margin:
+        0 auto;
 
-    padding-bottom:
-        140px;
-}
+    padding:
+        60px 3.5vw 90px;
 
+    
 
-.faculty-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    border-top:
-        1px solid var(--line);
-
-    border-left:
-        1px solid var(--line);
-}
-
-
-.faculty-card {
-
-    min-width: 0;
-
-    border-right:
-        1px solid var(--line);
-
-    border-bottom:
-        1px solid var(--line);
-
-    background:
-        var(--paper);
-
-    outline: none;
-
-    overflow: hidden;
 }
 
 
 /* =========================================================
-   FACULTY PHOTO
+   FACULTY GRID
 ========================================================= */
 
-.faculty-photo {
+.faculty-grid {
 
-    position: relative;
+    display:
+        grid;
 
-    height:
-        clamp(480px, 55vw, 760px);
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-    overflow: hidden;
+    gap:
+        55px 28px;
 
-    background:
-        var(--soft);
 }
 
 
+/* =========================================================
+   FACULTY CARD
+========================================================= */
+
+.faculty-card {
+
+    position:
+        relative;
+
+    min-width:
+        0;
+
+        
+
+}
+
+
+/* =========================================================
+   FACULTY IMAGE
+========================================================= */
+.faculty-photo {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        clamp(
+            260px,
+            28vw,
+            380px
+        );
+
+    overflow:
+        hidden;
+
+    background:
+        var(--card);
+
+    border-radius:
+        24px;
+
+}
 .faculty-photo img {
 
-    width: 100%;
-    height: 100%;
+    width:
+        100%;
 
-    display: block;
+    height:
+        100%;
 
-    object-fit: cover;
-
-    object-position:
-        center top;
+    object-fit:
+        cover;
 
     filter:
         grayscale(100%);
@@ -1034,1312 +1227,2140 @@ body.loaded
 
     transition:
         filter .75s ease,
-        transform 1s
-        cubic-bezier(.16, .84, .24, 1);
+        transform .85s
+        var(--transition);
+
 }
 
 
 .faculty-card:hover
-.faculty-photo img,
-.faculty-card:focus
-.faculty-photo img,
-.faculty-card.touch-active
 .faculty-photo img {
 
     filter:
         grayscale(0%);
 
     transform:
-        scale(1.06);
-}
+        scale(1.055);
 
-
-.faculty-number {
-
-    position: absolute;
-
-    top: 20px;
-    left: 20px;
-
-    z-index: 5;
-
-    width: 45px;
-    height: 45px;
-
-    display: grid;
-
-    place-items: center;
-
-    background:
-        var(--orange);
-
-    color: #fff;
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-
-    transition:
-        transform .6s
-        cubic-bezier(.16, .84, .24, 1);
-}
-
-
-.faculty-card:hover
-.faculty-number {
-
-    transform:
-        rotate(-8deg);
-}
-
-
-.photo-tag {
-
-    position: absolute;
-
-    top: 20px;
-    right: 20px;
-
-    z-index: 5;
-
-    padding:
-        10px 13px;
-
-    background:
-        var(--paper);
-
-    color:
-        var(--ink);
-
-    font:
-        700 8px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .08em;
-
-    transition:
-        transform .6s ease;
-}
-
-
-.faculty-card:hover
-.photo-tag,
-.faculty-card.touch-active
-.photo-tag {
-
-    transform:
-        translateY(6px);
 }
 
 
 /* =========================================================
-   PHOTO OVERLAY
+   CARD NUMBER
+========================================================= */
+
+.faculty-number {
+
+    position:
+        absolute;
+
+    z-index:
+        4;
+
+    top:
+        18px;
+
+    left:
+        18px;
+
+    width:
+        44px;
+
+    height:
+        44px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--cream);
+
+    color:
+        var(--navy);
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   CARD TAG
+========================================================= */
+
+.photo-tag {
+
+    position:
+        absolute;
+
+    z-index:
+        4;
+
+    right:
+        18px;
+
+    bottom:
+        18px;
+
+    padding:
+        8px 10px;
+
+    background:
+        var(--cream);
+
+    color:
+        var(--navy);
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .06em;
+
+}
+
+
+/* =========================================================
+   IMAGE HOVER OVERLAY
+========================================================= */
+
+/* =========================================================
+   FACULTY PHOTO OVERLAY
+   Text appears only on hover
 ========================================================= */
 
 .photo-overlay {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 4;
+    padding:
+        28px;
 
-    padding: 30px;
+    display:
+        flex;
 
-    display: flex;
-
-    flex-direction: column;
+    flex-direction:
+        column;
 
     justify-content:
-        space-between;
+        flex-end;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(198, 49, 8, .93),
-            rgba(15, 26, 43, .82)
+            to top,
+            rgba(0, 22, 55, 0.45) 0%,
+            rgba(0, 22, 55, 0.15) 35%,
+            transparent 70%
         );
 
-    color:
-        #d1cfc9;
-
-    opacity: 0;
-
-    transform:
-        translateY(100%);
+    opacity:
+        0;
 
     transition:
-        opacity .65s ease,
-        transform .8s
-        cubic-bezier(.16, .84, .24, 1);
+        opacity .45s ease;
+
 }
 
 
+/* SHOW OVERLAY WHEN HOVERING PHOTO */
+
+.faculty-photo:hover .photo-overlay {
+
+    opacity:
+        1;
+
+}
+
 .faculty-card:hover
-.photo-overlay,
-.faculty-card:focus
-.photo-overlay,
-.faculty-card.touch-active
 .photo-overlay {
 
-    opacity: 1;
+    opacity:
+        1;
 
-    transform:
-        translateY(0);
 }
 
 
 .photo-overlay span {
 
-    font:
-        700 9px
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .12em;
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .07em;
+
 }
 
 
 .photo-overlay strong {
 
-    font-size:
-        clamp(45px, 6vw, 90px);
+    max-width:
+        430px;
 
-    line-height: .82;
+    color:
+        var(--cream);
+
+    font-size:
+        clamp(
+            42px,
+            5vw,
+            80px
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        .84;
 
     letter-spacing:
-        -.075em;
+        -.07em;
+
+}
+.photo-overlay h3 {
+
+    margin:
+        0;
+
+    max-width:
+        80%;
+
+    font-size:
+        clamp(
+            24px,
+            2.4vw,
+            40px
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        .95;
+
+    letter-spacing:
+        -.04em;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(20px);
+
+    transition:
+        opacity .4s ease,
+        transform .4s ease;
+
 }
 
+
+.faculty-photo:hover .photo-overlay h3 {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+}
 
 /* =========================================================
-   DIFFERENT CARD ENTRANCES
-========================================================= */
-
-.faculty-card-01.reveal {
-
-    transform:
-        translateY(90px);
-}
-
-
-.faculty-card-02.reveal {
-
-    transform:
-        translateX(90px);
-}
-
-
-.faculty-card-03.reveal {
-
-    transform:
-        translateX(-90px);
-}
-
-
-.faculty-card-04.reveal {
-
-    transform:
-        translateY(90px);
-}
-
-
-.faculty-card.reveal.visible {
-
-    transform:
-        translate(0, 0);
-}
-
-
-/* =========================================================
-   CARD CONTENT
+   CARD TEXT
 ========================================================= */
 
 .faculty-card-content {
 
-    min-height: 330px;
+    padding:
+        25px 0 0;
 
-    padding: 30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    background:
-        var(--paper);
-
-    transition:
-        background .5s ease,
-        color .5s ease;
 }
 
 
 .faculty-role {
 
-    color:
-        var(--orange);
+    display:
+        block;
 
-    font:
-        700 8px
+    margin-bottom:
+        13px;
+
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .12em;
-}
-
-
-.faculty-card-content h3 {
-
-    margin-top: 20px;
-
     font-size:
-        clamp(32px, 4vw, 58px);
+        7px;
 
-    line-height: .88;
+    font-weight:
+        700;
 
     letter-spacing:
-        -.06em;
+        .08em;
+
 }
 
+
+.faculty-card-content h2 {
+
+    max-width:
+        650px;
+
+    margin:
+        0;
+
+    color:
+        var(--text);
+
+    font-size:
+        clamp(
+            34px,
+            4vw,
+            62px
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        .88;
+
+    letter-spacing:
+        -.065em;
+
+}
+
+
+/* =========================================================
+   CARD FOCUS
+========================================================= */
 
 .faculty-mini-info {
 
-    margin-top: 35px;
+    margin-top:
+        27px;
 
-    padding-top: 20px;
+    padding:
+        16px 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        90px 1fr;
+
+    gap:
+        20px;
 
     border-top:
-        1px solid var(--line);
+        1px solid
+        var(--border);
+
 }
 
 
 .faculty-mini-info span {
 
-    display: block;
-
-    margin-bottom: 10px;
-
     color:
-        var(--orange);
+        var(--text-soft);
 
-    font:
-        700 8px
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .12em;
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .07em;
+
 }
 
 
 .faculty-mini-info p {
 
-    max-width: 440px;
+    margin:
+        0;
 
     color:
-        var(--muted);
+        var(--text);
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    line-height: 1.65;
+    line-height:
+        1.6;
+
 }
 
 
 /* =========================================================
-   PROFILE BUTTON
+   VIEW PROFILE BUTTON
 ========================================================= */
 
 .profile-button {
 
-    width: 100%;
-
-    margin-top: auto;
+    width:
+        100%;
 
     padding:
-        17px 0 0;
+        16px 0;
 
-    border: 0;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border:
+        0;
 
     border-top:
-        1px solid var(--line);
+        1px solid
+        var(--border-strong);
+
+    border-bottom:
+        1px solid
+        var(--border-strong);
 
     background:
         transparent;
 
     color:
-        var(--ink);
+        var(--text);
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
-
-    cursor: pointer;
-
-    font:
-        700 9px
+    font-family:
         "Space Mono",
         monospace;
 
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .06em;
+
+    cursor:
+        pointer;
+
     transition:
-        padding .45s ease,
-        color .45s ease;
+        padding .35s var(--transition),
+        background-color .35s ease,
+        color .35s ease;
+
 }
 
 
 .profile-button:hover {
 
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left:
+        12px;
 
-    color:
-        var(--orange);
-}
-
-
-/* =========================================================
-   DISCIPLINES
-========================================================= */
-
-.disciplines-section {
-
-    padding:
-        120px
-        max(
-            3vw,
-            calc((100vw - 1440px) / 2)
-        );
+    padding-right:
+        12px;
 
     background:
-        var(--opposite);
+        var(--text);
 
     color:
-        var(--opposite-text);
+        var(--bg);
+
 }
-
-
-.disciplines-heading {
-
-    margin-bottom: 70px;
-}
-
-
-.discipline-list {
-
-    border-top:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--opposite-text) 25%,
-            transparent
-        );
-}
-
-
-.discipline-row {
-
-    min-height: 105px;
-
-    display: grid;
-
-    grid-template-columns:
-        80px 1fr 80px;
-
-    align-items: center;
-
-    gap: 20px;
-
-    border-bottom:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--opposite-text) 25%,
-            transparent
-        );
-
-    position: relative;
-
-    isolation: isolate;
-
-    overflow: hidden;
-
-    transition:
-        color .55s ease,
-        padding .55s ease;
-}
-
-
-.discipline-row::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: -1;
-
-    background:
-        var(--orange);
-
-    transform:
-        translateX(-101%);
-
-    transition:
-        transform .7s
-        cubic-bezier(.16, .84, .24, 1);
-}
-
-
-.discipline-row:hover::before {
-
-    transform:
-        translateX(0);
-}
-
-
-.discipline-row:hover {
-
-    padding-left: 18px;
-}
-
-
-.discipline-row span {
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-}
-
-
-.discipline-row strong {
-
-    font-size:
-        clamp(22px, 3vw, 43px);
-
-    line-height: .95;
-
-    letter-spacing:
-        -.04em;
-}
-
-
-.discipline-row i {
-
-    justify-self: end;
-
-    font:
-        700 11px
-        "Space Mono",
-        monospace;
-
-    font-style: normal;
-}
-
-
 /* =========================================================
-   CLOSING
+   10. INDEX BOTTOM / FOOTER
 ========================================================= */
 
-.faculty-closing {
+.cpe-footer {
+
+    position:
+        relative;
 
     width:
-        min(1440px, 94vw);
+        100%;
 
-    margin: auto;
+    min-height:
+        10vh;
 
-    padding:
-        140px 0 100px;
-}
+    display:
+        flex;
 
+    flex-direction:
+        column;
 
-.closing-small {
-
-    padding-bottom: 20px;
-
-    border-bottom:
-        1px solid var(--line);
-
-    color:
-        var(--orange);
-
-    font:
-        700 9px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .12em;
-}
-
-
-.closing-title {
-
-    padding:
-        70px 0;
-
-    overflow: hidden;
-}
-
-
-.closing-title span {
-
-    display: block;
-
-    font-size:
-        clamp(65px, 11vw, 160px);
-
-    font-weight: 900;
-
-    line-height: .76;
-
-    letter-spacing:
-        -.09em;
-}
-
-
-.closing-title span:nth-child(2) {
-
-    padding-left: 7vw;
-}
-
-
-.closing-title span:nth-child(3) {
-
-    text-align: right;
-}
-
-
-.closing-title em {
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-weight: 500;
-
-    color:
-        var(--orange);
-}
-
-
-.closing-bottom {
-
-    display: grid;
-
-    grid-template-columns:
-        .6fr 1fr;
-
-    gap: 8vw;
-
-    align-items: end;
-}
-
-
-.closing-bottom > p {
-
-    max-width: 400px;
-
-    color:
-        var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-
-.next-page {
-
-    min-height: 180px;
-
-    padding: 25px;
-
-    border:
-        1px solid var(--line);
-
-    display: grid;
-
-    grid-template-columns:
-        1fr auto;
-
-    position: relative;
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    transition:
-        color .5s ease;
-}
-
-
-.next-page::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: -1;
+    overflow:
+        hidden;
 
     background:
-        var(--opposite);
-
-    transform:
-        translateY(101%);
-
-    transition:
-        transform .7s
-        cubic-bezier(.16, .84, .24, 1);
-}
-
-
-.next-page:hover::before {
-
-    transform:
-        translateY(0);
-}
-
-
-.next-page:hover {
+        linear-gradient(
+            120deg,
+            #07153b 0%,
+            #123c50 52%,
+            #07143c 100%
+        );
 
     color:
-        var(--opposite-text);
-}
+        #fffaf0;
 
-
-.next-page span {
-
-    grid-column:
-        1 / -1;
-
-    font:
-        700 8px
-        "Space Mono",
-        monospace;
-
-    color:
-        var(--orange);
-}
-
-
-.next-page strong {
-
-    align-self: end;
-
-    font-size:
-        clamp(30px, 4vw, 60px);
-
-    line-height: .85;
-
-    letter-spacing:
-        -.055em;
-}
-
-
-.next-page i {
-
-    align-self: end;
-
-    font-size: 45px;
-
-    font-style: normal;
 }
 
 
 /* =========================================================
-   PROFILE VIEWER
+   FOOTER TOP GRADIENT
+========================================================= */
+
+.cpe-footer::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        2;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        100%;
+
+    height:
+        180px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #06485a 0%,
+            rgba(6, 72, 90, .75) 25%,
+            rgba(6, 72, 90, .35) 55%,
+            transparent 100%
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   FOOTER.PNG
+========================================================= */
+
+.cpe-footer-pattern {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    opacity:
+        .55;
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   FOOTER OVERLAY
+========================================================= */
+
+.cpe-footer::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        1;
+
+    inset:
+        0;
+
+    background:
+        rgba(
+            3,
+            15,
+            43,
+            .18
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   FOOTER MAIN CONTENT
+========================================================= */
+
+.cpe-footer-content {
+
+    position:
+        relative;
+
+    z-index:
+        3;
+
+    min-height:
+        20vh;
+
+    padding:
+        35px 70px 25px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        80px;
+
+    flex:
+        1;
+
+}
+
+
+/* =========================================================
+   FOOTER LEFT
+========================================================= */
+
+.cpe-footer-brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        18px;
+
+    flex:
+        1;
+
+}
+
+
+/* =========================================================
+   CPE LOGO
+========================================================= */
+
+.cpe-footer-logo {
+
+    width:
+        clamp(
+            220px,
+            23vw,
+            370px
+        );
+
+    height:
+        auto;
+
+    object-fit:
+        contain;
+
+}
+
+
+/* =========================================================
+   FOOTER DIVIDER
+========================================================= */
+
+.cpe-footer-divider {
+
+    width:
+        3px;
+
+    height:
+        72px;
+
+    flex-shrink:
+        0;
+
+    background:
+        #fffaf0;
+
+}
+
+
+/* =========================================================
+   FOOTER NAME
+========================================================= */
+
+.cpe-footer-name {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    color:
+        #fffaf0;
+
+}
+
+
+.cpe-footer-name span {
+
+    color:
+        #fffaf0;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            13px,
+            1.3vw,
+            22px
+        );
+
+    font-weight:
+        700;
+
+    line-height:
+        1.1;
+
+}
+
+
+.cpe-footer-name strong {
+
+    color:
+        #fffaf0;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            20px,
+            2vw,
+            34px
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* =========================================================
+   FOOTER RIGHT
+========================================================= */
+
+.cpe-footer-social {
+
+    flex:
+        0 0 auto;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+}
+
+
+/* =========================================================
+   FOLLOW US
+========================================================= */
+
+.cpe-footer-follow {
+
+    margin-bottom:
+        22px;
+
+    color:
+        #fffaf0;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size:
+        58px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1;
+
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.cpe-footer-icons {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        20px;
+
+}
+
+
+.cpe-social-link {
+
+    width:
+        70px;
+
+    height:
+        70px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #fffaf0;
+
+    color:
+        #06153b;
+
+    text-decoration:
+        none;
+
+    transition:
+        transform .3s ease,
+        background-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.cpe-social-link i {
+
+    color:
+        inherit;
+
+    font-size:
+        32px;
+
+}
+
+
+.cpe-social-link:hover {
+
+    transform:
+        translateY(-6px)
+        scale(1.08);
+
+    background:
+        #ffffff;
+
+    color:
+        #06153b;
+
+    box-shadow:
+        0 10px 24px
+        rgba(0, 0, 0, .22);
+
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.cpe-footer-bottom {
+
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    width:
+        100%;
+
+    margin-top:
+        auto;
+
+    padding:
+        0 55px 22px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    color:
+        #fffaf0;
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .05em;
+
+}
+
+
+/* =========================================================
+   11. PROFILE VIEWER
 ========================================================= */
 
 .profile-viewer {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    z-index:
+        5000;
 
-    z-index: 100000;
+    inset:
+        0;
 
-    display: grid;
+    visibility:
+        hidden;
 
-    place-items: center;
-
-    padding: 35px;
-
-    visibility: hidden;
-
-    opacity: 0;
-
-    pointer-events: none;
+    opacity:
+        0;
 
     transition:
-        opacity .45s ease,
-        visibility .45s ease;
+        opacity .4s ease,
+        visibility .4s ease;
+
 }
 
 
-.profile-viewer.open {
+.profile-viewer.active {
 
-    visibility: visible;
+    visibility:
+        visible;
 
-    opacity: 1;
+    opacity:
+        1;
 
-    pointer-events: auto;
 }
 
+
+/* =========================================================
+   PROFILE BACKDROP
+========================================================= */
 
 .profile-backdrop {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
     background:
-        rgba(5, 10, 18, .84);
+        rgba(
+            3,
+            15,
+            35,
+            .78
+        );
 
     backdrop-filter:
-        blur(14px);
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
 }
 
 
+/* =========================================================
+   PROFILE MODAL
+========================================================= */
+
 .profile-modal {
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    left:
+        50%;
 
     width:
-        min(1180px, 94vw);
+        min(
+            1120px,
+            calc(100% - 50px)
+        );
 
     max-height:
-        90vh;
+        calc(100vh - 50px);
 
-    position: relative;
-
-    z-index: 2;
-
-    overflow: auto;
-
-    background:
-        var(--paper);
-
-    color:
-        var(--ink);
+    transform:
+        translate(
+            -50%,
+            -46%
+        );
 
     border:
-        1px solid var(--line);
+        1px solid
+        var(--border);
 
-    opacity: 0;
+    /* ROUNDED OPENED BOX */
+    border-radius:
+        28px;
 
-    transform:
-        translateY(45px)
-        scale(.97);
+    /* KEEPS IMAGE AND CONTENT INSIDE ROUNDED CORNERS */
+    overflow:
+        hidden;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+    box-shadow:
+        0 40px 120px
+        rgba(0, 0, 0, .35);
 
     transition:
-        opacity .55s ease,
-        transform .65s
-        cubic-bezier(.16, .84, .24, 1);
+        transform .6s
+        var(--transition);
+
 }
 
 
-.profile-viewer.open
+.profile-viewer.active
 .profile-modal {
 
-    opacity: 1;
-
     transform:
-        translateY(0)
-        scale(1);
+        translate(
+            -50%,
+            -50%
+        );
+
 }
 
+.profile-modal-info section {
+
+    padding:
+        18px 0;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+}
+
+
+.profile-modal-info section:first-of-type {
+
+    margin-top:
+        5px;
+
+}
+
+
+.profile-modal-info p {
+
+    margin:
+        0;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+}
+
+
+.profile-modal-info ul {
+
+    margin:
+        10px 0 0;
+
+    padding-left:
+        18px;
+
+}
+
+
+.profile-modal-info li {
+
+    margin-bottom:
+        5px;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.45;
+
+}
+
+/* =========================================================
+   PROFILE TOP
+========================================================= */
 
 .profile-modal-top {
 
-    min-height: 62px;
+    min-height:
+        58px;
 
     padding:
-        0 20px;
+        0 25px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     justify-content:
         space-between;
 
     border-bottom:
-        1px solid var(--line);
+        1px solid
+        var(--border);
 
-    font:
-        700 9px
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    color:
-        var(--orange);
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .06em;
+
 }
 
 
 .profile-close {
 
-    width: 42px;
-    height: 42px;
+    width:
+        36px;
+
+    height:
+        36px;
+
+    padding:
+        0;
+
+    display:
+        grid;
+
+    place-items:
+        center;
 
     border:
-        1px solid var(--line);
+        1px solid
+        var(--border);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         transparent;
 
     color:
-        var(--ink);
+        var(--text);
 
-    cursor: pointer;
+    font-size:
+        20px;
 
-    font-size: 24px;
+    line-height:
+        1;
+
+    cursor:
+        pointer;
 
     transition:
-        background .4s ease,
-        color .4s ease,
-        transform .4s ease;
+        transform .35s ease,
+        background-color .35s ease,
+        color .35s ease;
+
 }
 
 
 .profile-close:hover {
 
-    background:
-        var(--opposite);
-
-    color:
-        var(--opposite-text);
-
     transform:
         rotate(90deg);
+
+    background:
+        var(--text);
+
+    color:
+        var(--bg);
+
 }
 
 
 /* =========================================================
-   MODAL LAYOUT
+   PROFILE LAYOUT
 ========================================================= */
 
 .profile-modal-layout {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        .8fr 1fr;
+        minmax(
+            300px,
+            .75fr
+        )
+        1fr;
 
-    min-height: 610px;
 }
 
 
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
+
 .profile-modal-photo {
 
-    position: relative;
+    position:
+        relative;
 
-    min-height: 610px;
+    min-height:
+        600px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     background:
-        var(--soft);
+        var(--card);
+
 }
 
 
 .profile-modal-photo img {
 
-    width: 100%;
-    height: 100%;
+    position:
+        absolute;
 
-    position: absolute;
+    inset:
+        0;
 
-    inset: 0;
+    width:
+        100%;
 
-    object-fit: cover;
+    height:
+        100%;
 
-    object-position:
-        center top;
+    object-fit:
+        cover;
 
-    transition:
-        opacity .35s ease,
-        transform .6s ease;
-}
-
-
-.profile-modal-photo img.changing {
-
-    opacity: 0;
-
-    transform:
-        scale(1.04);
 }
 
 
 .profile-image-code {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 20px;
-    bottom: 20px;
+    left:
+        20px;
+
+    bottom:
+        20px;
 
     padding:
-        10px 13px;
+        8px 10px;
 
     background:
-        var(--orange);
+        var(--cream);
 
-    color: #fff;
+    color:
+        var(--navy);
 
-    font:
-        700 8px
+    font-family:
         "Space Mono",
         monospace;
+
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
 }
 
+
+/* =========================================================
+   PROFILE INFORMATION
+========================================================= */
 
 .profile-modal-info {
 
     padding:
-        clamp(35px, 5vw, 70px);
+        55px 45px;
 
-    display: flex;
-
-    flex-direction: column;
 }
 
 
 .profile-modal-role {
 
-    color:
-        var(--orange);
+    display:
+        block;
 
-    font:
-        700 9px
+    margin-bottom:
+        18px;
+
+    color:
+        var(--text-soft);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .12em;
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .07em;
+
 }
 
 
 .profile-modal-info h2 {
 
-    margin-top: 20px;
-
-    padding-bottom: 35px;
-
-    border-bottom:
-        1px solid var(--line);
+    margin:
+        12px 0 25px;
 
     font-size:
-        clamp(42px, 6vw, 82px);
+        clamp(
+            38px,
+            4.2vw,
+            68px
+        );
 
-    line-height: .82;
+    font-weight:
+        900;
+
+    line-height:
+        .88;
 
     letter-spacing:
-        -.075em;
+        -.055em;
+
 }
 
 
+/* =========================================================
+   PROFILE DETAILS
+========================================================= */
+
 .profile-information {
 
-    margin-top: 30px;
+    border-top:
+        1px solid
+        var(--border);
 
-    display: grid;
+}
 
-    gap: 30px;
+
+.profile-detail {
+
+    padding:
+        22px 0;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
 }
 
 
 .profile-detail > span {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        13px;
 
     color:
-        var(--orange);
+        var(--text-soft);
 
-    font:
-        700 8px
+    font-family:
         "Space Mono",
         monospace;
 
-    letter-spacing: .12em;
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .06em;
+
 }
 
+
+/* =========================================================
+   PROFILE TAGS
+========================================================= */
 
 .profile-tags {
 
-    display: flex;
+    position:
+        absolute;
 
-    flex-wrap: wrap;
+    left:
+        24px;
 
-    gap: 8px;
+    bottom:
+        24px;
+
+    z-index:
+        5;
+
 }
 
 
-.profile-tag {
+.profile-tags span {
 
     padding:
-        9px 12px;
+        8px 11px;
 
     border:
-        1px solid var(--line);
+        1px solid
+        var(--border-strong);
 
-    font:
-        700 8px
+    border-radius:
+        100px;
+
+    color:
+        var(--text);
+
+    font-family:
         "Space Mono",
         monospace;
 
-    transition:
-        background .4s ease,
-        color .4s ease,
-        border-color .4s ease;
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
 }
 
 
-.profile-tag:hover {
-
-    background:
-        var(--orange);
-
-    border-color:
-        var(--orange);
-
-    color: #fff;
-}
-
+/* =========================================================
+   PROFILE LIST
+========================================================= */
 
 .profile-detail ul {
 
-    list-style: none;
+    padding-left:
+        17px;
 
-    border-top:
-        1px solid var(--line);
+    color:
+        var(--text);
+
 }
 
 
 .profile-detail li {
 
-    padding:
-        10px 0;
+    margin-bottom:
+        7px;
 
-    border-bottom:
-        1px solid var(--line);
+    font-size:
+        11px;
 
-    color:
-        var(--muted);
+    line-height:
+        1.6;
 
-    font-size: 11px;
-
-    line-height: 1.5;
 }
 
 
 .profile-description p {
 
+    margin:
+        0;
+
     color:
-        var(--muted);
+        var(--text-soft);
 
-    font-size: 12px;
+    font-size:
+        11px;
 
-    line-height: 1.75;
+    line-height:
+        1.8;
+
 }
 
 
 /* =========================================================
-   MODAL BOTTOM
+   PROFILE BOTTOM NAVIGATION
 ========================================================= */
 
 .profile-modal-bottom {
 
-    min-height: 65px;
+    min-height:
+        65px;
 
     padding:
-        0 20px;
+        0 25px;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         1fr auto 1fr;
 
-    align-items: center;
-
-    gap: 20px;
+    align-items:
+        center;
 
     border-top:
-        1px solid var(--line);
-}
+        1px solid
+        var(--border);
 
-
-.profile-modal-bottom > span {
-
-    font:
-        700 9px
+    font-family:
         "Space Mono",
         monospace;
 
-    color:
-        var(--orange);
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
 }
 
 
 .profile-navigation {
 
-    width: max-content;
+    padding:
+        15px 0;
 
-    border: 0;
+    border:
+        0;
 
     background:
         transparent;
 
     color:
-        var(--ink);
+        var(--text);
 
-    cursor: pointer;
-
-    font:
-        700 8px
+    font-family:
         "Space Mono",
         monospace;
 
-    transition:
-        color .3s ease,
-        transform .3s ease;
+    font-size:
+        7px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
 }
 
 
 #profilePrev {
 
-    justify-self: start;
+    justify-self:
+        start;
+
 }
 
 
 #profileNext {
 
-    justify-self: end;
+    justify-self:
+        end;
+
 }
 
 
-#profilePrev:hover {
+#profileCounter {
 
     color:
-        var(--orange);
+        var(--text-soft);
 
-    transform:
-        translateX(-5px);
-}
-
-
-#profileNext:hover {
-
-    color:
-        var(--orange);
-
-    transform:
-        translateX(5px);
 }
 
 
 /* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    min-height: 90px;
-
-    padding:
-        0 3vw;
-
-    border-top:
-        1px solid var(--line);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
-
-    gap: 20px;
-
-    font:
-        700 8px
-        "Space Mono",
-        monospace;
-
-    letter-spacing: .1em;
-}
-
-
-/* =========================================================
-   REVEAL
+   12. SCROLL FADE-IN
 ========================================================= */
 
 .reveal {
 
-    opacity: 0;
+    opacity:
+        0;
 
     transform:
         translateY(55px);
 
     transition:
-        opacity .9s ease,
-        transform 1s
-        cubic-bezier(.16, .84, .24, 1);
+        opacity 1s var(--transition),
+        transform 1s var(--transition);
+
 }
 
 
 .reveal.visible {
 
-    opacity: 1;
+    opacity:
+        1;
 
     transform:
-        translate(0, 0);
+        translateY(0);
+
 }
 
 
 /* =========================================================
-   CURSOR TRAIL
+   FACULTY CARD STAGGER
 ========================================================= */
 
-.cursor-trail-circle {
+.faculty-card:nth-child(2) {
 
-    position: fixed;
+    transition-delay:
+        .08s;
 
-    top: 0;
-    left: 0;
+}
 
-    z-index: 9999999;
 
-    border-radius: 50%;
+.faculty-card:nth-child(3) {
+
+    transition-delay:
+        .12s;
+
+}
+
+
+.faculty-card:nth-child(4) {
+
+    transition-delay:
+        .18s;
+
+}
+
+
+/* =========================================================
+   FOOTER FADE-IN
+========================================================= */
+
+.cpe-footer.reveal {
+
+    opacity:
+        0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity 1.1s var(--transition),
+        transform 1.1s var(--transition);
+
+}
+
+
+.cpe-footer.reveal.visible {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.cpe-footer-brand,
+.cpe-footer-social {
+
+    opacity:
+        0;
+
+    transform:
+        translateY(35px);
+
+    transition:
+        opacity .9s var(--transition),
+        transform .9s var(--transition);
+
+}
+
+
+.cpe-footer.visible
+.cpe-footer-brand {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+    transition-delay:
+        .15s;
+
+}
+
+
+.cpe-footer.visible
+.cpe-footer-social {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+    transition-delay:
+        .28s;
+
+}
+
+
+/* =========================================================
+   13. TEXT SELECTION
+========================================================= */
+
+::selection {
 
     background:
-        var(--opposite);
+        var(--text);
 
-    pointer-events: none;
+    color:
+        var(--bg);
 
-    opacity: 0;
-
-    will-change:
-        transform;
 }
 
 
 /* =========================================================
-   TABLET
+   14. SCROLLBAR
 ========================================================= */
 
-@media (max-width: 1000px) {
+::-webkit-scrollbar {
 
-    .nav-links {
-        display: none;
+    width:
+        9px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+    background:
+        var(--bg);
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--text) 32%,
+            transparent
+        );
+
+    border:
+        3px solid
+        var(--bg);
+
+    border-radius:
+        100px;
+
+}
+
+/* =========================================================
+   15. DIVE DEEPER
+========================================================= */
+
+.go-deeper-section {
+    width: min(100%, 1600px);
+
+    margin: 0 auto;
+
+    padding:
+        80px
+        3.5vw
+        100px;
+}
+
+
+.go-deeper-section .section-label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color:
+        var(--text-soft);
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+}
+
+
+.go-deeper-section h2 {
+    margin:
+        0
+        0
+        55px;
+
+    color:
+        var(--text);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            60px,
+            7vw,
+            110px
+        );
+
+    font-weight: 900;
+
+    line-height: .9;
+
+    letter-spacing: -.07em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DIVE DEEPER LIST
+========================================================= */
+
+.go-deeper-list {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   DIVE DEEPER CARD
+========================================================= */
+
+.deeper-card {
+    width: 100%;
+
+    min-height: 125px;
+
+    padding:
+        25px
+        30px;
+
+    display: grid;
+
+    grid-template-columns:
+        70px
+        minmax(0, 1fr)
+        50px;
+
+    align-items: center;
+
+    border:
+        1px solid
+        var(--border-strong);
+
+    border-radius: 24px;
+
+    background:
+        var(--card);
+
+    color:
+        var(--text);
+
+    text-decoration: none;
+
+    transition:
+        transform .35s var(--transition),
+        background-color .35s ease,
+        border-color .35s ease;
+}
+
+
+.deeper-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--text-soft);
+}
+
+
+/* =========================================================
+   DIVE DEEPER NUMBER
+========================================================= */
+
+.deeper-number {
+    color:
+        var(--text-soft);
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .06em;
+}
+
+
+/* =========================================================
+   DIVE DEEPER CONTENT
+========================================================= */
+
+.deeper-card-content {
+    min-width: 0;
+}
+
+
+.deeper-card-content h3 {
+    margin:
+        0
+        0
+        6px;
+
+    color:
+        var(--text);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:
+        clamp(
+            22px,
+            2vw,
+            32px
+        );
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -.04em;
+}
+
+
+.deeper-card-content p {
+    margin: 0;
+
+    color:
+        var(--text-soft);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DIVE DEEPER ARROW
+========================================================= */
+
+.deeper-arrow {
+    justify-self: end;
+
+    color:
+        var(--text);
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    transition:
+        transform .35s
+        var(--transition);
+}
+
+
+.deeper-card:hover
+.deeper-arrow {
+    transform:
+        translateX(7px);
+}
+/* =========================================================
+   15. LARGE TABLET / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    .nav-inner {
+
+        gap:
+            22px;
+
     }
 
+
+    .nav-links {
+
+        gap:
+            15px;
+
+    }
+
+
+    .nav-links a {
+
+        font-size:
+            7px;
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
 
     .faculty-hero {
 
@@ -2347,255 +3368,461 @@ footer {
             auto;
 
         padding-top:
-            80px;
-    }
+            70px;
 
+        padding-bottom:
+            100px;
 
-    .hero-bottom {
-
-        grid-template-columns:
-            1fr 280px;
-    }
-
-
-    .intro-heading {
-
-        grid-template-columns:
-            55px 1fr;
-    }
-
-
-    .intro-heading > p {
-
-        grid-column:
-            2;
-
-        max-width:
-            520px;
-
-        margin-top:
-            25px;
-    }
-
-
-    .faculty-photo {
-
-        height:
-            600px;
-    }
-
-
-    .profile-modal-layout {
-
-        grid-template-columns:
-            .75fr 1fr;
-    }
-
-
-    .profile-modal-photo {
-
-        min-height:
-            570px;
-    }
-
-}
-
-
-/* =========================================================
-   PHONE
-========================================================= */
-
-@media (max-width: 650px) {
-
-    .topbar {
-
-        padding:
-            0 5vw;
-    }
-
-
-    .topbar-right span:first-child {
-
-        display: none;
-    }
-
-
-    .nav-inner {
-
-        width:
-            90vw;
-
-        grid-template-columns:
-            1fr auto;
-
-        min-height:
-            68px;
-    }
-
-
-    .logo small {
-
-        display: none;
-    }
-
-
-    .nav-right {
-
-        gap: 7px;
-    }
-
-
-    .theme-toggle {
-
-        width: 38px;
-        height: 38px;
-    }
-
-
-    .home-button {
-
-        padding:
-            10px 12px;
-
-        font-size:
-            7px;
-    }
-
-
-    /* HERO */
-
-    .faculty-hero {
-
-        width:
-            90vw;
-
-        padding:
-            55px 0 45px;
-    }
-
-
-    .hero-meta {
-
-        font-size:
-            7px;
-    }
-
-
-    .hero-meta span:last-child {
-
-        display: none;
     }
 
 
     .hero-title {
 
         padding:
-            55px 0;
+            70px 0;
+
+    }
+
+
+    /* =====================================================
+       FACULTY CARDS
+    ====================================================== */
+
+    .faculty-grid {
+
+        gap:
+            80px 25px;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .cpe-footer-content {
+
+        padding:
+            45px 45px 30px;
+
+        gap:
+            45px;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width:
+            clamp(
+                200px,
+                21vw,
+                310px
+            );
+
+    }
+
+
+    .cpe-footer-follow {
+
+        font-size:
+            50px;
+
+    }
+
+
+    .cpe-social-link {
+
+        width:
+            62px;
+
+        height:
+            62px;
+
+    }
+
+
+    .cpe-social-link i {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .cpe-footer-bottom {
+
+        padding:
+            0 45px 22px;
+
+    }
+
+}
+
+
+/* =========================================================
+   16. TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    .nav-inner {
+
+        min-height:
+            70px;
+
+        padding:
+            0 25px;
+
+        grid-template-columns:
+            auto 1fr;
+
+        gap:
+            20px;
+
+    }
+
+
+    .nav-links {
+
+        display:
+            none;
+
+    }
+
+
+    .nav-right {
+
+        justify-self:
+            end;
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .faculty-hero {
+
+        min-height:
+            auto;
+
+        padding:
+            65px 25px 90px;
+
+    }
+
+
+    .hero-title {
+
+        padding:
+            70px 0;
+
     }
 
 
     .hero-line {
 
         font-size:
-            clamp(58px, 20vw, 92px);
+            clamp(
+                70px,
+                14vw,
+                135px
+            );
 
-        line-height:
-            .78;
     }
 
 
     .hero-line-two {
 
         padding-left:
-            5vw;
+            7vw;
+
     }
 
 
-    .hero-bottom {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            45px;
-    }
-
-
-    .hero-code {
-
-        font-size:
-            110px;
-    }
-
-
-    /* INTRO */
-
-    .faculty-intro {
-
-        width:
-            90vw;
-
-        padding:
-            90px 0;
-    }
-
-
-    .intro-heading {
-
-        display: block;
-    }
-
-
-    .section-number {
-
-        display: block;
-
-        margin-bottom:
-            25px;
-    }
-
-
-    .intro-heading h2,
-    .disciplines-heading h2 {
-
-        font-size:
-            clamp(43px, 14vw, 67px);
-    }
-
-
-    .intro-heading > p {
-
-        margin-top:
-            30px;
-    }
-
-
-    .faculty-focus-strip {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        margin-top:
-            45px;
-    }
-
-
-    .faculty-focus-strip span {
-
-        min-height:
-            90px;
-    }
-
-
-    /* FACULTY */
+    /* =====================================================
+       FACULTY SECTION
+    ====================================================== */
 
     .faculty-section {
 
-        width:
-            90vw;
+        padding:
+            100px 25px 120px;
 
-        padding-bottom:
-            90px;
+    }
+
+
+    .faculty-grid {
+
+        gap:
+            70px 22px;
+
+    }
+
+
+    .faculty-card-content h2 {
+
+        font-size:
+            clamp(
+                30px,
+                5vw,
+                48px
+            );
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .cpe-footer {
+
+        min-height:
+            auto;
+
+    }
+
+
+    .cpe-footer-content {
+
+        min-height:
+            auto;
+
+        padding:
+            90px 30px 90px;
+
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+        gap:
+            65px;
+
+    }
+
+
+    .cpe-footer-brand {
+
+        width:
+            100%;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width:
+            min(
+                330px,
+                42vw
+            );
+
+    }
+
+
+    .cpe-footer-social {
+
+        width:
+            100%;
+
+    }
+
+
+    .cpe-footer-follow {
+
+        font-size:
+            54px;
+
+    }
+
+
+    .cpe-footer-bottom {
+
+        padding:
+            0 25px 25px;
+
+    }
+
+
+    /* =====================================================
+       PROFILE
+    ====================================================== */
+
+    .profile-modal {
+
+        width:
+            calc(
+                100% - 35px
+            );
+
+    }
+
+
+    .profile-modal-layout {
+
+        grid-template-columns:
+            minmax(
+                280px,
+                .75fr
+            )
+            1fr;
+
+    }
+
+
+    .profile-modal-info {
+
+        padding:
+            40px 30px;
+
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    .nav-inner {
+
+        min-height:
+            66px;
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .logo {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .logo small {
+
+        display:
+            none;
+
+    }
+
+
+    .home-button {
+
+        padding:
+            0 13px;
+
+    }
+
+
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .faculty-hero {
+
+        padding:
+            50px 18px 80px;
+
+    }
+
+
+    .hero-meta {
+
+        gap:
+            20px;
+
+    }
+
+
+    .hero-meta span:last-child {
+
+        text-align:
+            right;
+
+    }
+
+
+    .hero-title {
+
+        padding:
+            60px 0;
+
+    }
+
+
+    .hero-line {
+
+        font-size:
+            clamp(
+                55px,
+                17vw,
+                110px
+            );
+
+        line-height:
+            .79;
+
+    }
+
+
+    .hero-line-two {
+
+        padding-left:
+            0;
+
+    }
+
+
+    .hero-line-three {
+
+        align-self:
+            flex-start;
+
+    }
+
+
+    .hero-description {
+
+        max-width:
+            500px;
+
+    }
+
+
+    /* =====================================================
+       FACULTY SECTION
+    ====================================================== */
+
+    .faculty-section {
+
+        padding:
+            85px 18px 100px;
+
     }
 
 
@@ -2603,251 +3830,525 @@ footer {
 
         grid-template-columns:
             1fr;
+
+        gap:
+            80px;
+
     }
 
 
     .faculty-photo {
 
-        height:
-            125vw;
+        aspect-ratio:
+            4 / 4.8;
 
-        max-height:
-            650px;
-
-        min-height:
-            450px;
     }
 
 
-    .faculty-card-content {
-
-        min-height:
-            310px;
-
-        padding:
-            24px;
-    }
-
-
-    .faculty-card-content h3 {
+    .faculty-card-content h2 {
 
         font-size:
-            clamp(36px, 11vw, 55px);
+            clamp(
+                38px,
+                10vw,
+                62px
+            );
+
     }
 
 
-    /*
-       Mobile tap state
-    */
+    /* =====================================================
+       FOOTER
+    ====================================================== */
 
-    .faculty-card.touch-active
-    .photo-overlay {
+    .cpe-footer::before {
 
-        opacity: 1;
+        height:
+            120px;
 
-        transform:
-            translateY(0);
     }
 
 
-    .faculty-card.touch-active
-    .faculty-photo img {
-
-        filter:
-            grayscale(0);
-
-        transform:
-            scale(1.05);
-    }
-
-
-    /* DISCIPLINES */
-
-    .disciplines-section {
+    .cpe-footer-content {
 
         padding:
-            90px 5vw;
-    }
-
-
-    .disciplines-heading {
-
-        margin-bottom:
-            45px;
-    }
-
-
-    .discipline-row {
-
-        min-height:
-            95px;
-
-        grid-template-columns:
-            35px 1fr 30px;
+            80px 25px 85px;
 
         gap:
-            10px;
+            60px;
+
     }
 
 
-    .discipline-row strong {
+    .cpe-footer-brand {
 
-        font-size:
-            clamp(20px, 6vw, 30px);
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+
+        gap:
+            25px;
+
     }
 
 
-    /* CLOSING */
-
-    .faculty-closing {
+    .cpe-footer-logo {
 
         width:
-            90vw;
+            min(
+                350px,
+                72vw
+            );
 
-        padding:
-            90px 0 70px;
     }
 
 
-    .closing-title {
+    .cpe-footer-divider {
+
+        width:
+            110px;
+
+        height:
+            2px;
+
+    }
+
+
+    .cpe-footer-name {
+
+        align-items:
+            center;
+
+    }
+
+
+    .cpe-footer-name span {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .cpe-footer-name strong {
+
+        font-size:
+            24px;
+
+        white-space:
+            normal;
+
+        text-align:
+            center;
+
+    }
+
+
+    .cpe-footer-follow {
+
+        margin-bottom:
+            25px;
+
+        font-size:
+            52px;
+
+    }
+
+
+    .cpe-footer-icons {
+
+        gap:
+            15px;
+
+    }
+
+
+    .cpe-social-link {
+
+        width:
+            64px;
+
+        height:
+            64px;
+
+    }
+
+
+    .cpe-social-link i {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .cpe-footer-bottom {
+
+        padding:
+            0 20px 22px;
+
+        flex-direction:
+            column;
+
+        gap:
+            8px;
+
+        text-align:
+            center;
+
+        font-size:
+            9px;
+
+    }
+
+
+    /* =========================================================
+   PROFILE MODAL
+========================================================= */
+
+.profile-modal {
+
+    width:
+        min(
+            86vw,
+            1320px
+        );
+
+    height:
+        min(
+            86vh,
+            820px
+        );
+
+    max-height:
+        86vh;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--bg);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+}
+
+
+/* =========================================================
+   MODAL TOP
+========================================================= */
+
+.profile-modal-top {
+
+    height:
+        68px;
+
+    min-height:
+        68px;
+
+    padding:
+        0 30px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.profile-modal-body {
+
+    flex:
+        1;
+
+    min-height:
+        0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        42% 58%;
+
+    overflow:
+        hidden;
+
+}
+/* =========================================================
+   18. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    .nav-right {
+
+        gap:
+            7px;
+
+    }
+
+
+    .theme-toggle {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    .home-button {
+
+        min-height:
+            38px;
+
+        padding:
+            0 11px;
+
+        font-size:
+            7px;
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .faculty-hero {
+
+        padding-top:
+            42px;
+
+    }
+
+
+    .hero-meta {
+
+        font-size:
+            6px;
+
+    }
+
+
+    .hero-title {
 
         padding:
             55px 0;
+
     }
 
 
-    .closing-title span {
+    .hero-line {
 
         font-size:
-            clamp(52px, 17vw, 85px);
+            clamp(
+                48px,
+                17.5vw,
+                82px
+            );
+
     }
 
 
-    .closing-title span:nth-child(2) {
+    .hero-description p {
 
-        padding-left:
-            0;
+        font-size:
+            11px;
+
     }
 
 
-    .closing-bottom {
+    /* =====================================================
+       FACULTY CARDS
+    ====================================================== */
 
-        grid-template-columns:
-            1fr;
+    .faculty-section {
+
+        padding-top:
+            70px;
+
+    }
+
+
+    .faculty-grid {
 
         gap:
-            45px;
+            70px;
+
     }
 
 
-    /* PROFILE MODAL */
+    .faculty-number {
 
-    .profile-viewer {
+        top:
+            12px;
 
-        padding: 0;
+        left:
+            12px;
 
-        align-items:
-            stretch;
     }
 
 
-    .profile-modal {
+    .photo-tag {
 
-        width: 100%;
+        right:
+            12px;
 
-        max-height:
-            100svh;
+        bottom:
+            12px;
 
-        border: 0;
     }
 
 
-    .profile-modal-layout {
+    .photo-overlay {
+
+        padding:
+            20px;
+
+    }
+
+
+    .faculty-mini-info {
 
         grid-template-columns:
-            1fr;
+            65px 1fr;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .cpe-footer-content {
+
+        padding:
+            70px 18px 75px;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width:
+            min(
+                300px,
+                78vw
+            );
+
+    }
+
+
+    .cpe-footer-follow {
+
+        font-size:
+            46px;
+
+    }
+
+
+    .cpe-footer-icons {
+
+        gap:
+            12px;
+
+    }
+
+
+    .cpe-social-link {
+
+        width:
+            58px;
+
+        height:
+            58px;
+
+    }
+
+
+    .cpe-social-link i {
+
+        font-size:
+            25px;
+
+    }
+
+
+    /* =====================================================
+       PROFILE POPUP
+    ====================================================== */
+
+    .profile-modal-top {
+
+        padding:
+            0 17px;
+
     }
 
 
     .profile-modal-photo {
 
         min-height:
-            55svh;
+            390px;
+
     }
 
 
     .profile-modal-info {
 
         padding:
-            35px 22px 45px;
-    }
+            38px 18px;
 
-
-    .profile-modal-info h2 {
-
-        font-size:
-            clamp(42px, 13vw, 65px);
     }
 
 
     .profile-modal-bottom {
 
-        position: sticky;
-
-        bottom: 0;
-
-        z-index: 5;
-
-        background:
-            var(--paper);
-    }
-
-
-    footer {
-
         padding:
-            25px 5vw;
+            0 17px;
 
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-
-        justify-content:
-            center;
     }
 
 }
 
 
 /* =========================================================
-   TOUCH DEVICES
+   19. REDUCED MOTION
 ========================================================= */
 
-@media (hover: none) {
+@media (prefers-reduced-motion: reduce) {
 
-    .faculty-photo img {
-
-        filter:
-            grayscale(0);
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (
-    prefers-reduced-motion:
-    reduce
-) {
-
-    *,
-    *::before,
-    *::after {
+    * {
 
         scroll-behavior:
             auto !important;
@@ -2860,6 +4361,1551 @@ footer {
 
         transition-duration:
             .01ms !important;
+
+    }
+
+
+    .reveal,
+    .cpe-footer-brand,
+    .cpe-footer-social {
+
+        opacity:
+            1 !important;
+
+        transform:
+            none !important;
+
     }
 
 }
+/* =========================================================
+   REMOVE HERO / FACULTY DIVIDER
+========================================================= */
+
+.faculty-hero {
+
+    border-bottom:
+        none !important;
+
+}
+
+
+.faculty-section {
+
+    border-top:
+        none !important;
+
+}
+
+
+.faculty-grid {
+
+    border-top:
+        none !important;
+
+}
+/* =========================================================
+   PROFILE MODAL — CONSISTENT CONTENT ALIGNMENT
+========================================================= */
+
+.profile-modal-info {
+
+    height:
+        100%;
+
+    min-height:
+        0;
+
+    padding:
+        55px 55px 28px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    box-sizing:
+        border-box;
+
+}
+
+
+/* =========================================================
+   FACULTY NAME AREA
+========================================================= */
+
+.profile-modal-info h2 {
+
+    min-height:
+        125px;
+
+    margin:
+        18px 0 25px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+}
+
+
+
+/* =========================================================
+   SPECIALIZATION AREA
+========================================================= */
+
+.profile-specialization {
+
+      position:
+        static;
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+    margin-top:
+        2px;
+
+}
+
+
+/* =========================================================
+   COURSES / TECHNICAL INTERESTS
+========================================================= */
+
+.profile-courses {
+
+    min-height:
+        165px;
+
+}
+
+
+/* =========================================================
+   PROFILE DESCRIPTION
+========================================================= */
+
+.profile-description {
+
+    margin-top:
+        auto;
+
+    min-height:
+        125px;
+
+}
+
+
+/* =========================================================
+   KEEP DIVIDERS CONSISTENT
+========================================================= */
+
+.profile-specialization,
+.profile-courses,
+.profile-description {
+
+    box-sizing:
+        border-box;
+
+}
+
+
+/* =========================================================
+   REMOVE EXTRA BOTTOM SPACE
+========================================================= */
+
+.profile-modal-info > *:last-child {
+
+    margin-bottom:
+        0;
+
+}
+/* =========================================================
+   FIX: REMOVE SPECIALIZATION TAGS FROM PHOTO SIDE
+========================================================= */
+
+/* Keep the CPE / UE label */
+.profile-image-code {
+    display: block !important;
+}
+
+
+/* Remove any specialization/tag container from the photo */
+.profile-modal-photo .profile-specialization,
+.profile-modal-photo .profile-tags,
+.profile-modal-photo .specialization-tags,
+.profile-modal-photo .profile-specialization-tags {
+    display: none !important;
+}
+
+
+/* Safety fix:
+   photo should contain ONLY the image + CPE / UE label */
+.profile-modal-photo {
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================================================
+   FACULTY MODAL — ROUNDED EDGES
+========================================================= */
+
+.profile-modal-content {
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+
+/* LEFT IMAGE SIDE */
+
+.profile-modal-photo {
+    border-radius: 0 0 0 24px;
+    overflow: hidden;
+}
+
+.profile-modal-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* TOP / HEADER AREA */
+
+.profile-modal-header {
+    border-radius: 24px 24px 0 0;
+}
+
+
+/* RIGHT CONTENT */
+
+.profile-modal-info {
+    border-radius: 0 0 24px 0;
+}
+
+
+/* CLOSE BUTTON */
+
+.profile-modal-close {
+    border-radius: 50%;
+}
+
+/* =========================================================
+   DIVE DEEPER
+========================================================= */
+
+.go-deeper-section {
+    position: relative;
+
+    width: 100%;
+
+    padding: 70px 72px 80px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SMALL LABEL
+========================================================= */
+
+.go-deeper-label {
+    margin-bottom: 45px;
+
+    font-family: "Space Mono", monospace;
+    font-size: 9px;
+    font-weight: 700;
+
+    line-height: 1;
+    letter-spacing: 0.12em;
+
+    color: var(--text-soft);
+}
+
+
+/* =========================================================
+   DIVE DEEPER TITLE
+========================================================= */
+
+.go-deeper-heading {
+    margin: 0 0 45px;
+
+    line-height: 0.88;
+}
+
+
+.go-deeper-heading span {
+    display: inline-block;
+
+    margin: 0;
+
+    font-size: clamp(58px, 6.5vw, 105px);
+    font-weight: 900;
+
+    line-height: 0.88;
+    letter-spacing: -0.065em;
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   CARD LIST
+========================================================= */
+
+.deeper-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    width: 100%;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   INDIVIDUAL CARD
+========================================================= */
+
+.deeper-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        70px
+        minmax(0, 1fr)
+        50px;
+
+    align-items: center;
+
+    width: 100%;
+    min-height: 120px;
+
+    padding: 22px 30px;
+
+    border: 1px solid var(--border);
+    border-radius: 28px;
+
+    background: transparent;
+
+    color: var(--text);
+    text-decoration: none;
+
+    overflow: hidden;
+
+    transition:
+        background-color 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.deeper-number {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    color: var(--text-soft);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.deeper-card-content {
+    min-width: 0;
+}
+
+
+.deeper-card-content h3 {
+    margin: 0 0 6px;
+
+    font-size: clamp(23px, 2.2vw, 34px);
+    font-weight: 800;
+
+    line-height: 1;
+    letter-spacing: -0.04em;
+
+    color: var(--text);
+}
+
+
+.deeper-card-content p {
+    margin: 0;
+
+    max-width: 850px;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    color: var(--text-soft);
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.deeper-arrow {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    font-size: 28px;
+
+    color: var(--text);
+
+    transition: transform 0.35s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.deeper-card:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.04);
+}
+
+
+.deeper-card:hover .deeper-arrow {
+    transform: translateX(7px);
+}
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body.light-mode .deeper-card {
+    border-color: rgba(4, 28, 58, 0.22);
+}
+
+
+body.light-mode .deeper-card:hover {
+    background: rgba(4, 28, 58, 0.05);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .go-deeper-section {
+        padding:
+            60px
+            35px
+            70px;
+    }
+
+
+    .go-deeper-heading span {
+        font-size: clamp(48px, 10vw, 75px);
+    }
+
+
+    .deeper-card {
+        grid-template-columns:
+            55px
+            minmax(0, 1fr)
+            40px;
+
+        min-height: 110px;
+
+        padding: 20px 24px;
+
+        border-radius: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .go-deeper-section {
+        padding:
+            50px
+            20px
+            60px;
+    }
+
+
+    .go-deeper-label {
+        margin-bottom: 30px;
+    }
+
+
+    .go-deeper-heading {
+        margin-bottom: 35px;
+    }
+
+
+    .go-deeper-heading span {
+        font-size: clamp(42px, 13vw, 60px);
+    }
+
+
+    .deeper-card {
+        grid-template-columns:
+            40px
+            minmax(0, 1fr)
+            30px;
+
+        min-height: 105px;
+
+        padding: 18px 18px;
+
+        border-radius: 22px;
+    }
+
+
+    .deeper-card-content h3 {
+        font-size: 21px;
+    }
+
+
+    .deeper-card-content p {
+        font-size: 12px;
+    }
+
+
+    .deeper-arrow {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.deeper-card:hover {
+    transform: translateX(6px);
+
+    background: var(--card);
+
+    border-color: var(--text-soft);
+}
+
+
+.deeper-card:hover .deeper-arrow {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .go-deeper-section {
+        padding: 60px 40px 70px;
+    }
+
+
+    .go-deeper-heading {
+        margin-bottom: 35px;
+    }
+
+
+    .deeper-card {
+        grid-template-columns:
+            55px
+            minmax(0, 1fr)
+            40px;
+
+        min-height: 95px;
+
+        padding: 16px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .go-deeper-section {
+        padding: 50px 20px 60px;
+    }
+
+
+    .go-deeper-heading {
+        margin-bottom: 30px;
+    }
+
+
+    .go-deeper-heading span {
+        font-size: clamp(48px, 16vw, 72px);
+    }
+
+
+    .deeper-grid {
+        gap: 10px;
+    }
+
+
+    .deeper-card {
+        grid-template-columns:
+            40px
+            minmax(0, 1fr)
+            30px;
+
+        min-height: 88px;
+
+        padding: 14px 16px;
+
+        border-radius: 16px;
+    }
+
+
+    .deeper-card-content h3 {
+        font-size: 19px;
+    }
+
+
+    .deeper-card-content p {
+        font-size: 9px;
+
+        line-height: 1.4;
+    }
+
+
+    .deeper-arrow {
+        font-size: 20px;
+    }
+
+}
+/* =========================================================
+   FACULTY PAGE — DIVE DEEPER FIX
+   PUT THIS AT THE VERY BOTTOM OF faculty.css
+========================================================= */
+
+
+/* SECTION */
+
+section.go-deeper-section {
+    box-sizing: border-box !important;
+
+    width: 100% !important;
+
+    padding:
+        70px
+        5.5%
+        90px !important;
+
+    margin: 0 !important;
+
+    background: transparent !important;
+}
+
+
+/* SMALL TOP TEXT */
+
+section.go-deeper-section > .go-deeper-label {
+    display: block !important;
+
+    margin: 0 0 20px 0 !important;
+
+    font-family: "Space Mono", monospace !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: 0.12em !important;
+
+    color: #aeb9c4 !important;
+}
+
+
+/* DIVE DEEPER */
+
+section.go-deeper-section > .go-deeper-heading {
+    display: block !important;
+
+    margin: 0 0 45px 0 !important;
+}
+
+
+section.go-deeper-section > .go-deeper-heading > span {
+    display: block !important;
+
+    margin: 0 !important;
+
+    font-size: clamp(65px, 7vw, 110px) !important;
+    font-weight: 900 !important;
+
+    line-height: 0.9 !important;
+    letter-spacing: -0.06em !important;
+
+    color: #fff8eb !important;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+section.go-deeper-section > .deeper-grid {
+    display: grid !important;
+
+    grid-template-columns: 1fr !important;
+
+    gap: 14px !important;
+
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+section.go-deeper-section .deeper-grid > a.deeper-card {
+    box-sizing: border-box !important;
+
+    position: relative !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+        70px
+        minmax(0, 1fr)
+        50px !important;
+
+    align-items: center !important;
+
+    width: 100% !important;
+    min-height: 120px !important;
+
+    margin: 0 !important;
+
+    padding:
+        25px
+        32px !important;
+
+    border:
+        1px solid
+        rgba(255, 248, 235, 0.20) !important;
+
+    border-radius: 26px !important;
+
+    background:
+        rgba(255, 255, 255, 0.015) !important;
+
+    color: #fff8eb !important;
+
+    text-decoration: none !important;
+
+    overflow: hidden !important;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease !important;
+}
+
+
+/* REMOVE DEFAULT LINK STYLES */
+
+section.go-deeper-section .deeper-card:link,
+section.go-deeper-section .deeper-card:visited,
+section.go-deeper-section .deeper-card:hover,
+section.go-deeper-section .deeper-card:active {
+    color: #fff8eb !important;
+
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+section.go-deeper-section .deeper-number {
+    display: block !important;
+
+    margin: 0 !important;
+
+    font-family: "Space Mono", monospace !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+    letter-spacing: 0.08em !important;
+
+    color: #9daeba !important;
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+section.go-deeper-section .deeper-card-content {
+    display: block !important;
+
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+section.go-deeper-section .deeper-card-content h3 {
+    display: block !important;
+
+    margin:
+        0
+        0
+        7px
+        0 !important;
+
+    padding: 0 !important;
+
+    font-size: clamp(24px, 2.3vw, 35px) !important;
+    font-weight: 800 !important;
+
+    line-height: 1.05 !important;
+    letter-spacing: -0.04em !important;
+
+    color: #fff8eb !important;
+}
+
+
+section.go-deeper-section .deeper-card-content p {
+    display: block !important;
+
+    max-width: 850px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 14px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.5 !important;
+
+    color: #b6c0ca !important;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+section.go-deeper-section .deeper-arrow {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    margin: 0 !important;
+
+    font-size: 28px !important;
+
+    color: #fff8eb !important;
+
+    transition:
+        transform 0.3s ease !important;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+section.go-deeper-section .deeper-card:hover {
+    transform: translateY(-2px) !important;
+
+    border-color:
+        rgba(255, 248, 235, 0.45) !important;
+
+    background:
+        rgba(255, 255, 255, 0.05) !important;
+}
+
+
+section.go-deeper-section .deeper-card:hover .deeper-arrow {
+    transform: translateX(7px) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    section.go-deeper-section {
+        padding:
+            55px
+            20px
+            70px !important;
+    }
+
+
+    section.go-deeper-section
+    > .go-deeper-heading
+    > span {
+        font-size: 52px !important;
+    }
+
+
+    section.go-deeper-section
+    .deeper-grid
+    > a.deeper-card {
+
+        grid-template-columns:
+            38px
+            minmax(0, 1fr)
+            25px !important;
+
+        min-height: 105px !important;
+
+        padding:
+            18px
+            18px !important;
+
+        border-radius: 20px !important;
+    }
+
+
+    section.go-deeper-section
+    .deeper-card-content h3 {
+
+        font-size: 21px !important;
+    }
+
+
+    section.go-deeper-section
+    .deeper-card-content p {
+
+        font-size: 12px !important;
+    }
+
+}
+/* =========================================================
+   DIVE DEEPER TEST
+========================================================= */
+
+.go-deeper-section {
+    padding: 80px !important;
+}
+
+.deeper-card {
+    display: grid !important;
+    grid-template-columns: 80px 1fr 50px !important;
+    align-items: center !important;
+
+    width: 100% !important;
+    min-height: 130px !important;
+
+    margin-bottom: 16px !important;
+    padding: 30px !important;
+
+    border: 2px solid white !important;
+    border-radius: 30px !important;
+
+    text-decoration: none !important;
+}
+
+.deeper-card-content h3 {
+    margin: 0 0 8px !important;
+}
+
+.deeper-card-content p {
+    margin: 0 !important;
+}
+
+.deeper-arrow {
+    text-align: right !important;
+}
+/* =========================================================
+   DIVE DEEPER
+   FINAL FIX
+========================================================= */
+
+.go-deeper-section {
+    width: 100%;
+    padding: 70px 5% 90px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION LABEL
+--------------------------------------------------------- */
+
+.go-deeper-section .section-label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ---------------------------------------------------------
+   DIVE DEEPER TITLE
+--------------------------------------------------------- */
+
+.go-deeper-section h2 {
+    margin: 0 0 45px;
+
+    font-family: "Inter", sans-serif;
+    font-size: clamp(45px, 5vw, 80px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+
+    color: #f7f3e8;
+}
+
+
+/* ---------------------------------------------------------
+   CARD CONTAINER
+--------------------------------------------------------- */
+
+.go-deeper-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* ---------------------------------------------------------
+   INDIVIDUAL CARD
+--------------------------------------------------------- */
+
+.go-deeper-section .deeper-card {
+    width: 100%;
+    min-height: 125px;
+
+    display: grid;
+    grid-template-columns: 70px 1fr 60px;
+    align-items: center;
+
+    padding: 26px 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 25px;
+
+    background: rgba(3, 35, 58, 0.22);
+
+    color: #f7f3e8;
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease;
+}
+
+
+/* ---------------------------------------------------------
+   CARD HOVER
+--------------------------------------------------------- */
+
+.go-deeper-section .deeper-card:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* ---------------------------------------------------------
+   NUMBER
+--------------------------------------------------------- */
+
+.go-deeper-section .deeper-number {
+    font-family: "Space Mono", monospace;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ---------------------------------------------------------
+   CARD TEXT
+--------------------------------------------------------- */
+
+.go-deeper-section .deeper-card-content {
+    min-width: 0;
+}
+
+
+.go-deeper-section .deeper-card-content h3 {
+    margin: 0 0 5px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: clamp(20px, 2vw, 29px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+
+    color: #f7f3e8;
+}
+
+
+.go-deeper-section .deeper-card-content p {
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* ---------------------------------------------------------
+   ARROW
+--------------------------------------------------------- */
+
+.go-deeper-section .deeper-arrow {
+    justify-self: end;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 27px;
+    font-weight: 400;
+
+    color: #f7f3e8;
+
+    transition: transform 0.3s ease;
+}
+
+
+.go-deeper-section .deeper-card:hover .deeper-arrow {
+    transform: translateX(7px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .go-deeper-section {
+        padding: 60px 30px 80px;
+    }
+
+
+    .go-deeper-section .deeper-card {
+        grid-template-columns: 50px 1fr 40px;
+
+        min-height: 115px;
+
+        padding: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .go-deeper-section {
+        padding: 50px 20px 70px;
+    }
+
+
+    .go-deeper-section h2 {
+        margin-bottom: 30px;
+
+        font-size: 45px;
+    }
+
+
+    .go-deeper-list {
+        gap: 12px;
+    }
+
+
+    .go-deeper-section .deeper-card {
+        grid-template-columns: 35px 1fr 30px;
+
+        min-height: 105px;
+
+        padding: 20px 18px;
+
+        border-radius: 20px;
+    }
+
+
+    .go-deeper-section .deeper-card-content h3 {
+        font-size: 18px;
+    }
+
+
+    .go-deeper-section .deeper-card-content p {
+        font-size: 11px;
+    }
+
+
+    .go-deeper-section .deeper-arrow {
+        font-size: 21px;
+    }
+
+}
+}
+/* =========================================================
+   FACULTY PAGE — DIVE DEEPER
+   Isolated from the faculty cards above
+========================================================= */
+
+.faculty-deeper-section {
+    width: 100%;
+    padding: 70px 4.7% 90px;
+}
+
+
+/* ---------------------------------------------------------
+   SMALL TOP LABEL
+--------------------------------------------------------- */
+
+.faculty-deeper-label {
+    margin-bottom: 65px;
+
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #a8b6c5;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN TITLE
+--------------------------------------------------------- */
+
+.faculty-deeper-heading {
+    margin: 0 0 42px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: clamp(64px, 7vw, 112px);
+    font-weight: 900;
+
+    line-height: 0.9;
+    letter-spacing: -6px;
+
+    color: #f6f1e7;
+}
+
+
+/* ---------------------------------------------------------
+   CARD LIST
+--------------------------------------------------------- */
+
+.faculty-deeper-list {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   INDIVIDUAL CARD
+--------------------------------------------------------- */
+
+.faculty-deeper-card {
+    width: 100%;
+    min-height: 102px;
+
+    display: grid;
+
+    grid-template-columns:
+        70px
+        minmax(0, 1fr)
+        60px;
+
+    align-items: center;
+
+    padding: 22px 26px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.015);
+
+    text-decoration: none;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* ---------------------------------------------------------
+   NUMBER
+--------------------------------------------------------- */
+
+.faculty-deeper-number {
+    font-family: "Space Mono", monospace;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #9aaaba;
+}
+
+
+/* ---------------------------------------------------------
+   TEXT AREA
+--------------------------------------------------------- */
+
+.faculty-deeper-content {
+    min-width: 0;
+}
+
+
+.faculty-deeper-content h3 {
+    margin: 0 0 5px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: clamp(23px, 2vw, 31px);
+    font-weight: 800;
+
+    line-height: 1.05;
+    letter-spacing: -1.2px;
+
+    color: #f6f1e7;
+}
+
+
+.faculty-deeper-content p {
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    color: #aab7c3;
+}
+
+
+/* ---------------------------------------------------------
+   ARROW
+--------------------------------------------------------- */
+
+.faculty-deeper-arrow {
+    justify-self: end;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 30px;
+    font-weight: 400;
+
+    color: #f6f1e7;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* ---------------------------------------------------------
+   HOVER
+--------------------------------------------------------- */
+
+.faculty-deeper-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+
+    border-color: rgba(255, 255, 255, 0.38);
+}
+
+
+.faculty-deeper-card:hover .faculty-deeper-arrow {
+    transform: translateX(7px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .faculty-deeper-section {
+        padding:
+            60px
+            32px
+            80px;
+    }
+
+
+    .faculty-deeper-label {
+        margin-bottom: 45px;
+    }
+
+
+    .faculty-deeper-heading {
+        margin-bottom: 35px;
+
+        font-size: clamp(55px, 9vw, 85px);
+
+        letter-spacing: -4px;
+    }
+
+
+    .faculty-deeper-card {
+        grid-template-columns:
+            55px
+            minmax(0, 1fr)
+            45px;
+
+        min-height: 105px;
+
+        padding:
+            22px
+            24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .faculty-deeper-section {
+        padding:
+            45px
+            18px
+            60px;
+    }
+
+
+    .faculty-deeper-label {
+        margin-bottom: 35px;
+
+        font-size: 9px;
+    }
+
+
+    .faculty-deeper-heading {
+        margin-bottom: 28px;
+
+        font-size: clamp(45px, 15vw, 65px);
+
+        letter-spacing: -3px;
+    }
+
+
+    .faculty-deeper-list {
+        gap: 10px;
+    }
+
+
+    .faculty-deeper-card {
+        grid-template-columns:
+            35px
+            minmax(0, 1fr)
+            30px;
+
+        min-height: 110px;
+
+        padding:
+            20px
+            16px;
+
+        border-radius: 17px;
+    }
+
+
+    .faculty-deeper-number {
+        font-size: 8px;
+    }
+
+
+    .faculty-deeper-content h3 {
+        font-size: 20px;
+
+        letter-spacing: -0.7px;
+    }
+
+
+    .faculty-deeper-content p {
+        margin-top: 5px;
+
+        font-size: 10px;
+
+        line-height: 1.4;
+    }
+
+
+    .faculty-deeper-arrow {
+        font-size: 23px;
+    }
+
+}
+

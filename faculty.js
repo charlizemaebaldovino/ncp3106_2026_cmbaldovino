@@ -1,1588 +1,1090 @@
 /* =========================================================
    FACULTY PAGE
+   UE COMPUTER ENGINEERING
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", () => {
 
 
-        /* =================================================
-           ELEMENTS
-        ================================================= */
+    /* =====================================================
+       01. ELEMENTS
+    ====================================================== */
 
-        const themeToggle =
-            document.getElementById(
-                "themeToggle"
-            );
+    const root =
+        document.documentElement;
 
-        const clock =
-            document.getElementById(
-                "clock"
-            );
+    const themeToggle =
+        document.getElementById("themeToggle");
 
-        const pageTransition =
-            document.getElementById(
-                "pageTransition"
-            );
+    const clock =
+        document.getElementById("clock");
 
-        const exploreFaculty =
-            document.getElementById(
-                "exploreFaculty"
-            );
+    const exploreFaculty =
+        document.getElementById("exploreFaculty");
+
+    const facultySection =
+        document.getElementById("faculty");
+
+    const pageTransition =
+        document.getElementById("pageTransition");
 
 
-        /* =================================================
-           PAGE ENTRANCE
-        ================================================= */
+    /* =====================================================
+       02. THEME
+    ====================================================== */
 
-        if (pageTransition) {
+    const savedTheme =
+        localStorage.getItem("cpe-theme") || "light";
 
-            pageTransition
-                .classList
-                .add(
-                    "entering"
+
+    root.dataset.theme =
+        savedTheme;
+
+
+    if (themeToggle) {
+
+        themeToggle.addEventListener(
+            "click",
+            () => {
+
+                const currentTheme =
+                    root.dataset.theme;
+
+                const newTheme =
+                    currentTheme === "dark"
+                        ? "light"
+                        : "dark";
+
+
+                root.dataset.theme =
+                    newTheme;
+
+
+                localStorage.setItem(
+                    "cpe-theme",
+                    newTheme
                 );
 
-
-            setTimeout(
-                function () {
-
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering"
-                        );
-
-                },
-                1050
-            );
-        }
-
-
-        setTimeout(
-            function () {
-
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
-                    );
-
-            },
-            180
-        );
-
-
-        /* =================================================
-           THEME
-        ================================================= */
-
-        const savedTheme =
-            localStorage.getItem(
-                "cpe-theme"
-            ) || "light";
-
-
-        document
-            .documentElement
-            .dataset
-            .theme =
-            savedTheme;
-
-
-        if (themeToggle) {
-
-            themeToggle.addEventListener(
-                "click",
-                function () {
-
-                    const current =
-                        document
-                            .documentElement
-                            .dataset
-                            .theme;
-
-
-                    const next =
-                        current === "dark"
-                            ? "light"
-                            : "dark";
-
-
-                    document
-                        .documentElement
-                        .dataset
-                        .theme =
-                        next;
-
-
-                    localStorage.setItem(
-                        "cpe-theme",
-                        next
-                    );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           MANILA CLOCK
-        ================================================= */
-
-        function updateClock() {
-
-            if (!clock) {
-                return;
             }
+        );
+
+    }
 
 
-            const formatter =
-                new Intl.DateTimeFormat(
-                    "en-PH",
-                    {
+    /* =====================================================
+       03. MANILA CLOCK
+    ====================================================== */
 
-                        timeZone:
-                            "Asia/Manila",
+    function updateClock() {
 
-                        hour:
-                            "2-digit",
-
-                        minute:
-                            "2-digit",
-
-                        second:
-                            "2-digit",
-
-                        hour12:
-                            false
-
-                    }
-                );
-
-
-            clock.textContent =
-                "MANILA " +
-                formatter.format(
-                    new Date()
-                );
+        if (!clock) {
+            return;
         }
 
 
-        updateClock();
+        const now =
+            new Date();
 
 
-        setInterval(
-            updateClock,
-            1000
+        const manilaTime =
+            new Intl.DateTimeFormat(
+                "en-GB",
+                {
+                    timeZone:
+                        "Asia/Manila",
+
+                    hour:
+                        "2-digit",
+
+                    minute:
+                        "2-digit",
+
+                    second:
+                        "2-digit",
+
+                    hour12:
+                        false
+                }
+            ).format(now);
+
+
+        clock.textContent =
+            `MANILA ${manilaTime}`;
+
+    }
+
+
+    updateClock();
+
+
+    setInterval(
+        updateClock,
+        1000
+    );
+
+
+    /* =====================================================
+       04. EXPLORE FACULTY BUTTON
+    ====================================================== */
+
+    if (
+        exploreFaculty &&
+        facultySection
+    ) {
+
+        exploreFaculty.addEventListener(
+            "click",
+            () => {
+
+                facultySection.scrollIntoView({
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "start"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       05. SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
         );
 
 
-        /* =================================================
-           EXPLORE FACULTY
-        ================================================= */
+    const revealObserver =
+        new IntersectionObserver(
 
-        if (exploreFaculty) {
+            (entries, observer) => {
 
-            exploreFaculty.addEventListener(
-                "click",
-                function () {
+                entries.forEach(
+                    (entry) => {
 
-                    const faculty =
-                        document.getElementById(
-                            "faculty"
-                        );
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-
-                    if (faculty) {
-
-                        faculty.scrollIntoView(
-                            {
-                                behavior:
-                                    "smooth"
-                            }
-                        );
-                    }
-
-                }
-            );
-        }
+                            entry.target.classList.add(
+                                "visible"
+                            );
 
 
-        /* =================================================
-           SCROLL REVEAL
-        ================================================= */
+                            observer.unobserve(
+                                entry.target
+                            );
 
-        const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
-
-
-        if (
-            "IntersectionObserver"
-            in window
-        ) {
-
-            const revealObserver =
-                new IntersectionObserver(
-
-                    function (entries) {
-
-                        entries.forEach(
-                            function (entry) {
-
-                                if (
-                                    entry.isIntersecting
-                                ) {
-
-                                    entry
-                                        .target
-                                        .classList
-                                        .add(
-                                            "visible"
-                                        );
-
-
-                                    revealObserver
-                                        .unobserve(
-                                            entry.target
-                                        );
-                                }
-
-                            }
-                        );
-
-                    },
-
-                    {
-
-                        threshold:
-                            .1,
-
-                        rootMargin:
-                            "0px 0px -40px 0px"
+                        }
 
                     }
-
                 );
-
-
-            revealElements.forEach(
-                function (element) {
-
-                    revealObserver.observe(
-                        element
-                    );
-
-                }
-            );
-
-        } else {
-
-            revealElements.forEach(
-                function (element) {
-
-                    element
-                        .classList
-                        .add(
-                            "visible"
-                        );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           FACULTY DATA
-        ================================================= */
-
-        const facultyProfiles = [
-
-            {
-
-                id:
-                    "antonio",
-
-                number:
-                    "FACULTY / 01",
-
-                name:
-                    "ENGR. ERROL JOHN M. ANTONIO",
-
-                role:
-                    "COMPUTER ENGINEERING FACULTY",
-
-                image:
-                    "assets/faculty-errol-antonio.jpg",
-
-                specializations: [
-
-                    "Embedded Systems",
-
-                    "Internet of Things",
-
-                    "Microcontrollers",
-
-                    "Sensors",
-
-                    "Hardware–Software Integration"
-
-                ],
-
-                courses: [
-
-                    "Embedded Systems",
-
-                    "Internet of Things",
-
-                    "Microcontroller Applications",
-
-                    "Sensor-Based Systems",
-
-                    "Hardware and Software Integration"
-
-                ],
-
-                description:
-                    "Focuses on embedded and Internet of Things technologies, particularly the integration of hardware, microcontrollers, sensors, software, and connected systems."
 
             },
 
-
             {
-
-                id:
-                    "limkian",
-
-                number:
-                    "FACULTY / 02",
-
-                name:
-                    "ENGR. MARYANN LIMKIAN",
-
-                role:
-                    "COMPUTER ENGINEERING FACULTY",
-
-                image:
-                    "assets/faculty-maryann-limkian.jpg",
-
-                specializations: [
-
-                    "Computer Networking",
-
-                    "Logic Circuits",
-
-                    "Data Communications",
-
-                    "Digital Systems"
-
-                ],
-
-                courses: [
-
-                    "Computer Networking",
-
-                    "Data Communications",
-
-                    "Logic Circuits",
-
-                    "Digital Systems",
-
-                    "Network Technologies"
-
-                ],
-
-                description:
-                    "Focuses on networking and digital systems, including computer communication, data transmission, network technologies, and the application of logic circuits in computing systems."
-
-            },
-
-
-            {
-
-                id:
-                    "coral",
-
-                number:
-                    "FACULTY / 03",
-
-                name:
-                    "ENGR. JOHN JOEMHEL D. CORAL",
-
-                role:
-                    "COMPUTER ENGINEERING FACULTY",
-
-                image:
-                    "assets/faculty-john-coral.jpg",
-
-                specializations: [
-
-                    "Engineering Mathematics",
-
-                    "Engineering Data Analysis",
-
-                    "Discrete Mathematics",
-
-                    "Software Design"
-
-                ],
-
-                courses: [
-
-                    "Engineering Data Analysis",
-
-                    "Discrete Mathematics",
-
-                    "Software Design",
-
-                    "Mathematical Methods",
-
-                    "Analytical Problem Solving"
-
-                ],
-
-                description:
-                    "Focuses on the mathematical and analytical side of Computer Engineering, particularly engineering data analysis, discrete mathematics, software design, and analytical problem-solving."
-
-            },
-
-
-            {
-
-                id:
-                    "corpuz",
-
-                number:
-                    "FACULTY / 04",
-
-                name:
-                    "ENGR. ONOFRE CORPUZ",
-
-                role:
-                    "COMPUTER ENGINEERING FACULTY",
-
-                image:
-                    "assets/faculty-onofre-corpuz.jpg",
-
-                specializations: [
-
-                    "Electronics",
-
-                    "Mixed-Signal Systems",
-
-                    "Sensors",
-
-                    "Electronic Circuits"
-
-                ],
-
-                courses: [
-
-                    "Electronics",
-
-                    "Mixed-Signal Systems",
-
-                    "Sensor Technologies",
-
-                    "Electronic Circuits",
-
-                    "Electronic System Applications"
-
-                ],
-
-                description:
-                    "Focuses on electronics and sensor-based technologies, including electronic circuits and mixed-signal systems that combine analog and digital components."
-
+                threshold:
+                    0.12,
+
+                rootMargin:
+                    "0px 0px -60px 0px"
             }
 
-        ];
-
-
-        /* =================================================
-           PROFILE VIEWER ELEMENTS
-        ================================================= */
-
-        const profileViewer =
-            document.getElementById(
-                "profileViewer"
-            );
-
-
-        const profileBackdrop =
-            document.getElementById(
-                "profileBackdrop"
-            );
-
-
-        const profileClose =
-            document.getElementById(
-                "profileClose"
-            );
-
-
-        const profileImage =
-            document.getElementById(
-                "profileImage"
-            );
-
-
-        const profileNumber =
-            document.getElementById(
-                "profileNumber"
-            );
-
-
-        const profileRole =
-            document.getElementById(
-                "profileRole"
-            );
-
-
-        const profileName =
-            document.getElementById(
-                "profileName"
-            );
-
-
-        const profileSpecializations =
-            document.getElementById(
-                "profileSpecializations"
-            );
-
-
-        const profileCourses =
-            document.getElementById(
-                "profileCourses"
-            );
-
-
-        const profileDescription =
-            document.getElementById(
-                "profileDescription"
-            );
-
-
-        const profileCounter =
-            document.getElementById(
-                "profileCounter"
-            );
-
-
-        const profilePrev =
-            document.getElementById(
-                "profilePrev"
-            );
-
-
-        const profileNext =
-            document.getElementById(
-                "profileNext"
-            );
-
-
-        let activeProfileIndex =
-            0;
-
-
-        /* =================================================
-           FIND PROFILE
-        ================================================= */
-
-        function findProfileIndex(
-            profileId
-        ) {
-
-            return facultyProfiles
-                .findIndex(
-                    function (profile) {
-
-                        return (
-                            profile.id ===
-                            profileId
-                        );
-
-                    }
-                );
-        }
-
-
-        /* =================================================
-           UPDATE PROFILE VIEWER
-        ================================================= */
-
-        function updateProfile() {
-
-            const profile =
-                facultyProfiles[
-                    activeProfileIndex
-                ];
-
-
-            if (!profile) {
-                return;
-            }
-
-
-            /* IMAGE */
-
-            if (profileImage) {
-
-                profileImage
-                    .classList
-                    .add(
-                        "changing"
-                    );
-
-
-                setTimeout(
-                    function () {
-
-                        profileImage.src =
-                            profile.image;
-
-
-                        profileImage.alt =
-                            profile.name;
-
-
-                        profileImage
-                            .classList
-                            .remove(
-                                "changing"
-                            );
-
-                    },
-                    180
-                );
-            }
-
-
-            /* NUMBER */
-
-            if (profileNumber) {
-
-                profileNumber.textContent =
-                    profile.number;
-            }
-
-
-            /* ROLE */
-
-            if (profileRole) {
-
-                profileRole.textContent =
-                    profile.role;
-            }
-
-
-            /* NAME */
-
-            if (profileName) {
-
-                profileName.textContent =
-                    profile.name;
-            }
-
-
-            /* SPECIALIZATIONS */
-
-            if (
-                profileSpecializations
-            ) {
-
-                profileSpecializations
-                    .innerHTML =
-                    "";
-
-
-                profile
-                    .specializations
-                    .forEach(
-                        function (item) {
-
-                            const tag =
-                                document
-                                    .createElement(
-                                        "span"
-                                    );
-
-
-                            tag.className =
-                                "profile-tag";
-
-
-                            tag.textContent =
-                                item;
-
-
-                            profileSpecializations
-                                .appendChild(
-                                    tag
-                                );
-
-                        }
-                    );
-            }
-
-
-            /* COURSES */
-
-            if (profileCourses) {
-
-                profileCourses.innerHTML =
-                    "";
-
-
-                profile
-                    .courses
-                    .forEach(
-                        function (course) {
-
-                            const li =
-                                document
-                                    .createElement(
-                                        "li"
-                                    );
-
-
-                            li.textContent =
-                                course;
-
-
-                            profileCourses
-                                .appendChild(
-                                    li
-                                );
-
-                        }
-                    );
-            }
-
-
-            /* DESCRIPTION */
-
-            if (profileDescription) {
-
-                profileDescription
-                    .textContent =
-                    profile.description;
-            }
-
-
-            /* COUNTER */
-
-            if (profileCounter) {
-
-                const current =
-                    String(
-                        activeProfileIndex +
-                        1
-                    )
-                        .padStart(
-                            2,
-                            "0"
-                        );
-
-
-                const total =
-                    String(
-                        facultyProfiles.length
-                    )
-                        .padStart(
-                            2,
-                            "0"
-                        );
-
-
-                profileCounter
-                    .textContent =
-                    current +
-                    " / " +
-                    total;
-            }
-        }
-
-
-        /* =================================================
-           OPEN PROFILE
-        ================================================= */
-
-        function openProfile(
-            profileId
-        ) {
-
-            const index =
-                findProfileIndex(
-                    profileId
-                );
-
-
-            if (index < 0) {
-                return;
-            }
-
-
-            activeProfileIndex =
-                index;
-
-
-            updateProfile();
-
-
-            if (!profileViewer) {
-                return;
-            }
-
-
-            profileViewer
-                .classList
-                .add(
-                    "open"
-                );
-
-
-            profileViewer
-                .setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-
-            document.body
-                .classList
-                .add(
-                    "profile-open"
-                );
-        }
-
-
-        /* =================================================
-           CLOSE PROFILE
-        ================================================= */
-
-        function closeProfile() {
-
-            if (!profileViewer) {
-                return;
-            }
-
-
-            profileViewer
-                .classList
-                .remove(
-                    "open"
-                );
-
-
-            profileViewer
-                .setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-
-            document.body
-                .classList
-                .remove(
-                    "profile-open"
-                );
-        }
-
-
-        /* =================================================
-           NEXT PROFILE
-        ================================================= */
-
-        function nextProfile() {
-
-            activeProfileIndex =
-                (
-                    activeProfileIndex +
-                    1
-                ) %
-                facultyProfiles.length;
-
-
-            updateProfile();
-        }
-
-
-        /* =================================================
-           PREVIOUS PROFILE
-        ================================================= */
-
-        function previousProfile() {
-
-            activeProfileIndex =
-                (
-                    activeProfileIndex -
-                    1 +
-                    facultyProfiles.length
-                ) %
-                facultyProfiles.length;
-
-
-            updateProfile();
-        }
-
-
-        /* =================================================
-           PROFILE BUTTONS
-        ================================================= */
-
-        const profileButtons =
-            document.querySelectorAll(
-                ".profile-button"
-            );
-
-
-        profileButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function (event) {
-
-                        event.stopPropagation();
-
-
-                        const profileId =
-                            button
-                                .dataset
-                                .profile;
-
-
-                        openProfile(
-                            profileId
-                        );
-
-                    }
-                );
-
-            }
         );
 
 
-        /* =================================================
-           PROFILE CONTROLS
-        ================================================= */
+    revealElements.forEach(
+        (element) => {
 
-        if (profileClose) {
+            revealObserver.observe(
+                element
+            );
 
-            profileClose
-                .addEventListener(
-                    "click",
-                    closeProfile
-                );
+        }
+    );
+
+
+    /* =====================================================
+       06. FACULTY INFORMATION
+    ====================================================== */
+
+    const facultyProfiles = {
+
+        antonio: {
+
+            number:
+                "FACULTY / 01",
+
+            counter:
+                "01 / 04",
+
+            name:
+                "ENGR. ERROL JOHN M. ANTONIO",
+
+            role:
+                "DEPARTMENT CHAIRPERSON",
+
+            image:
+                "assets/sirej.jpg",
+
+            specializations: [
+                "Embedded Systems",
+                "Internet of Things"
+            ],
+
+            courses: [
+                "Embedded Systems",
+                "Internet of Things",
+                "Computer Engineering Applications"
+            ],
+
+            description:
+                "Focuses on embedded systems and Internet of Things technologies, including the integration of computing hardware, software, sensors, and connected devices."
+
+        },
+
+
+        limkian: {
+
+            number:
+                "FACULTY / 02",
+
+            counter:
+                "02 / 04",
+
+            name:
+                "ENGR. MARYANN LIMKIAN",
+
+            role:
+                "COMPUTER ENGINEERING FACULTY",
+
+            image:
+                "assets/mamlim.JPG",
+
+            specializations: [
+                "Computer Networks",
+                "Logic Circuits",
+                "Data Communication"
+            ],
+
+            courses: [
+                "Computer Networks",
+                "Logic Circuits",
+                "Data Communication"
+            ],
+
+            description:
+                "Focuses on computer networking, logic circuits, and data communication technologies that allow computing systems and devices to communicate effectively."
+
+        },
+
+
+        coral: {
+
+            number:
+                "FACULTY / 03",
+
+            counter:
+                "03 / 04",
+
+            name:
+                "ENGR. JOHN JOEMHEL D. CORAL",
+
+            role:
+                "COMPUTER ENGINEERING FACULTY",
+
+            image:
+                "assets/sircoral.JPG",
+
+            specializations: [
+                "Engineering Mathematics",
+                "Engineering Data Analysis",
+                "Software Design",
+                "Discrete Mathematics"
+            ],
+
+            courses: [
+                "Engineering Data Analysis",
+                "Software Design",
+                "Discrete Mathematics",
+                "Engineering Mathematics"
+            ],
+
+            description:
+                "Focuses on the mathematical and analytical side of Computer Engineering, including engineering data analysis, software design, and discrete mathematics."
+
+        },
+
+
+        corpuz: {
+
+            number:
+                "FACULTY / 04",
+
+            counter:
+                "04 / 04",
+
+            name:
+                "ENGR. ONOFRE CORPUZ",
+
+            role:
+                "COMPUTER ENGINEERING FACULTY",
+
+            image:
+                "assets/faculty-onofre-corpuz.jpg",
+
+            specializations: [
+                "Electronics",
+                "Mixed Signals",
+                "Sensors"
+            ],
+
+            courses: [
+                "Electronics",
+                "Mixed-Signal Systems",
+                "Sensors",
+                "Computer Engineering Hardware"
+            ],
+
+            description:
+                "Focuses on electronics, mixed-signal systems, and sensor technologies used to detect, measure, and process information in computer engineering applications."
+
         }
 
-
-        if (profileBackdrop) {
-
-            profileBackdrop
-                .addEventListener(
-                    "click",
-                    closeProfile
-                );
-        }
+    };
 
 
-        if (profileNext) {
+    /* =====================================================
+       07. PROFILE ORDER
+    ====================================================== */
 
-            profileNext
-                .addEventListener(
-                    "click",
-                    nextProfile
-                );
-        }
-
-
-        if (profilePrev) {
-
-            profilePrev
-                .addEventListener(
-                    "click",
-                    previousProfile
-                );
-        }
+    const profileOrder = [
+        "antonio",
+        "limkian",
+        "coral",
+        "corpuz"
+    ];
 
 
-        /* =================================================
-           KEYBOARD PROFILE CONTROLS
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    !profileViewer ||
-                    !profileViewer
-                        .classList
-                        .contains(
-                            "open"
-                        )
-                ) {
-
-                    return;
-                }
+    let activeProfileIndex =
+        0;
 
 
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
+    /* =====================================================
+       08. PROFILE ELEMENTS
+    ====================================================== */
 
-                    closeProfile();
-                }
+    const profileViewer =
+        document.getElementById(
+            "profileViewer"
+        );
 
+    const profileBackdrop =
+        document.getElementById(
+            "profileBackdrop"
+        );
 
-                if (
-                    event.key ===
-                    "ArrowRight"
-                ) {
+    const profileClose =
+        document.getElementById(
+            "profileClose"
+        );
 
-                    nextProfile();
-                }
+    const profileNumber =
+        document.getElementById(
+            "profileNumber"
+        );
 
+    const profileImage =
+        document.getElementById(
+            "profileImage"
+        );
 
-                if (
-                    event.key ===
-                    "ArrowLeft"
-                ) {
+    const profileRole =
+        document.getElementById(
+            "profileRole"
+        );
 
-                    previousProfile();
-                }
+    const profileName =
+        document.getElementById(
+            "profileName"
+        );
 
-            }
+    const profileSpecializations =
+        document.getElementById(
+            "profileSpecializations"
+        );
+
+    const profileCourses =
+        document.getElementById(
+            "profileCourses"
+        );
+
+    const profileDescription =
+        document.getElementById(
+            "profileDescription"
+        );
+
+    const profileCounter =
+        document.getElementById(
+            "profileCounter"
+        );
+
+    const profilePrev =
+        document.getElementById(
+            "profilePrev"
+        );
+
+    const profileNext =
+        document.getElementById(
+            "profileNext"
         );
 
 
-        /* =================================================
-           MOBILE PROFILE SWIPE
-        ================================================= */
+    /* =====================================================
+       09. RENDER PROFILE
+    ====================================================== */
 
-        let touchStartX =
-            0;
+    function renderProfile(
+        profileKey
+    ) {
 
-
-        let touchEndX =
-            0;
-
-
-        if (profileViewer) {
-
-            profileViewer
-                .addEventListener(
-                    "touchstart",
-                    function (event) {
-
-                        touchStartX =
-                            event
-                                .changedTouches[0]
-                                .screenX;
-
-                    },
-                    {
-                        passive: true
-                    }
-                );
+        const profile =
+            facultyProfiles[
+                profileKey
+            ];
 
 
-            profileViewer
-                .addEventListener(
-                    "touchend",
-                    function (event) {
-
-                        touchEndX =
-                            event
-                                .changedTouches[0]
-                                .screenX;
-
-
-                        const distance =
-                            touchEndX -
-                            touchStartX;
-
-
-                        if (
-                            Math.abs(
-                                distance
-                            ) < 60
-                        ) {
-
-                            return;
-                        }
-
-
-                        if (
-                            distance < 0
-                        ) {
-
-                            nextProfile();
-
-                        } else {
-
-                            previousProfile();
-
-                        }
-
-                    },
-                    {
-                        passive: true
-                    }
-                );
+        if (!profile) {
+            return;
         }
 
 
-        /* =================================================
-           FACULTY CARD TOUCH EFFECT
-        ================================================= */
-
-        const facultyCards =
-            document.querySelectorAll(
-                ".faculty-card"
+        activeProfileIndex =
+            profileOrder.indexOf(
+                profileKey
             );
 
 
-        facultyCards.forEach(
-            function (card) {
+        if (profileNumber) {
 
-                card.addEventListener(
-                    "touchstart",
-                    function () {
+            profileNumber.textContent =
+                profile.number;
 
-                        facultyCards
-                            .forEach(
-                                function (
-                                    otherCard
-                                ) {
-
-                                    if (
-                                        otherCard !==
-                                        card
-                                    ) {
-
-                                        otherCard
-                                            .classList
-                                            .remove(
-                                                "touch-active"
-                                            );
-                                    }
-
-                                }
-                            );
+        }
 
 
-                        card
-                            .classList
-                            .toggle(
-                                "touch-active"
-                            );
+        if (profileImage) {
 
-                    },
-                    {
-                        passive: true
-                    }
-                );
+            profileImage.src =
+                profile.image;
 
-            }
-        );
+            profileImage.alt =
+                profile.name;
+
+        }
 
 
-        /* =================================================
-           PAGE TRANSITIONS
+        if (profileRole) {
+
+            profileRole.textContent =
+                profile.role;
+
+        }
+
+
+        if (profileName) {
+
+            profileName.textContent =
+                profile.name;
+
+        }
+
+
+        if (profileCounter) {
+
+            profileCounter.textContent =
+                profile.counter;
+
+        }
+
+
+        /* ================================================
+           SPECIALIZATIONS
         ================================================= */
 
-        const pageLinks =
-            document.querySelectorAll(
-                ".page-link"
-            );
+        if (profileSpecializations) {
+
+            profileSpecializations.innerHTML =
+                "";
 
 
-        pageLinks.forEach(
-            function (link) {
+            profile.specializations.forEach(
+                (specialization) => {
 
-                link.addEventListener(
-                    "click",
-                    function (event) {
-
-                        const href =
-                            link.getAttribute(
-                                "href"
-                            );
-
-
-                        if (
-                            !href ||
-                            href.startsWith(
-                                "#"
-                            )
-                        ) {
-
-                            return;
-                        }
-
-
-                        if (
-                            event.ctrlKey ||
-                            event.metaKey ||
-                            event.shiftKey ||
-                            event.altKey
-                        ) {
-
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        if (
-                            !pageTransition
-                        ) {
-
-                            window.location.href =
-                                href;
-
-                            return;
-                        }
-
-
-                        pageTransition
-                            .classList
-                            .remove(
-                                "entering"
-                            );
-
-
-                        pageTransition
-                            .classList
-                            .add(
-                                "leaving"
-                            );
-
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    href;
-
-                            },
-                            700
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =================================================
-           CURSOR TRAIL
-        ================================================= */
-
-        const finePointer =
-            window.matchMedia(
-                "(pointer: fine)"
-            ).matches;
-
-
-        const reducedMotion =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
-
-
-        if (
-            finePointer &&
-            !reducedMotion
-        ) {
-
-            const circleCount =
-                12;
-
-
-            const circles =
-                [];
-
-
-            let mouseX =
-                -100;
-
-
-            let mouseY =
-                -100;
-
-
-            let mouseActive =
-                false;
-
-
-            for (
-                let i = 0;
-                i < circleCount;
-                i++
-            ) {
-
-                const circle =
-                    document
-                        .createElement(
+                    const tag =
+                        document.createElement(
                             "span"
                         );
 
 
-                circle.className =
-                    "cursor-trail-circle";
+                    tag.textContent =
+                        specialization;
 
 
-                const size =
-                    Math.max(
-                        3,
-                        12 -
-                        i * .65
+                    profileSpecializations.appendChild(
+                        tag
                     );
 
-
-                circle.style.width =
-                    size + "px";
-
-
-                circle.style.height =
-                    size + "px";
-
-
-                document.body
-                    .appendChild(
-                        circle
-                    );
-
-
-                circles.push(
-                    {
-
-                        element:
-                            circle,
-
-                        x:
-                            mouseX,
-
-                        y:
-                            mouseY
-
-                    }
-                );
-
-            }
-
-
-            document.addEventListener(
-                "mousemove",
-                function (event) {
-
-                    mouseX =
-                        event.clientX;
-
-
-                    mouseY =
-                        event.clientY;
-
-
-                    mouseActive =
-                        true;
-
                 }
             );
-
-
-            document.addEventListener(
-                "mouseleave",
-                function () {
-
-                    mouseActive =
-                        false;
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mouseenter",
-                function () {
-
-                    mouseActive =
-                        true;
-
-                }
-            );
-
-
-            function animateTrail() {
-
-                let x =
-                    mouseX;
-
-
-                let y =
-                    mouseY;
-
-
-                circles.forEach(
-                    function (
-                        circle,
-                        index
-                    ) {
-
-                        circle.x +=
-                            (
-                                x -
-                                circle.x
-                            ) *
-                            .30;
-
-
-                        circle.y +=
-                            (
-                                y -
-                                circle.y
-                            ) *
-                            .30;
-
-
-                        const size =
-                            Math.max(
-                                3,
-                                12 -
-                                index * .65
-                            );
-
-
-                        const opacity =
-                            mouseActive
-
-                                ? Math.max(
-                                    .05,
-                                    .46 -
-                                    index *
-                                    .035
-                                )
-
-                                : 0;
-
-
-                        circle
-                            .element
-                            .style
-                            .opacity =
-                            opacity;
-
-
-                        circle
-                            .element
-                            .style
-                            .transform =
-
-                            "translate3d(" +
-
-                            (
-                                circle.x -
-                                size / 2
-                            ) +
-
-                            "px," +
-
-                            (
-                                circle.y -
-                                size / 2
-                            ) +
-
-                            "px,0)";
-
-
-                        x =
-                            circle.x;
-
-
-                        y =
-                            circle.y;
-
-                    }
-                );
-
-
-                requestAnimationFrame(
-                    animateTrail
-                );
-
-            }
-
-
-            animateTrail();
 
         }
 
 
-        /* =================================================
-           BACK BUTTON FIX
+        /* ================================================
+           COURSES
         ================================================= */
 
-        window.addEventListener(
-            "pageshow",
-            function () {
+        if (profileCourses) {
 
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
+            profileCourses.innerHTML =
+                "";
+
+
+            profile.courses.forEach(
+                (course) => {
+
+                    const item =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    item.textContent =
+                        course;
+
+
+                    profileCourses.appendChild(
+                        item
                     );
+
+                }
+            );
+
+        }
+
+
+        /* ================================================
+           DESCRIPTION
+        ================================================= */
+
+        if (profileDescription) {
+
+            profileDescription.textContent =
+                profile.description;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       10. OPEN PROFILE
+    ====================================================== */
+
+    function openProfile(
+        profileKey
+    ) {
+
+        if (!profileViewer) {
+            return;
+        }
+
+
+        renderProfile(
+            profileKey
+        );
+
+
+        profileViewer.classList.add(
+            "active"
+        );
+
+
+        profileViewer.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "profile-open"
+        );
+
+    }
+
+
+    /* =====================================================
+       11. CLOSE PROFILE
+    ====================================================== */
+
+    function closeProfile() {
+
+        if (!profileViewer) {
+            return;
+        }
+
+
+        profileViewer.classList.remove(
+            "active"
+        );
+
+
+        profileViewer.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.classList.remove(
+            "profile-open"
+        );
+
+    }
+
+
+    /* =====================================================
+       12. PROFILE BUTTONS
+    ====================================================== */
+
+    const profileButtons =
+        document.querySelectorAll(
+            "[data-profile-button]"
+        );
+
+
+    profileButtons.forEach(
+        (button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const profileKey =
+                        button.dataset
+                            .profileButton;
+
+
+                    openProfile(
+                        profileKey
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       13. CLICKING FACULTY IMAGE/CARD
+    ====================================================== */
+
+    const facultyCards =
+        document.querySelectorAll(
+            ".faculty-card[data-profile]"
+        );
+
+
+    facultyCards.forEach(
+        (card) => {
+
+            const photo =
+                card.querySelector(
+                    ".faculty-photo"
+                );
+
+
+            if (!photo) {
+                return;
+            }
+
+
+            photo.addEventListener(
+                "click",
+                () => {
+
+                    const profileKey =
+                        card.dataset.profile;
+
+
+                    openProfile(
+                        profileKey
+                    );
+
+                }
+            );
+
+
+            photo.style.cursor =
+                "pointer";
+
+        }
+    );
+
+
+    /* =====================================================
+       14. CLOSE EVENTS
+    ====================================================== */
+
+    if (profileClose) {
+
+        profileClose.addEventListener(
+            "click",
+            closeProfile
+        );
+
+    }
+
+
+    if (profileBackdrop) {
+
+        profileBackdrop.addEventListener(
+            "click",
+            closeProfile
+        );
+
+    }
+
+
+    /* =====================================================
+       15. PREVIOUS PROFILE
+    ====================================================== */
+
+    if (profilePrev) {
+
+        profilePrev.addEventListener(
+            "click",
+            () => {
+
+                activeProfileIndex--;
 
 
                 if (
-                    pageTransition
+                    activeProfileIndex < 0
                 ) {
 
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering",
-                            "leaving"
-                        );
+                    activeProfileIndex =
+                        profileOrder.length - 1;
 
                 }
 
 
-                revealElements
-                    .forEach(
-                        function (
-                            element
-                        ) {
-
-                            if (
-                                element
-                                    .getBoundingClientRect()
-                                    .top <
-                                window.innerHeight
-                            ) {
-
-                                element
-                                    .classList
-                                    .add(
-                                        "visible"
-                                    );
-
-                            }
-
-                        }
-                    );
+                renderProfile(
+                    profileOrder[
+                        activeProfileIndex
+                    ]
+                );
 
             }
         );
 
+    }
+
+
+    /* =====================================================
+       16. NEXT PROFILE
+    ====================================================== */
+
+    if (profileNext) {
+
+        profileNext.addEventListener(
+            "click",
+            () => {
+
+                activeProfileIndex++;
+
+
+                if (
+                    activeProfileIndex >=
+                    profileOrder.length
+                ) {
+
+                    activeProfileIndex =
+                        0;
+
+                }
+
+
+                renderProfile(
+                    profileOrder[
+                        activeProfileIndex
+                    ]
+                );
+
+            }
+        );
 
     }
-);
+
+
+    /* =====================================================
+       17. KEYBOARD CONTROLS
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                !profileViewer ||
+                !profileViewer.classList.contains(
+                    "active"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            /* ESCAPE */
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeProfile();
+
+            }
+
+
+            /* LEFT */
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                activeProfileIndex--;
+
+
+                if (
+                    activeProfileIndex < 0
+                ) {
+
+                    activeProfileIndex =
+                        profileOrder.length - 1;
+
+                }
+
+
+                renderProfile(
+                    profileOrder[
+                        activeProfileIndex
+                    ]
+                );
+
+            }
+
+
+            /* RIGHT */
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                activeProfileIndex++;
+
+
+                if (
+                    activeProfileIndex >=
+                    profileOrder.length
+                ) {
+
+                    activeProfileIndex =
+                        0;
+
+                }
+
+
+                renderProfile(
+                    profileOrder[
+                        activeProfileIndex
+                    ]
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       18. PAGE TRANSITIONS
+    ====================================================== */
+
+    const pageLinks =
+        document.querySelectorAll(
+            "a.page-link"
+        );
+
+
+    pageLinks.forEach(
+        (link) => {
+
+            link.addEventListener(
+                "click",
+                (event) => {
+
+                    const destination =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    /* ========================================
+                       IGNORE EMPTY LINKS
+                    ========================================= */
+
+                    if (
+                        !destination ||
+                        destination === "#" ||
+                        destination.startsWith(
+                            "javascript:"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /* ========================================
+                       IGNORE NEW TAB LINKS
+                    ========================================= */
+
+                    if (
+                        link.target ===
+                        "_blank"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /* ========================================
+                       SAME PAGE HASH
+                    ========================================= */
+
+                    if (
+                        destination.startsWith(
+                            "#"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    if (pageTransition) {
+
+                        pageTransition.classList.add(
+                            "active"
+                        );
+
+                    }
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                destination;
+
+                        },
+                        620
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       19. RESET TRANSITION WHEN RETURNING WITH BACK BUTTON
+    ====================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        () => {
+
+            if (pageTransition) {
+
+                pageTransition.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       20. IMAGE LOADING
+    ====================================================== */
+
+    const facultyImages =
+        document.querySelectorAll(
+            ".faculty-photo img"
+        );
+
+
+    facultyImages.forEach(
+        (image) => {
+
+            if (
+                image.complete
+            ) {
+
+                image.classList.add(
+                    "loaded"
+                );
+
+                return;
+
+            }
+
+
+            image.addEventListener(
+                "load",
+                () => {
+
+                    image.classList.add(
+                        "loaded"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+});
