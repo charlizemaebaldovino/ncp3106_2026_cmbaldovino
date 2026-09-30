@@ -1546,11 +1546,40 @@ html[data-theme="dark"]
 
 .cpe-logo-stage {
     position: absolute;
-    right: 70px;
-    bottom: 45px;
-    width: 180px;
+
+    right:
+        clamp(
+            55px,
+            6vw,
+            100px
+        );
+
+    bottom:
+        clamp(
+            55px,
+            5vw,
+            85px
+        );
+
+    width:
+        clamp(
+            105px,
+            10vw,
+            155px
+        );
+
     z-index: 10;
+
     pointer-events: none;
+}
+
+.hero-cpe-logo {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
 }
 
 .hero-cpe-logo {
@@ -10324,4 +10353,1841 @@ body.light-mode
 
     }
 
+}/* =========================================================
+   SCPES HERO
+   USES THE EXISTING SITE BACKGROUND
+========================================================= */
+
+.scpes-feature {
+    width: 100%;
+
+    padding:
+        clamp(22px, 3vw, 38px)
+        0
+        clamp(28px, 4vw, 50px);
 }
+
+
+.scpes-feature-inner {
+    width: min(86%, 1280px);
+
+    margin:
+        0
+        auto;
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.scpes-feature-photo {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio:
+        16 / 9;
+
+    overflow: hidden;
+
+    border-radius:
+        clamp(32px, 4vw, 58px);
+}
+
+
+.scpes-feature-image {
+    position: absolute;
+
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 0;
+
+    opacity: 1;
+    filter: none;
+}
+
+
+/* REMOVE ANY OLD HERO OVERLAY */
+
+.scpes-feature-photo::before,
+.scpes-feature-photo::after {
+    display: none;
+}
+
+
+/* =========================================================
+   SCPES LOGO
+========================================================= */
+
+.scpes-feature-badge {
+    position: absolute;
+
+    z-index: 5;
+
+    left: 2%;
+    bottom: 35%;
+
+    width:
+        clamp(68px, 7vw, 105px);
+
+    height: auto;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 0;
+
+    overflow: visible;
+}
+
+
+.scpes-feature-badge img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+
+    opacity: 1;
+    filter: none;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.scpes-feature-title {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 2%;
+    bottom: 7%;
+
+    width: 70%;
+    max-width: 800px;
+}
+
+
+.scpes-feature-title h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(34px, 4vw, 64px);
+
+    font-weight: 900;
+
+    line-height: 0.91;
+
+    letter-spacing: -0.045em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .scpes-feature-inner {
+        width:
+            calc(100% - 40px);
+    }
+
+
+    .scpes-feature-photo {
+        aspect-ratio:
+            16 / 10;
+
+        border-radius:
+            36px;
+    }
+
+
+    .scpes-feature-badge {
+        left: 24px;
+        bottom: 37%;
+
+        width: 72px;
+    }
+
+
+    .scpes-feature-title {
+        left: 24px;
+        bottom: 7%;
+
+        width: 80%;
+    }
+
+
+    .scpes-feature-title h1 {
+        font-size:
+            clamp(31px, 6vw, 50px);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .scpes-feature {
+        padding:
+            16px
+            0
+            28px;
+    }
+
+
+    .scpes-feature-inner {
+        width:
+            calc(100% - 24px);
+    }
+
+
+    .scpes-feature-photo {
+        aspect-ratio:
+            4 / 5;
+
+        border-radius:
+            28px;
+    }
+
+
+    .scpes-feature-badge {
+        left: 18px;
+        bottom: 32%;
+
+        width: 62px;
+    }
+
+.scpes-feature-title {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 2%;
+    bottom: 6%;
+
+    width: 82%;
+    max-width: 1000px;
+}
+
+.scpes-feature-title h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(48px, 5.3vw, 82px);
+
+    font-weight: 900;
+
+    line-height: 0.88;
+
+    letter-spacing: -0.055em;
+
+    text-transform: uppercase;
+}
+/* =========================================================
+   FORCE SCPES HERO TITLE SIZE
+   FINAL OVERRIDE
+========================================================= */
+
+body .scpes-feature
+.scpes-feature-photo
+.scpes-feature-title h1 {
+    font-size: clamp(60px, 6vw, 96px) !important;
+    line-height: 0.84 !important;
+    letter-spacing: -0.065em !important;
+    font-weight: 900 !important;
+
+    margin: 0 !important;
+
+    color: #ffffff !important;
+}
+
+
+body .scpes-feature
+.scpes-feature-title {
+    left: 2% !important;
+    bottom: 6% !important;
+
+    width: 90% !important;
+    max-width: none !important;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    body .scpes-feature
+    .scpes-feature-photo
+    .scpes-feature-title h1 {
+        font-size: clamp(48px, 7vw, 70px) !important;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 560px) {
+
+    body .scpes-feature
+    .scpes-feature-photo
+    .scpes-feature-title h1 {
+        font-size: clamp(38px, 10vw, 54px) !important;
+    }
+
+}
+}
+/* =========================================================
+   SCPES HERO — BALANCED FINAL SIZE
+========================================================= */
+/* =========================================================
+   GRADIENT
+========================================================= */
+
+body .scpes-feature .scpes-feature-photo::after {
+    content: "";
+
+    display: block !important;
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2, 18, 55, 0.78) 0%,
+            rgba(2, 18, 55, 0.48) 23%,
+            rgba(2, 18, 55, 0.15) 47%,
+            rgba(2, 18, 55, 0) 68%
+        );
+}
+/* LOGO */
+
+body .scpes-feature .scpes-feature-badge {
+    width: clamp(95px, 7.5vw, 125px) !important;
+    height: clamp(95px, 7.5vw, 125px) !important;
+
+    left: 2.5% !important;
+    bottom: 36% !important;
+}
+
+
+/* TITLE */
+
+body .scpes-feature .scpes-feature-title {
+    left: 2.5% !important;
+    bottom: 5.5% !important;
+
+    width: 88% !important;
+    max-width: 1100px !important;
+}
+
+
+body .scpes-feature .scpes-feature-title h1 {
+    font-size: clamp(48px, 5vw, 78px) !important;
+
+    line-height: 0.9 !important;
+
+    letter-spacing: -0.05em !important;
+
+    font-weight: 900 !important;
+}
+/* =====================================================
+   SCPES INTRODUCTION
+===================================================== */
+
+.scpes-intro {
+    padding: 35px 0 85px;
+}
+
+/* SAME WIDTH AS THE HERO PICTURE */
+
+.scpes-intro .container {
+    width: min(85%, 1400px);
+    max-width: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.scpes-intro-content {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: start;
+
+    gap: 0;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.scpes-intro-label {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    padding-top: 3px;
+
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.scpes-intro-text {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: 400;
+
+    line-height: 1.75;
+    letter-spacing: 0;
+
+    text-align: justify;
+    text-justify: inter-word;
+
+    color: rgba(247, 242, 232, 0.82);
+}
+
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+[data-theme="light"] .scpes-intro-label {
+    color: rgba(0, 25, 65, 0.6);
+}
+
+[data-theme="light"] .scpes-intro-text {
+    color: rgba(0, 25, 65, 0.78);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .scpes-intro {
+        padding: 25px 0 65px;
+    }
+
+    .scpes-intro .container {
+        width: calc(100% - 40px);
+    }
+
+    .scpes-intro-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .scpes-intro-text {
+        width: 100%;
+        font-size: 15px;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+}
+/* =========================================================
+   SCPES OFFICERS — FINAL OVERRIDE
+========================================================= */
+
+
+/* =========================================================
+   GRID — 4 CARDS PER ROW
+========================================================= */
+
+.scpes-officers-grid {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    column-gap: 20px !important;
+    row-gap: 55px !important;
+
+    margin-top: 45px !important;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.scpes-officer-card {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.scpes-officer-button {
+    display: block !important;
+
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    background: transparent !important;
+
+    color: inherit !important;
+
+    text-align: left !important;
+
+    cursor: pointer !important;
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.scpes-officer-photo {
+    position: relative !important;
+
+    width: 100% !important;
+
+    /*
+       Controls card height.
+       Smaller than your current huge cards.
+    */
+    aspect-ratio: 4 / 4.7 !important;
+
+    overflow: hidden !important;
+
+    background: rgba(255, 255, 255, 0.04) !important;
+}
+
+
+/* IMAGE */
+
+.scpes-officer-photo > img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    transition:
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.45s ease !important;
+}
+
+
+/* =========================================================
+   GRADIENT OVER PHOTO
+========================================================= */
+
+.scpes-officer-photo::after {
+    content: "" !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    z-index: 2 !important;
+
+    display: block !important;
+
+    pointer-events: none !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 20, 55, 0) 38%,
+            rgba(0, 20, 55, 0.05) 55%,
+            rgba(0, 20, 55, 0.30) 76%,
+            rgba(0, 20, 55, 0.78) 100%
+        ) !important;
+}
+
+
+/* =========================================================
+   VIEW PROFILE OVERLAY
+========================================================= */
+
+.scpes-officer-overlay {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    z-index: 4 !important;
+
+    display: flex !important;
+
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+
+    padding: 18px !important;
+
+    opacity: 0 !important;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 15, 45, 0.60),
+            rgba(0, 15, 45, 0) 55%
+        ) !important;
+
+    transition:
+        opacity 0.35s ease !important;
+}
+
+
+/* VIEW PROFILE TEXT */
+
+.scpes-officer-overlay span {
+    color: #ffffff !important;
+
+    font-family: "Space Mono", monospace !important;
+
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: 0.08em !important;
+}
+
+
+/* ARROW */
+
+.scpes-officer-overlay span:last-child {
+    font-size: 18px !important;
+
+    transition:
+        transform 0.35s ease !important;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.scpes-officer-button:hover
+.scpes-officer-overlay {
+    opacity: 1 !important;
+}
+
+
+.scpes-officer-button:hover
+.scpes-officer-photo > img {
+    transform: scale(1.045) !important;
+}
+
+
+.scpes-officer-button:hover
+.scpes-officer-overlay span:last-child {
+    transform:
+        translate(3px, -3px) !important;
+}
+
+
+/* =========================================================
+   INFO BELOW PHOTO
+========================================================= */
+
+.scpes-officer-info {
+    display: grid !important;
+
+    grid-template-columns:
+        25px
+        minmax(0, 1fr) !important;
+
+    column-gap: 10px !important;
+
+    align-items: start !important;
+
+    width: 100% !important;
+
+    padding-top: 14px !important;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.scpes-officer-number {
+    padding-top: 4px !important;
+
+    color:
+        rgba(247, 242, 232, 0.60) !important;
+
+    font-family:
+        "Space Mono",
+        monospace !important;
+
+    font-size: 9px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+}
+
+
+/* =========================================================
+   NAME AREA
+========================================================= */
+
+.scpes-officer-name {
+    min-width: 0 !important;
+}
+
+
+/* NAME */
+
+.scpes-officer-name h3 {
+    margin: 0 !important;
+
+    color: #f7f2e8 !important;
+
+    font-size:
+        clamp(
+            15px,
+            1.1vw,
+            19px
+        ) !important;
+
+    font-weight: 800 !important;
+
+    line-height: 1.08 !important;
+
+    letter-spacing:
+        -0.035em !important;
+
+    overflow-wrap:
+        break-word !important;
+}
+
+
+/* =========================================================
+   POSITION
+   LARGER + READABLE
+========================================================= */
+
+.scpes-officer-name p {
+    margin:
+        9px
+        0
+        0 !important;
+
+    color:
+        rgba(247, 242, 232, 0.78) !important;
+
+    font-family:
+        "Space Mono",
+        monospace !important;
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        700 !important;
+
+    line-height:
+        1.45 !important;
+
+    letter-spacing:
+        0.045em !important;
+
+    text-transform:
+        uppercase !important;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .scpes-officers-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            ) !important;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .scpes-officers-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            ) !important;
+
+        column-gap:
+            16px !important;
+
+        row-gap:
+            45px !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .scpes-officers-grid {
+        grid-template-columns:
+            1fr !important;
+
+        row-gap:
+            40px !important;
+    }
+
+
+    .scpes-officer-photo {
+        aspect-ratio:
+            4 / 4.6 !important;
+    }
+
+
+    .scpes-officer-name h3 {
+        font-size:
+            18px !important;
+    }
+
+
+    .scpes-officer-name p {
+        font-size:
+            10px !important;
+    }
+
+}/* =========================================================
+   REMOVE VIEW PROFILE OVERLAY
+========================================================= */
+
+.scpes-officer-overlay {
+    display: none !important;
+}
+
+
+/* =========================================================
+   OFFICER PHOTO
+========================================================= */
+
+.scpes-officer-photo {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 4 / 4.7 !important;
+    overflow: hidden !important;
+
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* PHOTO */
+
+.scpes-officer-photo > img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    transition: transform 0.5s ease !important;
+}
+
+
+/* SUBTLE GRADIENT ON THE PHOTO */
+
+.scpes-officer-photo::after {
+    content: "" !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    pointer-events: none !important;
+
+    background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0, 18, 48, 0.08) 70%,
+        rgba(0, 18, 48, 0.42) 100%
+    ) !important;
+}
+
+
+/* SIMPLE HOVER — PHOTO ONLY */
+
+.scpes-officer-card:hover .scpes-officer-photo > img {
+    transform: scale(1.035) !important;
+}
+
+/* =========================================================
+   ROUNDED OFFICER PHOTOS
+========================================================= */
+
+.scpes-officer-photo {
+    border-radius: 22px !important;
+    overflow: hidden !important;
+}
+
+.scpes-officer-photo > img {
+    border-radius: 22px !important;
+}
+/* =====================================================
+   SCPES OFFICERS — ONE LINE TITLE
+===================================================== */
+
+.scpes-officers-section .projects-heading .section-title {
+    white-space: nowrap;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+}
+
+/* Ignore the <br> inside MEET THE OFFICERS */
+.scpes-officers-section .projects-heading .section-title br {
+    display: none;
+}
+/* =====================================================
+   SCPES OFFICER PHOTO HOVER SWAP
+===================================================== */
+
+.scpes-officer-photo {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* BOTH PHOTOS */
+
+.scpes-officer-img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: inherit;
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* NORMAL PHOTO */
+
+.scpes-officer-img-main {
+    position: relative;
+
+    z-index: 1;
+
+    opacity: 1;
+}
+
+
+/* HOVER PHOTO */
+
+.scpes-officer-img-hover {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    opacity: 0;
+
+    transform: scale(1.04);
+}
+
+
+/* =====================================================
+   GRADIENT OVER BOTH PHOTOS
+===================================================== */
+
+.scpes-officer-photo::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(0, 20, 55, 0.06) 70%,
+        rgba(0, 20, 55, 0.38) 100%
+    );
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.scpes-officer-card:hover
+.scpes-officer-img-main {
+    opacity: 0;
+
+    transform: scale(1.03);
+}
+
+
+.scpes-officer-card:hover
+.scpes-officer-img-hover {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* NO VIEW PROFILE */
+
+.scpes-officer-overlay {
+    display: none !important;
+}
+/* =====================================================
+   OFFICER TEXT ORDER
+   POSITION FIRST → NAME SECOND
+===================================================== */
+
+.scpes-officer-name {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* POSITION */
+
+.scpes-officer-name p {
+    order: 1;
+
+    margin:
+        0
+        0
+        7px;
+
+    font-family:
+        "Space Mono",
+        monospace;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+
+/* NAME */
+
+.scpes-officer-name h3 {
+    order: 2;
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            15px,
+            1.05vw,
+            18px
+        );
+
+    font-weight: 800;
+
+    line-height: 1.08;
+
+    letter-spacing: -0.035em;
+}
+/* =========================================================
+   SCPES OFFICERS — GROUP PHOTO
+========================================================= */
+
+.scpes-group-card {
+    grid-column: span 3;
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* PHOTO CONTAINER */
+
+.scpes-group-photo {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    aspect-ratio: 16 / 7;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: transparent;
+}
+
+
+/* BOTH IMAGES */
+
+.scpes-group-img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    transition:
+        opacity 0.55s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* DEFAULT IMAGE */
+
+.scpes-group-img-default {
+    opacity: 1;
+    z-index: 1;
+}
+
+
+/* HOVER IMAGE */
+
+.scpes-group-img-hover {
+    opacity: 0;
+    z-index: 2;
+}
+
+
+/* GRADIENT */
+
+.scpes-group-gradient {
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 19, 55, 0.38) 0%,
+            rgba(0, 19, 55, 0.08) 35%,
+            transparent 60%
+        );
+}
+
+
+/* HOVER */
+
+.scpes-group-photo:hover .scpes-group-img-default {
+    opacity: 0;
+    transform: scale(1.025);
+}
+
+.scpes-group-photo:hover .scpes-group-img-hover {
+    opacity: 1;
+    transform: scale(1.025);
+}
+/* =========================================================
+   SCPES — MORE THAN EVENTS
+========================================================= */
+
+.scpes-memories {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1.45fr 0.85fr;
+
+    align-items: center;
+
+    gap: clamp(50px, 7vw, 120px);
+
+    padding:
+        clamp(130px, 12vw, 200px)
+        clamp(45px, 3vw, 55px)
+        clamp(130px, 12vw, 200px);
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.scpes-memories-video {
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+}
+
+
+.scpes-memories-video video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: inherit;
+
+    background: #001633;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.scpes-section-number {
+    display: block;
+
+    margin-bottom: 35px;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+.scpes-memories-content h2 {
+    margin: 0 0 40px;
+
+    font-size: clamp(3rem, 5.3vw, 6.5rem);
+    line-height: 0.88;
+
+    letter-spacing: -0.055em;
+
+    color: #f7f3e9;
+}
+
+
+.scpes-memories-content p {
+    max-width: 620px;
+
+    margin: 0;
+
+    font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+    font-weight: 400;
+
+    line-height: 1.85;
+
+    text-align: justify;
+
+    color: rgba(255, 255, 255, 0.72);
+}
+/* =========================================================
+   SCPES PHOTO GALLERY
+========================================================= */
+
+.scpes-gallery {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    grid-auto-rows: 260px;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   GALLERY PHOTO
+========================================================= */
+
+.scpes-gallery-item {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+.scpes-gallery-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.5s ease;
+}
+
+
+/* =========================================================
+   DIFFERENT PHOTO SIZES
+========================================================= */
+
+.scpes-gallery-wide {
+    grid-column: span 2;
+}
+
+
+.scpes-gallery-tall {
+    grid-row: span 2;
+}
+
+
+/* =========================================================
+   SUBTLE HOVER
+========================================================= */
+
+.scpes-gallery-item:hover img {
+    transform: scale(1.055);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .scpes-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 240px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .scpes-gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 300px;
+
+        gap: 12px;
+    }
+
+
+    .scpes-gallery-wide {
+        grid-column: span 1;
+    }
+
+
+    .scpes-gallery-tall {
+        grid-row: span 1;
+    }
+
+}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .scpes-memories {
+        grid-template-columns: 1fr;
+    }
+
+
+    .scpes-memories-content {
+        max-width: 750px;
+    }
+
+
+    .scpes-motion-heading {
+        grid-template-columns: 1fr;
+    }
+
+
+    .scpes-motion-title h2 {
+        white-space: normal;
+    }
+
+
+    .scpes-motion-description {
+        max-width: 700px;
+    }
+
+
+    .scpes-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .scpes-memories,
+    .scpes-motion {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+
+    .scpes-memories-content h2 {
+        font-size: clamp(3rem, 15vw, 5rem);
+    }
+
+
+    .scpes-motion-title h2 {
+        font-size: clamp(3.2rem, 15vw, 5rem);
+    }
+
+
+    .scpes-gallery {
+        grid-template-columns: 1fr;
+    }
+
+
+    .scpes-gallery-wide {
+        grid-column: span 1;
+    }
+
+
+    .scpes-gallery-tall {
+        grid-row: span 1;
+
+        min-height: 420px;
+    }
+
+
+    .scpes-gallery-item {
+        min-height: 360px;
+    }
+
+    /* =========================================================
+   FIX — MORE THAN JUST EVENTS + MEMORY PHOTOS
+   PUT THIS AT THE VERY BOTTOM OF SCPES.CSS
+========================================================= */
+
+/* Main section */
+.scpes-beyond {
+    width: 100%;
+    display: block;
+}
+
+
+/* Content container */
+.scpes-beyond-inner {
+    width: calc(100% - 120px);
+    max-width: 1400px;
+
+    margin: 0 auto;
+    padding: 100px 0 80px;
+}
+
+
+/* Text area */
+.scpes-beyond-header {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.8fr) minmax(400px, 1.2fr);
+
+    gap: 80px;
+    align-items: end;
+
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+
+/* Prevent text from becoming narrow */
+.scpes-beyond-title,
+.scpes-beyond-copy {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.scpes-gallery {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-flow: dense;
+    grid-auto-rows: 240px;
+
+    gap: 16px;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative;
+}
+
+
+/* Every photo */
+.scpes-gallery-item {
+    position: relative !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+}
+
+
+/* Actual image */
+.scpes-gallery-item img {
+    display: block;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: inherit;
+
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Wide images */
+.scpes-gallery-item.scpes-gallery-wide {
+    grid-column: span 2 !important;
+}
+
+
+/* Tall images */
+.scpes-gallery-item.scpes-gallery-tall {
+    grid-row: span 2 !important;
+}
+
+
+/* Hover */
+.scpes-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .scpes-beyond-inner {
+        width: calc(100% - 60px);
+    }
+
+
+    .scpes-beyond-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+
+    .scpes-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-auto-rows: 230px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .scpes-beyond-inner {
+        width: calc(100% - 32px);
+        padding: 70px 0;
+    }
+
+
+    .scpes-gallery {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: 280px;
+
+        gap: 12px;
+    }
+
+
+    .scpes-gallery-item.scpes-gallery-wide,
+    .scpes-gallery-item.scpes-gallery-tall {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+
+}
+}
+/* =========================================================
+   SCPES IN MOTION
+========================================================= */
+
+.scpes-gallery {
+    width: min(100% - 64px, 1360px);
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    /* SPACE BEFORE FOOTER */
+    padding-bottom: 180px;
+}
+
+/* =========================================================
+   MOTION HEADER
+========================================================= */
+
+.scpes-motion-header {
+    width: 100%;
+    margin-bottom: 55px;
+}
+
+.scpes-motion-header .scpes-section-number {
+    display: block;
+
+    margin-bottom: 22px;
+
+    font-family: "Space Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    opacity: 0.7;
+}
+
+.scpes-motion-header h2 {
+    margin: 0 0 24px;
+
+    font-family: "Inter", sans-serif;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    font-weight: 900;
+
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+}
+
+.scpes-motion-header p {
+    max-width: 760px;
+
+    margin: 0;
+
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    font-weight: 400;
+
+    line-height: 1.8;
+
+    text-align: justify;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   SCPES GALLERY — LANDSCAPE PHOTOS ONLY
+========================================================= */
+
+.scpes-gallery {
+    width: min(100% - 64px, 1360px);
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   GALLERY ITEM
+========================================================= */
+
+.scpes-gallery-item,
+.scpes-gallery-wide,
+.scpes-gallery-tall {
+    width: 100%;
+
+    /* Forces every photo to landscape */
+    aspect-ratio: 16 / 9;
+
+    grid-column: auto;
+    grid-row: auto;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.scpes-gallery-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: inherit;
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.scpes-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .scpes-gallery {
+        width: min(100% - 40px, 1360px);
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .scpes-gallery {
+        width: calc(100% - 32px);
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+}
+
