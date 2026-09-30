@@ -1,1572 +1,2198 @@
 /* =========================================================
-   SCPES PAGE
+   UE MANILA — COMPUTER ENGINEERING
+   INDEX.JS
+
+   CLEAN VERSION
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
 
+document.addEventListener("DOMContentLoaded", () => {
 
-        /* =================================================
-           BASIC ELEMENTS
-        ================================================= */
 
-        const themeToggle =
-            document.getElementById(
-                "themeToggle"
-            );
+    /* =====================================================
+       01. ELEMENTS
+    ====================================================== */
 
-        const clock =
-            document.getElementById(
-                "clock"
-            );
+    const html = document.documentElement;
+    const body = document.body;
 
-        const pageTransition =
-            document.getElementById(
-                "pageTransition"
-            );
+    const intro = document.getElementById("intro");
+    const introVideo = document.getElementById("introVideo");
+    const introVideoSource = document.getElementById("introVideoSource");
 
-        const exploreButton =
-            document.getElementById(
-                "exploreButton"
-            );
+    const site = document.getElementById("site");
 
+    const sharedTitle = document.getElementById("sharedTitle");
+    const heroTitleTarget = document.getElementById("heroTitleTarget");
 
-        /* =================================================
-           PAGE ENTRANCE
-        ================================================= */
+    const themeToggle = document.getElementById("themeToggle");
+    const clock = document.getElementById("clock");
 
-        if (pageTransition) {
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-            pageTransition
-                .classList
-                .add(
-                    "entering"
-                );
+    const revealElements = document.querySelectorAll(".reveal");
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = document.querySelectorAll("main section[id]");
+    const faqDetails = document.querySelectorAll(".faq details");
 
 
-            setTimeout(
-                function () {
+    /* =====================================================
+       02. SETTINGS
+    ====================================================== */
 
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering"
-                        );
+    const THEME_KEY = "cpe-theme";
 
-                },
-                1050
-            );
-        }
+    const LIGHT_VIDEO = "assets/light.mp4";
+    const DARK_VIDEO = "assets/dark.mp4";
 
+    const TITLE_APPEAR_DELAY = 5200;
 
-        setTimeout(
-            function () {
+    /*
+       Slightly quicker movement than the previous version.
+       It keeps the transition smooth without feeling slow.
+    */
 
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
-                    );
+    const TITLE_MOVE_DELAY = 500;
+    const TITLE_MOVE_DURATION = 1550;
+    const INTRO_FADE_DURATION = 1050;
 
-            },
-            180
-        );
 
+    /* =====================================================
+       03. STATE
+    ====================================================== */
 
-        /* =================================================
-           THEME
-        ================================================= */
+    let introStarted = false;
+    let introFinished = false;
+    let titleLanded = false;
 
-        const savedTheme =
-            localStorage.getItem(
-                "cpe-theme"
-            ) || "light";
+    let titleAnimation = null;
 
+    let fallbackTimer = null;
+    let resizeTimer = null;
+    let introSequenceTimer = null;
+    let titleMoveTimer = null;
+    let introHideTimer = null;
 
-        document
-            .documentElement
-            .dataset
-            .theme =
-            savedTheme;
 
+    /* =====================================================
+       04. REDUCED MOTION
+    ====================================================== */
 
-        if (themeToggle) {
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-            themeToggle.addEventListener(
-                "click",
-                function () {
 
-                    const current =
-                        document
-                            .documentElement
-                            .dataset
-                            .theme;
+    /* =====================================================
+       05. THEME
+    ====================================================== */
 
+    function getInitialTheme() {
 
-                    const next =
-                        current === "dark"
-                            ? "light"
-                            : "dark";
-
-
-                    document
-                        .documentElement
-                        .dataset
-                        .theme =
-                        next;
-
-
-                    localStorage.setItem(
-                        "cpe-theme",
-                        next
-                    );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           MANILA CLOCK
-        ================================================= */
-
-        function updateClock() {
-
-            if (!clock) {
-                return;
-            }
-
-
-            const formatter =
-                new Intl.DateTimeFormat(
-                    "en-PH",
-                    {
-
-                        timeZone:
-                            "Asia/Manila",
-
-                        hour:
-                            "2-digit",
-
-                        minute:
-                            "2-digit",
-
-                        second:
-                            "2-digit",
-
-                        hour12:
-                            false
-
-                    }
-                );
-
-
-            clock.textContent =
-                "MANILA " +
-                formatter.format(
-                    new Date()
-                );
-        }
-
-
-        updateClock();
-
-
-        setInterval(
-            updateClock,
-            1000
-        );
-
-
-        /* =================================================
-           EXPLORE
-        ================================================= */
-
-        if (exploreButton) {
-
-            exploreButton.addEventListener(
-                "click",
-                function () {
-
-                    const about =
-                        document.getElementById(
-                            "about"
-                        );
-
-
-                    if (about) {
-
-                        about.scrollIntoView(
-                            {
-                                behavior:
-                                    "smooth"
-                            }
-                        );
-                    }
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           REVEAL
-        ================================================= */
-
-        const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
-
+        const savedTheme = localStorage.getItem(THEME_KEY);
 
         if (
-            "IntersectionObserver"
-            in window
+            savedTheme === "light" ||
+            savedTheme === "dark"
         ) {
+            return savedTheme;
+        }
 
-            const revealObserver =
-                new IntersectionObserver(
+        /*
+           Default theme:
+           LIGHT MODE
+        */
 
-                    function (entries) {
-
-                        entries.forEach(
-                            function (entry) {
-
-                                if (
-                                    entry.isIntersecting
-                                ) {
-
-                                    entry
-                                        .target
-                                        .classList
-                                        .add(
-                                            "visible"
-                                        );
+        return "light";
+    }
 
 
-                                    revealObserver
-                                        .unobserve(
-                                            entry.target
-                                        );
-                                }
+    function applyTheme(theme, save = true) {
 
-                            }
-                        );
+        const selectedTheme =
+            theme === "dark"
+                ? "dark"
+                : "light";
 
-                    },
+        html.setAttribute(
+            "data-theme",
+            selectedTheme
+        );
 
-                    {
+        if (save) {
+            localStorage.setItem(
+                THEME_KEY,
+                selectedTheme
+            );
+        }
 
-                        threshold:
-                            .1,
+        /*
+           While the intro is still running,
+           switch the intro video with the theme.
+        */
 
-                        rootMargin:
-                            "0px 0px -40px 0px"
+        if (!introFinished) {
+            updateIntroVideo(selectedTheme);
+        }
+    }
 
-                    }
 
+    function updateIntroVideo(theme) {
+
+        if (
+            !introVideo ||
+            !introVideoSource
+        ) {
+            return;
+        }
+
+        const desiredSource =
+            theme === "dark"
+                ? DARK_VIDEO
+                : LIGHT_VIDEO;
+
+        const currentSource =
+            introVideoSource.getAttribute("src");
+
+        if (currentSource === desiredSource) {
+            return;
+        }
+
+        introVideoSource.setAttribute(
+            "src",
+            desiredSource
+        );
+
+        try {
+
+            introVideo.load();
+
+            const playPromise = introVideo.play();
+
+            if (
+                playPromise &&
+                typeof playPromise.catch === "function"
+            ) {
+                playPromise.catch(() => {});
+            }
+
+        } catch (error) {
+
+            /*
+               Decorative video failure must never
+               stop the rest of the website.
+            */
+
+        }
+    }
+
+
+    function toggleTheme() {
+
+        const currentTheme =
+            html.getAttribute("data-theme") === "dark"
+                ? "dark"
+                : "light";
+
+        const nextTheme =
+            currentTheme === "dark"
+                ? "light"
+                : "dark";
+
+        applyTheme(
+            nextTheme,
+            true
+        );
+    }
+
+
+    applyTheme(
+        getInitialTheme(),
+        false
+    );
+
+
+    if (themeToggle) {
+
+        themeToggle.addEventListener(
+            "click",
+            toggleTheme
+        );
+    }
+
+
+    /* =====================================================
+       06. MANILA CLOCK
+    ====================================================== */
+
+    function updateClock() {
+
+        if (!clock) {
+            return;
+        }
+
+        const now = new Date();
+
+        const formatter =
+            new Intl.DateTimeFormat(
+                "en-PH",
+                {
+                    timeZone: "Asia/Manila",
+
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+
+                    hour12: false
+                }
+            );
+
+        clock.textContent =
+            `MANILA ${formatter.format(now)}`;
+    }
+
+
+    updateClock();
+
+    setInterval(
+        updateClock,
+        1000
+    );
+
+
+    /* =====================================================
+       07. PREPARE SHARED TITLE
+    ====================================================== */
+
+    function prepareSharedTitle() {
+
+        if (!sharedTitle) {
+            return;
+        }
+
+        /*
+           During the intro, the title belongs directly
+           inside <body>.
+
+           This gives it freedom to move from the center
+           of the screen into the hero.
+        */
+
+        if (sharedTitle.parentElement !== body) {
+            body.appendChild(sharedTitle);
+        }
+
+        sharedTitle.classList.remove("is-visible");
+        sharedTitle.classList.remove("title-landed");
+
+        sharedTitle.style.position = "fixed";
+
+        sharedTitle.style.left = "50%";
+        sharedTitle.style.top = "50%";
+
+        sharedTitle.style.width = "max-content";
+
+        sharedTitle.style.transform =
+            "translate(-50%, -50%)";
+
+        sharedTitle.style.transformOrigin =
+            "top left";
+
+        sharedTitle.style.opacity = "";
+
+        titleLanded = false;
+    }
+
+
+    prepareSharedTitle();
+
+
+    /* =====================================================
+       08. SHOW SHARED TITLE
+    ====================================================== */
+
+    function showSharedTitle() {
+
+        if (!sharedTitle) {
+            return;
+        }
+
+        sharedTitle.classList.add(
+            "is-visible"
+        );
+    }
+
+
+    /* =====================================================
+       09. REVEAL HOME
+    ====================================================== */
+
+    function revealHome() {
+
+        if (!site) {
+            return;
+        }
+
+        site.classList.add(
+            "home-ready"
+        );
+    }
+
+
+    /* =====================================================
+       10. CLEAR TEMPORARY TITLE STYLES
+    ====================================================== */
+
+    function clearTitleInlineStyles() {
+
+        if (!sharedTitle) {
+            return;
+        }
+
+        sharedTitle.style.position = "";
+        sharedTitle.style.left = "";
+        sharedTitle.style.top = "";
+        sharedTitle.style.width = "";
+        sharedTitle.style.height = "";
+
+        sharedTitle.style.transform = "";
+        sharedTitle.style.transformOrigin = "";
+
+        sharedTitle.style.opacity = "";
+        sharedTitle.style.visibility = "";
+    }
+
+
+    /* =====================================================
+       11. LAND TITLE
+
+       IMPORTANT:
+       This uses the SAME title from the intro.
+
+       No duplicate COMPUTER ENGINEERING title is created.
+    ====================================================== */
+
+    function landSharedTitle() {
+
+        if (
+            !sharedTitle ||
+            !heroTitleTarget
+        ) {
+            return;
+        }
+
+        /*
+           Move the actual title into its permanent
+           hero destination.
+        */
+
+        heroTitleTarget.appendChild(
+            sharedTitle
+        );
+
+        clearTitleInlineStyles();
+
+        sharedTitle.classList.add(
+            "is-visible"
+        );
+
+        sharedTitle.classList.add(
+            "title-landed"
+        );
+
+        titleLanded = true;
+    }
+
+
+    /* =====================================================
+       12. MEASURE FINAL TITLE
+
+       THIS IS THE IMPORTANT FIX.
+
+       The previous version estimated the final scale from
+       heroTitleTarget's width.
+
+       That caused the animation to finish at one size and
+       then CSS changed the title to another size.
+
+       This version temporarily puts the title in its REAL
+       final state, measures it, and then restores the intro
+       state before animating.
+    ====================================================== */
+
+    function measureFinalTitle() {
+
+        if (
+            !sharedTitle ||
+            !heroTitleTarget
+        ) {
+            return null;
+        }
+
+        /*
+           Remember where the title currently lives.
+        */
+
+        const originalParent =
+            sharedTitle.parentElement;
+
+        const originalNextSibling =
+            sharedTitle.nextSibling;
+
+        /*
+           Remember its current classes.
+        */
+
+        const hadVisibleClass =
+            sharedTitle.classList.contains(
+                "is-visible"
+            );
+
+        const hadLandedClass =
+            sharedTitle.classList.contains(
+                "title-landed"
+            );
+
+        /*
+           Remember current inline styles.
+        */
+
+        const originalStyle =
+            sharedTitle.getAttribute(
+                "style"
+            );
+
+        /*
+           Put the title into the exact final DOM position.
+        */
+
+        heroTitleTarget.appendChild(
+            sharedTitle
+        );
+
+        clearTitleInlineStyles();
+
+        sharedTitle.classList.add(
+            "is-visible"
+        );
+
+        sharedTitle.classList.add(
+            "title-landed"
+        );
+
+        /*
+           Hide it only visually while measuring.
+
+           visibility:hidden still gives us the correct
+           dimensions and coordinates.
+        */
+
+        sharedTitle.style.visibility =
+            "hidden";
+
+        const finalRect =
+            sharedTitle
+                .getBoundingClientRect();
+
+        /*
+           Restore title to its original DOM location.
+        */
+
+        if (originalParent) {
+
+            if (
+                originalNextSibling &&
+                originalNextSibling.parentElement ===
+                    originalParent
+            ) {
+
+                originalParent.insertBefore(
+                    sharedTitle,
+                    originalNextSibling
                 );
 
+            } else {
 
-            revealElements.forEach(
-                function (element) {
+                originalParent.appendChild(
+                    sharedTitle
+                );
+            }
+        }
 
-                    revealObserver.observe(
-                        element
-                    );
+        /*
+           Restore original classes.
+        */
 
-                }
+        if (!hadVisibleClass) {
+            sharedTitle.classList.remove(
+                "is-visible"
+            );
+        }
+
+        if (!hadLandedClass) {
+            sharedTitle.classList.remove(
+                "title-landed"
+            );
+        }
+
+        /*
+           Restore the original inline styles exactly.
+        */
+
+        if (originalStyle === null) {
+
+            sharedTitle.removeAttribute(
+                "style"
             );
 
         } else {
 
-            revealElements.forEach(
-                function (element) {
-
-                    element
-                        .classList
-                        .add(
-                            "visible"
-                        );
-
-                }
+            sharedTitle.setAttribute(
+                "style",
+                originalStyle
             );
         }
 
+        return finalRect;
+    }
 
-        /* =================================================
-           OFFICER DATA
-        ================================================= */
 
-        const officers = [
+    /* =====================================================
+       13. MOVE TITLE TO HERO
 
-            {
-                name:
-                    "CHARLIZE MAE S. BALDOVINO",
+       FLIP animation:
 
-                position:
-                    "PRESIDENT",
+       START
+       Centered COMPUTER ENGINEERING
 
-                image:
-                    "assets/officer-charlize-baldovino.jpg",
+                   ↓
 
-                description:
-                    "Leads SCPES and works with the executive officers in coordinating the organization's programs, activities, projects, and student initiatives."
-            },
+       END
+       Lower-left hero title
 
+       The final title dimensions are measured first,
+       preventing the large jump after landing.
+    ====================================================== */
 
-            {
-                name:
-                    "JAWAD HADJI CASSAN M. MACAWADIB",
+    function moveTitleToHero() {
 
-                position:
-                    "VICE PRESIDENT FOR INTERNAL AFFAIRS",
-
-                image:
-                    "assets/officer-jawad-macawadib.jpg",
-
-                description:
-                    "Supports the organization's internal coordination and helps strengthen communication and collaboration among SCPES officers and members."
-            },
-
-
-            {
-                name:
-                    "JOSHUA R. MADRIAGA",
-
-                position:
-                    "VICE PRESIDENT FOR EXTERNAL AFFAIRS",
-
-                image:
-                    "assets/officer-joshua-madriaga.jpg",
-
-                description:
-                    "Supports external coordination and helps SCPES connect with groups and opportunities beyond its internal student community."
-            },
-
-
-            {
-                name:
-                    "GHENNY MAE A. MANABAT",
-
-                position:
-                    "VICE PRESIDENT FOR SECRETARIAT",
-
-                image:
-                    "assets/officer-ghenny-manabat.jpg",
-
-                description:
-                    "Supports organizational documentation, records, communication, and administrative coordination."
-            },
-
-
-            {
-                name:
-                    "JESSICA P. APOSTOL",
-
-                position:
-                    "VICE PRESIDENT FOR BUSINESS & FINANCE",
-
-                image:
-                    "assets/officer-jessica-apostol.jpg",
-
-                description:
-                    "Supports financial organization, budgeting, and business-related activities for SCPES projects and events."
-            },
-
-
-            {
-                name:
-                    "JOSHUA C. PURIFICACION",
-
-                position:
-                    "VICE PRESIDENT FOR CAREER DEVELOPMENT",
-
-                image:
-                    "assets/officer-joshua-purificacion.jpg",
-
-                description:
-                    "Supports programs that encourage career awareness, professional development, and learning opportunities for Computer Engineering students."
-            },
-
-
-            {
-                name:
-                    "ROSELLE GABRIELLE J. LANDAYAN",
-
-                position:
-                    "VICE PRESIDENT FOR EVENTS & PROGRAMS",
-
-                image:
-                    "assets/officer-roselle-landayan.jpg",
-
-                description:
-                    "Supports the planning and coordination of SCPES activities, programs, and student-centered events."
-            },
-
-
-            {
-                name:
-                    "EARL DUNCAN C. LORENZO",
-
-                position:
-                    "VICE PRESIDENT FOR OUTREACH & SOCIAL RESPONSIBILITY",
-
-                image:
-                    "assets/officer-earl-lorenzo.jpg",
-
-                description:
-                    "Supports outreach, community engagement, and socially responsible projects and initiatives."
-            },
-
-
-            {
-                name:
-                    "KRISELDA MEI G. RUPERA",
-
-                position:
-                    "VICE PRESIDENT FOR TECHNICAL OPERATIONS",
-
-                image:
-                    "assets/officer-kriselda-rupera.jpg",
-
-                description:
-                    "Supports technical requirements and operations involved in SCPES programs, projects, and activities."
-            },
-
-
-            {
-                name:
-                    "JIAN MIEL M. CRUZ",
-
-                position:
-                    "VICE PRESIDENT FOR CREATIVES & COMMUNICATIONS",
-
-                image:
-                    "assets/officer-jian-cruz.jpg",
-
-                description:
-                    "Supports the visual identity, creative materials, and communication needs of SCPES."
-            },
-
-
-            {
-                name:
-                    "JOEZER C. CORNITA",
-
-                position:
-                    "VICE PRESIDENT FOR MEDIA",
-
-                image:
-                    "assets/officer-joezer-cornita.jpg",
-
-                description:
-                    "Supports media coverage and helps document SCPES events, activities, and student experiences."
-            },
-
-
-            {
-                name:
-                    "BENCH CALVIN PAED",
-
-                position:
-                    "VICE PRESIDENT FOR LOGISTICS & EVENT COORDINATION",
-
-                image:
-                    "assets/officer-bench-paed.jpg",
-
-                description:
-                    "Supports logistical requirements and event coordination to help SCPES activities run efficiently."
-            },
-
-
-            {
-                name:
-                    "FELIX FREDERICK L. ADRIANO",
-
-                position:
-                    "VICE PRESIDENT FOR RECREATION & WELLNESS",
-
-                image:
-                    "assets/officer-felix-adriano.jpg",
-
-                description:
-                    "Supports recreation, engagement, and wellness-oriented activities for the Computer Engineering student community."
-            }
-
-        ];
-
-
-        /* =================================================
-           OFFICER MODAL
-        ================================================= */
-
-        const officerModal =
-            document.getElementById(
-                "officerModal"
-            );
-
-        const officerModalBackdrop =
-            document.getElementById(
-                "officerModalBackdrop"
-            );
-
-        const officerModalClose =
-            document.getElementById(
-                "officerModalClose"
-            );
-
-        const officerModalImage =
-            document.getElementById(
-                "officerModalImage"
-            );
-
-        const officerModalPosition =
-            document.getElementById(
-                "officerModalPosition"
-            );
-
-        const officerModalName =
-            document.getElementById(
-                "officerModalName"
-            );
-
-        const officerModalDescription =
-            document.getElementById(
-                "officerModalDescription"
-            );
-
-        const officerCounter =
-            document.getElementById(
-                "officerCounter"
-            );
-
-        const officerPrev =
-            document.getElementById(
-                "officerPrev"
-            );
-
-        const officerNext =
-            document.getElementById(
-                "officerNext"
-            );
-
-
-        let activeOfficer =
-            0;
-
-
-        function updateOfficer() {
-
-            const officer =
-                officers[
-                    activeOfficer
-                ];
-
-
-            if (!officer) {
-                return;
-            }
-
-
-            if (officerModalImage) {
-
-                officerModalImage
-                    .classList
-                    .add(
-                        "changing"
-                    );
-
-
-                setTimeout(
-                    function () {
-
-                        officerModalImage.src =
-                            officer.image;
-
-
-                        officerModalImage.alt =
-                            officer.name;
-
-
-                        officerModalImage
-                            .classList
-                            .remove(
-                                "changing"
-                            );
-
-                    },
-                    160
-                );
-            }
-
-
-            if (officerModalPosition) {
-
-                officerModalPosition
-                    .textContent =
-                    officer.position;
-            }
-
-
-            if (officerModalName) {
-
-                officerModalName
-                    .textContent =
-                    officer.name;
-            }
-
-
-            if (officerModalDescription) {
-
-                officerModalDescription
-                    .textContent =
-                    officer.description;
-            }
-
-
-            if (officerCounter) {
-
-                officerCounter
-                    .textContent =
-
-                    String(
-                        activeOfficer + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    ) +
-
-                    " / " +
-
-                    String(
-                        officers.length
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-            }
-        }
-
-
-        function openOfficer(
-            index
+        if (
+            !sharedTitle ||
+            !heroTitleTarget ||
+            titleLanded
         ) {
-
-            activeOfficer =
-                Number(index);
-
-
-            updateOfficer();
-
-
-            if (!officerModal) {
-                return;
-            }
-
-
-            officerModal
-                .classList
-                .add(
-                    "open"
-                );
-
-
-            officerModal
-                .setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-
-            document.body
-                .classList
-                .add(
-                    "viewer-open"
-                );
+            return;
         }
 
+        if (titleAnimation) {
 
-        function closeOfficer() {
-
-            if (!officerModal) {
-                return;
-            }
-
-
-            officerModal
-                .classList
-                .remove(
-                    "open"
-                );
-
-
-            officerModal
-                .setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-
-            document.body
-                .classList
-                .remove(
-                    "viewer-open"
-                );
+            titleAnimation.cancel();
+            titleAnimation = null;
         }
 
+        /*
+           The hero must be visible before its final
+           coordinates can be measured.
+        */
 
-        function nextOfficer() {
+        revealHome();
 
-            activeOfficer =
-                (
-                    activeOfficer + 1
-                ) %
-                officers.length;
+        requestAnimationFrame(() => {
 
+            requestAnimationFrame(() => {
 
-            updateOfficer();
-        }
+                /*
+                   Current title position during intro.
+                */
 
+                const startRect =
+                    sharedTitle
+                        .getBoundingClientRect();
 
-        function previousOfficer() {
+                /*
+                   Measure the REAL final title itself,
+                   not just its destination container.
+                */
 
-            activeOfficer =
-                (
-                    activeOfficer -
-                    1 +
-                    officers.length
-                ) %
-                officers.length;
-
-
-            updateOfficer();
-        }
-
-
-        const officerCards =
-            document.querySelectorAll(
-                ".officer-card"
-            );
-
-
-        officerCards.forEach(
-            function (card) {
-
-                const viewButton =
-                    card.querySelector(
-                        ".officer-view"
-                    );
-
-
-                if (viewButton) {
-
-                    viewButton.addEventListener(
-                        "click",
-                        function (event) {
-
-                            event.stopPropagation();
-
-
-                            openOfficer(
-                                card.dataset.officer
-                            );
-
-                        }
-                    );
-                }
-
-
-                card.addEventListener(
-                    "touchstart",
-                    function () {
-
-                        officerCards.forEach(
-                            function (
-                                otherCard
-                            ) {
-
-                                if (
-                                    otherCard !==
-                                    card
-                                ) {
-
-                                    otherCard
-                                        .classList
-                                        .remove(
-                                            "touch-active"
-                                        );
-                                }
-
-                            }
-                        );
-
-
-                        card
-                            .classList
-                            .add(
-                                "touch-active"
-                            );
-
-                    },
-                    {
-                        passive: true
-                    }
-                );
-
-            }
-        );
-
-
-        if (officerModalClose) {
-
-            officerModalClose
-                .addEventListener(
-                    "click",
-                    closeOfficer
-                );
-        }
-
-
-        if (officerModalBackdrop) {
-
-            officerModalBackdrop
-                .addEventListener(
-                    "click",
-                    closeOfficer
-                );
-        }
-
-
-        if (officerNext) {
-
-            officerNext
-                .addEventListener(
-                    "click",
-                    nextOfficer
-                );
-        }
-
-
-        if (officerPrev) {
-
-            officerPrev
-                .addEventListener(
-                    "click",
-                    previousOfficer
-                );
-        }
-
-
-        /* =================================================
-           IMAGE GALLERIES
-        ================================================= */
-
-        const imageViewer =
-            document.getElementById(
-                "imageViewer"
-            );
-
-        const viewerBackdrop =
-            document.getElementById(
-                "viewerBackdrop"
-            );
-
-        const viewerClose =
-            document.getElementById(
-                "viewerClose"
-            );
-
-        const viewerImage =
-            document.getElementById(
-                "viewerImage"
-            );
-
-        const viewerTitle =
-            document.getElementById(
-                "viewerTitle"
-            );
-
-        const viewerSubtitle =
-            document.getElementById(
-                "viewerSubtitle"
-            );
-
-        const viewerDescription =
-            document.getElementById(
-                "viewerDescription"
-            );
-
-        const viewerCounter =
-            document.getElementById(
-                "viewerCounter"
-            );
-
-        const viewerPrev =
-            document.getElementById(
-                "viewerPrev"
-            );
-
-        const viewerNext =
-            document.getElementById(
-                "viewerNext"
-            );
-
-
-        let activeItems =
-            [];
-
-        let activeIndex =
-            0;
-
-
-        const galleries =
-            document.querySelectorAll(
-                "[data-gallery]"
-            );
-
-
-        galleries.forEach(
-            function (gallery) {
-
-                const items =
-                    Array.from(
-                        gallery.querySelectorAll(
-                            "[data-image]"
-                        )
-                    );
-
-
-                items.forEach(
-                    function (
-                        item,
-                        index
-                    ) {
-
-                        item.addEventListener(
-                            "click",
-                            function () {
-
-                                activeItems =
-                                    items;
-
-
-                                activeIndex =
-                                    index;
-
-
-                                openViewer();
-
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        function updateViewer() {
-
-            if (
-                !activeItems.length
-            ) {
-
-                return;
-            }
-
-
-            const item =
-                activeItems[
-                    activeIndex
-                ];
-
-
-            if (viewerImage) {
-
-                viewerImage
-                    .classList
-                    .add(
-                        "changing"
-                    );
-
-
-                setTimeout(
-                    function () {
-
-                        viewerImage.src =
-                            item.dataset.image;
-
-
-                        viewerImage.alt =
-                            item.dataset.title ||
-                            "";
-
-
-                        viewerImage
-                            .classList
-                            .remove(
-                                "changing"
-                            );
-
-                    },
-                    160
-                );
-            }
-
-
-            if (viewerTitle) {
-
-                viewerTitle.textContent =
-                    item.dataset.title ||
-                    "";
-            }
-
-
-            if (viewerSubtitle) {
-
-                viewerSubtitle.textContent =
-                    item.dataset.subtitle ||
-                    "SCPES / FEATURE";
-            }
-
-
-            if (viewerDescription) {
-
-                viewerDescription.textContent =
-                    item.dataset.description ||
-                    "";
-            }
-
-
-            if (viewerCounter) {
-
-                viewerCounter.textContent =
-
-                    String(
-                        activeIndex + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    ) +
-
-                    " / " +
-
-                    String(
-                        activeItems.length
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-            }
-        }
-
-
-        function openViewer() {
-
-            if (!imageViewer) {
-                return;
-            }
-
-
-            updateViewer();
-
-
-            imageViewer
-                .classList
-                .add(
-                    "open"
-                );
-
-
-            imageViewer
-                .setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-
-            document.body
-                .classList
-                .add(
-                    "viewer-open"
-                );
-        }
-
-
-        function closeViewer() {
-
-            if (!imageViewer) {
-                return;
-            }
-
-
-            imageViewer
-                .classList
-                .remove(
-                    "open"
-                );
-
-
-            imageViewer
-                .setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-
-            document.body
-                .classList
-                .remove(
-                    "viewer-open"
-                );
-        }
-
-
-        function nextImage() {
-
-            if (!activeItems.length) {
-                return;
-            }
-
-
-            activeIndex =
-                (
-                    activeIndex + 1
-                ) %
-                activeItems.length;
-
-
-            updateViewer();
-        }
-
-
-        function previousImage() {
-
-            if (!activeItems.length) {
-                return;
-            }
-
-
-            activeIndex =
-                (
-                    activeIndex -
-                    1 +
-                    activeItems.length
-                ) %
-                activeItems.length;
-
-
-            updateViewer();
-        }
-
-
-        if (viewerClose) {
-
-            viewerClose
-                .addEventListener(
-                    "click",
-                    closeViewer
-                );
-        }
-
-
-        if (viewerBackdrop) {
-
-            viewerBackdrop
-                .addEventListener(
-                    "click",
-                    closeViewer
-                );
-        }
-
-
-        if (viewerNext) {
-
-            viewerNext
-                .addEventListener(
-                    "click",
-                    nextImage
-                );
-        }
-
-
-        if (viewerPrev) {
-
-            viewerPrev
-                .addEventListener(
-                    "click",
-                    previousImage
-                );
-        }
-
-
-        /* =================================================
-           KEYBOARD
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
+                const finalRect =
+                    measureFinalTitle();
 
                 if (
-                    officerModal &&
-                    officerModal
-                        .classList
-                        .contains(
-                            "open"
-                        )
+                    !finalRect ||
+                    startRect.width <= 0 ||
+                    startRect.height <= 0 ||
+                    finalRect.width <= 0 ||
+                    finalRect.height <= 0
                 ) {
 
-                    if (
-                        event.key ===
-                        "Escape"
-                    ) {
-
-                        closeOfficer();
-                    }
-
-
-                    if (
-                        event.key ===
-                        "ArrowRight"
-                    ) {
-
-                        nextOfficer();
-                    }
-
-
-                    if (
-                        event.key ===
-                        "ArrowLeft"
-                    ) {
-
-                        previousOfficer();
-                    }
-
-
+                    landSharedTitle();
                     return;
                 }
 
+                /*
+                   Freeze the title exactly where it
+                   currently appears.
 
-                if (
-                    imageViewer &&
-                    imageViewer
-                        .classList
-                        .contains(
-                            "open"
-                        )
-                ) {
+                   This lets us remove
+                   translate(-50%, -50%) without a jump.
+                */
 
-                    if (
-                        event.key ===
-                        "Escape"
-                    ) {
+                sharedTitle.style.position =
+                    "fixed";
 
-                        closeViewer();
-                    }
+                sharedTitle.style.left =
+                    `${startRect.left}px`;
 
+                sharedTitle.style.top =
+                    `${startRect.top}px`;
 
-                    if (
-                        event.key ===
-                        "ArrowRight"
-                    ) {
+                sharedTitle.style.width =
+                    `${startRect.width}px`;
 
-                        nextImage();
-                    }
+                sharedTitle.style.transform =
+                    "translate3d(0, 0, 0) scale(1)";
 
+                sharedTitle.style.transformOrigin =
+                    "top left";
 
-                    if (
-                        event.key ===
-                        "ArrowLeft"
-                    ) {
+                /*
+                   Calculate the movement from the current
+                   visual position to the REAL final title
+                   position.
+                */
 
-                        previousImage();
-                    }
+                const deltaX =
+                    finalRect.left -
+                    startRect.left;
 
+                const deltaY =
+                    finalRect.top -
+                    startRect.top;
+
+                /*
+                   Because the final title may have a
+                   different CSS font size, use the actual
+                   final rendered dimensions.
+
+                   We use the smaller scale ratio so both
+                   words remain inside the target area.
+                */
+
+                const scaleX =
+                    finalRect.width /
+                    startRect.width;
+
+                const scaleY =
+                    finalRect.height /
+                    startRect.height;
+
+                const finalScale =
+                    Math.min(
+                        scaleX,
+                        scaleY
+                    );
+
+                /*
+                   Reduced-motion users skip the animation.
+                */
+
+                if (prefersReducedMotion) {
+
+                    landSharedTitle();
+                    return;
                 }
 
+                titleAnimation =
+                    sharedTitle.animate(
+                        [
+                            {
+                                transform:
+                                    "translate3d(0, 0, 0) scale(1)"
+                            },
+
+                            {
+                                transform:
+                                    `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${finalScale})`
+                            }
+                        ],
+                        {
+                            duration:
+                                TITLE_MOVE_DURATION,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)",
+
+                            fill:
+                                "forwards"
+                        }
+                    );
+
+
+                titleAnimation.onfinish =
+                    () => {
+
+                        titleAnimation = null;
+
+                        /*
+                           The animated title is now visually
+                           sitting over its final destination.
+
+                           Put it into the actual destination.
+
+                           Because we measured the exact final
+                           layout beforehand, there should be
+                           no size jump here.
+                        */
+
+                        landSharedTitle();
+                    };
+
+
+                titleAnimation.oncancel =
+                    () => {
+
+                        titleAnimation = null;
+                    };
+
+            });
+
+        });
+    }
+
+
+    /* =====================================================
+       14. FADE INTRO
+    ====================================================== */
+
+    function fadeIntroAway() {
+
+        if (!intro) {
+            return;
+        }
+
+        intro.classList.add(
+            "go-home"
+        );
+
+        clearTimeout(
+            introHideTimer
+        );
+
+        introHideTimer =
+            setTimeout(
+                () => {
+
+                    intro.style.display =
+                        "none";
+
+                },
+                INTRO_FADE_DURATION + 250
+            );
+    }
+
+
+    /* =====================================================
+       15. INTRO SEQUENCE
+
+       VIDEO
+         ↓
+       COMPUTER ENGINEERING APPEARS
+         ↓
+       HERO REVEALS
+         ↓
+       TITLE MOVES INTO FINAL POSITION
+         ↓
+       INTRO FADES
+         ↓
+       TITLE BECOMES PART OF HERO
+    ====================================================== */
+
+    function startIntroSequence() {
+
+        if (introStarted) {
+            return;
+        }
+
+        introStarted = true;
+
+        clearTimeout(
+            fallbackTimer
+        );
+
+
+        /* -------------------------------------------------
+           REDUCED MOTION
+        -------------------------------------------------- */
+
+        if (prefersReducedMotion) {
+
+            revealHome();
+
+            showSharedTitle();
+
+            landSharedTitle();
+
+            fadeIntroAway();
+
+            introFinished = true;
+
+            return;
+        }
+
+
+        /* -------------------------------------------------
+           1. SHOW COMPUTER ENGINEERING
+        -------------------------------------------------- */
+
+        showSharedTitle();
+
+
+        /* -------------------------------------------------
+           2. REVEAL HERO BEHIND INTRO
+        -------------------------------------------------- */
+
+        revealHome();
+
+
+        /* -------------------------------------------------
+           3. BEGIN TITLE MOVEMENT
+        -------------------------------------------------- */
+
+        clearTimeout(
+            titleMoveTimer
+        );
+
+        titleMoveTimer =
+            setTimeout(
+                () => {
+
+                    moveTitleToHero();
+
+                    /*
+                       Fade the intro shortly after movement
+                       begins.
+
+                       This allows the new HELLO hero to
+                       appear underneath the moving title.
+                    */
+
+                    setTimeout(
+                        fadeIntroAway,
+                        140
+                    );
+
+                },
+                TITLE_MOVE_DELAY
+            );
+
+
+        /* -------------------------------------------------
+           4. MARK INTRO COMPLETE
+        -------------------------------------------------- */
+
+        clearTimeout(
+            introSequenceTimer
+        );
+
+        introSequenceTimer =
+            setTimeout(
+                () => {
+
+                    introFinished = true;
+
+                },
+                TITLE_MOVE_DELAY +
+                TITLE_MOVE_DURATION +
+                450
+            );
+    }
+
+
+    /* =====================================================
+       16. INTRO VIDEO EVENTS
+    ====================================================== */
+
+    function scheduleIntroFallback() {
+
+        clearTimeout(
+            fallbackTimer
+        );
+
+        fallbackTimer =
+            setTimeout(
+                startIntroSequence,
+                TITLE_APPEAR_DELAY
+            );
+    }
+
+
+    if (introVideo) {
+
+        /*
+           Preferred behavior:
+           transition when the intro video ends.
+        */
+
+        introVideo.addEventListener(
+            "ended",
+            () => {
+
+                clearTimeout(
+                    fallbackTimer
+                );
+
+                startIntroSequence();
             }
         );
 
 
-        /* =================================================
-           VIDEO SELECTOR
-        ================================================= */
+        /*
+           If the video fails to load,
+           the website still opens.
+        */
 
-        const featuredVideo =
-            document.getElementById(
-                "featuredVideo"
+        introVideo.addEventListener(
+            "error",
+            () => {
+
+                clearTimeout(
+                    fallbackTimer
+                );
+
+                fallbackTimer =
+                    setTimeout(
+                        startIntroSequence,
+                        900
+                    );
+            }
+        );
+
+
+        /*
+           Backup in case autoplay or "ended"
+           doesn't fire.
+        */
+
+        scheduleIntroFallback();
+
+    } else {
+
+        fallbackTimer =
+            setTimeout(
+                startIntroSequence,
+                700
             );
-
-        const featuredVideoSource =
-            document.getElementById(
-                "featuredVideoSource"
-            );
-
-        const featuredVideoTitle =
-            document.getElementById(
-                "featuredVideoTitle"
-            );
-
-        const featuredVideoNumber =
-            document.getElementById(
-                "featuredVideoNumber"
-            );
-
-        const videoOptions =
-            document.querySelectorAll(
-                ".video-option"
-            );
+    }
 
 
-        videoOptions.forEach(
-            function (option) {
+    /* =====================================================
+       17. DIRECT HASH OPENING
 
-                option.addEventListener(
-                    "click",
-                    function () {
+       Example:
+       index.html#projects
 
-                        videoOptions.forEach(
-                            function (item) {
+       Skip the intro when opening a section directly.
+    ====================================================== */
 
-                                item
-                                    .classList
-                                    .remove(
-                                        "active"
-                                    );
+    function handleInitialHash() {
 
-                            }
-                        );
+        const hash =
+            window.location.hash;
 
+        if (
+            !hash ||
+            hash === "#home"
+        ) {
+            return;
+        }
 
-                        option
-                            .classList
-                            .add(
-                                "active"
-                            );
+        let target = null;
 
+        try {
 
-                        if (
-                            featuredVideo &&
-                            featuredVideoSource
-                        ) {
+            target =
+                document.querySelector(
+                    hash
+                );
 
-                            featuredVideo.pause();
+        } catch (error) {
 
+            return;
+        }
 
-                            featuredVideoSource.src =
-                                option.dataset.video;
+        if (!target) {
+            return;
+        }
 
+        clearTimeout(
+            fallbackTimer
+        );
 
-                            featuredVideo.poster =
-                                option.dataset.poster ||
-                                "";
+        revealHome();
 
+        showSharedTitle();
 
-                            featuredVideo.load();
-                        }
+        landSharedTitle();
 
+        fadeIntroAway();
 
-                        if (
-                            featuredVideoTitle
-                        ) {
+        introStarted = true;
+        introFinished = true;
 
-                            featuredVideoTitle
-                                .textContent =
-                                option.dataset.title;
-                        }
+        setTimeout(
+            () => {
 
+                target.scrollIntoView(
+                    {
+                        behavior:
+                            prefersReducedMotion
+                                ? "auto"
+                                : "smooth",
 
-                        if (
-                            featuredVideoNumber
-                        ) {
-
-                            featuredVideoNumber
-                                .textContent =
-                                option.dataset.number;
-                        }
-
-
-                        if (featuredVideo) {
-
-                            featuredVideo.scrollIntoView(
-                                {
-                                    behavior:
-                                        "smooth",
-
-                                    block:
-                                        "center"
-                                }
-                            );
-                        }
-
+                        block:
+                            "start"
                     }
                 );
 
-            }
+            },
+            150
         );
+    }
 
 
-        /* =================================================
-           IMAGE VIEWER SWIPE
-        ================================================= */
-
-        let touchStartX =
-            0;
+    handleInitialHash();
 
 
-        let touchEndX =
-            0;
+    /* =====================================================
+       18. SCROLL REVEAL
+    ====================================================== */
+
+    function setupRevealObserver() {
+
+        if (
+            !("IntersectionObserver" in window)
+        ) {
+
+            revealElements.forEach(
+                (element) => {
+
+                    element.classList.add(
+                        "show"
+                    );
+                }
+            );
+
+            return;
+        }
 
 
-        if (imageViewer) {
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
 
-            imageViewer.addEventListener(
-                "touchstart",
-                function (event) {
+                    entries.forEach(
+                        (entry) => {
 
-                    touchStartX =
-                        event
-                            .changedTouches[0]
-                            .screenX;
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+                        }
+                    );
 
                 },
                 {
-                    passive: true
+                    threshold: 0.10,
+
+                    rootMargin:
+                        "0px 0px -7% 0px"
                 }
             );
 
 
-            imageViewer.addEventListener(
-                "touchend",
-                function (event) {
+        revealElements.forEach(
+            (element) => {
 
-                    touchEndX =
-                        event
-                            .changedTouches[0]
-                            .screenX;
+                observer.observe(
+                    element
+                );
+            }
+        );
+    }
 
 
-                    const distance =
-                        touchEndX -
-                        touchStartX;
+    setupRevealObserver();
 
+
+    /* =====================================================
+       19. ACTIVE NAVIGATION
+    ====================================================== */
+
+    function setActiveNavigation(sectionId) {
+
+        navLinks.forEach(
+            (link) => {
+
+                const href =
+                    link.getAttribute(
+                        "href"
+                    );
+
+                link.classList.toggle(
+                    "active",
+                    href === `#${sectionId}`
+                );
+            }
+        );
+    }
+
+
+    function setupNavigationObserver() {
+
+        if (
+            !("IntersectionObserver" in window)
+        ) {
+            return;
+        }
+
+
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
+
+                    const visibleSections =
+                        entries
+                            .filter(
+                                (entry) =>
+                                    entry.isIntersecting
+                            )
+                            .sort(
+                                (a, b) =>
+                                    b.intersectionRatio -
+                                    a.intersectionRatio
+                            );
 
                     if (
-                        Math.abs(
-                            distance
-                        ) < 60
+                        visibleSections.length === 0
                     ) {
+                        return;
+                    }
+
+                    const sectionId =
+                        visibleSections[0]
+                            .target
+                            .id;
+
+                    if (sectionId) {
+
+                        setActiveNavigation(
+                            sectionId
+                        );
+                    }
+
+                },
+                {
+                    threshold:
+                        [
+                            0.15,
+                            0.3,
+                            0.5
+                        ],
+
+                    rootMargin:
+                        "-20% 0px -55% 0px"
+                }
+            );
+
+
+        sections.forEach(
+            (section) => {
+
+                observer.observe(
+                    section
+                );
+            }
+        );
+    }
+
+
+    setupNavigationObserver();
+
+
+    /* =====================================================
+       20. SMOOTH INTERNAL LINKS
+    ====================================================== */
+
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    internalLinks.forEach(
+        (link) => {
+
+            link.addEventListener(
+                "click",
+                (event) => {
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+                    if (
+                        !href ||
+                        href === "#"
+                    ) {
+                        return;
+                    }
+
+                    let target = null;
+
+                    try {
+
+                        target =
+                            document.querySelector(
+                                href
+                            );
+
+                    } catch (error) {
 
                         return;
                     }
 
-
-                    if (
-                        distance < 0
-                    ) {
-
-                        nextImage();
-
-                    } else {
-
-                        previousImage();
-
+                    if (!target) {
+                        return;
                     }
 
-                },
+                    event.preventDefault();
+
+                    closeMobileMenu();
+
+                    const nav =
+                        document.querySelector(
+                            "nav"
+                        );
+
+                    const navHeight =
+                        nav
+                            ? nav.offsetHeight
+                            : 0;
+
+                    const targetPosition =
+                        target
+                            .getBoundingClientRect()
+                            .top +
+                        window.scrollY -
+                        navHeight -
+                        10;
+
+
+                    window.scrollTo(
+                        {
+                            top:
+                                targetPosition,
+
+                            behavior:
+                                prefersReducedMotion
+                                    ? "auto"
+                                    : "smooth"
+                        }
+                    );
+
+
+                    /*
+                       Update the URL without causing
+                       another browser jump.
+                    */
+
+                    try {
+
+                        history.replaceState(
+                            null,
+                            "",
+                            href
+                        );
+
+                    } catch (error) {
+
+                        /*
+                           URL update isn't essential.
+                        */
+
+                    }
+                }
+            );
+        }
+    );
+
+
+    /* =====================================================
+       21. MOBILE MENU
+    ====================================================== */
+
+    function openMobileMenu() {
+
+        if (
+            !menuButton ||
+            !mobileMenu
+        ) {
+            return;
+        }
+
+        menuButton.classList.add(
+            "active"
+        );
+
+        mobileMenu.classList.add(
+            "active"
+        );
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+    }
+
+
+    function closeMobileMenu() {
+
+        if (
+            !menuButton ||
+            !mobileMenu
+        ) {
+            return;
+        }
+
+        menuButton.classList.remove(
+            "active"
+        );
+
+        mobileMenu.classList.remove(
+            "active"
+        );
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+    }
+
+
+    function toggleMobileMenu() {
+
+        if (
+            !menuButton ||
+            !mobileMenu
+        ) {
+            return;
+        }
+
+        const isOpen =
+            mobileMenu.classList.contains(
+                "active"
+            );
+
+        if (isOpen) {
+
+            closeMobileMenu();
+
+        } else {
+
+            openMobileMenu();
+        }
+    }
+
+
+    if (menuButton) {
+
+        menuButton.addEventListener(
+            "click",
+            toggleMobileMenu
+        );
+    }
+
+
+    /* =====================================================
+       22. ESCAPE CLOSES MOBILE MENU
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (event.key === "Escape") {
+                closeMobileMenu();
+            }
+        }
+    );
+
+
+    /* =====================================================
+       23. FAQ
+
+       Keep only one FAQ item open at a time.
+    ====================================================== */
+
+    faqDetails.forEach(
+        (detail) => {
+
+            detail.addEventListener(
+                "toggle",
+                () => {
+
+                    if (!detail.open) {
+                        return;
+                    }
+
+                    faqDetails.forEach(
+                        (otherDetail) => {
+
+                            if (
+                                otherDetail !== detail
+                            ) {
+                                otherDetail.open = false;
+                            }
+                        }
+                    );
+                }
+            );
+        }
+    );
+
+
+    /* =====================================================
+       24. CURSOR TRAIL
+
+       Desktop / fine pointer only.
+    ====================================================== */
+
+    const supportsFinePointer =
+        window.matchMedia(
+            "(hover: hover) and (pointer: fine)"
+        ).matches;
+
+
+    if (
+        supportsFinePointer &&
+        !prefersReducedMotion
+    ) {
+
+        const TRAIL_COUNT = 8;
+
+        const trail = [];
+
+        const mouse = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+        };
+
+
+        for (
+            let i = 0;
+            i < TRAIL_COUNT;
+            i++
+        ) {
+
+            const circle =
+                document.createElement(
+                    "div"
+                );
+
+            circle.className =
+                "cursor-trail-circle";
+
+            const size =
+                Math.max(
+                    4,
+                    13 - i
+                );
+
+            circle.style.width =
+                `${size}px`;
+
+            circle.style.height =
+                `${size}px`;
+
+            circle.style.opacity =
+                `${Math.max(
+                    0.05,
+                    0.28 - i * 0.03
+                )}`;
+
+            body.appendChild(
+                circle
+            );
+
+            trail.push(
                 {
-                    passive: true
+                    element: circle,
+
+                    x: mouse.x,
+                    y: mouse.y
                 }
             );
         }
 
 
-        /* =================================================
-           PAGE LINKS
-        ================================================= */
+        window.addEventListener(
+            "mousemove",
+            (event) => {
 
-        const pageLinks =
-            document.querySelectorAll(
-                ".page-link"
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function animateCursor() {
+
+            let x = mouse.x;
+            let y = mouse.y;
+
+            trail.forEach(
+                (point, index) => {
+
+                    const followSpeed =
+                        index === 0
+                            ? 0.30
+                            : 0.24;
+
+                    point.x +=
+                        (x - point.x) *
+                        followSpeed;
+
+                    point.y +=
+                        (y - point.y) *
+                        followSpeed;
+
+                    point.element.style.left =
+                        `${point.x}px`;
+
+                    point.element.style.top =
+                        `${point.y}px`;
+
+                    x = point.x;
+                    y = point.y;
+                }
+            );
+
+            requestAnimationFrame(
+                animateCursor
+            );
+        }
+
+
+        animateCursor();
+    }
+
+
+    /* =====================================================
+       25. RESIZE
+    ====================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(
+                resizeTimer
+            );
+
+            resizeTimer =
+                setTimeout(
+                    () => {
+
+                        /*
+                           Close the mobile menu when
+                           returning to desktop.
+                        */
+
+                        if (
+                            window.innerWidth > 900
+                        ) {
+                            closeMobileMenu();
+                        }
+
+                        /*
+                           If the browser was resized during
+                           the title animation, safely finish
+                           the transition instead of leaving
+                           the title floating.
+                        */
+
+                        if (
+                            introStarted &&
+                            !titleLanded &&
+                            introFinished
+                        ) {
+
+                            if (titleAnimation) {
+
+                                titleAnimation.cancel();
+                                titleAnimation = null;
+                            }
+
+                            landSharedTitle();
+                        }
+
+                    },
+                    150
+                );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       26. BROWSER BACK / FORWARD CACHE
+    ====================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        (event) => {
+
+            if (!event.persisted) {
+                return;
+            }
+
+            clearTimeout(
+                fallbackTimer
+            );
+
+            clearTimeout(
+                titleMoveTimer
+            );
+
+            clearTimeout(
+                introSequenceTimer
+            );
+
+            introStarted = true;
+            introFinished = true;
+
+            revealHome();
+
+            showSharedTitle();
+
+            landSharedTitle();
+
+
+            if (intro) {
+
+                intro.classList.add(
+                    "go-home"
+                );
+
+                intro.style.display =
+                    "none";
+            }
+
+
+            /*
+               Reveal elements already visible
+               in the restored viewport.
+            */
+
+            revealElements.forEach(
+                (element) => {
+
+                    const rect =
+                        element
+                            .getBoundingClientRect();
+
+                    if (
+                        rect.top <
+                        window.innerHeight
+                    ) {
+
+                        element.classList.add(
+                            "show"
+                        );
+                    }
+                }
+            );
+        }
+    );
+
+
+    /* =====================================================
+       27. VISIBILITY RESTORATION
+
+       If the tab is hidden during the animation,
+       don't leave the title floating when the user
+       comes back.
+    ====================================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+
+            if (
+                document.visibilityState !==
+                "visible"
+            ) {
+                return;
+            }
+
+            if (
+                introStarted &&
+                introFinished &&
+                !titleLanded
+            ) {
+
+                if (titleAnimation) {
+
+                    titleAnimation.cancel();
+                    titleAnimation = null;
+                }
+
+                landSharedTitle();
+            }
+        }
+    );
+
+
+    /* =====================================================
+       28. SAFETY FALLBACK
+
+       The website should never remain permanently
+       trapped on the intro.
+    ====================================================== */
+
+    setTimeout(
+        () => {
+
+            if (introFinished) {
+                return;
+            }
+
+            if (!introStarted) {
+                startIntroSequence();
+            }
+
+        },
+        7500
+    );
+
+
+    /* =====================================================
+       END
+    ====================================================== */
+
+});
+/* =========================================================
+   GLOBAL SCROLL REVEAL
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /*
+       Main elements that will animate when they
+       enter the screen.
+    */
+    const revealSelectors = [
+        ".section-label",
+        ".section-title",
+        ".section-intro",
+
+        ".program-copy",
+        ".program-video",
+
+        ".deeper-card",
+
+        ".achievements-heading",
+
+        ".news-header",
+        ".news-card",
+
+        ".faq-heading",
+        ".faq-item",
+
+        ".cta-content",
+
+        ".cpe-footer-brand",
+        ".cpe-footer-social",
+    ];
+
+
+    const revealItems = document.querySelectorAll(
+        revealSelectors.join(",")
+    );
+
+
+    revealItems.forEach((item, index) => {
+
+        item.classList.add("scroll-reveal");
+
+        /*
+           Small stagger.
+           We keep the delay short so the website
+           doesn't feel slow.
+        */
+        const delay = (index % 4) * 70;
+
+        item.style.transitionDelay = `${delay}ms`;
+    });
+
+
+    /*
+       Images get a softer scale + fade animation.
+    */
+    const revealImages = document.querySelectorAll(
+        ".program-video img, .news-card-image, .achievements-showcase img"
+    );
+
+
+    revealImages.forEach((image) => {
+        image.classList.add("scroll-reveal-image");
+    });
+
+
+    /* =====================================================
+       OBSERVER
+    ===================================================== */
+
+    const revealObserver = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "is-visible"
+                    );
+
+                    /*
+                       Stop observing after reveal.
+                       This means it animates only once.
+                    */
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12,
+
+            rootMargin:
+                "0px 0px -40px 0px"
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".scroll-reveal, .scroll-reveal-image"
+        )
+        .forEach((item) => {
+
+            revealObserver.observe(item);
+
+        });
+        
+});
+/* =========================================================
+   =========================================================
+   SCPES PAGE
+   PAGE-SPECIFIC JAVASCRIPT
+
+   IMPORTANT:
+   The complete original index.js should remain ABOVE this.
+   =========================================================
+   ========================================================= */
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* =====================================================
+       01. OFFICER CARDS
+    ====================================================== */
+
+    const officerButtons =
+        document.querySelectorAll(".scpes-officer-button");
+
+
+    officerButtons.forEach((button) => {
+
+        button.addEventListener("click", () => {
+
+            const card =
+                button.closest(".scpes-officer-card");
+
+
+            if (!card) {
+                return;
+            }
+
+
+            /*
+             * For now this gives the cards a simple
+             * active interaction without changing the
+             * Index structure.
+             */
+
+            officerButtons.forEach((item) => {
+
+                if (item !== button) {
+
+                    item.classList.remove(
+                        "officer-active"
+                    );
+
+                }
+
+            });
+
+
+            button.classList.toggle(
+                "officer-active"
+            );
+
+        });
+
+    });
+
+
+
+    /* =====================================================
+       02. FAQ
+
+       Native <details> is already being used.
+       This makes only one FAQ stay open at a time.
+    ====================================================== */
+
+    const faqItems =
+        document.querySelectorAll(".scpes-faq-item");
+
+
+    faqItems.forEach((item) => {
+
+        item.addEventListener("toggle", () => {
+
+            if (!item.open) {
+                return;
+            }
+
+
+            faqItems.forEach((otherItem) => {
+
+                if (otherItem !== item) {
+
+                    otherItem.removeAttribute(
+                        "open"
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+
+    /* =====================================================
+       03. SCPES INTERNAL NAVIGATION
+
+       Keeps anchor scrolling smooth without interfering
+       with the navigation behavior from index.js.
+    ====================================================== */
+
+    const scpesAnchorLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    scpesAnchorLinks.forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            (event) => {
+
+                const targetID =
+                    link.getAttribute("href");
+
+
+                if (
+                    !targetID ||
+                    targetID === "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetID
+                    );
+
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "start"
+
+                });
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       04. ACTIVITY IMAGE MOVEMENT
+
+       Very small transform only.
+       No heavy scroll calculations.
+       This avoids the lag problem we had before.
+    ====================================================== */
+
+    const activityCards =
+        document.querySelectorAll(
+            ".scpes-activity-card"
+        );
+
+
+    activityCards.forEach((card) => {
+
+        const image =
+            card.querySelector(
+                ".scpes-activity-image img"
             );
 
 
-        pageLinks.forEach(
-            function (link) {
+        if (!image) {
+            return;
+        }
 
-                link.addEventListener(
-                    "click",
-                    function (event) {
 
-                        const href =
-                            link.getAttribute(
-                                "href"
-                            );
+        card.addEventListener(
+            "mouseenter",
+            () => {
 
+                image.style.transform =
+                    "scale(1.025)";
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                image.style.transform =
+                    "";
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       05. OFFICER KEYBOARD SUPPORT
+    ====================================================== */
+
+    officerButtons.forEach((button) => {
+
+        button.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key !== "Enter" &&
+                    event.key !== " "
+                ) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+                button.click();
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       06. VIDEO BEHAVIOR
+
+       When one SCPES video starts playing,
+       pause the others.
+    ====================================================== */
+
+    const scpesVideos =
+        document.querySelectorAll(
+            ".scpes-video-frame video"
+        );
+
+
+    scpesVideos.forEach((video) => {
+
+        video.addEventListener(
+            "play",
+            () => {
+
+                scpesVideos.forEach(
+                    (otherVideo) => {
 
                         if (
-                            !href ||
-                            href.startsWith(
-                                "#"
-                            )
+                            otherVideo !== video &&
+                            !otherVideo.paused
                         ) {
 
-                            return;
+                            otherVideo.pause();
+
                         }
-
-
-                        if (
-                            event.ctrlKey ||
-                            event.metaKey ||
-                            event.shiftKey ||
-                            event.altKey
-                        ) {
-
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        if (
-                            !pageTransition
-                        ) {
-
-                            window.location.href =
-                                href;
-
-                            return;
-                        }
-
-
-                        pageTransition
-                            .classList
-                            .remove(
-                                "entering"
-                            );
-
-
-                        pageTransition
-                            .classList
-                            .add(
-                                "leaving"
-                            );
-
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    href;
-
-                            },
-                            700
-                        );
 
                     }
                 );
@@ -1574,299 +2200,54 @@ document.addEventListener(
             }
         );
 
-
-        /* =================================================
-           CURSOR TRAIL
-        ================================================= */
-
-        const finePointer =
-            window.matchMedia(
-                "(pointer: fine)"
-            ).matches;
+    });
 
 
-        const reducedMotion =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
+
+    /* =====================================================
+       07. IMAGE ERROR SAFETY
+
+       If one of the temporary SCPES asset names does
+       not exist yet, hide the broken image icon.
+
+       Once you replace the src values with your real
+       existing assets, the images display normally.
+    ====================================================== */
+
+    const scpesImages =
+        document.querySelectorAll(
+            ".scpes-officer-photo img, " +
+            ".scpes-activity-image img, " +
+            ".scpes-community-main img, " +
+            ".program-media img"
+        );
+
+
+    scpesImages.forEach((image) => {
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.classList.add(
+                    "scpes-image-missing"
+                );
+
+            }
+        );
 
 
         if (
-            finePointer &&
-            !reducedMotion
+            image.complete &&
+            image.naturalWidth === 0
         ) {
 
-            const circleCount =
-                12;
-
-
-            const circles =
-                [];
-
-
-            let mouseX =
-                -100;
-
-
-            let mouseY =
-                -100;
-
-
-            let mouseActive =
-                false;
-
-
-            for (
-                let i = 0;
-                i < circleCount;
-                i++
-            ) {
-
-                const circle =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                circle.className =
-                    "cursor-trail-circle";
-
-
-                const size =
-                    Math.max(
-                        3,
-                        12 -
-                        i * .65
-                    );
-
-
-                circle.style.width =
-                    size + "px";
-
-
-                circle.style.height =
-                    size + "px";
-
-
-                document.body
-                    .appendChild(
-                        circle
-                    );
-
-
-                circles.push(
-                    {
-
-                        element:
-                            circle,
-
-                        x:
-                            mouseX,
-
-                        y:
-                            mouseY
-
-                    }
-                );
-
-            }
-
-
-            document.addEventListener(
-                "mousemove",
-                function (event) {
-
-                    mouseX =
-                        event.clientX;
-
-
-                    mouseY =
-                        event.clientY;
-
-
-                    mouseActive =
-                        true;
-
-                }
+            image.classList.add(
+                "scpes-image-missing"
             );
-
-
-            document.addEventListener(
-                "mouseleave",
-                function () {
-
-                    mouseActive =
-                        false;
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mouseenter",
-                function () {
-
-                    mouseActive =
-                        true;
-
-                }
-            );
-
-
-            function animateTrail() {
-
-                let x =
-                    mouseX;
-
-
-                let y =
-                    mouseY;
-
-
-                circles.forEach(
-                    function (
-                        circle,
-                        index
-                    ) {
-
-                        circle.x +=
-                            (
-                                x -
-                                circle.x
-                            ) *
-                            .30;
-
-
-                        circle.y +=
-                            (
-                                y -
-                                circle.y
-                            ) *
-                            .30;
-
-
-                        const size =
-                            Math.max(
-                                3,
-                                12 -
-                                index * .65
-                            );
-
-
-                        const opacity =
-                            mouseActive
-
-                                ? Math.max(
-                                    .05,
-                                    .46 -
-                                    index *
-                                    .035
-                                )
-
-                                : 0;
-
-
-                        circle
-                            .element
-                            .style
-                            .opacity =
-                            opacity;
-
-
-                        circle
-                            .element
-                            .style
-                            .transform =
-
-                            "translate3d(" +
-
-                            (
-                                circle.x -
-                                size / 2
-                            ) +
-
-                            "px," +
-
-                            (
-                                circle.y -
-                                size / 2
-                            ) +
-
-                            "px,0)";
-
-
-                        x =
-                            circle.x;
-
-
-                        y =
-                            circle.y;
-
-                    }
-                );
-
-
-                requestAnimationFrame(
-                    animateTrail
-                );
-
-            }
-
-
-            animateTrail();
 
         }
 
+    });
 
-        /* =================================================
-           BACK BUTTON FIX
-        ================================================= */
-
-        window.addEventListener(
-            "pageshow",
-            function () {
-
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
-                    );
-
-
-                if (pageTransition) {
-
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering",
-                            "leaving"
-                        );
-                }
-
-
-                revealElements.forEach(
-                    function (element) {
-
-                        if (
-                            element
-                                .getBoundingClientRect()
-                                .top <
-                            window.innerHeight
-                        ) {
-
-                            element
-                                .classList
-                                .add(
-                                    "visible"
-                                );
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-    }
-);
+});
