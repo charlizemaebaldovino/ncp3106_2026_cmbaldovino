@@ -1,7 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+
+<html
+    lang="en"
+    data-theme="light"
+    data-intro-theme="light"
+>
 
 <head>
+
+    <!-- =====================================================
+         BASIC META
+    ====================================================== -->
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,9 +19,25 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>SCPES | UE Computer Engineering</title>
+    <meta
+        name="description"
+        content="Society of Computer Engineering Students — University of the East Manila"
+    >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <title>
+        SCPES | UE Computer Engineering
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
     <link
         rel="preconnect"
@@ -24,2165 +50,1446 @@
         rel="stylesheet"
     >
 
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         SCPES CSS
+         THIS WILL BE BASED DIRECTLY ON INDEX.CSS
+    ====================================================== -->
+
     <link
         rel="stylesheet"
         href="scpes.css"
     >
 
-    <script>
-        (function () {
-            const savedTheme =
-                localStorage.getItem("cpe-theme") || "light";
-
-            document.documentElement.dataset.theme =
-                savedTheme;
-        })();
-    </script>
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     PAGE TRANSITION
-========================================================= -->
+    <!-- =====================================================
+         CUSTOM CURSOR
+         SAME AS INDEX
+    ====================================================== -->
 
-<div
-    class="page-transition"
-    id="pageTransition"
-></div>
+    <div
+        class="cursor-dot"
+        id="cursorDot"
+    ></div>
 
-
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-
-<div class="topbar">
-
-    <div class="topbar-left">
-
-        <span class="status-dot"></span>
-
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
-
-    </div>
+    <div
+        class="cursor-ring"
+        id="cursorRing"
+    ></div>
 
 
-    <div class="topbar-right">
+    <!-- =====================================================
+         SITE
+    ====================================================== -->
 
-        <span>
-            SCPES
-        </span>
-
-        <span id="clock">
-            MANILA 00:00:00
-        </span>
-
-    </div>
-
-</div>
+    <div
+        class="site"
+        id="site"
+    >
 
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
+        <!-- =================================================
+             TOP BAR
+             SAME STRUCTURE AS INDEX
+        ================================================== -->
 
-<nav>
+        <div class="topbar">
 
-    <div class="nav-inner">
+            <span>
+                UE MANILA / COMPUTER ENGINEERING
+            </span>
 
-        <a
-            href="index.html"
-            class="logo page-link"
+            <span>
+                CORE CPE © 2026
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+             SAME STRUCTURE + TEXT AS INDEX
+        ================================================== -->
+
+        <nav class="navbar">
+
+            <div class="nav-inner">
+
+
+                <!-- =========================================
+                     LOGO
+                ========================================== -->
+
+                <a
+                    class="logo"
+                    href="index.html"
+                >
+
+                    CpE
+
+                    <small>
+                        UE MANILA
+                    </small>
+
+                </a>
+
+
+                <!-- =========================================
+                     NAVIGATION LINKS
+                     SAME TEXT AS INDEX
+                ========================================== -->
+
+                <ul class="nav-links">
+
+                    <li>
+
+                        <a href="#program">
+                            PROGRAM
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="#projects">
+                            PROJECTS
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="#about">
+                            ABOUT
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="#go-deeper">
+                            DIVE DEEPER
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="#faq">
+                            FAQ
+                        </a>
+
+                    </li>
+
+                </ul>
+
+
+                <!-- =========================================
+                     RIGHT NAVIGATION
+                ========================================== -->
+
+                <div class="nav-right">
+
+
+                    <!-- CLOCK -->
+
+                    <div
+                        class="clock"
+                        id="clock"
+                    >
+                        MANILA 00:00:00
+                    </div>
+
+
+                    <!-- THEME -->
+
+                    <button
+                        class="theme-toggle"
+                        id="themeToggle"
+                        type="button"
+                        aria-label="Switch color theme"
+                    >
+
+                        <span class="sun">
+                            ☀
+                        </span>
+
+                        <span class="moon">
+                            ☾
+                        </span>
+
+                    </button>
+
+
+                    <!-- EXPLORE -->
+
+                    <a
+                        class="cta"
+                        href="#go-deeper"
+                    >
+                        EXPLORE →
+                    </a>
+
+                </div>
+
+
+                <!-- =========================================
+                     MOBILE MENU BUTTON
+                ========================================== -->
+
+                <button
+                    class="menu-button"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <!-- =================================================
+             MOBILE NAVIGATION
+             SAME AS INDEX
+        ================================================== -->
+
+        <div
+            class="mobile-menu"
+            id="mobileMenu"
         >
-            CPE
 
-            <small>
-                UNIVERSITY OF THE EAST
-            </small>
-        </a>
+            <a href="#program">
+                PROGRAM
+            </a>
 
+            <a href="#projects">
+                PROJECTS
+            </a>
 
-        <ul class="nav-links">
+            <a href="#about">
+                ABOUT
+            </a>
 
-            <li>
-                <a
-                    href="computer-engineering.html"
-                    class="page-link"
-                >
-                    CPE
-                </a>
-            </li>
+            <a href="#go-deeper">
+                DIVE DEEPER
+            </a>
 
-            <li>
-                <a
-                    href="ue-program.html"
-                    class="page-link"
-                >
-                    UE PROGRAM
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="specializations.html"
-                    class="page-link"
-                >
-                    SPECIALIZATIONS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="careers.html"
-                    class="page-link"
-                >
-                    CAREERS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="faculty.html"
-                    class="page-link"
-                >
-                    FACULTY
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="scpes.html"
-                    class="active"
-                >
-                    SCPES
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="nav-right">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle theme"
-            >
-                <span class="sun">☀</span>
-                <span class="moon">◐</span>
-            </button>
-
-
-            <a
-                href="index.html"
-                class="home-button page-link"
-            >
-                HOME ↗
+            <a href="#faq">
+                FAQ
             </a>
 
         </div>
 
-    </div>
 
-</nav>
+        <!-- =================================================
+             MAIN
+        ================================================== -->
 
-
-<main>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="scpes-hero">
-
-    <div class="hero-meta reveal">
-
-        <span>
-            06 / STUDENT COMMUNITY
-        </span>
-
-        <span>
-            SOCIETY OF COMPUTER ENGINEERING STUDENTS
-        </span>
-
-    </div>
+        <main id="home">
 
 
-    <div class="hero-title">
+           <!-- =====================================================
+     SCPES HERO
+====================================================== -->
 
-        <span class="hero-line hero-line-one">
-            WE ARE
-        </span>
+<section class="scpes-feature">
 
-        <span class="hero-line hero-line-two">
-            <em>SCPES.</em>
-        </span>
+    <div class="scpes-feature-inner">
 
-    </div>
+        <div class="scpes-feature-photo">
 
 
-    <div class="hero-visual reveal">
-
-        <div class="hero-image-wrap">
+            <!-- =========================================
+                 SCPES GROUP PHOTO
+            ========================================== -->
 
             <img
-                src="assets/scpes-officers-group.jpg"
-                alt="SCPES Officers group"
+                src="assets/scpescover.jpg"
+                alt="Society of Computer Engineering Students"
+                class="scpes-feature-image"
             >
 
-            <div class="hero-image-overlay">
 
-                <span>
-                    UE MANILA
-                </span>
+            <!-- =========================================
+                 SCPES LOGO
+            ========================================== -->
 
-                <strong>
-                    CONNECT.<br>
-                    CREATE.<br>
-                    LEAD.
-                </strong>
+            <div class="scpes-feature-badge">
+
+                <img
+                    src="assets/scpeslogo.png"
+                    alt="SCPES Logo"
+                >
+
+            </div>
+
+
+            <!-- =========================================
+                 SCPES TITLE
+            ========================================== -->
+
+            <div class="scpes-feature-title">
+
+                <h1>
+                    SOCIETY OF
+                    <br>
+                    COMPUTER ENGINEERING
+                    <br>
+                    STUDENTS
+                </h1>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="hero-side">
+</section>
+           
+<!-- =====================================================
+     SCPES INTRODUCTION
+====================================================== -->
 
-            <span class="hero-side-label">
-                STUDENT ORGANIZATION
-            </span>
+<section class="scpes-intro">
 
-            <p>
-                A community for Computer Engineering
-                students built around connection,
-                collaboration, technical growth,
-                service, and shared experiences.
+    <div class="container">
+
+        <div class="scpes-intro-content reveal">
+
+            <div class="scpes-intro-label">
+                <span>01</span>
+                <span>THE ORGANIZATION</span>
+            </div>
+
+            <p class="scpes-intro-text">
+                The Society of Computer Engineering Students brings together
+                the Computer Engineering community of UE Manila through
+                collaboration, learning, leadership, and shared experiences.
+                It provides students with opportunities to connect with one
+                another, develop their skills, participate in meaningful
+                activities, and grow beyond the classroom.
             </p>
 
+        </div>
 
-            <button
-                class="explore-button"
-                id="exploreButton"
+    </div>
+
+</section>
+                        <!-- =================================================
+                 PROJECTS
+                 SCPES OFFICERS
+            ================================================== -->
+
+            <section
+                class="section projects-section scpes-officers-section"
+                id="projects"
             >
 
-                <span>
-                    EXPLORE SCPES
-                </span>
+                <div class="container">
 
-                <span>
-                    ↓
-                </span>
 
-            </button>
+                    <!-- =========================================
+                         SECTION HEADER
+                    ========================================== -->
 
-        </div>
+                    <div class="projects-heading reveal">
 
-    </div>
+                        <div class="section-label">
+                            02 / LEADERSHIP
+                        </div>
 
-</section>
 
+                        <h2 class="section-title">
+                            MEET THE
+                            <br>
+                            OFFICERS
+                        </h2>
 
-<!-- =========================================================
-     MARQUEE
-========================================================= -->
 
-<div class="scpes-marquee">
+                        <p class="section-intro">
+                            Meet the student leaders behind the
+                            Society of Computer Engineering Students
+                            who work together to organize activities,
+                            support the CpE community, and create
+                            meaningful experiences for students.
+                        </p>
 
-    <div class="marquee-track">
+                    </div>
 
-        <span>CONNECT</span><i>✦</i>
-        <span>COLLABORATE</span><i>✦</i>
-        <span>CREATE</span><i>✦</i>
-        <span>SERVE</span><i>✦</i>
-        <span>LEAD</span><i>✦</i>
-        <span>GROW</span><i>✦</i>
 
-        <span>CONNECT</span><i>✦</i>
-        <span>COLLABORATE</span><i>✦</i>
-        <span>CREATE</span><i>✦</i>
-        <span>SERVE</span><i>✦</i>
-        <span>LEAD</span><i>✦</i>
-        <span>GROW</span><i>✦</i>
+                    <!-- =========================================
+                         OFFICERS GRID
+                    ========================================== -->
 
-    </div>
+                    <div class="scpes-officers-grid">
 
-</div>
 
+<!-- =====================================
+     01 / PRESIDENT
+====================================== -->
 
-<!-- =========================================================
-     ABOUT SCPES
-========================================================= -->
+<article class="scpes-officer-card reveal">
 
-<section
-    class="content-section about-section"
-    id="about"
->
-
-    <div class="section-heading reveal">
-
-        <span class="section-number">
-            01
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                ABOUT SCPES
-            </span>
-
-            <h2>
-                MORE THAN AN<br>
-                <em>ORGANIZATION.</em>
-            </h2>
-
-        </div>
-
-
-        <p class="section-description">
-            The Society of Computer Engineering Students
-            brings together Computer Engineering students
-            through academic, technical, social, and
-            community-centered initiatives.
-        </p>
-
-    </div>
-
-
-    <div class="about-layout">
-
-        <div class="about-main reveal">
-
-            <p>
-                SCPES provides opportunities for students
-                to connect with one another, develop their
-                abilities, participate in meaningful
-                activities, and contribute to the Computer
-                Engineering community.
-            </p>
-
-        </div>
-
-
-        <div class="about-code reveal">
-
-            <span>
-                SCPES
-            </span>
-
-            <strong>
-                UE / CPE
-            </strong>
-
-        </div>
-
-    </div>
-
-
-    <div class="about-strip reveal">
-
-        <span>ACADEMICS</span>
-        <span>TECHNOLOGY</span>
-        <span>COMMUNITY</span>
-        <span>LEADERSHIP</span>
-        <span>COLLABORATION</span>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     OBJECTIVES
-========================================================= -->
-
-<section class="objectives-section">
-
-    <div class="objectives-heading reveal">
-
-        <span class="section-label">
-            02 / ORGANIZATION OBJECTIVES
-        </span>
-
-        <h2>
-            WHAT WE<br>
-            <em>STAND FOR.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="objective-grid">
-
-        <article class="objective-card reveal">
-
-            <span>01</span>
-
-            <div class="objective-symbol">
-                +
-            </div>
-
-            <h3>
-                BUILD<br>
-                COMMUNITY
-            </h3>
-
-            <p>
-                Strengthen connections among Computer
-                Engineering students and create a
-                supportive student community.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>02</span>
-
-            <div class="objective-symbol">
-                &lt;/&gt;
-            </div>
-
-            <h3>
-                DEVELOP<br>
-                SKILLS
-            </h3>
-
-            <p>
-                Provide activities that encourage
-                technical learning, creativity,
-                collaboration, and professional growth.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>03</span>
-
-            <div class="objective-symbol">
-                ↗
-            </div>
-
-            <h3>
-                CREATE<br>
-                OPPORTUNITIES
-            </h3>
-
-            <p>
-                Give students opportunities to participate
-                in seminars, projects, competitions,
-                events, and collaborative experiences.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>04</span>
-
-            <div class="objective-symbol">
-                ♥
-            </div>
-
-            <h3>
-                SERVE THE<br>
-                COMMUNITY
-            </h3>
-
-            <p>
-                Encourage responsibility, participation,
-                service, and initiatives that create a
-                positive impact beyond the classroom.
-            </p>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     OFFICERS
-========================================================= -->
-
-<section class="officers-section">
-
-    <div class="section-heading officers-heading reveal">
-
-        <span class="section-number">
-            03
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                MEET THE OFFICERS
-            </span>
-
-            <h2>
-                THE PEOPLE<br>
-                <em>BEHIND SCPES.</em>
-            </h2>
-
-        </div>
-
-
-        <p class="section-description">
-            Meet the student leaders working together
-            to organize programs, activities, projects,
-            and experiences for the Computer Engineering
-            community.
-        </p>
-
-    </div>
-
-
-    <div class="officer-grid">
-
-
-        <!-- PRESIDENT -->
-
-        <article
-            class="officer-card officer-president reveal"
-            data-officer="0"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-charlize-baldovino.jpg"
-                    alt="Charlize Mae S. Baldovino"
-                >
-
-                <span class="officer-index">
-                    01
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        PRESIDENT
-                    </span>
-
-                    <strong>
-                        LEAD.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    PRESIDENT
-                </span>
-
-                <h3>
-                    CHARLIZE MAE S.<br>
-                    BALDOVINO
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- VP INTERNAL -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="1"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-jawad-macawadib.jpg"
-                    alt="Jawad Hadji Cassan M. Macawadib"
-                >
-
-                <span class="officer-index">
-                    02
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        VP INTERNAL
-                    </span>
-
-                    <strong>
-                        CONNECT.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VICE PRESIDENT FOR INTERNAL AFFAIRS
-                </span>
-
-                <h3>
-                    JAWAD HADJI CASSAN M.<br>
-                    MACAWADIB
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- VP EXTERNAL -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="2"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-joshua-madriaga.jpg"
-                    alt="Joshua R. Madriaga"
-                >
-
-                <span class="officer-index">
-                    03
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        VP EXTERNAL
-                    </span>
-
-                    <strong>
-                        REACH.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VICE PRESIDENT FOR EXTERNAL AFFAIRS
-                </span>
-
-                <h3>
-                    JOSHUA R.<br>
-                    MADRIAGA
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- SECRETARIAT -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="3"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-ghenny-manabat.jpg"
-                    alt="Ghenny Mae A. Manabat"
-                >
-
-                <span class="officer-index">
-                    04
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        SECRETARIAT
-                    </span>
-
-                    <strong>
-                        ORGANIZE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VICE PRESIDENT FOR SECRETARIAT
-                </span>
-
-                <h3>
-                    GHENNY MAE A.<br>
-                    MANABAT
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- BUSINESS & FINANCE -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="4"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-jessica-apostol.jpg"
-                    alt="Jessica P. Apostol"
-                >
-
-                <span class="officer-index">
-                    05
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        BUSINESS & FINANCE
-                    </span>
-
-                    <strong>
-                        MANAGE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR BUSINESS & FINANCE
-                </span>
-
-                <h3>
-                    JESSICA P.<br>
-                    APOSTOL
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- CAREER DEVELOPMENT -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="5"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-joshua-purificacion.jpg"
-                    alt="Joshua C. Purificacion"
-                >
-
-                <span class="officer-index">
-                    06
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        CAREER DEVELOPMENT
-                    </span>
-
-                    <strong>
-                        GROW.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR CAREER DEVELOPMENT
-                </span>
-
-                <h3>
-                    JOSHUA C.<br>
-                    PURIFICACION
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- EVENTS -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="6"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-roselle-landayan.jpg"
-                    alt="Roselle Gabrielle J. Landayan"
-                >
-
-                <span class="officer-index">
-                    07
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        EVENTS & PROGRAMS
-                    </span>
-
-                    <strong>
-                        CREATE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR EVENTS & PROGRAMS
-                </span>
-
-                <h3>
-                    ROSELLE GABRIELLE J.<br>
-                    LANDAYAN
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- OUTREACH -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="7"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-earl-lorenzo.jpg"
-                    alt="Earl Duncan C. Lorenzo"
-                >
-
-                <span class="officer-index">
-                    08
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        OUTREACH
-                    </span>
-
-                    <strong>
-                        SERVE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR OUTREACH & SOCIAL RESPONSIBILITY
-                </span>
-
-                <h3>
-                    EARL DUNCAN C.<br>
-                    LORENZO
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- TECHNICAL OPERATIONS -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="8"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-kriselda-rupera.jpg"
-                    alt="Kriselda Mei G. Rupera"
-                >
-
-                <span class="officer-index">
-                    09
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        TECHNICAL OPERATIONS
-                    </span>
-
-                    <strong>
-                        BUILD.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR TECHNICAL OPERATIONS
-                </span>
-
-                <h3>
-                    KRISELDA MEI G.<br>
-                    RUPERA
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- CREATIVES -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="9"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-jian-cruz.jpg"
-                    alt="Jian Miel M. Cruz"
-                >
-
-                <span class="officer-index">
-                    10
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        CREATIVES
-                    </span>
-
-                    <strong>
-                        DESIGN.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR CREATIVES & COMMUNICATIONS
-                </span>
-
-                <h3>
-                    JIAN MIEL M.<br>
-                    CRUZ
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- MEDIA -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="10"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-joezer-cornita.jpg"
-                    alt="Joezer C. Cornita"
-                >
-
-                <span class="officer-index">
-                    11
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        MEDIA
-                    </span>
-
-                    <strong>
-                        CAPTURE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VICE PRESIDENT FOR MEDIA
-                </span>
-
-                <h3>
-                    JOEZER C.<br>
-                    CORNITA
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- LOGISTICS -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="11"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-bench-paed.jpg"
-                    alt="Bench Calvin Paed"
-                >
-
-                <span class="officer-index">
-                    12
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        LOGISTICS
-                    </span>
-
-                    <strong>
-                        DELIVER.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR LOGISTICS & EVENT COORDINATION
-                </span>
-
-                <h3>
-                    BENCH CALVIN<br>
-                    PAED
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <!-- RECREATION -->
-
-        <article
-            class="officer-card reveal"
-            data-officer="12"
-        >
-
-            <div class="officer-image">
-
-                <img
-                    src="assets/officer-felix-adriano.jpg"
-                    alt="Felix Frederick L. Adriano"
-                >
-
-                <span class="officer-index">
-                    13
-                </span>
-
-                <div class="officer-image-cover">
-
-                    <span>
-                        RECREATION & WELLNESS
-                    </span>
-
-                    <strong>
-                        ENGAGE.
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="officer-info">
-
-                <span>
-                    VP FOR RECREATION & WELLNESS
-                </span>
-
-                <h3>
-                    FELIX FREDERICK L.<br>
-                    ADRIANO
-                </h3>
-
-                <button class="officer-view">
-                    VIEW OFFICER ↗
-                </button>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ACTIVITIES & EVENTS
-========================================================= -->
-
-<section class="events-section">
-
-    <div class="events-heading reveal">
-
-        <span class="section-label">
-            04 / ACTIVITIES & EVENTS
-        </span>
-
-        <h2>
-            WHERE THE COMMUNITY<br>
-            <em>COMES TO LIFE.</em>
-        </h2>
-
-        <p>
-            Explore some of the activities, programs,
-            and experiences organized for the Computer
-            Engineering community.
-        </p>
-
-    </div>
-
-
-    <div
-        class="event-gallery"
-        data-gallery="events"
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="president"
+        aria-label="President"
     >
 
-
-        <button
-            class="event-card event-large reveal"
-            data-image="assets/scpes-freshmen-huddle.jpg"
-            data-title="Freshmen Huddle"
-            data-subtitle="SCPES / STUDENT CONNECTION"
-            data-description="A welcoming activity designed to help Computer Engineering freshmen connect with fellow students and become more familiar with the CPE community."
-        >
+        <div class="scpes-officer-photo">
 
             <img
-                src="assets/scpes-freshmen-huddle.jpg"
-                alt="SCPES Freshmen Huddle"
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/mia1.jpg"
+                alt="SCPES President"
             >
-
-            <div class="event-overlay">
-
-                <span>
-                    01 / COMMUNITY
-                </span>
-
-                <h3>
-                    FRESHMEN<br>
-                    HUDDLE
-                </h3>
-
-                <i>
-                    EXPLORE ↗
-                </i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="event-card reveal"
-            data-image="assets/scpes-orientation.jpg"
-            data-title="Freshmen Orientation"
-            data-subtitle="SCPES / ORIENTATION"
-            data-description="An opportunity to welcome incoming students and introduce them to the Computer Engineering community."
-        >
 
             <img
-                src="assets/scpes-orientation.jpg"
-                alt="SCPES Freshmen Orientation"
-            >
-
-            <div class="event-overlay">
-
-                <span>
-                    02
-                </span>
-
-                <h3>
-                    FRESHMEN
-                    ORIENTATION
-                </h3>
-
-                <i>
-                    VIEW ↗
-                </i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="event-card reveal"
-            data-image="assets/scpes-seminar.jpg"
-            data-title="Technical Seminars"
-            data-subtitle="SCPES / LEARNING"
-            data-description="Technical seminars and learning sessions provide students with opportunities to explore tools, technologies, and professional topics beyond regular classroom discussions."
-        >
-
-            <img
-                src="assets/scpes-seminar.jpg"
-                alt="SCPES Technical Seminar"
-            >
-
-            <div class="event-overlay">
-
-                <span>
-                    03
-                </span>
-
-                <h3>
-                    TECHNICAL
-                    SEMINARS
-                </h3>
-
-                <i>
-                    VIEW ↗
-                </i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="event-card reveal"
-            data-image="assets/scpes-student-activity.jpg"
-            data-title="Student Activities"
-            data-subtitle="SCPES / PARTICIPATION"
-            data-description="Student-centered activities create spaces for participation, teamwork, interaction, and memorable experiences within the organization."
-        >
-
-            <img
-                src="assets/scpes-student-activity.jpg"
-                alt="SCPES Student Activity"
-            >
-
-            <div class="event-overlay">
-
-                <span>
-                    04
-                </span>
-
-                <h3>
-                    STUDENT
-                    ACTIVITIES
-                </h3>
-
-                <i>
-                    VIEW ↗
-                </i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="event-card event-wide reveal"
-            data-image="assets/scpes-community.jpg"
-            data-title="Community Activities"
-            data-subtitle="SCPES / COMMUNITY"
-            data-description="Activities that bring students together and strengthen involvement across the Computer Engineering community."
-        >
-
-            <img
-                src="assets/scpes-community.jpg"
-                alt="SCPES Community Activity"
-            >
-
-            <div class="event-overlay">
-
-                <span>
-                    05 / TOGETHER
-                </span>
-
-                <h3>
-                    COMMUNITY
-                    EXPERIENCES
-                </h3>
-
-                <i>
-                    EXPLORE ↗
-                </i>
-
-            </div>
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     STUDENT INVOLVEMENT
-========================================================= -->
-
-<section class="involvement-section">
-
-    <div class="section-heading involvement-heading reveal">
-
-        <span class="section-number">
-            05
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                STUDENT INVOLVEMENT
-            </span>
-
-            <h2>
-                SHOW UP.<br>
-                <em>BE PART OF IT.</em>
-            </h2>
-
-        </div>
-
-
-        <p class="section-description">
-            SCPES becomes meaningful through the students
-            who participate, collaborate, volunteer,
-            compete, create, and share their experiences.
-        </p>
-
-    </div>
-
-
-    <div
-        class="involvement-wall"
-        data-gallery="involvement"
-    >
-
-
-        <button
-            class="involvement-photo involvement-tall reveal"
-            data-image="assets/scpes-involvement-01.jpg"
-            data-title="Connect"
-            data-subtitle="STUDENT INVOLVEMENT / 01"
-            data-description="Connecting with fellow Computer Engineering students through shared activities and experiences."
-        >
-
-            <img
-                src="assets/scpes-involvement-01.jpg"
-                alt="SCPES student involvement"
-            >
-
-            <span>
-                CONNECT
-            </span>
-
-        </button>
-
-
-        <button
-            class="involvement-photo reveal"
-            data-image="assets/scpes-involvement-02.jpg"
-            data-title="Participate"
-            data-subtitle="STUDENT INVOLVEMENT / 02"
-            data-description="Participating in student-led activities, programs, and organizational initiatives."
-        >
-
-            <img
-                src="assets/scpes-involvement-02.jpg"
-                alt="SCPES students participating"
-            >
-
-            <span>
-                PARTICIPATE
-            </span>
-
-        </button>
-
-
-        <button
-            class="involvement-photo reveal"
-            data-image="assets/scpes-involvement-03.jpg"
-            data-title="Collaborate"
-            data-subtitle="STUDENT INVOLVEMENT / 03"
-            data-description="Working with other students to plan, create, solve problems, and bring ideas to life."
-        >
-
-            <img
-                src="assets/scpes-involvement-03.jpg"
-                alt="SCPES student collaboration"
-            >
-
-            <span>
-                COLLABORATE
-            </span>
-
-        </button>
-
-
-        <button
-            class="involvement-photo involvement-wide reveal"
-            data-image="assets/scpes-involvement-04.jpg"
-            data-title="Lead"
-            data-subtitle="STUDENT INVOLVEMENT / 04"
-            data-description="Developing leadership through responsibility, teamwork, communication, and service."
-        >
-
-            <img
-                src="assets/scpes-involvement-04.jpg"
-                alt="SCPES student leadership"
-            >
-
-            <span>
-                LEAD
-            </span>
-
-        </button>
-
-
-        <button
-            class="involvement-photo reveal"
-            data-image="assets/scpes-involvement-05.jpg"
-            data-title="Create"
-            data-subtitle="STUDENT INVOLVEMENT / 05"
-            data-description="Creating projects, experiences, and activities with fellow Computer Engineering students."
-        >
-
-            <img
-                src="assets/scpes-involvement-05.jpg"
-                alt="SCPES students creating"
-            >
-
-            <span>
-                CREATE
-            </span>
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     VIDEOS
-========================================================= -->
-
-<section class="video-section">
-
-    <div class="video-heading reveal">
-
-        <span class="section-label">
-            06 / VIDEO HIGHLIGHTS
-        </span>
-
-        <h2>
-            MOMENTS<br>
-            <em>IN MOTION.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="video-layout reveal">
-
-
-        <div class="featured-video">
-
-            <video
-                id="featuredVideo"
-                controls
-                playsinline
-                preload="metadata"
-                poster="assets/scpes-video-01-cover.jpg"
-            >
-                <source
-                    id="featuredVideoSource"
-                    src="assets/videos/scpes-video-01.mp4"
-                    type="video/mp4"
-                >
-            </video>
-
-
-            <div class="featured-video-meta">
-
-                <span id="featuredVideoNumber">
-                    VIDEO / 01
-                </span>
-
-                <h3 id="featuredVideoTitle">
-                    SCPES EVENT HIGHLIGHT
-                </h3>
-
-            </div>
-
-        </div>
-
-
-        <div class="video-list">
-
-
-            <button
-                class="video-option active"
-                data-video="assets/videos/scpes-video-01.mp4"
-                data-poster="assets/scpes-video-01-cover.jpg"
-                data-title="SCPES EVENT HIGHLIGHT"
-                data-number="VIDEO / 01"
-            >
-
-                <span>
-                    01
-                </span>
-
-                <strong>
-                    SCPES EVENT
-                    HIGHLIGHT
-                </strong>
-
-                <i>
-                    ▶
-                </i>
-
-            </button>
-
-
-            <button
-                class="video-option"
-                data-video="assets/videos/scpes-video-02.mp4"
-                data-poster="assets/scpes-video-02-cover.jpg"
-                data-title="STUDENT ACTIVITY"
-                data-number="VIDEO / 02"
-            >
-
-                <span>
-                    02
-                </span>
-
-                <strong>
-                    STUDENT
-                    ACTIVITY
-                </strong>
-
-                <i>
-                    ▶
-                </i>
-
-            </button>
-
-
-            <button
-                class="video-option"
-                data-video="assets/videos/scpes-video-03.mp4"
-                data-poster="assets/scpes-video-03-cover.jpg"
-                data-title="SCPES EXPERIENCE"
-                data-number="VIDEO / 03"
-            >
-
-                <span>
-                    03
-                </span>
-
-                <strong>
-                    SCPES
-                    EXPERIENCE
-                </strong>
-
-                <i>
-                    ▶
-                </i>
-
-            </button>
-
-
-            <button
-                class="video-option"
-                data-video="assets/videos/scpes-video-04.mp4"
-                data-poster="assets/scpes-video-04-cover.jpg"
-                data-title="BEHIND THE SCENES"
-                data-number="VIDEO / 04"
-            >
-
-                <span>
-                    04
-                </span>
-
-                <strong>
-                    BEHIND
-                    THE SCENES
-                </strong>
-
-                <i>
-                    ▶
-                </i>
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     PROJECTS & ACCOMPLISHMENTS
-========================================================= -->
-
-<section class="projects-section">
-
-    <div class="projects-heading reveal">
-
-        <span class="section-label">
-            07 / PROJECTS & ACCOMPLISHMENTS
-        </span>
-
-        <h2>
-            IDEAS INTO<br>
-            <em>ACTION.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="project-timeline">
-
-
-        <article class="project-row reveal">
-
-            <div class="project-year">
-                01
-            </div>
-
-
-            <div class="project-image">
-
-                <img
-                    src="assets/scpes-ecobytes.jpg"
-                    alt="EcoBytes project"
-                >
-
-            </div>
-
-
-            <div class="project-content">
-
-                <span>
-                    SUSTAINABILITY PROJECT
-                </span>
-
-                <h3>
-                    ECOBYTES
-                </h3>
-
-                <p>
-                    An e-waste initiative centered on
-                    encouraging responsible collection,
-                    recycling, and disposal of old gadgets,
-                    chargers, wires, and other electronic
-                    waste.
-                </p>
-
-
-                <div class="project-tags">
-
-                    <span>
-                        SDG 12
-                    </span>
-
-                    <span>
-                        SDG 13
-                    </span>
-
-                    <span>
-                        E-WASTE
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article class="project-row reveal">
-
-            <div class="project-year">
-                02
-            </div>
-
-
-            <div class="project-image">
-
-                <img
-                    src="assets/scpes-project-02.jpg"
-                    alt="SCPES project"
-                >
-
-            </div>
-
-
-            <div class="project-content">
-
-                <span>
-                    ADD YOUR PROJECT
-                </span>
-
-                <h3>
-                    NEXT PROJECT
-                </h3>
-
-                <p>
-                    Replace this content with another
-                    SCPES project, accomplishment,
-                    competition, initiative, or milestone.
-                </p>
-
-
-                <div class="project-tags">
-
-                    <span>
-                        SCPES
-                    </span>
-
-                    <span>
-                        CPE
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article class="project-row reveal">
-
-            <div class="project-year">
-                03
-            </div>
-
-
-            <div class="project-image">
-
-                <img
-                    src="assets/scpes-project-03.jpg"
-                    alt="SCPES accomplishment"
-                >
-
-            </div>
-
-
-            <div class="project-content">
-
-                <span>
-                    ADD YOUR ACCOMPLISHMENT
-                </span>
-
-                <h3>
-                    MILESTONE
-                </h3>
-
-                <p>
-                    This space can be used for an
-                    organizational achievement,
-                    recognition, major event, or
-                    successful student initiative.
-                </p>
-
-
-                <div class="project-tags">
-
-                    <span>
-                        COMMUNITY
-                    </span>
-
-                    <span>
-                        ACHIEVEMENT
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CLOSING
-========================================================= -->
-
-<section class="closing-section">
-
-    <div class="closing-meta reveal">
-        SOCIETY OF COMPUTER ENGINEERING STUDENTS
-    </div>
-
-
-    <div class="closing-title reveal">
-
-        <span>
-            CONNECT.
-        </span>
-
-        <span>
-            CREATE.
-        </span>
-
-        <span>
-            <em>TOGETHER.</em>
-        </span>
-
-    </div>
-
-
-    <div class="closing-bottom reveal">
-
-        <p>
-            SCPES is shaped by the students who show up,
-            share ideas, work together, and contribute
-            to the Computer Engineering community.
-        </p>
-
-
-        <a
-            href="index.html"
-            class="back-home page-link"
-        >
-
-            <span>
-                BACK TO
-            </span>
-
-            <strong>
-                HOME
-            </strong>
-
-            <i>
-                ↗
-            </i>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     IMAGE VIEWER
-========================================================= -->
-
-<div
-    class="image-viewer"
-    id="imageViewer"
-    aria-hidden="true"
->
-
-    <div
-        class="viewer-backdrop"
-        id="viewerBackdrop"
-    ></div>
-
-
-    <div class="viewer-window">
-
-        <div class="viewer-top">
-
-            <span id="viewerSubtitle">
-                SCPES / FEATURE
-            </span>
-
-
-            <button
-                id="viewerClose"
-                class="viewer-close"
-                aria-label="Close image viewer"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="viewer-content">
-
-            <div class="viewer-image-wrap">
-
-                <img
-                    id="viewerImage"
-                    src=""
-                    alt=""
-                >
-
-            </div>
-
-
-            <div class="viewer-info">
-
-                <span id="viewerCounter">
-                    01 / 01
-                </span>
-
-                <h2 id="viewerTitle">
-                    SCPES
-                </h2>
-
-                <p id="viewerDescription"></p>
-
-            </div>
-
-        </div>
-
-
-        <div class="viewer-bottom">
-
-            <button id="viewerPrev">
-                ← PREVIOUS
-            </button>
-
-            <button id="viewerNext">
-                NEXT →
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     OFFICER VIEWER
-========================================================= -->
-
-<div
-    class="officer-modal"
-    id="officerModal"
-    aria-hidden="true"
->
-
-    <div
-        class="officer-modal-backdrop"
-        id="officerModalBackdrop"
-    ></div>
-
-
-    <div class="officer-modal-window">
-
-        <button
-            class="officer-modal-close"
-            id="officerModalClose"
-        >
-            ×
-        </button>
-
-
-        <div class="officer-modal-image">
-
-            <img
-                id="officerModalImage"
-                src=""
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/mia2.jpg"
                 alt=""
             >
 
         </div>
 
 
-        <div class="officer-modal-info">
+        <div class="scpes-officer-info">
 
-            <span id="officerModalPosition">
-                POSITION
+            <span class="scpes-officer-number">
+                01
             </span>
 
-            <h2 id="officerModalName">
-                OFFICER NAME
-            </h2>
+            <div class="scpes-officer-name">
 
-            <p id="officerModalDescription">
-                SCPES Officer
-            </p>
+                <h3>
+                    CHARLIZE MAE S.
+                    BALDOVINO
+                </h3>
 
-
-            <div class="officer-modal-counter">
-
-                <button id="officerPrev">
-                    ←
-                </button>
-
-                <span id="officerCounter">
-                    01 / 13
-                </span>
-
-                <button id="officerNext">
-                    →
-                </button>
+                <p>
+                    PRESIDENT
+                </p>
 
             </div>
 
         </div>
 
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     02 / VP INTERNAL
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-internal"
+        aria-label="Vice President for Internal Affairs"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/jawad1.jpg"
+                alt="Vice President for Internal Affairs"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/jawad2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                02
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JAWAD HADJI CASSAN M.
+                    MACAWADIB
+                </h3>
+
+                <p>
+                    VP FOR INTERNAL AFFAIRS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     03 / VP EXTERNAL
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-external"
+        aria-label="Vice President for External Affairs"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/joash1.jpg"
+                alt="Vice President for External Affairs"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/josh2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                03
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JOSHUA R.
+                    MADRIAGA
+                </h3>
+
+                <p>
+                    VP FOR EXTERNAL AFFAIRS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     04 / VP SECRETARIAT
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-secretariat"
+        aria-label="Vice President for Secretariat"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/ghenny1.jpg"
+                alt="Vice President for Secretariat"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/ghenny2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                04
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    GHENNY MAE A.
+                    MANABAT
+                </h3>
+
+                <p>
+                    VP FOR SECRETARIAT
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+<!-- =====================================
+     05 / VP BUSINESS & FINANCE
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-finance"
+        aria-label="Vice President for Business and Finance"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/jessica1.jpg"
+                alt="Vice President for Business and Finance"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/jessica2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                05
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JESSICA P.
+                    APOSTOL
+                </h3>
+
+                <p>
+                    VP FOR BUSINESS & FINANCE
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     06 / VP EVENTS & PROGRAMS
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-events"
+        aria-label="Vice President for Events and Programs"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/roselle1.jpg"
+                alt="Vice President for Events and Programs"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/roselle2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                06
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    ROSELLE GABRIELLE J.
+                    LANDAYAN
+                </h3>
+
+                <p>
+                    VP FOR EVENTS & PROGRAMS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     07 / VP CAREER DEVELOPMENT
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-career"
+        aria-label="Vice President for Career Development"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/joshua1.jpg"
+                alt="Vice President for Career Development"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/joshua2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                07
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JOSHUA C.
+                    PURIFICACION
+                </h3>
+
+                <p>
+                    VP FOR CAREER DEVELOPMENT
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     08 / VP OUTREACH
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-outreach"
+        aria-label="Vice President for Outreach and Social Responsibility"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/earl1.jpg"
+                alt="Vice President for Outreach and Social Responsibility"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/earl2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                08
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    EARL DUNCAN C.
+                    LORENZO
+                </h3>
+
+                <p>
+                    VP FOR OUTREACH &
+                    SOCIAL RESPONSIBILITY
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+<!-- =====================================
+     09 / VP TECHNICAL OPERATIONS
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-technical"
+        aria-label="Vice President for Technical Operations"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/mei1.jpg"
+                alt="Vice President for Technical Operations"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/mei2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                09
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    KRISELDA MEI G.
+                    RUPERA
+                </h3>
+
+                <p>
+                    VP FOR TECHNICAL OPERATIONS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     10 / VP CREATIVES
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-creatives"
+        aria-label="Vice President for Creatives and Communications"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/jian1.jpg"
+                alt="Vice President for Creatives and Communications"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/jian2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                10
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JIAN MIEL M.
+                    CRUZ
+                </h3>
+
+                <p>
+                    VP FOR CREATIVES &
+                    COMMUNICATIONS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     11 / VP MEDIA
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-media"
+        aria-label="Vice President for Media"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/joe1.jpg"
+                alt="Vice President for Media"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/joe2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                11
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    JOEZER C.
+                    CORNITA
+                </h3>
+
+                <p>
+                    VP FOR MEDIA
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     12 / VP LOGISTICS
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-logistics"
+        aria-label="Vice President for Logistics and Event Coordination"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/bench1.jpg"
+                alt="Vice President for Logistics and Event Coordination"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/bench2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                12
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    BENCH CALVIN
+                    PAED
+                </h3>
+
+                <p>
+                    VP FOR LOGISTICS &
+                    EVENT COORDINATION
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+
+<!-- =====================================
+     13 / VP RECREATION & WELLNESS
+====================================== -->
+
+<article class="scpes-officer-card reveal">
+
+    <button
+        class="scpes-officer-button"
+        type="button"
+        data-officer="vp-recreation"
+        aria-label="Vice President for Recreation and Wellness"
+    >
+
+        <div class="scpes-officer-photo">
+
+            <img
+                class="scpes-officer-img scpes-officer-img-main"
+                src="assets/felix1.jpg"
+                alt="Vice President for Recreation and Wellness"
+            >
+
+            <img
+                class="scpes-officer-img scpes-officer-img-hover"
+                src="assets/felix2.jpg"
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="scpes-officer-info">
+
+            <span class="scpes-officer-number">
+                13
+            </span>
+
+            <div class="scpes-officer-name">
+
+                <h3>
+                    FELIX FREDERICK L.
+                    ADRIANO
+                </h3>
+
+                <p>
+                    VP FOR RECREATION &
+                    WELLNESS
+                </p>
+
+            </div>
+
+        </div>
+
+    </button>
+
+</article>
+
+        <!-- =====================================
+     SCPES OFFICERS GROUP PHOTO
+====================================== -->
+
+<article class="scpes-group-card reveal">
+
+    <div class="scpes-group-photo">
+
+        <!-- DEFAULT PHOTO -->
+        <img
+            class="scpes-group-img scpes-group-img-default"
+            src="assets/groupphto1.jpg"
+            alt="SCPES Officers"
+        >
+
+        <!-- HOVER PHOTO -->
+        <img
+            class="scpes-group-img scpes-group-img-hover"
+            src="assets/groupphoto.jpg"
+            alt=""
+            aria-hidden="true"
+        >
+
+        <!-- SAME GRADIENT STYLE -->
+        <div class="scpes-group-gradient"></div>
+
+            </div>
+
+    </div>
+
+</article>
+
+
+<!-- =====================================
+     END OF OFFICERS GRID
+====================================== -->
+
+</div>
+
+
+<!-- =====================================
+     END OF CONTAINER
+====================================== -->
+
+</div>
+
+
+<!-- =====================================
+     END OF OFFICERS SECTION
+====================================== -->
+
+</section>
+
+
+<!-- =========================================================
+     SCPES — MORE THAN EVENTS
+========================================================= -->
+
+<section class="scpes-memories">
+
+    <div class="scpes-memories-video reveal">
+<video
+    class="YOUR-CURRENT-VIDEO-CLASS"
+    autoplay
+    muted
+    loop
+    playsinline
+>
+            <source
+                src="assets/SCPESsde.mp4"
+                type="video/mp4"
+            >
+
+            Your browser does not support the video tag.
+        </video>
+
+    </div>
+
+
+    <div class="scpes-memories-content reveal">
+
+        <span class="scpes-section-number">
+            03 / BEYOND THE EVENTS
+        </span>
+
+        <h2>
+            MORE THAN<br>
+            JUST EVENTS
+        </h2>
+
+        <p>
+            SCPES is not only about organizing events, attending workshops,
+            or completing activities. It is also about the people we meet,
+            the friendships we build, and the moments we share along the way.
+            Behind every program are stories, laughter, teamwork, and memories
+            that make our journey as Computer Engineering students more
+            meaningful.
+        </p>
+
+    </div>
+
+</section>
+<!-- =====================================================
+     SCPES PHOTO GALLERY
+====================================================== -->
+
+<div class="scpes-gallery">
+
+    <div class="scpes-gallery-item scpes-gallery-wide reveal">
+        <img src="assets/1.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/2.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/3.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/4.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item scpes-gallery-tall reveal">
+        <img src="assets/5.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/6.JPG" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item scpes-gallery-wide reveal">
+        <img src="assets/7.jpeg" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/8.jpeg" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/9.jpeg" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/10.jpg" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item reveal">
+        <img src="assets/11.jpeg" alt="SCPES memory">
+    </div>
+
+    <div class="scpes-gallery-item scpes-gallery-wide reveal">
+        <img src="assets/12.jpeg" alt="SCPES memory">
     </div>
 
 </div>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <span>
-        UNIVERSITY OF THE EAST — MANILA
-    </span>
-
-    <span>
-        COMPUTER ENGINEERING
-    </span>
-
-    <span>
-        SCPES
-    </span>
-
-</footer>
+        </main>
 
 
-<script src="scpes.js"></script>
+        <!-- =================================================
+             FOOTER
+             KEEPING THE INDEX / FACULTY TEXT + STRUCTURE
+        ================================================== -->
+
+        <footer class="cpe-footer">
+
+
+            <!-- =============================================
+                 BACKGROUND
+            ============================================== -->
+
+            <img
+                src="assets/footer.png"
+                alt=""
+                class="cpe-footer-pattern"
+                aria-hidden="true"
+            >
+
+
+            <!-- =============================================
+                 MAIN FOOTER
+            ============================================== -->
+
+            <div class="cpe-footer-content">
+
+
+                <!-- =========================================
+                     LEFT
+                ========================================== -->
+
+                <div class="cpe-footer-brand">
+
+                    <img
+                        class="cpe-footer-logo"
+                        src="assets/cpelogo.png"
+                        alt="Computer Engineering"
+                    >
+
+
+                    <span
+                        class="cpe-footer-divider"
+                        aria-hidden="true"
+                    ></span>
+
+
+                    <div class="cpe-footer-name">
+
+                        <span>
+                            University of the East - Manila
+                        </span>
+
+                        <strong>
+                            COMPUTER ENGINEERING
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     RIGHT
+                ========================================== -->
+
+                <div class="cpe-footer-social">
+
+                    <p class="cpe-footer-follow">
+                        follow us!
+                    </p>
+
+
+                    <div class="cpe-footer-icons">
+
+
+                        <!-- FACEBOOK -->
+
+                        <a
+                            class="cpe-social-link"
+                            href="#"
+                            aria-label="Facebook"
+                        >
+
+                            <i class="fa-brands fa-facebook-f"></i>
+
+                        </a>
+
+
+                        <!-- INSTAGRAM -->
+
+                        <a
+                            class="cpe-social-link"
+                            href="#"
+                            aria-label="Instagram"
+                        >
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </a>
+
+
+                        <!-- EMAIL -->
+
+                        <a
+                            class="cpe-social-link"
+                            href="mailto:"
+                            aria-label="Email"
+                        >
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 FOOTER BOTTOM
+            ============================================== -->
+
+            <div class="cpe-footer-bottom">
+
+                <span>
+                    CPE @ 2026 ALL RIGHTS RESERVED
+                </span>
+
+
+                <span>
+                    BY: BALDOVINO | LANDAYAN
+                </span>
+
+            </div>
+
+        </footer>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         SCPES JAVASCRIPT
+    ====================================================== -->
+
+    <script src="scpes.js"></script>
+
 
 </body>
+
 </html>
