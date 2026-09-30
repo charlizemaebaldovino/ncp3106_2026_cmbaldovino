@@ -42,205 +42,204 @@ document.addEventListener("DOMContentLoaded", () => {
        02. CAREER DATA
     ====================================================== */
 
-    const careers = [
+   const careers = [
 
-        {
-            number: "01",
-            category: "CORE CPE",
-            title: "Computer Engineer",
-            role: "Computer Engineering",
-            focus: "Hardware / Software / Systems",
-            image: "assets/careers/computer-engineer.jpg",
-            short:
-                "Designs and develops integrated computer hardware and software systems.",
-            description:
-                "Designs, develops, tests, and maintains computer systems by combining hardware and software technologies."
-        },
+    {
+        number: "01",
+        category: "CORE CPE",
+        title: "Computer Engineer",
+        role: "Computer Engineering",
+        focus: "Hardware / Software / Systems",
+        image: "assets/computer-engineer.jpg",
+        short:
+            "Designs and develops integrated computer hardware and software systems.",
+        description:
+            "Designs, develops, tests, and maintains computer systems by combining hardware and software technologies."
+    },
 
-        {
-            number: "02",
-            category: "EMBEDDED",
-            title: "Embedded Systems Engineer",
-            role: "Embedded Systems",
-            focus: "Hardware / Firmware / Microcontrollers",
-            image: "assets/careers/embedded-systems.jpg",
-            short:
-                "Creates dedicated computing systems for smart devices and machines.",
-            description:
-                "Develops dedicated computing systems for devices such as smart appliances, industrial machines, medical equipment, and automotive systems."
-        },
+    {
+        number: "02",
+        category: "EMBEDDED",
+        title: "Embedded Systems Engineer",
+        role: "Embedded Systems",
+        focus: "Hardware / Firmware / Microcontrollers",
+        image: "assets/embedded-systems1.jpg",
+        short:
+            "Creates dedicated computing systems for smart devices and machines.",
+        description:
+            "Develops dedicated computing systems for devices such as smart appliances, industrial machines, medical equipment, and automotive systems."
+    },
 
-        {
-            number: "03",
-            category: "IOT",
-            title: "IoT Engineer",
-            role: "Internet of Things",
-            focus: "Devices / Sensors / Connectivity",
-            image: "assets/careers/iot-engineer.jpg",
-            short:
-                "Builds connected devices that communicate and exchange real-world data.",
-            description:
-                "Builds connected devices and systems that collect, transmit, and process real-world information through networks and the Internet."
-        },
+    {
+        number: "03",
+        category: "IOT",
+        title: "IoT Engineer",
+        role: "Internet of Things",
+        focus: "Devices / Sensors / Connectivity",
+        image: "assets/iot-engineer1.jpg",
+        short:
+            "Builds connected devices that communicate and exchange real-world data.",
+        description:
+            "Builds connected devices and systems that collect, transmit, and process real-world information through networks and the Internet."
+    },
 
-        {
-            number: "04",
-            category: "SOFTWARE",
-            title: "Software Engineer",
-            role: "Software Engineering",
-            focus: "Programming / Applications / Systems",
-            image: "assets/careers/software-engineer.jpg",
-            short:
-                "Develops applications, platforms, and software-based computing solutions.",
-            description:
-                "Designs and develops software applications, platforms, and computing systems using programming and software engineering principles."
-        },
+    {
+        number: "04",
+        category: "SOFTWARE",
+        title: "Software Engineer",
+        role: "Software Engineering",
+        focus: "Programming / Applications / Systems",
+        image: "assets/software-engineer1.jpg",
+        short:
+            "Develops applications, platforms, and software-based computing solutions.",
+        description:
+            "Designs and develops software applications, platforms, and computing systems using programming and software engineering principles."
+    },
 
-        {
-            number: "05",
-            category: "HARDWARE",
-            title: "Hardware Engineer",
-            role: "Computer Hardware",
-            focus: "Electronics / Circuits / Computer Systems",
-            image: "assets/careers/hardware-engineer.jpg",
-            short:
-                "Designs and tests electronic components and computer hardware.",
-            description:
-                "Designs and tests electronic components and computer hardware such as processors, circuit boards, and digital systems."
-        },
+    {
+        number: "05",
+        category: "HARDWARE",
+        title: "Hardware Engineer",
+        role: "Computer Hardware",
+        focus: "Electronics / Circuits / Computer Systems",
+        image: "assets/hardware-engineer1.jpg",
+        short:
+            "Designs and tests electronic components and computer hardware.",
+        description:
+            "Designs and tests electronic components and computer hardware such as processors, circuit boards, and digital systems."
+    },
 
-        {
-            number: "06",
-            category: "NETWORKS",
-            title: "Network Engineer",
-            role: "Computer Networks",
-            focus: "Infrastructure / Routing / Connectivity",
-            image: "assets/careers/network-engineer.jpg",
-            short:
-                "Builds and maintains reliable communication and network infrastructures.",
-            description:
-                "Designs, configures, maintains, and troubleshoots network infrastructure to provide reliable communication between devices and systems."
-        },
+    {
+        number: "06",
+        category: "NETWORKS",
+        title: "Network Engineer",
+        role: "Computer Networks",
+        focus: "Infrastructure / Routing / Connectivity",
+        image: "assets/network-engineer1.jpg",
+        short:
+            "Builds and maintains reliable communication and network infrastructures.",
+        description:
+            "Designs, configures, maintains, and troubleshoots network infrastructure to provide reliable communication between devices and systems."
+    },
 
-        {
-            number: "07",
-            category: "SECURITY",
-            title: "Cybersecurity Engineer",
-            role: "Cybersecurity",
-            focus: "Security / Networks / Systems",
-            image: "assets/careers/cybersecurity.jpg",
-            short:
-                "Protects systems, networks, and information against digital threats.",
-            description:
-                "Protects computer systems, networks, applications, and digital information from security threats and unauthorized access."
-        },
+    {
+        number: "07",
+        category: "SECURITY",
+        title: "Cybersecurity Engineer",
+        role: "Cybersecurity",
+        focus: "Security / Networks / Systems",
+        image: "assets/cybersecurity-engineer.jpg",
+        short:
+            "Protects systems, networks, and information against digital threats.",
+        description:
+            "Protects computer systems, networks, applications, and digital information from security threats and unauthorized access."
+    },
 
-        {
-            number: "08",
-            category: "AI / ML",
-            title: "AI / Machine Learning Engineer",
-            role: "Artificial Intelligence",
-            focus: "AI / Machine Learning / Data",
-            image: "assets/careers/ai-engineer.jpg",
-            short:
-                "Develops intelligent systems that learn from data and recognize patterns.",
-            description:
-                "Develops intelligent systems and machine learning models that use data to recognize patterns and support automated decision-making."
-        },
+    {
+        number: "08",
+        category: "AI / ML",
+        title: "AI / Machine Learning Engineer",
+        role: "Artificial Intelligence",
+        focus: "AI / Machine Learning / Data",
+        image: "assets/ai-ml-engineer1.jpg",
+        short:
+            "Develops intelligent systems that learn from data and recognize patterns.",
+        description:
+            "Develops intelligent systems and machine learning models that use data to recognize patterns and support automated decision-making."
+    },
 
-        {
-            number: "09",
-            category: "ROBOTICS",
-            title: "Robotics Engineer",
-            role: "Robotics",
-            focus: "Automation / Sensors / Control",
-            image: "assets/careers/robotics-engineer.jpg",
-            short:
-                "Combines electronics, programming, sensors, and control to build robots.",
-            description:
-                "Designs robotic systems by combining electronics, programming, sensors, control systems, and automation technologies."
-        },
+    {
+        number: "09",
+        category: "ROBOTICS",
+        title: "Robotics Engineer",
+        role: "Robotics",
+        focus: "Automation / Sensors / Control",
+        image: "assets/robotics-engineer1.jpg",
+        short:
+            "Combines electronics, programming, sensors, and control to build robots.",
+        description:
+            "Designs robotic systems by combining electronics, programming, sensors, control systems, and automation technologies."
+    },
 
-        {
-            number: "10",
-            category: "DATA",
-            title: "Data Analyst",
-            role: "Data Analytics",
-            focus: "Data / Analysis / Insights",
-            image: "assets/careers/data-analyst.jpg",
-            short:
-                "Transforms raw data into useful information and meaningful insights.",
-            description:
-                "Collects, organizes, analyzes, and interprets data to discover patterns and provide useful information for decision-making."
-        },
+    {
+        number: "10",
+        category: "DATA",
+        title: "Data Analyst",
+        role: "Data Analytics",
+        focus: "Data / Analysis / Insights",
+        image: "assets/data-analyst1.jpg",
+        short:
+            "Transforms raw data into useful information and meaningful insights.",
+        description:
+            "Collects, organizes, analyzes, and interprets data to discover patterns and provide useful information for decision-making."
+    },
 
-        {
-            number: "11",
-            category: "QUALITY",
-            title: "Quality Assurance Engineer",
-            role: "Quality Assurance",
-            focus: "Testing / Validation / Quality",
-            image: "assets/careers/qa-engineer.jpg",
-            short:
-                "Tests systems and software to maintain reliability and product quality.",
-            description:
-                "Tests software and technology systems to identify problems and ensure products meet expected performance and quality standards."
-        },
+    {
+        number: "11",
+        category: "QUALITY",
+        title: "Quality Assurance Engineer",
+        role: "Quality Assurance",
+        focus: "Testing / Validation / Quality",
+        image: "assets/qa-engineer.jpg",
+        short:
+            "Tests systems and software to maintain reliability and product quality.",
+        description:
+            "Tests software and technology systems to identify problems and ensure products meet expected performance and quality standards."
+    },
 
-        {
-            number: "12",
-            category: "CLOUD",
-            title: "Cloud Engineer",
-            role: "Cloud Computing",
-            focus: "Cloud / Infrastructure / Services",
-            image: "assets/careers/cloud-engineer.jpg",
-            short:
-                "Develops and maintains scalable cloud infrastructure and computing services.",
-            description:
-                "Builds and manages cloud infrastructure, applications, storage systems, and scalable computing services."
-        },
+    {
+        number: "12",
+        category: "CLOUD",
+        title: "Cloud Engineer",
+        role: "Cloud Computing",
+        focus: "Cloud / Infrastructure / Services",
+        image: "assets/cloud-engineer1.jpg",
+        short:
+            "Develops and maintains scalable cloud infrastructure and computing services.",
+        description:
+            "Builds and manages cloud infrastructure, applications, storage systems, and scalable computing services."
+    },
 
-        {
-            number: "13",
-            category: "SYSTEMS",
-            title: "Systems Engineer",
-            role: "Systems Engineering",
-            focus: "Integration / Infrastructure / Systems",
-            image: "assets/careers/systems-engineer.jpg",
-            short:
-                "Integrates hardware, software, networks, and services into complete systems.",
-            description:
-                "Integrates hardware, software, networks, and services so that complex computing systems operate effectively together."
-        },
+    {
+        number: "13",
+        category: "SYSTEMS",
+        title: "Systems Engineer",
+        role: "Systems Engineering",
+        focus: "Integration / Infrastructure / Systems",
+        image: "assets/systems-engineer.jpg",
+        short:
+            "Integrates hardware, software, networks, and services into complete systems.",
+        description:
+            "Integrates hardware, software, networks, and services so that complex computing systems operate effectively together."
+    },
 
-        {
-            number: "14",
-            category: "AUTOMATION",
-            title: "Automation Engineer",
-            role: "Automation and Control",
-            focus: "Control / Sensors / Automation",
-            image: "assets/careers/automation-engineer.jpg",
-            short:
-                "Creates automated systems using sensors, controllers, and software.",
-            description:
-                "Develops automated systems using controllers, sensors, software, and intelligent technologies to improve technical processes."
-        },
+    {
+        number: "14",
+        category: "AUTOMATION",
+        title: "Automation Engineer",
+        role: "Automation and Control",
+        focus: "Control / Sensors / Automation",
+        image: "assets/automation-engineer1.jpg",
+        short:
+            "Creates automated systems using sensors, controllers, and software.",
+        description:
+            "Develops automated systems using controllers, sensors, software, and intelligent technologies to improve technical processes."
+    },
 
-        {
-            number: "15",
-            category: "RESEARCH",
-            title: "Research & Development Engineer",
-            role: "Research and Development",
-            focus: "Research / Prototyping / Innovation",
-            image: "assets/careers/research-development.jpg",
-            short:
-                "Researches and prototypes new technologies and engineering solutions.",
-            description:
-                "Researches, prototypes, and develops new technologies and engineering solutions in computing, electronics, AI, robotics, and related fields."
-        }
+    {
+        number: "15",
+        category: "FIRMWARE",
+        title: "Firmware Engineer",
+        role: "Firmware Engineering",
+        focus: "Firmware / Hardware / Embedded Systems",
+        image: "assets/firmware-engineer.jpg",
+        short:
+            "Develops low-level software that directly controls computer hardware.",
+        description:
+            "Develops firmware and low-level software that allows hardware devices and embedded systems to operate correctly."
+    }
 
-    ];
-
+];
 
     let currentCareer =
         0;
