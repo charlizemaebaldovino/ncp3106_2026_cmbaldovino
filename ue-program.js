@@ -1,969 +1,1449 @@
 /* =========================================================
-   UE PROGRAM PAGE
+   UE COMPUTER ENGINEERING PROGRAM
+   ue-program.js
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
-
-    const themeToggle = document.getElementById("themeToggle");
-    const clock = document.getElementById("clock");
-    const pageTransition = document.getElementById("pageTransition");
-    const exploreButton = document.getElementById("exploreButton");
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
 
-    /* =====================================================
-       PAGE ENTRANCE
-    ===================================================== */
+        /* =====================================================
+           01. ELEMENTS
+        ====================================================== */
 
-    if (pageTransition) {
-        pageTransition.classList.add("entering");
+        const html =
+            document.documentElement;
 
-        setTimeout(function () {
-            pageTransition.classList.remove("entering");
-        }, 1050);
-    }
+        const body =
+            document.body;
 
-    setTimeout(function () {
-        document.body.classList.add("loaded");
-    }, 180);
+        const themeToggle =
+            document.getElementById(
+                "themeToggle"
+            );
+
+        const navLogoImage =
+            document.getElementById(
+                "navLogoImage"
+            );
+
+        const navigation =
+            document.querySelector(
+                ".main-navigation"
+            );
+
+        const exploreButton =
+            document.getElementById(
+                "exploreButton"
+            );
+
+        const pageTransition =
+            document.getElementById(
+                "pageTransition"
+            );
+
+        const cursorTrail =
+            document.getElementById(
+                "cursorTrail"
+            );
 
 
-    /* =====================================================
-       THEME
-    ===================================================== */
+        /* =====================================================
+           02. PAGE ENTRANCE
+        ====================================================== */
 
-    const savedTheme =
-        localStorage.getItem("cpe-theme") || "light";
+        if (pageTransition) {
 
-    document.documentElement.dataset.theme = savedTheme;
+            pageTransition.classList.add(
+                "is-entering"
+            );
 
-    if (themeToggle) {
-        themeToggle.addEventListener("click", function () {
 
-            const current =
-                document.documentElement.dataset.theme;
+            window.setTimeout(
+                () => {
 
-            const next =
-                current === "dark"
-                    ? "light"
-                    : "dark";
+                    pageTransition.classList.remove(
+                        "is-entering"
+                    );
 
-            document.documentElement.dataset.theme = next;
+                },
+                800
+            );
+
+        }
+
+
+        /* =====================================================
+           03. THEME
+           LIGHT = SUN
+           DARK  = MOON
+        ====================================================== */
+
+        const savedTheme =
+            localStorage.getItem(
+                "cpe-theme"
+            ) || "light";
+
+
+        function updateLogo(theme) {
+
+            if (!navLogoImage) {
+                return;
+            }
+
+
+            navLogoImage.src =
+                theme === "dark"
+                    ? "assets/light.png"
+                    : "assets/dark.png";
+
+        }
+
+
+        function updateThemeButton(theme) {
+
+            if (!themeToggle) {
+                return;
+            }
+
+
+            if (theme === "dark") {
+
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to light mode"
+                );
+
+                themeToggle.setAttribute(
+                    "title",
+                    "Switch to light mode"
+                );
+
+            } else {
+
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to dark mode"
+                );
+
+                themeToggle.setAttribute(
+                    "title",
+                    "Switch to dark mode"
+                );
+
+            }
+
+        }
+
+
+        function setTheme(theme) {
+
+            html.dataset.theme =
+                theme;
+
 
             localStorage.setItem(
                 "cpe-theme",
-                next
-            );
-        });
-    }
-
-
-    /* =====================================================
-       MANILA CLOCK
-    ===================================================== */
-
-    function updateClock() {
-
-        if (!clock) return;
-
-        const formatter =
-            new Intl.DateTimeFormat(
-                "en-PH",
-                {
-                    timeZone: "Asia/Manila",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                    hour12: false
-                }
+                theme
             );
 
-        clock.textContent =
-            "MANILA " +
-            formatter.format(new Date());
-    }
 
-    updateClock();
-
-    setInterval(
-        updateClock,
-        1000
-    );
-
-
-    /* =====================================================
-       EXPLORE BUTTON
-    ===================================================== */
-
-    if (exploreButton) {
-
-        exploreButton.addEventListener(
-            "click",
-            function () {
-
-                const overview =
-                    document.getElementById(
-                        "overview"
-                    );
-
-                if (overview) {
-                    overview.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                }
-            }
-        );
-    }
-
-
-    /* =====================================================
-       SCROLL REVEAL
-    ===================================================== */
-
-    const revealElements =
-        document.querySelectorAll(
-            ".reveal"
-        );
-
-    if ("IntersectionObserver" in window) {
-
-        const revealObserver =
-            new IntersectionObserver(
-
-                function (entries) {
-
-                    entries.forEach(
-                        function (entry) {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry.target
-                                    .classList
-                                    .add(
-                                        "visible"
-                                    );
-
-                                revealObserver
-                                    .unobserve(
-                                        entry.target
-                                    );
-                            }
-                        }
-                    );
-                },
-
-                {
-                    threshold: 0.1,
-                    rootMargin:
-                        "0px 0px -40px 0px"
-                }
+            updateLogo(
+                theme
             );
 
-        revealElements.forEach(
-            function (element) {
-                revealObserver.observe(
-                    element
-                );
-            }
-        );
 
-    } else {
-
-        revealElements.forEach(
-            function (element) {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-    }
-
-
-    /* =====================================================
-       FEATURE VIEWER
-    ===================================================== */
-
-    const viewer =
-        document.getElementById(
-            "featureViewer"
-        );
-
-    const viewerBackdrop =
-        document.getElementById(
-            "viewerBackdrop"
-        );
-
-    const viewerClose =
-        document.getElementById(
-            "viewerClose"
-        );
-
-    const viewerImage =
-        document.getElementById(
-            "viewerImage"
-        );
-
-    const viewerTitle =
-        document.getElementById(
-            "viewerTitle"
-        );
-
-    const viewerSubtitle =
-        document.getElementById(
-            "viewerSubtitle"
-        );
-
-    const viewerDescription =
-        document.getElementById(
-            "viewerDescription"
-        );
-
-    const viewerCounter =
-        document.getElementById(
-            "viewerCounter"
-        );
-
-    const viewerPrev =
-        document.getElementById(
-            "viewerPrev"
-        );
-
-    const viewerNext =
-        document.getElementById(
-            "viewerNext"
-        );
-
-
-    let activeItems = [];
-    let activeIndex = 0;
-
-
-    /* =====================================================
-       REGISTER ALL NORMAL GALLERIES
-
-       Learning Experiences
-       Laboratories
-       Student Projects
-       Research galleries
-    ===================================================== */
-
-    const galleryContainers =
-        document.querySelectorAll(
-            "[data-gallery]"
-        );
-
-    galleryContainers.forEach(
-        function (gallery) {
-
-            const items =
-                Array.from(
-                    gallery.querySelectorAll(
-                        "[data-image]"
-                    )
-                );
-
-            items.forEach(
-                function (item, index) {
-
-                    item.addEventListener(
-                        "click",
-                        function () {
-
-                            activeItems = items;
-                            activeIndex = index;
-
-                            openViewer();
-                        }
-                    );
-                }
-            );
-        }
-    );
-
-
-    /* =====================================================
-       RESEARCH IMAGE GALLERIES
-
-       This also works if the research images are not
-       wrapped in data-gallery.
-    ===================================================== */
-
-    const researchGroups =
-        document.querySelectorAll(
-            ".research-expand"
-        );
-
-    researchGroups.forEach(
-        function (group) {
-
-            /*
-             * If this group already uses data-gallery,
-             * the normal gallery code above handles it.
-             */
-
-            if (
-                group.hasAttribute(
-                    "data-gallery"
-                )
-            ) {
-                return;
-            }
-
-            const items =
-                Array.from(
-                    group.querySelectorAll(
-                        ".research-image[data-image]"
-                    )
-                );
-
-            items.forEach(
-                function (item, index) {
-
-                    item.addEventListener(
-                        "click",
-                        function (event) {
-
-                            event.stopPropagation();
-
-                            activeItems = items;
-                            activeIndex = index;
-
-                            openViewer();
-                        }
-                    );
-                }
-            );
-        }
-    );
-
-
-    /* =====================================================
-       UPDATE FEATURE VIEWER
-    ===================================================== */
-
-    function updateViewer() {
-
-        if (!activeItems.length) {
-            return;
-        }
-
-        const item =
-            activeItems[
-                activeIndex
-            ];
-
-        const image =
-            item.dataset.image;
-
-        const title =
-            item.dataset.title || "";
-
-        const subtitle =
-            item.dataset.subtitle ||
-            "UE CPE / FEATURE";
-
-        const description =
-            item.dataset.description || "";
-
-
-        if (viewerImage) {
-
-            viewerImage.classList.add(
-                "changing"
+            updateThemeButton(
+                theme
             );
 
-            setTimeout(
-                function () {
-
-                    viewerImage.src =
-                        image;
-
-                    viewerImage.alt =
-                        title;
-
-                    viewerImage
-                        .classList
-                        .remove(
-                            "changing"
-                        );
-
-                },
-                170
-            );
         }
 
-
-        if (viewerTitle) {
-            viewerTitle.textContent =
-                title;
-        }
-
-
-        if (viewerSubtitle) {
-            viewerSubtitle.textContent =
-                subtitle;
-        }
-
-
-        if (viewerDescription) {
-            viewerDescription.textContent =
-                description;
-        }
-
-
-        if (viewerCounter) {
-
-            const current =
-                String(
-                    activeIndex + 1
-                ).padStart(
-                    2,
-                    "0"
-                );
-
-            const total =
-                String(
-                    activeItems.length
-                ).padStart(
-                    2,
-                    "0"
-                );
-
-            viewerCounter.textContent =
-                current +
-                " / " +
-                total;
-        }
-    }
-
-
-    /* =====================================================
-       OPEN VIEWER
-    ===================================================== */
-
-    function openViewer() {
-
-        if (!viewer) return;
-
-        updateViewer();
-
-        viewer.classList.add(
-            "open"
-        );
-
-        viewer.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body
-            .classList
-            .add(
-                "viewer-open"
-            );
-    }
-
-
-    /* =====================================================
-       CLOSE VIEWER
-    ===================================================== */
-
-    function closeViewer() {
-
-        if (!viewer) return;
-
-        viewer.classList.remove(
-            "open"
-        );
-
-        viewer.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body
-            .classList
-            .remove(
-                "viewer-open"
-            );
-    }
-
-
-    /* =====================================================
-       NEXT FEATURE
-    ===================================================== */
-
-    function nextFeature() {
-
-        if (!activeItems.length) {
-            return;
-        }
-
-        activeIndex =
-            (
-                activeIndex + 1
-            ) %
-            activeItems.length;
-
-        updateViewer();
-    }
-
-
-    /* =====================================================
-       PREVIOUS FEATURE
-    ===================================================== */
-
-    function previousFeature() {
-
-        if (!activeItems.length) {
-            return;
-        }
-
-        activeIndex =
-            (
-                activeIndex -
-                1 +
-                activeItems.length
-            ) %
-            activeItems.length;
-
-        updateViewer();
-    }
-
-
-    /* =====================================================
-       VIEWER BUTTONS
-    ===================================================== */
-
-    if (viewerNext) {
-
-        viewerNext.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-                nextFeature();
-            }
-        );
-    }
-
-
-    if (viewerPrev) {
-
-        viewerPrev.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-                previousFeature();
-            }
-        );
-    }
-
-
-    if (viewerClose) {
-
-        viewerClose.addEventListener(
-            "click",
-            closeViewer
-        );
-    }
-
-
-    if (viewerBackdrop) {
-
-        viewerBackdrop.addEventListener(
-            "click",
-            closeViewer
-        );
-    }
-
-
-    /* =====================================================
-       KEYBOARD CONTROLS
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                !viewer ||
-                !viewer.classList.contains(
-                    "open"
-                )
-            ) {
-                return;
-            }
-
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-                closeViewer();
-            }
-
-
-            if (
-                event.key ===
-                "ArrowRight"
-            ) {
-                nextFeature();
-            }
-
-
-            if (
-                event.key ===
-                "ArrowLeft"
-            ) {
-                previousFeature();
-            }
-        }
-    );
-
-
-    /* =====================================================
-       PHONE SWIPE FOR FEATURE VIEWER
-    ===================================================== */
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-
-    if (viewer) {
-
-        viewer.addEventListener(
-            "touchstart",
-            function (event) {
-
-                touchStartX =
-                    event
-                        .changedTouches[0]
-                        .screenX;
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        viewer.addEventListener(
-            "touchend",
-            function (event) {
-
-                touchEndX =
-                    event
-                        .changedTouches[0]
-                        .screenX;
-
-                handleSwipe();
-            },
-            {
-                passive: true
-            }
-        );
-    }
-
-
-    function handleSwipe() {
-
-        const distance =
-            touchEndX -
-            touchStartX;
 
         /*
-         * Ignore small movement so the
-         * user can still scroll normally.
+         * Apply saved theme when the page loads.
          */
 
-        if (
-            Math.abs(
-                distance
-            ) < 55
-        ) {
-            return;
-        }
-
-
-        if (distance < 0) {
-
-            nextFeature();
-
-        } else {
-
-            previousFeature();
-
-        }
-    }
-
-
-    /* =====================================================
-       RESEARCH ACCORDION
-       THINK. TEST. CREATE.
-    ===================================================== */
-
-    const researchBoxes =
-        document.querySelectorAll(
-            ".research-expand"
+        setTheme(
+            savedTheme
         );
 
 
-    researchBoxes.forEach(
-        function (box) {
+        /*
+         * Toggle light / dark mode.
+         */
 
-            const trigger =
-                box.querySelector(
-                    ".research-trigger"
-                );
+        if (themeToggle) {
 
-            const panel =
-                box.querySelector(
-                    ".research-panel"
-                );
-
-
-            if (
-                !trigger ||
-                !panel
-            ) {
-                return;
-            }
-
-
-            trigger.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            trigger.addEventListener(
+            themeToggle.addEventListener(
                 "click",
-                function () {
+                () => {
 
-                    const opening =
-                        !box.classList.contains(
-                            "active"
-                        );
+                    const currentTheme =
+                        html.dataset.theme;
+
+
+                    const newTheme =
+                        currentTheme === "dark"
+                            ? "light"
+                            : "dark";
+
+
+                    setTheme(
+                        newTheme
+                    );
 
 
                     /*
-                     * Close all other boxes first.
+                     * Small page fade when changing theme.
                      */
 
-                    researchBoxes.forEach(
-                        function (otherBox) {
+                    if (
+                        !window.matchMedia(
+                            "(prefers-reduced-motion: reduce)"
+                        ).matches
+                    ) {
 
-                            const otherPanel =
-                                otherBox.querySelector(
-                                    ".research-panel"
+                        body.animate(
+                            [
+                                {
+                                    opacity:
+                                        0.9
+                                },
+
+                                {
+                                    opacity:
+                                        1
+                                }
+                            ],
+                            {
+                                duration:
+                                    350,
+
+                                easing:
+                                    "ease-out"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           04. NAVIGATION SCROLL EFFECT
+        ====================================================== */
+
+        function updateNavigation() {
+
+            if (!navigation) {
+                return;
+            }
+
+
+            if (window.scrollY > 20) {
+
+                navigation.classList.add(
+                    "is-scrolled"
+                );
+
+            } else {
+
+                navigation.classList.remove(
+                    "is-scrolled"
+                );
+
+            }
+
+        }
+
+
+        updateNavigation();
+
+
+        window.addEventListener(
+            "scroll",
+            updateNavigation,
+            {
+                passive:
+                    true
+            }
+        );
+
+
+        /* =====================================================
+           05. EXPLORE PROGRAM BUTTON
+        ====================================================== */
+
+        if (exploreButton) {
+
+            exploreButton.addEventListener(
+                "click",
+                () => {
+
+                    const overview =
+                        document.getElementById(
+                            "overview"
+                        );
+
+
+                    if (overview) {
+
+                        overview.scrollIntoView(
+                            {
+                                behavior:
+                                    "smooth",
+
+                                block:
+                                    "start"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           06. SCROLL REVEAL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const revealObserver =
+                new IntersectionObserver(
+                    entries => {
+
+                        entries.forEach(
+                            entry => {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    entry.target.classList.add(
+                                        "visible"
+                                    );
+
+
+                                    revealObserver.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold:
+                            0.12,
+
+                        rootMargin:
+                            "0px 0px -45px 0px"
+                    }
+                );
+
+
+            revealElements.forEach(
+                element => {
+
+                    revealObserver.observe(
+                        element
+                    );
+
+                }
+            );
+
+        } else {
+
+            revealElements.forEach(
+                element => {
+
+                    element.classList.add(
+                        "visible"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           07. HERO TEXT ENTRANCE
+        ====================================================== */
+
+        const heroLines =
+            document.querySelectorAll(
+                ".hero-line"
+            );
+
+
+        heroLines.forEach(
+            (line, index) => {
+
+                if (
+                    window.matchMedia(
+                        "(prefers-reduced-motion: reduce)"
+                    ).matches
+                ) {
+
+                    return;
+                }
+
+
+                line.animate(
+                    [
+                        {
+                            opacity:
+                                0,
+
+                            transform:
+                                "translateY(55px)"
+                        },
+
+                        {
+                            opacity:
+                                1,
+
+                            transform:
+                                "translateY(0)"
+                        }
+                    ],
+                    {
+                        duration:
+                            850,
+
+                        delay:
+                            130 + index * 100,
+
+                        easing:
+                            "cubic-bezier(.2,.8,.2,1)",
+
+                        fill:
+                            "both"
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           08. OBJECTIVE CARD ANIMATION
+        ====================================================== */
+
+        const objectiveCards =
+            document.querySelectorAll(
+                ".objective-card"
+            );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const objectiveObserver =
+                new IntersectionObserver(
+                    entries => {
+
+                        entries.forEach(
+                            entry => {
+
+                                if (
+                                    !entry.isIntersecting
+                                ) {
+                                    return;
+                                }
+
+
+                                const cards =
+                                    Array.from(
+                                        objectiveCards
+                                    );
+
+
+                                const index =
+                                    cards.indexOf(
+                                        entry.target
+                                    );
+
+
+                                if (
+                                    !window.matchMedia(
+                                        "(prefers-reduced-motion: reduce)"
+                                    ).matches
+                                ) {
+
+                                    entry.target.animate(
+                                        [
+                                            {
+                                                opacity:
+                                                    0,
+
+                                                transform:
+                                                    "translateX(-30px)"
+                                            },
+
+                                            {
+                                                opacity:
+                                                    1,
+
+                                                transform:
+                                                    "translateX(0)"
+                                            }
+                                        ],
+                                        {
+                                            duration:
+                                                650,
+
+                                            delay:
+                                                Math.max(
+                                                    0,
+                                                    index * 70
+                                                ),
+
+                                            easing:
+                                                "cubic-bezier(.2,.8,.2,1)",
+
+                                            fill:
+                                                "both"
+                                        }
+                                    );
+
+                                }
+
+
+                                objectiveObserver.unobserve(
+                                    entry.target
                                 );
 
-                            const otherTrigger =
-                                otherBox.querySelector(
-                                    ".research-trigger"
-                                );
+                            }
+                        );
+
+                    },
+                    {
+                        threshold:
+                            0.15
+                    }
+                );
 
 
-                            otherBox.classList.remove(
+            objectiveCards.forEach(
+                card => {
+
+                    objectiveObserver.observe(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           09. SKILL ROW HOVER
+        ====================================================== */
+
+        const skillRows =
+            document.querySelectorAll(
+                ".skill-row"
+            );
+
+
+        skillRows.forEach(
+            row => {
+
+                row.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        if (
+                            window.matchMedia(
+                                "(prefers-reduced-motion: reduce)"
+                            ).matches
+                        ) {
+                            return;
+                        }
+
+
+                        row.animate(
+                            [
+                                {
+                                    transform:
+                                        "translateX(0)"
+                                },
+
+                                {
+                                    transform:
+                                        "translateX(6px)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    220,
+
+                                easing:
+                                    "ease-out",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+                );
+
+
+                row.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        row.animate(
+                            [
+                                {
+                                    transform:
+                                        "translateX(6px)"
+                                },
+
+                                {
+                                    transform:
+                                        "translateX(0)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    220,
+
+                                easing:
+                                    "ease-out",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           10. RESEARCH ACCORDION
+        ====================================================== */
+
+        const researchItems =
+            document.querySelectorAll(
+                ".research-item"
+            );
+
+
+        researchItems.forEach(
+            item => {
+
+                const trigger =
+                    item.querySelector(
+                        ".research-trigger"
+                    );
+
+
+                if (!trigger) {
+                    return;
+                }
+
+
+                trigger.addEventListener(
+                    "click",
+                    () => {
+
+                        const isActive =
+                            item.classList.contains(
                                 "active"
                             );
 
 
-                            if (otherPanel) {
+                        /*
+                         * Close the other research items.
+                         */
 
-                                otherPanel.style.maxHeight =
-                                    null;
-                            }
+                        researchItems.forEach(
+                            otherItem => {
 
-
-                            if (otherTrigger) {
-
-                                otherTrigger.setAttribute(
-                                    "aria-expanded",
-                                    "false"
+                                otherItem.classList.remove(
+                                    "active"
                                 );
+
+
+                                const otherTrigger =
+                                    otherItem.querySelector(
+                                        ".research-trigger"
+                                    );
+
+
+                                if (otherTrigger) {
+
+                                    otherTrigger.setAttribute(
+                                        "aria-expanded",
+                                        "false"
+                                    );
+
+                                }
+
                             }
-                        }
-                    );
-
-
-                    /*
-                     * Open selected research box.
-                     */
-
-                    if (opening) {
-
-                        box.classList.add(
-                            "active"
                         );
-
-                        trigger.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-
-
-                        panel.style.maxHeight =
-                            panel.scrollHeight +
-                            "px";
 
 
                         /*
-                         * Small second calculation after
-                         * layout finishes. This helps when
-                         * images affect panel height.
+                         * Open selected item unless
+                         * it was already open.
                          */
 
-                        setTimeout(
-                            function () {
+                        if (!isActive) {
 
-                                if (
-                                    box.classList.contains(
-                                        "active"
-                                    )
-                                ) {
+                            item.classList.add(
+                                "active"
+                            );
 
-                                    panel.style.maxHeight =
-                                        panel.scrollHeight +
-                                        "px";
-                                }
 
-                            },
-                            350
-                        );
+                            trigger.setAttribute(
+                                "aria-expanded",
+                                "true"
+                            );
+
+                        }
+
                     }
-                }
-            );
-
-
-            /*
-             * Images can change panel height after loading.
-             */
-
-            const panelImages =
-                panel.querySelectorAll(
-                    "img"
                 );
 
-
-            panelImages.forEach(
-                function (image) {
-
-                    image.addEventListener(
-                        "load",
-                        function () {
-
-                            if (
-                                box.classList.contains(
-                                    "active"
-                                )
-                            ) {
-
-                                panel.style.maxHeight =
-                                    panel.scrollHeight +
-                                    "px";
-                            }
-                        }
-                    );
-                }
-            );
-        }
-    );
-
-
-    /* =====================================================
-       PROJECT IMAGE TRANSITION
-       FROM IDEA TO PROTOTYPE
-    ===================================================== */
-
-    const projectFeatures =
-        document.querySelectorAll(
-            ".project-feature"
+            }
         );
 
 
-    projectFeatures.forEach(
-        function (project) {
+        /* =====================================================
+           11. IMAGE VIEWER
+        ====================================================== */
 
-            /*
-             * Desktop transition is handled by CSS hover.
-             *
-             * On touchscreen:
-             * first tap activates the second image.
-             */
-
-            project.addEventListener(
-                "touchstart",
-                function () {
-
-                    projectFeatures.forEach(
-                        function (otherProject) {
-
-                            if (
-                                otherProject !==
-                                project
-                            ) {
-
-                                otherProject
-                                    .classList
-                                    .remove(
-                                        "touch-active"
-                                    );
-                            }
-                        }
-                    );
-
-
-                    project.classList.add(
-                        "touch-active"
-                    );
-
-                },
-                {
-                    passive: true
-                }
+        const galleryItems =
+            Array.from(
+                document.querySelectorAll(
+                    ".gallery-item"
+                )
             );
+
+
+        const imageViewer =
+            document.getElementById(
+                "imageViewer"
+            );
+
+        const viewerBackdrop =
+            document.getElementById(
+                "viewerBackdrop"
+            );
+
+        const viewerClose =
+            document.getElementById(
+                "viewerClose"
+            );
+
+        const viewerImage =
+            document.getElementById(
+                "viewerImage"
+            );
+
+        const viewerNumber =
+            document.getElementById(
+                "viewerNumber"
+            );
+
+        const viewerSubtitle =
+            document.getElementById(
+                "viewerSubtitle"
+            );
+
+        const viewerTitle =
+            document.getElementById(
+                "viewerTitle"
+            );
+
+        const viewerDescription =
+            document.getElementById(
+                "viewerDescription"
+            );
+
+        const viewerCounter =
+            document.getElementById(
+                "viewerCounter"
+            );
+
+        const viewerPrev =
+            document.getElementById(
+                "viewerPrev"
+            );
+
+        const viewerNext =
+            document.getElementById(
+                "viewerNext"
+            );
+
+
+        let currentImageIndex =
+            0;
+
+
+        function formatNumber(number) {
+
+            return String(
+                number
+            ).padStart(
+                2,
+                "0"
+            );
+
         }
-    );
 
 
-    /*
-     * Tap outside a project to return its
-     * first image on mobile.
-     */
+        function updateViewer() {
 
-    document.addEventListener(
-        "touchstart",
-        function (event) {
-
-            const touchedProject =
-                event.target.closest(
-                    ".project-feature"
-                );
-
-            if (touchedProject) {
+            if (
+                galleryItems.length === 0
+            ) {
                 return;
             }
 
 
-            projectFeatures.forEach(
-                function (project) {
+            const item =
+                galleryItems[
+                    currentImageIndex
+                ];
 
-                    project.classList.remove(
-                        "touch-active"
+
+            const image =
+                item.dataset.image || "";
+
+            const title =
+                item.dataset.title || "";
+
+            const subtitle =
+                item.dataset.subtitle ||
+                "UE MANILA / CPE";
+
+            const description =
+                item.dataset.description || "";
+
+
+            if (viewerImage) {
+
+                viewerImage.src =
+                    image;
+
+                viewerImage.alt =
+                    title;
+
+            }
+
+
+            if (viewerTitle) {
+
+                viewerTitle.textContent =
+                    title;
+
+            }
+
+
+            if (viewerSubtitle) {
+
+                viewerSubtitle.textContent =
+                    subtitle;
+
+            }
+
+
+            if (viewerDescription) {
+
+                viewerDescription.textContent =
+                    description;
+
+            }
+
+
+            if (viewerNumber) {
+
+                viewerNumber.textContent =
+                    `UE CPE / ${formatNumber(
+                        currentImageIndex + 1
+                    )}`;
+
+            }
+
+
+            if (viewerCounter) {
+
+                viewerCounter.textContent =
+                    `${formatNumber(
+                        currentImageIndex + 1
+                    )} / ${formatNumber(
+                        galleryItems.length
+                    )}`;
+
+            }
+
+        }
+
+
+        function openViewer(index) {
+
+            if (
+                !imageViewer ||
+                galleryItems.length === 0
+            ) {
+                return;
+            }
+
+
+            currentImageIndex =
+                index;
+
+
+            updateViewer();
+
+
+            imageViewer.classList.add(
+                "active"
+            );
+
+
+            imageViewer.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            body.classList.add(
+                "viewer-open"
+            );
+
+
+            if (viewerClose) {
+
+                window.setTimeout(
+                    () => {
+
+                        viewerClose.focus();
+
+                    },
+                    100
+                );
+
+            }
+
+        }
+
+
+        function closeViewer() {
+
+            if (!imageViewer) {
+                return;
+            }
+
+
+            imageViewer.classList.remove(
+                "active"
+            );
+
+
+            imageViewer.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            body.classList.remove(
+                "viewer-open"
+            );
+
+        }
+
+
+        function nextImage() {
+
+            if (
+                galleryItems.length === 0
+            ) {
+                return;
+            }
+
+
+            currentImageIndex =
+                (
+                    currentImageIndex + 1
+                ) % galleryItems.length;
+
+
+            updateViewer();
+
+        }
+
+
+        function previousImage() {
+
+            if (
+                galleryItems.length === 0
+            ) {
+                return;
+            }
+
+
+            currentImageIndex =
+                (
+                    currentImageIndex -
+                    1 +
+                    galleryItems.length
+                ) % galleryItems.length;
+
+
+            updateViewer();
+
+        }
+
+
+        galleryItems.forEach(
+            (item, index) => {
+
+                item.addEventListener(
+                    "click",
+                    () => {
+
+                        openViewer(
+                            index
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        if (viewerClose) {
+
+            viewerClose.addEventListener(
+                "click",
+                closeViewer
+            );
+
+        }
+
+
+        if (viewerBackdrop) {
+
+            viewerBackdrop.addEventListener(
+                "click",
+                closeViewer
+            );
+
+        }
+
+
+        if (viewerNext) {
+
+            viewerNext.addEventListener(
+                "click",
+                nextImage
+            );
+
+        }
+
+
+        if (viewerPrev) {
+
+            viewerPrev.addEventListener(
+                "click",
+                previousImage
+            );
+
+        }
+
+
+        /* =====================================================
+           12. VIEWER KEYBOARD CONTROLS
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    !imageViewer ||
+                    !imageViewer.classList.contains(
+                        "active"
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeViewer();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    nextImage();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    previousImage();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           13. PROJECT CARD ENTRANCE
+        ====================================================== */
+
+        const projectCards =
+            document.querySelectorAll(
+                ".project-card"
+            );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const projectObserver =
+                new IntersectionObserver(
+                    entries => {
+
+                        entries.forEach(
+                            entry => {
+
+                                if (
+                                    !entry.isIntersecting
+                                ) {
+                                    return;
+                                }
+
+
+                                const cards =
+                                    Array.from(
+                                        projectCards
+                                    );
+
+
+                                const index =
+                                    cards.indexOf(
+                                        entry.target
+                                    );
+
+
+                                if (
+                                    !window.matchMedia(
+                                        "(prefers-reduced-motion: reduce)"
+                                    ).matches
+                                ) {
+
+                                    entry.target.animate(
+                                        [
+                                            {
+                                                opacity:
+                                                    0,
+
+                                                transform:
+                                                    "translateY(35px)"
+                                            },
+
+                                            {
+                                                opacity:
+                                                    1,
+
+                                                transform:
+                                                    "translateY(0)"
+                                            }
+                                        ],
+                                        {
+                                            duration:
+                                                650,
+
+                                            delay:
+                                                Math.max(
+                                                    0,
+                                                    index * 100
+                                                ),
+
+                                            easing:
+                                                "cubic-bezier(.2,.8,.2,1)",
+
+                                            fill:
+                                                "both"
+                                        }
+                                    );
+
+                                }
+
+
+                                projectObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold:
+                            0.12
+                    }
+                );
+
+
+            projectCards.forEach(
+                card => {
+
+                    projectObserver.observe(
+                        card
                     );
+
                 }
             );
+
+        }
+
+
+        /* =====================================================
+           14. GALLERY MOUSE MOVEMENT
+        ====================================================== */
+
+        const galleryCards =
+            document.querySelectorAll(
+                ".gallery-item"
+            );
+
+
+        galleryCards.forEach(
+            card => {
+
+                card.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        if (
+                            window.matchMedia(
+                                "(prefers-reduced-motion: reduce)"
+                            ).matches
+                        ) {
+                            return;
+                        }
+
+
+                        const rect =
+                            card.getBoundingClientRect();
+
+
+                        const x =
+                            event.clientX -
+                            rect.left;
+
+
+                        const y =
+                            event.clientY -
+                            rect.top;
+
+
+                        const rotateY =
+                            (
+                                x /
+                                rect.width -
+                                0.5
+                            ) * 2;
+
+
+                        const rotateX =
+                            (
+                                0.5 -
+                                y /
+                                rect.height
+                            ) * 2;
+
+
+                        card.style.transform =
+                            `perspective(1000px)
+                             rotateX(${rotateX}deg)
+                             rotateY(${rotateY}deg)`;
+
+                    }
+                );
+
+
+                card.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        card.style.transform =
+                            "";
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           15. CURSOR TRAIL
+        ====================================================== */
+
+        /* =====================================================
+   15. CURSOR TRAIL
+   SAME STYLE AS INDEX
+====================================================== */
+
+const supportsFinePointer =
+    window.matchMedia(
+        "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+if (
+    supportsFinePointer &&
+    !prefersReducedMotion
+) {
+
+    const TRAIL_COUNT = 8;
+
+    const trail = [];
+
+    const mouse = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
+    };
+
+
+    /* -------------------------------------------------
+       CREATE CURSOR CIRCLES
+    -------------------------------------------------- */
+
+    for (
+        let i = 0;
+        i < TRAIL_COUNT;
+        i++
+    ) {
+
+        const circle =
+            document.createElement(
+                "div"
+            );
+
+
+        circle.className =
+            "cursor-trail-circle";
+
+
+        /*
+         * Same sizing as Index.
+         *
+         * First circle = 13px
+         * Following circles become smaller.
+         */
+
+        const size =
+            Math.max(
+                4,
+                13 - i
+            );
+
+
+        circle.style.width =
+            `${size}px`;
+
+
+        circle.style.height =
+            `${size}px`;
+
+
+        circle.style.opacity =
+            `${Math.max(
+                0.05,
+                0.28 - i * 0.03
+            )}`;
+
+
+        document.body.appendChild(
+            circle
+        );
+
+
+        trail.push(
+            {
+                element: circle,
+                x: mouse.x,
+                y: mouse.y
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------
+       TRACK MOUSE
+    -------------------------------------------------- */
+
+    window.addEventListener(
+        "mousemove",
+        event => {
+
+            mouse.x =
+                event.clientX;
+
+            mouse.y =
+                event.clientY;
 
         },
         {
@@ -972,407 +1452,290 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    /* =====================================================
-       RECALCULATE OPEN RESEARCH PANEL
-       ON SCREEN RESIZE
-    ===================================================== */
+    /* -------------------------------------------------
+       ANIMATE TRAIL
+    -------------------------------------------------- */
 
-    window.addEventListener(
-        "resize",
-        function () {
+    function animateCursor() {
 
-            const openBox =
-                document.querySelector(
-                    ".research-expand.active"
-                );
+        let x =
+            mouse.x;
 
-            if (!openBox) {
-                return;
+        let y =
+            mouse.y;
+
+
+        trail.forEach(
+            (point, index) => {
+
+                const followSpeed =
+                    index === 0
+                        ? 0.30
+                        : 0.24;
+
+
+                point.x +=
+                    (x - point.x) *
+                    followSpeed;
+
+
+                point.y +=
+                    (y - point.y) *
+                    followSpeed;
+
+
+                point.element.style.left =
+                    `${point.x}px`;
+
+
+                point.element.style.top =
+                    `${point.y}px`;
+
+
+                x =
+                    point.x;
+
+                y =
+                    point.y;
+
             }
-
-
-            const panel =
-                openBox.querySelector(
-                    ".research-panel"
-                );
-
-
-            if (panel) {
-
-                panel.style.maxHeight =
-                    panel.scrollHeight +
-                    "px";
-            }
-        }
-    );
-
-
-    /* =====================================================
-       PAGE TRANSITIONS
-    ===================================================== */
-
-    const pageLinks =
-        document.querySelectorAll(
-            ".page-link"
         );
 
 
-    pageLinks.forEach(
-        function (link) {
+        requestAnimationFrame(
+            animateCursor
+        );
 
-            link.addEventListener(
-                "click",
-                function (event) {
-
-                    const href =
-                        link.getAttribute(
-                            "href"
-                        );
+    }
 
 
-                    if (
-                        !href ||
-                        href.startsWith(
-                            "#"
-                        )
-                    ) {
-                        return;
-                    }
+    animateCursor();
+
+}
+
+      
+
+        /* =====================================================
+           17. PAGE LINK TRANSITION
+        ====================================================== */
+
+        const pageLinks =
+            document.querySelectorAll(
+                "a.page-link"
+            );
 
 
-                    /*
-                     * Don't interfere with:
-                     * CTRL + click
-                     * CMD + click
-                     * SHIFT + click
-                     * ALT + click
-                     */
+        pageLinks.forEach(
+            link => {
 
-                    if (
-                        event.ctrlKey ||
-                        event.metaKey ||
-                        event.shiftKey ||
-                        event.altKey
-                    ) {
-                        return;
-                    }
+                link.addEventListener(
+                    "click",
+                    event => {
+
+                        const href =
+                            link.getAttribute(
+                                "href"
+                            );
 
 
-                    event.preventDefault();
+                        if (
+                            !href ||
+                            href.startsWith("#") ||
+                            link.target === "_blank"
+                        ) {
+                            return;
+                        }
 
 
-                    if (!pageTransition) {
+                        /*
+                         * Allow modified clicks.
+                         */
 
-                        window.location.href =
-                            href;
-
-                        return;
-                    }
-
-
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering"
-                        );
+                        if (
+                            event.ctrlKey ||
+                            event.metaKey ||
+                            event.shiftKey ||
+                            event.altKey
+                        ) {
+                            return;
+                        }
 
 
-                    pageTransition
-                        .classList
-                        .add(
-                            "leaving"
-                        );
+                        event.preventDefault();
 
 
-                    setTimeout(
-                        function () {
+                        if (!pageTransition) {
 
                             window.location.href =
                                 href;
 
-                        },
-                        700
-                    );
-                }
-            );
-        }
-    );
+                            return;
+                        }
 
 
-    /* =====================================================
-       CURSOR TRAIL
-    ===================================================== */
-
-    const finePointer =
-        window.matchMedia(
-            "(pointer: fine)"
-        ).matches;
-
-
-    const reducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-    if (
-        finePointer &&
-        !reducedMotion
-    ) {
-
-        const circleCount = 12;
-
-        const circles = [];
-
-        let mouseX = -100;
-        let mouseY = -100;
-        let mouseActive = false;
-
-
-        for (
-            let i = 0;
-            i < circleCount;
-            i++
-        ) {
-
-            const circle =
-                document.createElement(
-                    "span"
-                );
-
-
-            circle.className =
-                "cursor-trail-circle";
-
-
-            const size =
-                Math.max(
-                    3,
-                    12 -
-                    i * 0.65
-                );
-
-
-            circle.style.width =
-                size + "px";
-
-            circle.style.height =
-                size + "px";
-
-
-            document.body.appendChild(
-                circle
-            );
-
-
-            circles.push({
-                element: circle,
-                x: mouseX,
-                y: mouseY
-            });
-        }
-
-
-        document.addEventListener(
-            "mousemove",
-            function (event) {
-
-                mouseX =
-                    event.clientX;
-
-                mouseY =
-                    event.clientY;
-
-                mouseActive =
-                    true;
-            }
-        );
-
-
-        document.addEventListener(
-            "mouseleave",
-            function () {
-
-                mouseActive =
-                    false;
-            }
-        );
-
-
-        document.addEventListener(
-            "mouseenter",
-            function () {
-
-                mouseActive =
-                    true;
-            }
-        );
-
-
-        function animateTrail() {
-
-            let x = mouseX;
-            let y = mouseY;
-
-
-            circles.forEach(
-                function (
-                    circle,
-                    index
-                ) {
-
-                    circle.x +=
-                        (
-                            x -
-                            circle.x
-                        ) *
-                        0.30;
-
-
-                    circle.y +=
-                        (
-                            y -
-                            circle.y
-                        ) *
-                        0.30;
-
-
-                    const size =
-                        Math.max(
-                            3,
-                            12 -
-                            index * 0.65
+                        pageTransition.classList.remove(
+                            "is-entering"
                         );
 
 
-                    const opacity =
-                        mouseActive
-                            ? Math.max(
-                                0.05,
-                                0.46 -
-                                index * 0.035
-                            )
-                            : 0;
+                        pageTransition.classList.add(
+                            "is-leaving"
+                        );
 
 
-                    circle.element.style.opacity =
-                        opacity;
+                        window.setTimeout(
+                            () => {
 
+                                window.location.href =
+                                    href;
 
-                    circle.element.style.transform =
-                        "translate3d(" +
-                        (
-                            circle.x -
-                            size / 2
-                        ) +
-                        "px," +
-                        (
-                            circle.y -
-                            size / 2
-                        ) +
-                        "px,0)";
+                            },
+                            620
+                        );
 
-
-                    x = circle.x;
-                    y = circle.y;
-                }
-            );
-
-
-            requestAnimationFrame(
-                animateTrail
-            );
-        }
-
-
-        animateTrail();
-    }
-
-
-    /* =====================================================
-       BACK BUTTON / PAGE RESTORE FIX
-    ===================================================== */
-
-    window.addEventListener(
-        "pageshow",
-        function () {
-
-            document.body
-                .classList
-                .add(
-                    "loaded"
-                );
-
-
-            /*
-             * Always reset the transition.
-             * This prevents the page from staying
-             * covered after browser Back.
-             */
-
-            if (pageTransition) {
-
-                pageTransition
-                    .classList
-                    .remove(
-                        "entering",
-                        "leaving"
-                    );
-            }
-
-
-            /*
-             * Reveal sections already visible
-             * when returning to this page.
-             */
-
-            revealElements.forEach(
-                function (element) {
-
-                    if (
-                        element
-                            .getBoundingClientRect()
-                            .top <
-                        window.innerHeight
-                    ) {
-
-                        element
-                            .classList
-                            .add(
-                                "visible"
-                            );
                     }
-                }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           18. PROMOTION IMAGE PARALLAX
+        ====================================================== */
+
+        const promotionImage =
+            document.getElementById(
+                "promotionImage"
             );
 
 
-            /*
-             * Recalculate research box if one
-             * was open before navigating away.
-             */
+        if (
+            promotionImage &&
+            !window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        ) {
 
-            const openResearch =
-                document.querySelector(
-                    ".research-expand.active"
-                );
+            let ticking =
+                false;
 
 
-            if (openResearch) {
+            function updatePromotionParallax() {
 
-                const panel =
-                    openResearch.querySelector(
-                        ".research-panel"
+                const container =
+                    promotionImage.parentElement;
+
+
+                if (!container) {
+
+                    ticking =
+                        false;
+
+                    return;
+                }
+
+
+                const rect =
+                    container.getBoundingClientRect();
+
+
+                if (
+                    rect.bottom > 0 &&
+                    rect.top <
+                    window.innerHeight
+                ) {
+
+                    const center =
+                        rect.top +
+                        rect.height / 2;
+
+
+                    const viewportCenter =
+                        window.innerHeight / 2;
+
+
+                    const offset =
+                        (
+                            center -
+                            viewportCenter
+                        ) * -0.025;
+
+
+                    promotionImage.style.transform =
+                        `scale(1.04)
+                         translateY(${offset}px)`;
+
+                }
+
+
+                ticking =
+                    false;
+
+            }
+
+
+            window.addEventListener(
+                "scroll",
+                () => {
+
+                    if (!ticking) {
+
+                        requestAnimationFrame(
+                            updatePromotionParallax
+                        );
+
+
+                        ticking =
+                            true;
+
+                    }
+
+                },
+                {
+                    passive:
+                        true
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           19. SAFETY RESET WHEN RETURNING WITH BACK BUTTON
+        ====================================================== */
+
+        window.addEventListener(
+            "pageshow",
+            () => {
+
+                if (pageTransition) {
+
+                    pageTransition.classList.remove(
+                        "is-leaving"
                     );
 
-
-                if (panel) {
-
-                    panel.style.maxHeight =
-                        panel.scrollHeight +
-                        "px";
                 }
-            }
-        }
-    );
 
-});
+
+                /*
+                 * Re-read the theme in case another
+                 * page changed it.
+                 */
+
+                const currentSavedTheme =
+                    localStorage.getItem(
+                        "cpe-theme"
+                    ) || "light";
+
+
+                setTheme(
+                    currentSavedTheme
+                );
+
+            }
+        );
+
+
+    }
+);

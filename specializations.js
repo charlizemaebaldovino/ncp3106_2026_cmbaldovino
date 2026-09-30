@@ -1,1532 +1,1055 @@
 /* =========================================================
-   SPECIALIZATIONS PAGE
+   SPECIALIZATIONS.JS
+   UE COMPUTER ENGINEERING
+
+   FEATURES:
+   - Light / Dark Mode
+   - Cursor Trail
+   - Scroll Reveal
+   - Specialization Switching
+   - Previous / Next
+   - Field Index
+   - Direction Buttons
+   - Image Hover Reveal
+   - Touch Image Reveal
+   - Manila Clock
+   - Smooth Scroll
+   - Page Transition
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
 
+document.addEventListener("DOMContentLoaded", () => {
 
-        /* =================================================
-           SPECIALIZATION DATA
-        ================================================= */
 
-        const fields = [
+    /* =====================================================
+       01. ELEMENTS
+    ====================================================== */
 
-            {
-                title:
-                    "EMBEDDED<br>SYSTEMS",
+    const html =
+        document.documentElement;
 
-                category:
-                    "HARDWARE + SOFTWARE",
 
-                description:
-                    "Focuses on designing computer systems built into electronic devices to perform dedicated functions.",
+    const themeToggle =
+        document.getElementById("themeToggle");
 
-                applications: [
-                    "Automotive Control Systems",
-                    "Medical Devices",
-                    "Smart Appliances",
-                    "Drones"
-                ],
 
-                careers: [
-                    "Embedded Systems Engineer",
-                    "Firmware Engineer",
-                    "Hardware Engineer"
-                ],
+    const clock =
+        document.getElementById("clock");
 
-                image:
-                    "assets/specialization-embedded.jpg",
 
-                image2:
-                    "assets/specialization-embedded-2.jpg"
-            },
+    const cursorTrail =
+        document.getElementById("cursorTrail");
 
 
-            {
-                title:
-                    "INTERNET OF<br>THINGS",
+    const pageTransition =
+        document.getElementById("pageTransition");
 
-                category:
-                    "CONNECTED SYSTEMS",
 
-                description:
-                    "Connects physical devices to the internet, allowing them to collect and exchange data automatically.",
+    const exploreButton =
+        document.getElementById("exploreButton");
 
-                applications: [
-                    "Smart Homes",
-                    "Wearable Devices",
-                    "Smart Agriculture",
-                    "Industrial Monitoring"
-                ],
 
-                careers: [
-                    "IoT Engineer",
-                    "Systems Engineer",
-                    "IoT Solutions Developer"
-                ],
+    const specializationShowcase =
+        document.getElementById("specializationShowcase");
 
-                image:
-                    "assets/specialization-iot.jpg",
 
-                image2:
-                    "assets/specialization-iot-2.jpg"
-            },
+    const showcaseVisual =
+        document.getElementById("showcaseVisual");
 
 
-            {
-                title:
-                    "COMPUTER<br>NETWORKS",
+    const showcaseContent =
+        document.getElementById("showcaseContent");
 
-                category:
-                    "CONNECTIVITY",
 
-                description:
-                    "Designs, builds, and manages communication networks that connect computers and devices.",
+    const primaryImage =
+        document.getElementById("primaryImage");
 
-                applications: [
-                    "LAN / WAN",
-                    "Cloud Networking",
-                    "Enterprise Networks",
-                    "Wireless Communication"
-                ],
 
-                careers: [
-                    "Network Engineer",
-                    "Network Administrator",
-                    "Systems Engineer"
-                ],
+    const secondaryImage =
+        document.getElementById("secondaryImage");
 
-                image:
-                    "assets/specialization-networks.jpg",
 
-                image2:
-                    "assets/specialization-networks-2.jpg"
-            },
+    const showcaseCounter =
+        document.getElementById("showcaseCounter");
 
 
-            {
-                title:
-                    "CYBERSECURITY",
+    const showcaseCategory =
+        document.getElementById("showcaseCategory");
 
-                category:
-                    "DIGITAL SECURITY",
 
-                description:
-                    "Protects computer systems, networks, and data from cyber threats and unauthorized access.",
+    const visualNumber =
+        document.getElementById("visualNumber");
 
-                applications: [
-                    "Firewalls",
-                    "Encryption",
-                    "Ethical Hacking",
-                    "Digital Forensics"
-                ],
 
-                careers: [
-                    "Cybersecurity Analyst",
-                    "Security Engineer",
-                    "Penetration Tester"
-                ],
+    const fieldTitle =
+        document.getElementById("fieldTitle");
 
-                image:
-                    "assets/specialization-cybersecurity.jpg",
 
-                image2:
-                    "assets/specialization-cybersecurity-2.jpg"
-            },
+    const fieldDescription =
+        document.getElementById("fieldDescription");
 
 
-            {
-                title:
-                    "SOFTWARE<br>DEVELOPMENT",
+    const applicationTags =
+        document.getElementById("applicationTags");
 
-                category:
-                    "SOFTWARE",
 
-                description:
-                    "Develops software applications and system software to solve real-world problems.",
+    const careerList =
+        document.getElementById("careerList");
 
-                applications: [
-                    "Mobile Apps",
-                    "Desktop Software",
-                    "Web Applications",
-                    "Enterprise Systems"
-                ],
 
-                careers: [
-                    "Software Engineer",
-                    "Application Developer",
-                    "Full-Stack Developer"
-                ],
+    const previousField =
+        document.getElementById("previousField");
 
-                image:
-                    "assets/specialization-software.jpg",
 
-                image2:
-                    "assets/specialization-software-2.jpg"
-            },
+    const nextField =
+        document.getElementById("nextField");
 
 
-            {
-                title:
-                    "AI & MACHINE<br>LEARNING",
-
-                category:
-                    "INTELLIGENT SYSTEMS",
-
-                description:
-                    "Creates intelligent systems that can learn from data, recognize patterns, and make decisions.",
-
-                applications: [
-                    "Chatbots",
-                    "Facial Recognition",
-                    "Recommendation Systems",
-                    "Autonomous Vehicles"
-                ],
-
-                careers: [
-                    "AI Engineer",
-                    "Machine Learning Engineer",
-                    "AI Researcher"
-                ],
-
-                image:
-                    "assets/specialization-ai.jpg",
-
-                image2:
-                    "assets/specialization-ai-2.jpg"
-            },
-
-
-            {
-                title:
-                    "DATA SCIENCE &<br>DATA ENGINEERING",
-
-                category:
-                    "DATA",
-
-                description:
-                    "Collects, processes, stores, and analyzes large amounts of data to support decision-making.",
-
-                applications: [
-                    "Business Analytics",
-                    "Healthcare Analytics",
-                    "Financial Forecasting",
-                    "Big Data Platforms"
-                ],
-
-                careers: [
-                    "Data Engineer",
-                    "Data Scientist",
-                    "Business Intelligence Engineer"
-                ],
-
-                image:
-                    "assets/specialization-data.jpg",
-
-                image2:
-                    "assets/specialization-data-2.jpg"
-            },
-
-
-            {
-                title:
-                    "ROBOTICS &<br>AUTOMATION",
-
-                category:
-                    "AUTOMATION",
-
-                description:
-                    "Designs robots and automated systems that perform tasks with minimal human intervention.",
-
-                applications: [
-                    "Manufacturing Robots",
-                    "Warehouse Automation",
-                    "Medical Robots",
-                    "Autonomous Drones"
-                ],
-
-                careers: [
-                    "Robotics Engineer",
-                    "Automation Engineer",
-                    "Control Systems Engineer"
-                ],
-
-                image:
-                    "assets/specialization-robotics.jpg",
-
-                image2:
-                    "assets/specialization-robotics-2.jpg"
-            },
-
-
-            {
-                title:
-                    "COMPUTER HARDWARE<br>& ARCHITECTURE",
-
-                category:
-                    "COMPUTER HARDWARE",
-
-                description:
-                    "Focuses on designing, testing, and improving computer hardware and processor architecture.",
-
-                applications: [
-                    "CPUs",
-                    "GPUs",
-                    "Motherboards",
-                    "Memory Systems",
-                    "High-Performance Computers"
-                ],
-
-                careers: [
-                    "Hardware Engineer",
-                    "Computer Architect",
-                    "Electronics Engineer"
-                ],
-
-                image:
-                    "assets/specialization-hardware.jpg",
-
-                image2:
-                    "assets/specialization-hardware-2.jpg"
-            },
-
-
-            {
-                title:
-                    "CLOUD & EDGE<br>COMPUTING",
-
-                category:
-                    "DISTRIBUTED COMPUTING",
-
-                description:
-                    "Develops systems that process and store data through cloud platforms and edge devices for faster and more efficient computing.",
-
-                applications: [
-                    "Cloud Services",
-                    "Edge AI",
-                    "Online Storage",
-                    "Content Delivery Networks (CDNs)"
-                ],
-
-                careers: [
-                    "Cloud Engineer",
-                    "Cloud Solutions Architect",
-                    "Edge Computing Engineer"
-                ],
-
-                image:
-                    "assets/specialization-cloud.jpg",
-
-                image2:
-                    "assets/specialization-cloud-2.jpg"
-            }
-
-        ];
-
-
-        /* =================================================
-           ELEMENTS
-        ================================================= */
-
-        const themeToggle =
-            document.getElementById(
-                "themeToggle"
-            );
-
-        const clock =
-            document.getElementById(
-                "clock"
-            );
-
-        const pageTransition =
-            document.getElementById(
-                "pageTransition"
-            );
-
-        const exploreButton =
-            document.getElementById(
-                "exploreButton"
-            );
-
-
-        const showcaseVisual =
-            document.getElementById(
-                "showcaseVisual"
-            );
-
-        const showcaseContent =
-            document.getElementById(
-                "showcaseContent"
-            );
-
-
-        const primaryImage =
-            document.getElementById(
-                "primaryImage"
-            );
-
-        const secondaryImage =
-            document.getElementById(
-                "secondaryImage"
-            );
-
-
-        const showcaseCounter =
-            document.getElementById(
-                "showcaseCounter"
-            );
-
-        const showcaseCategory =
-            document.getElementById(
-                "showcaseCategory"
-            );
-
-        const visualNumber =
-            document.getElementById(
-                "visualNumber"
-            );
-
-        const fieldTitle =
-            document.getElementById(
-                "fieldTitle"
-            );
-
-        const fieldDescription =
-            document.getElementById(
-                "fieldDescription"
-            );
-
-        const applicationTags =
-            document.getElementById(
-                "applicationTags"
-            );
-
-        const careerList =
-            document.getElementById(
-                "careerList"
-            );
-
-
-        const previousField =
-            document.getElementById(
-                "previousField"
-            );
-
-        const nextField =
-            document.getElementById(
-                "nextField"
-            );
-
-
-        const indexItems =
-            document.querySelectorAll(
-                ".field-index-item"
-            );
-
-
-        let activeIndex =
-            0;
-
-        let changing =
-            false;
-
-
-        /* =================================================
-           PAGE ENTRANCE
-        ================================================= */
-
-        if (pageTransition) {
-
-            pageTransition
-                .classList
-                .add(
-                    "entering"
-                );
-
-
-            setTimeout(
-                function () {
-
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering"
-                        );
-
-                },
-                1050
-            );
-        }
-
-
-        setTimeout(
-            function () {
-
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
-                    );
-
-            },
-            170
+    const fieldIndexItems =
+        document.querySelectorAll(
+            ".field-index-item"
         );
 
 
-        /* =================================================
-           THEME
-        ================================================= */
-
-        const savedTheme =
-            localStorage.getItem(
-                "cpe-theme"
-            ) || "light";
-
-
-        document
-            .documentElement
-            .dataset
-            .theme =
-            savedTheme;
-
-
-        if (themeToggle) {
-
-            themeToggle.addEventListener(
-                "click",
-                function () {
-
-                    const current =
-                        document
-                            .documentElement
-                            .dataset
-                            .theme;
-
-
-                    const next =
-                        current === "dark"
-                            ? "light"
-                            : "dark";
-
-
-                    document
-                        .documentElement
-                        .dataset
-                        .theme =
-                        next;
-
-
-                    localStorage.setItem(
-                        "cpe-theme",
-                        next
-                    );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           MANILA CLOCK
-        ================================================= */
-
-        function updateClock() {
-
-            if (!clock) {
-                return;
-            }
-
-
-            const formatter =
-                new Intl.DateTimeFormat(
-                    "en-PH",
-                    {
-
-                        timeZone:
-                            "Asia/Manila",
-
-                        hour:
-                            "2-digit",
-
-                        minute:
-                            "2-digit",
-
-                        second:
-                            "2-digit",
-
-                        hour12:
-                            false
-
-                    }
-                );
-
-
-            clock.textContent =
-                "MANILA " +
-                formatter.format(
-                    new Date()
-                );
-        }
-
-
-        updateClock();
-
-
-        setInterval(
-            updateClock,
-            1000
+    const directionOptions =
+        document.querySelectorAll(
+            ".direction-option"
         );
 
 
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    const pageLinks =
+        document.querySelectorAll(
+            ".page-link"
+        );
+
+
+    /* =====================================================
+       02. SETTINGS
+    ====================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    const isTouchDevice =
+        window.matchMedia(
+            "(hover: none), (pointer: coarse)"
+        ).matches;
+
+
+    let currentField = 0;
+
+
+    let fieldChanging = false;
+
+
+    let touchRevealTimer = null;
+
+
+    /* =====================================================
+       03. SPECIALIZATION DATA
+
+       IMAGE NAMES ARE HERE.
+
+       Change these filenames based on the images
+       inside your assets folder.
+
+       Example:
+
+       image:
+       "assets/specialization-embedded.jpg"
+
+       hoverImage:
+       "assets/specialization-embedded-2.jpg"
+    ====================================================== */
+
+    const specializations = [
+
+
         /* =================================================
-           EXPLORE BUTTON
+           01. EMBEDDED SYSTEMS
         ================================================= */
 
-        if (exploreButton) {
+        {
 
-            exploreButton.addEventListener(
-                "click",
-                function () {
+            number:
+                "01",
 
-                    const section =
-                        document.getElementById(
-                            "specializationShowcase"
-                        );
+            category:
+                "HARDWARE + SOFTWARE",
+
+            title:
+                "EMBEDDED<br>SYSTEMS",
+
+            description:
+                "Embedded Systems focuses on designing specialized computer systems built directly into electronic devices. These systems combine hardware and software to perform dedicated functions efficiently and reliably.",
+
+            image:
+                "assets/specialization-embedded.jpg",
+
+            hoverImage:
+                "assets/specialization-embedded-2.jpg",
+
+            imageAlt:
+                "Embedded Systems",
+
+            applications: [
+
+                "Automotive Control Systems",
+
+                "Medical Devices",
+
+                "Smart Appliances",
+
+                "Industrial Controllers",
+
+                "Drones"
+
+            ],
+
+            careers: [
+
+                "Embedded Systems Engineer",
+
+                "Firmware Engineer",
+
+                "Hardware Engineer",
+
+                "Electronics Design Engineer"
+
+            ]
+
+        },
 
 
-                    if (section) {
+        /* =================================================
+           02. INTERNET OF THINGS
+        ================================================= */
 
-                        section.scrollIntoView(
-                            {
-                                behavior:
-                                    "smooth"
-                            }
-                        );
+        {
 
-                    }
+            number:
+                "02",
 
-                }
-            );
+            category:
+                "CONNECTED SYSTEMS",
+
+            title:
+                "INTERNET OF<br>THINGS",
+
+            description:
+                "The Internet of Things connects physical devices, sensors, software, and networks so they can collect information, communicate, and respond intelligently to their environment.",
+
+            image:
+                "assets/specialization-iot.jpg",
+
+            hoverImage:
+                "assets/specialization-iot-2.jpg",
+
+            imageAlt:
+                "Internet of Things",
+
+            applications: [
+
+                "Smart Homes",
+
+                "Smart Cities",
+
+                "Industrial IoT",
+
+                "Environmental Monitoring",
+
+                "Connected Devices"
+
+            ],
+
+            careers: [
+
+                "IoT Engineer",
+
+                "IoT Solutions Developer",
+
+                "Systems Integration Engineer",
+
+                "Embedded IoT Developer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           03. COMPUTER NETWORKS
+        ================================================= */
+
+        {
+
+            number:
+                "03",
+
+            category:
+                "CONNECTIVITY",
+
+            title:
+                "COMPUTER<br>NETWORKS",
+
+            description:
+                "Computer Networks focuses on the technologies that allow computers, servers, devices, and systems to communicate. It includes network design, configuration, management, and infrastructure.",
+
+            image:
+                "assets/specialization-networks.jpg",
+
+            hoverImage:
+                "assets/specialization-networks-2.jpg",
+
+            imageAlt:
+                "Computer Networks",
+
+            applications: [
+
+                "Enterprise Networks",
+
+                "Routing & Switching",
+
+                "Wireless Networks",
+
+                "Data Centers",
+
+                "Network Infrastructure"
+
+            ],
+
+            careers: [
+
+                "Network Engineer",
+
+                "Network Administrator",
+
+                "Systems Engineer",
+
+                "Infrastructure Engineer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           04. CYBERSECURITY
+        ================================================= */
+
+        {
+
+            number:
+                "04",
+
+            category:
+                "SECURITY",
+
+            title:
+                "CYBER<br>SECURITY",
+
+            description:
+                "Cybersecurity focuses on protecting computer systems, networks, applications, and digital information from unauthorized access, attacks, disruption, and other security threats.",
+
+            image:
+                "assets/specialization-cybersecurity.jpg",
+
+            hoverImage:
+                "assets/specialization-cybersecurity-2.jpg",
+
+            imageAlt:
+                "Cybersecurity",
+
+            applications: [
+
+                "Network Security",
+
+                "Security Monitoring",
+
+                "Threat Detection",
+
+                "Access Control",
+
+                "System Protection"
+
+            ],
+
+            careers: [
+
+                "Cybersecurity Engineer",
+
+                "Security Analyst",
+
+                "Network Security Engineer",
+
+                "Security Operations Analyst"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           05. SOFTWARE DEVELOPMENT
+        ================================================= */
+
+        {
+
+            number:
+                "05",
+
+            category:
+                "SOFTWARE",
+
+            title:
+                "SOFTWARE<br>DEVELOPMENT",
+
+            description:
+                "Software Development involves designing, building, testing, and maintaining applications and systems. Computer engineers apply programming and engineering principles to create reliable software solutions.",
+
+            image:
+                "assets/specialization-software.jpg",
+
+            hoverImage:
+                "assets/specialization-software-2.jpg",
+
+            imageAlt:
+                "Software Development",
+
+            applications: [
+
+                "Web Applications",
+
+                "Desktop Software",
+
+                "Mobile Applications",
+
+                "System Software",
+
+                "Engineering Tools"
+
+            ],
+
+            careers: [
+
+                "Software Engineer",
+
+                "Software Developer",
+
+                "Application Developer",
+
+                "Systems Programmer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           06. AI & MACHINE LEARNING
+        ================================================= */
+
+        {
+
+            number:
+                "06",
+
+            category:
+                "INTELLIGENT SYSTEMS",
+
+            title:
+                "AI & MACHINE<br>LEARNING",
+
+            description:
+                "Artificial Intelligence and Machine Learning focus on developing systems that can analyze information, recognize patterns, learn from data, and perform tasks that normally require human intelligence.",
+
+            image:
+                "assets/specialization-ai.jpg",
+
+            hoverImage:
+                "assets/specialization-ai-2.jpg",
+
+            imageAlt:
+                "Artificial Intelligence and Machine Learning",
+
+            applications: [
+
+                "Computer Vision",
+
+                "Intelligent Automation",
+
+                "Predictive Systems",
+
+                "Pattern Recognition",
+
+                "Smart Assistants"
+
+            ],
+
+            careers: [
+
+                "AI Engineer",
+
+                "Machine Learning Engineer",
+
+                "Computer Vision Engineer",
+
+                "AI Systems Developer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           07. DATA SCIENCE
+        ================================================= */
+
+        {
+
+            number:
+                "07",
+
+            category:
+                "DATA",
+
+            title:
+                "DATA SCIENCE &<br>DATA ENGINEERING",
+
+            description:
+                "Data Science and Data Engineering focus on collecting, organizing, processing, and analyzing large amounts of information so that useful patterns, insights, and decisions can be produced.",
+
+            image:
+                "assets/specialization-data.jpg",
+
+            hoverImage:
+                "assets/specialization-data-2.jpg",
+
+            imageAlt:
+                "Data Science and Data Engineering",
+
+            applications: [
+
+                "Data Analytics",
+
+                "Data Pipelines",
+
+                "Business Intelligence",
+
+                "Predictive Analytics",
+
+                "Large-Scale Data Processing"
+
+            ],
+
+            careers: [
+
+                "Data Analyst",
+
+                "Data Engineer",
+
+                "Data Scientist",
+
+                "Business Intelligence Analyst"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           08. ROBOTICS
+        ================================================= */
+
+        {
+
+            number:
+                "08",
+
+            category:
+                "AUTOMATION",
+
+            title:
+                "ROBOTICS &<br>AUTOMATION",
+
+            description:
+                "Robotics and Automation combine computing, electronics, sensors, control systems, and programming to develop machines capable of performing physical tasks automatically or intelligently.",
+
+            image:
+                "assets/specialization-robotics.jpg",
+
+            hoverImage:
+                "assets/specialization-robotics-2.jpg",
+
+            imageAlt:
+                "Robotics and Automation",
+
+            applications: [
+
+                "Industrial Robots",
+
+                "Autonomous Systems",
+
+                "Manufacturing Automation",
+
+                "Service Robots",
+
+                "Smart Machines"
+
+            ],
+
+            careers: [
+
+                "Robotics Engineer",
+
+                "Automation Engineer",
+
+                "Control Systems Engineer",
+
+                "Mechatronics Engineer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           09. COMPUTER HARDWARE
+        ================================================= */
+
+        {
+
+            number:
+                "09",
+
+            category:
+                "HARDWARE",
+
+            title:
+                "COMPUTER HARDWARE<br>& ARCHITECTURE",
+
+            description:
+                "Computer Hardware and Architecture focuses on how computing systems are physically designed and organized, from processors and digital circuits to memory, interfaces, and complete computer systems.",
+
+            image:
+                "assets/specialization-hardware.jpg",
+
+            hoverImage:
+                "assets/specialization-hardware-2.jpg",
+
+            imageAlt:
+                "Computer Hardware and Architecture",
+
+            applications: [
+
+                "Processor Systems",
+
+                "Digital Circuits",
+
+                "Computer Architecture",
+
+                "Electronic Hardware",
+
+                "Hardware Prototyping"
+
+            ],
+
+            careers: [
+
+                "Hardware Engineer",
+
+                "Computer Systems Engineer",
+
+                "Digital Design Engineer",
+
+                "Electronics Engineer"
+
+            ]
+
+        },
+
+
+        /* =================================================
+           10. CLOUD & EDGE COMPUTING
+        ================================================= */
+
+        {
+
+            number:
+                "10",
+
+            category:
+                "DISTRIBUTED COMPUTING",
+
+            title:
+                "CLOUD & EDGE<br>COMPUTING",
+
+            description:
+                "Cloud and Edge Computing focus on distributing computing resources across remote data centers and devices closer to users, allowing systems to process, store, and deliver information efficiently.",
+
+            image:
+                "assets/specialization-cloud.jpg",
+
+            hoverImage:
+                "assets/specialization-cloud-2.jpg",
+
+            imageAlt:
+                "Cloud and Edge Computing",
+
+            applications: [
+
+                "Cloud Infrastructure",
+
+                "Edge Devices",
+
+                "Distributed Systems",
+
+                "Remote Computing",
+
+                "Scalable Services"
+
+            ],
+
+            careers: [
+
+                "Cloud Engineer",
+
+                "Cloud Systems Engineer",
+
+                "DevOps Engineer",
+
+                "Infrastructure Engineer"
+
+            ]
+
         }
 
+    ];
 
-        /* =================================================
-           REVEAL
-        ================================================= */
 
-        const revealElements =
-            document.querySelectorAll(
-                ".reveal"
+    /* =====================================================
+       04. THEME
+    ====================================================== */
+
+   /* =====================================================
+   04. THEME
+====================================================== */
+
+/*
+    Get the navigation logo.
+
+    Make sure your HTML logo has:
+    id="navLogoImage"
+*/
+
+const navLogoImage =
+    document.getElementById(
+        "navLogoImage"
+    );
+
+
+const body =
+    document.body;
+
+
+/*
+    Change the logo depending
+    on the current theme.
+
+    DARK MODE  = light.png
+    LIGHT MODE = dark.png
+*/
+
+function updateLogo(theme) {
+
+    if (!navLogoImage) {
+        return;
+    }
+
+
+    navLogoImage.src =
+        theme === "dark"
+            ? "assets/light.png"
+            : "assets/dark.png";
+
+}
+
+
+/*
+    Apply theme + save it +
+    update the logo.
+*/
+
+function setTheme(theme) {
+
+    html.dataset.theme =
+        theme;
+
+
+    localStorage.setItem(
+        "cpe-theme",
+        theme
+    );
+
+
+    updateLogo(
+        theme
+    );
+
+}
+
+
+/*
+    Get previously saved theme.
+
+    If there is no saved theme,
+    start in LIGHT MODE.
+*/
+
+const savedTheme =
+    localStorage.getItem(
+        "cpe-theme"
+    ) || "light";
+
+
+/*
+    Apply saved theme when
+    the page first loads.
+*/
+
+html.dataset.theme =
+    savedTheme;
+
+
+updateLogo(
+    savedTheme
+);
+
+
+/*
+    Theme button
+*/
+
+if (themeToggle) {
+
+    themeToggle.addEventListener(
+        "click",
+        () => {
+
+            const currentTheme =
+                html.dataset.theme;
+
+
+            const newTheme =
+                currentTheme === "dark"
+                    ? "light"
+                    : "dark";
+
+
+            /*
+                This changes:
+                1. Theme
+                2. localStorage
+                3. Navigation logo
+            */
+
+            setTheme(
+                newTheme
             );
 
 
-        if (
-            "IntersectionObserver"
-            in window
-        ) {
-
-            const revealObserver =
-                new IntersectionObserver(
-
-                    function (entries) {
-
-                        entries.forEach(
-                            function (entry) {
-
-                                if (
-                                    entry.isIntersecting
-                                ) {
-
-                                    entry
-                                        .target
-                                        .classList
-                                        .add(
-                                            "visible"
-                                        );
-
-
-                                    revealObserver
-                                        .unobserve(
-                                            entry.target
-                                        );
-
-                                }
-
-                            }
-                        );
-
-                    },
-
-                    {
-
-                        threshold:
-                            .1,
-
-                        rootMargin:
-                            "0px 0px -40px 0px"
-
-                    }
-
-                );
-
-
-            revealElements.forEach(
-                function (element) {
-
-                    revealObserver.observe(
-                        element
-                    );
-
-                }
-            );
-
-        } else {
-
-            revealElements.forEach(
-                function (element) {
-
-                    element
-                        .classList
-                        .add(
-                            "visible"
-                        );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           CREATE TAGS
-        ================================================= */
-
-        function createApplications(
-            applications
-        ) {
-
-            if (!applicationTags) {
-                return;
-            }
-
-
-            applicationTags.innerHTML =
-                "";
-
-
-            applications.forEach(
-                function (application) {
-
-                    const span =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    span.textContent =
-                        application;
-
-
-                    applicationTags
-                        .appendChild(
-                            span
-                        );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           CREATE CAREERS
-        ================================================= */
-
-        function createCareers(
-            careers
-        ) {
-
-            if (!careerList) {
-                return;
-            }
-
-
-            careerList.innerHTML =
-                "";
-
-
-            careers.forEach(
-                function (career) {
-
-                    const span =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    span.textContent =
-                        career;
-
-
-                    careerList
-                        .appendChild(
-                            span
-                        );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           UPDATE ACTIVE INDEX
-        ================================================= */
-
-        function updateIndexNavigation() {
-
-            indexItems.forEach(
-                function (
-                    item,
-                    index
-                ) {
-
-                    item.classList.toggle(
-                        "active",
-                        index === activeIndex
-                    );
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           UPDATE FIELD
-        ================================================= */
-
-        function updateField(
-            newIndex
-        ) {
+            /*
+                Small transition when
+                changing themes.
+            */
 
             if (
-                changing ||
-                newIndex === activeIndex
+                !window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches
             ) {
 
-                return;
-            }
-
-
-            changing =
-                true;
-
-
-            const field =
-                fields[
-                    newIndex
-                ];
-
-
-            if (showcaseVisual) {
-
-                showcaseVisual
-                    .classList
-                    .remove(
-                        "touch-reveal"
-                    );
-
-
-                showcaseVisual
-                    .classList
-                    .add(
-                        "switching"
-                    );
-            }
-
-
-            if (showcaseContent) {
-
-                showcaseContent
-                    .classList
-                    .add(
-                        "changing"
-                    );
-            }
-
-
-            setTimeout(
-                function () {
-
-                    activeIndex =
-                        newIndex;
-
-
-                    const number =
-                        String(
-                            activeIndex + 1
-                        ).padStart(
-                            2,
-                            "0"
-                        );
-
-
-                    if (primaryImage) {
-
-                        primaryImage.src =
-                            field.image;
-
-
-                        primaryImage.alt =
-                            field.title
-                                .replace(
-                                    /<br>/g,
-                                    " "
-                                );
-                    }
-
-
-                    if (secondaryImage) {
-
-                        secondaryImage.src =
-                            field.image2;
-
-
-                        secondaryImage.alt =
-                            field.title
-                                .replace(
-                                    /<br>/g,
-                                    " "
-                                ) +
-                            " application";
-                    }
-
-
-                    if (showcaseCounter) {
-
-                        showcaseCounter
-                            .textContent =
-                            number +
-                            " / " +
-                            String(
-                                fields.length
-                            ).padStart(
-                                2,
-                                "0"
-                            );
-                    }
-
-
-                    if (showcaseCategory) {
-
-                        showcaseCategory
-                            .textContent =
-                            field.category;
-                    }
-
-
-                    if (visualNumber) {
-
-                        visualNumber
-                            .textContent =
-                            number;
-                    }
-
-
-                    if (fieldTitle) {
-
-                        fieldTitle
-                            .innerHTML =
-                            field.title;
-                    }
-
-
-                    if (fieldDescription) {
-
-                        fieldDescription
-                            .textContent =
-                            field.description;
-                    }
-
-
-                    createApplications(
-                        field.applications
-                    );
-
-
-                    createCareers(
-                        field.careers
-                    );
-
-
-                    const label =
-                        showcaseContent
-                            ? showcaseContent
-                                .querySelector(
-                                    ".showcase-field-label"
-                                )
-                            : null;
-
-
-                    if (label) {
-
-                        label.textContent =
-                            "FIELD / " +
-                            number;
-                    }
-
-
-                    updateIndexNavigation();
-
-
-                    if (showcaseVisual) {
-
-                        showcaseVisual
-                            .classList
-                            .remove(
-                                "switching"
-                            );
-                    }
-
-
-                    if (showcaseContent) {
-
-                        showcaseContent
-                            .classList
-                            .remove(
-                                "changing"
-                            );
-                    }
-
-
-                    setTimeout(
-                        function () {
-
-                            changing =
-                                false;
-
+                body.animate(
+                    [
+                        {
+                            opacity: 0.88
                         },
-                        350
-                    );
 
-                },
-                430
-            );
-
-        }
-
-
-        /* =================================================
-           NEXT FIELD
-        ================================================= */
-
-        function goNext() {
-
-            if (changing) {
-                return;
-            }
-
-
-            const newIndex =
-                (
-                    activeIndex + 1
-                ) %
-                fields.length;
-
-
-            updateField(
-                newIndex
-            );
-        }
-
-
-        /* =================================================
-           PREVIOUS FIELD
-        ================================================= */
-
-        function goPrevious() {
-
-            if (changing) {
-                return;
-            }
-
-
-            const newIndex =
-                (
-                    activeIndex -
-                    1 +
-                    fields.length
-                ) %
-                fields.length;
-
-
-            updateField(
-                newIndex
-            );
-        }
-
-
-        if (nextField) {
-
-            nextField.addEventListener(
-                "click",
-                goNext
-            );
-        }
-
-
-        if (previousField) {
-
-            previousField.addEventListener(
-                "click",
-                goPrevious
-            );
-        }
-
-
-        /* =================================================
-           INDEX CLICK
-        ================================================= */
-
-        indexItems.forEach(
-            function (
-                item,
-                index
-            ) {
-
-                item.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            index ===
-                            activeIndex
-                        ) {
-
-                            const showcase =
-                                document.querySelector(
-                                    ".showcase-section"
-                                );
-
-
-                            if (showcase) {
-
-                                showcase
-                                    .scrollIntoView(
-                                        {
-                                            behavior:
-                                                "smooth",
-
-                                            block:
-                                                "start"
-                                        }
-                                    );
-
-                            }
-
-
-                            return;
+                        {
+                            opacity: 1
                         }
+                    ],
+                    {
+                        duration: 380,
 
-
-                        updateField(
-                            index
-                        );
-
-
-                        setTimeout(
-                            function () {
-
-                                const showcase =
-                                    document.querySelector(
-                                        ".showcase-section"
-                                    );
-
-
-                                if (showcase) {
-
-                                    showcase
-                                        .scrollIntoView(
-                                            {
-                                                behavior:
-                                                    "smooth",
-
-                                                block:
-                                                    "start"
-                                            }
-                                        );
-
-                                }
-
-                            },
-                            150
-                        );
-
+                        easing:
+                            "ease-out"
                     }
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+    /* =====================================================
+       05. MANILA CLOCK
+    ====================================================== */
+
+    function updateClock() {
+
+        if (!clock) {
+            return;
+        }
+
+
+        const now =
+            new Date();
+
+
+        const time =
+            new Intl.DateTimeFormat(
+                "en-GB",
+                {
+
+                    timeZone:
+                        "Asia/Manila",
+
+                    hour:
+                        "2-digit",
+
+                    minute:
+                        "2-digit",
+
+                    second:
+                        "2-digit",
+
+                    hour12:
+                        false
+
+                }
+            ).format(now);
+
+
+        clock.textContent =
+            `MANILA ${time}`;
+
+    }
+
+
+    updateClock();
+
+
+    setInterval(
+        updateClock,
+        1000
+    );
+
+
+    /* =====================================================
+       06. SCROLL REVEAL
+    ====================================================== */
+
+    if (prefersReducedMotion) {
+
+        revealElements.forEach(
+            element => {
+
+                element.classList.add(
+                    "visible"
                 );
 
             }
         );
 
+    } else {
 
-        /* =================================================
-           TOUCH IMAGE REVEAL
-        ================================================= */
+        const revealObserver =
+            new IntersectionObserver(
+                entries => {
 
-        if (showcaseVisual) {
+                    entries.forEach(
+                        entry => {
 
-            showcaseVisual.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        window.matchMedia(
-                            "(hover: none)"
-                        ).matches
-                    ) {
-
-                        event.preventDefault();
-
-
-                        showcaseVisual
-                            .classList
-                            .toggle(
-                                "touch-reveal"
-                            );
-
-                    }
-
-                }
-            );
-        }
-
-
-        /* =================================================
-           SWIPE BETWEEN SPECIALIZATIONS
-        ================================================= */
-
-        let touchStartX =
-            0;
-
-        let touchEndX =
-            0;
-
-
-        if (showcaseVisual) {
-
-            showcaseVisual.addEventListener(
-                "touchstart",
-                function (event) {
-
-                    touchStartX =
-                        event
-                            .changedTouches[0]
-                            .screenX;
-
-                },
-                {
-                    passive: true
-                }
-            );
-
-
-            showcaseVisual.addEventListener(
-                "touchend",
-                function (event) {
-
-                    touchEndX =
-                        event
-                            .changedTouches[0]
-                            .screenX;
-
-
-                    const distance =
-                        touchEndX -
-                        touchStartX;
-
-
-                    if (
-                        Math.abs(
-                            distance
-                        ) < 75
-                    ) {
-
-                        return;
-                    }
-
-
-                    if (
-                        distance < 0
-                    ) {
-
-                        goNext();
-
-                    } else {
-
-                        goPrevious();
-
-                    }
-
-                },
-                {
-                    passive: true
-                }
-            );
-        }
-
-
-        /* =================================================
-           KEYBOARD CONTROLS
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                const showcase =
-                    document.querySelector(
-                        ".showcase-section"
-                    );
-
-
-                if (!showcase) {
-                    return;
-                }
-
-
-                const rect =
-                    showcase
-                        .getBoundingClientRect();
-
-
-                const visible =
-                    rect.top <
-                    window.innerHeight &&
-                    rect.bottom > 0;
-
-
-                if (!visible) {
-                    return;
-                }
-
-
-                if (
-                    event.key ===
-                    "ArrowRight"
-                ) {
-
-                    goNext();
-                }
-
-
-                if (
-                    event.key ===
-                    "ArrowLeft"
-                ) {
-
-                    goPrevious();
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           DIRECTION BUTTONS
-        ================================================= */
-
-        const directionOptions =
-            document.querySelectorAll(
-                ".direction-option"
-            );
-
-
-        directionOptions.forEach(
-            function (option) {
-
-                option.addEventListener(
-                    "click",
-                    function () {
-
-                        const indexes =
-                            option
-                                .dataset
-                                .fields
-                                .split(",")
-                                .map(
-                                    Number
-                                );
-
-
-                        const firstField =
-                            indexes[0];
-
-
-                        if (
-                            firstField !==
-                            activeIndex
-                        ) {
-
-                            updateField(
-                                firstField
-                            );
-                        }
-
-
-                        setTimeout(
-                            function () {
-
-                                const showcase =
-                                    document.querySelector(
-                                        ".showcase-section"
-                                    );
-
-
-                                if (showcase) {
-
-                                    showcase
-                                        .scrollIntoView(
-                                            {
-                                                behavior:
-                                                    "smooth",
-
-                                                block:
-                                                    "start"
-                                            }
-                                        );
-
-                                }
-
-                            },
-                            180
-                        );
-
-                    }
-                );
-
-
-                option.addEventListener(
-                    "mouseenter",
-                    function () {
-
-                        const indexes =
-                            option
-                                .dataset
-                                .fields
-                                .split(",")
-                                .map(
-                                    Number
-                                );
-
-
-                        indexItems.forEach(
-                            function (
-                                item,
-                                index
+                            if (
+                                entry.isIntersecting
                             ) {
 
-                                if (
-                                    indexes.includes(
-                                        index
-                                    )
-                                ) {
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
-                                    item.style.opacity =
-                                        "1";
 
-                                }
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
 
                             }
-                        );
 
-                    }
-                );
+                        }
+                    );
 
-            }
-        );
+                },
+                {
 
+                    threshold:
+                        0.12,
 
-        /* =================================================
-           PAGE TRANSITIONS
-        ================================================= */
+                    rootMargin:
+                        "0px 0px -45px 0px"
 
-        const pageLinks =
-            document.querySelectorAll(
-                ".page-link"
+                }
             );
 
 
-        pageLinks.forEach(
-            function (link) {
+        revealElements.forEach(
+            element => {
 
-                link.addEventListener(
-                    "click",
-                    function (event) {
+                revealObserver.observe(
+                    element
+                );
 
-                        const href =
-                            link.getAttribute(
-                                "href"
-                            );
+            }
+        );
 
-
-                        if (
-                            !href ||
-                            href.startsWith(
-                                "#"
-                            )
-                        ) {
-
-                            return;
-                        }
+    }
 
 
-                        if (
-                            event.ctrlKey ||
-                            event.metaKey ||
-                            event.shiftKey ||
-                            event.altKey
-                        ) {
+    /* =====================================================
+       07. EXPLORE BUTTON
+    ====================================================== */
 
-                            return;
-                        }
+    if (
+        exploreButton &&
+        specializationShowcase
+    ) {
 
+        exploreButton.addEventListener(
+            "click",
+            () => {
 
-                        event.preventDefault();
+                specializationShowcase.scrollIntoView(
+                    {
 
+                        behavior:
+                            prefersReducedMotion
+                                ? "auto"
+                                : "smooth",
 
-                        if (
-                            !pageTransition
-                        ) {
-
-                            window.location.href =
-                                href;
-
-                            return;
-                        }
-
-
-                        pageTransition
-                            .classList
-                            .remove(
-                                "entering"
-                            );
-
-
-                        pageTransition
-                            .classList
-                            .add(
-                                "leaving"
-                            );
-
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    href;
-
-                            },
-                            700
-                        );
+                        block:
+                            "start"
 
                     }
                 );
@@ -1534,290 +1057,999 @@ document.addEventListener(
             }
         );
 
-
-        /* =================================================
-           CURSOR TRAIL
-        ================================================= */
-
-        const finePointer =
-            window.matchMedia(
-                "(pointer: fine)"
-            ).matches;
+    }
 
 
-        const reducedMotion =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches;
+    /* =====================================================
+       08. CREATE APPLICATION TAGS
+    ====================================================== */
+
+    function renderApplications(
+        applications
+    ) {
+
+        if (!applicationTags) {
+            return;
+        }
 
 
-        if (
-            finePointer &&
-            !reducedMotion
-        ) {
-
-            const circleCount =
-                12;
+        applicationTags.innerHTML =
+            "";
 
 
-            const circles =
-                [];
+        applications.forEach(
+            application => {
 
-
-            let mouseX =
-                -100;
-
-            let mouseY =
-                -100;
-
-            let mouseActive =
-                false;
-
-
-            for (
-                let i = 0;
-                i < circleCount;
-                i++
-            ) {
-
-                const circle =
+                const tag =
                     document.createElement(
                         "span"
                     );
 
 
-                circle.className =
-                    "cursor-trail-circle";
+                tag.textContent =
+                    application;
 
 
-                const size =
-                    Math.max(
-                        3,
-                        12 -
-                        i * .65
-                    );
-
-
-                circle.style.width =
-                    size + "px";
-
-
-                circle.style.height =
-                    size + "px";
-
-
-                document.body
-                    .appendChild(
-                        circle
-                    );
-
-
-                circles.push(
-                    {
-
-                        element:
-                            circle,
-
-                        x:
-                            mouseX,
-
-                        y:
-                            mouseY
-
-                    }
+                applicationTags.appendChild(
+                    tag
                 );
 
             }
+        );
+
+    }
 
 
-            document.addEventListener(
-                "mousemove",
-                function (event) {
+    /* =====================================================
+       09. CREATE CAREER LIST
+    ====================================================== */
 
-                    mouseX =
-                        event.clientX;
+    function renderCareers(
+        careers
+    ) {
 
-
-                    mouseY =
-                        event.clientY;
-
-
-                    mouseActive =
-                        true;
-
-                }
-            );
+        if (!careerList) {
+            return;
+        }
 
 
-            document.addEventListener(
-                "mouseleave",
-                function () {
-
-                    mouseActive =
-                        false;
-
-                }
-            );
+        careerList.innerHTML =
+            "";
 
 
-            document.addEventListener(
-                "mouseenter",
-                function () {
+        careers.forEach(
+            career => {
 
-                    mouseActive =
-                        true;
-
-                }
-            );
+                const item =
+                    document.createElement(
+                        "span"
+                    );
 
 
-            function animateTrail() {
-
-                let x =
-                    mouseX;
-
-                let y =
-                    mouseY;
+                item.textContent =
+                    career;
 
 
-                circles.forEach(
-                    function (
-                        circle,
-                        index
-                    ) {
-
-                        circle.x +=
-                            (
-                                x -
-                                circle.x
-                            ) *
-                            .30;
-
-
-                        circle.y +=
-                            (
-                                y -
-                                circle.y
-                            ) *
-                            .30;
-
-
-                        const size =
-                            Math.max(
-                                3,
-                                12 -
-                                index * .65
-                            );
-
-
-                        const opacity =
-                            mouseActive
-
-                                ? Math.max(
-                                    .05,
-                                    .46 -
-                                    index *
-                                    .035
-                                )
-
-                                : 0;
-
-
-                        circle
-                            .element
-                            .style
-                            .opacity =
-                            opacity;
-
-
-                        circle
-                            .element
-                            .style
-                            .transform =
-
-                            "translate3d(" +
-
-                            (
-                                circle.x -
-                                size / 2
-                            ) +
-
-                            "px," +
-
-                            (
-                                circle.y -
-                                size / 2
-                            ) +
-
-                            "px,0)";
-
-
-                        x =
-                            circle.x;
-
-
-                        y =
-                            circle.y;
-
-                    }
-                );
-
-
-                requestAnimationFrame(
-                    animateTrail
+                careerList.appendChild(
+                    item
                 );
 
             }
+        );
+
+    }
 
 
-            animateTrail();
+    /* =====================================================
+       10. ACTIVE INDEX
+    ====================================================== */
+
+    function updateActiveIndex() {
+
+        fieldIndexItems.forEach(
+            (
+                item,
+                index
+            ) => {
+
+                item.classList.toggle(
+                    "active",
+                    index === currentField
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       11. UPDATE SPECIALIZATION
+
+       IMPORTANT:
+
+       We use the CSS states:
+
+       .changing
+       .switching
+
+       so the old content fades first,
+       then the new content appears.
+
+       This avoids the sudden snapping.
+    ====================================================== */
+
+    function updateSpecialization(
+        newIndex,
+        options = {}
+    ) {
+
+        if (
+            fieldChanging ||
+            !specializations.length
+        ) {
+            return;
+        }
+
+
+        let index =
+            Number(newIndex);
+
+
+        if (
+            Number.isNaN(index)
+        ) {
+            return;
+        }
+
+
+        /* LOOP BACKWARD */
+
+        if (index < 0) {
+
+            index =
+                specializations.length - 1;
 
         }
 
 
+        /* LOOP FORWARD */
+
+        if (
+            index >=
+            specializations.length
+        ) {
+
+            index = 0;
+
+        }
+
+
+        if (
+            index === currentField &&
+            !options.force
+        ) {
+
+            if (
+                options.scroll &&
+                showcaseVisual
+            ) {
+
+                showcaseVisual.scrollIntoView(
+                    {
+
+                        behavior:
+                            prefersReducedMotion
+                                ? "auto"
+                                : "smooth",
+
+                        block:
+                            "center"
+
+                    }
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        fieldChanging = true;
+
+
         /* =================================================
-           BACK BUTTON FIX
+           PHASE 1
+           FADE CURRENT CONTENT
         ================================================= */
 
-        window.addEventListener(
-            "pageshow",
-            function () {
+        if (showcaseContent) {
 
-                document.body
-                    .classList
-                    .add(
-                        "loaded"
-                    );
+            showcaseContent.classList.add(
+                "changing"
+            );
+
+        }
 
 
-                if (pageTransition) {
+        if (showcaseVisual) {
 
-                    pageTransition
-                        .classList
-                        .remove(
-                            "entering",
-                            "leaving"
-                        );
+            showcaseVisual.classList.add(
+                "switching"
+            );
+
+
+            showcaseVisual.classList.remove(
+                "touch-reveal"
+            );
+
+        }
+
+
+        clearTimeout(
+            touchRevealTimer
+        );
+
+
+        const changeDelay =
+            prefersReducedMotion
+                ? 0
+                : 300;
+
+
+        setTimeout(
+            () => {
+
+
+                /* =========================================
+                   PHASE 2
+                   CHANGE THE DATA
+                ========================================== */
+
+                currentField =
+                    index;
+
+
+                const field =
+                    specializations[
+                        currentField
+                    ];
+
+
+                /* COUNTER */
+
+                if (showcaseCounter) {
+
+                    showcaseCounter.textContent =
+                        `${field.number} / ${String(
+                            specializations.length
+                        ).padStart(2, "0")}`;
+
                 }
 
 
-                revealElements.forEach(
-                    function (element) {
+                /* CATEGORY */
 
-                        if (
-                            element
-                                .getBoundingClientRect()
-                                .top <
-                            window.innerHeight
-                        ) {
+                if (showcaseCategory) {
 
-                            element
-                                .classList
-                                .add(
-                                    "visible"
+                    showcaseCategory.textContent =
+                        field.category;
+
+                }
+
+
+                /* IMAGE NUMBER */
+
+                if (visualNumber) {
+
+                    visualNumber.textContent =
+                        field.number;
+
+                }
+
+
+                /* TITLE */
+
+                if (fieldTitle) {
+
+                    fieldTitle.innerHTML =
+                        field.title;
+
+                }
+
+
+                /* DESCRIPTION */
+
+                if (fieldDescription) {
+
+                    fieldDescription.textContent =
+                        field.description;
+
+                }
+
+
+                /* PRIMARY IMAGE */
+
+                if (primaryImage) {
+
+                    primaryImage.src =
+                        field.image;
+
+
+                    primaryImage.alt =
+                        field.imageAlt;
+
+                }
+
+
+                /* SECOND / HOVER IMAGE */
+
+                if (secondaryImage) {
+
+                    secondaryImage.src =
+                        field.hoverImage;
+
+
+                    secondaryImage.alt =
+                        `${field.imageAlt} application`;
+
+                }
+
+
+                /* APPLICATIONS */
+
+                renderApplications(
+                    field.applications
+                );
+
+
+                /* CAREERS */
+
+                renderCareers(
+                    field.careers
+                );
+
+
+                /* ACTIVE FIELD INDEX */
+
+                updateActiveIndex();
+
+
+                /* =========================================
+                   WAIT UNTIL IMAGE IS READY
+                ========================================== */
+
+                const finishChange =
+                    () => {
+
+
+                        requestAnimationFrame(
+                            () => {
+
+                                requestAnimationFrame(
+                                    () => {
+
+
+                                        if (
+                                            showcaseContent
+                                        ) {
+
+                                            showcaseContent.classList.remove(
+                                                "changing"
+                                            );
+
+                                        }
+
+
+                                        if (
+                                            showcaseVisual
+                                        ) {
+
+                                            showcaseVisual.classList.remove(
+                                                "switching"
+                                            );
+
+                                        }
+
+
+                                        fieldChanging =
+                                            false;
+
+
+                                        /* OPTIONAL SCROLL */
+
+                                        if (
+                                            options.scroll &&
+                                            showcaseVisual
+                                        ) {
+
+                                            const top =
+                                                showcaseVisual
+                                                    .getBoundingClientRect()
+                                                    .top +
+                                                window.scrollY -
+                                                115;
+
+
+                                            window.scrollTo(
+                                                {
+
+                                                    top:
+                                                        top,
+
+                                                    behavior:
+                                                        prefersReducedMotion
+                                                            ? "auto"
+                                                            : "smooth"
+
+                                                }
+                                            );
+
+                                        }
+
+                                    }
                                 );
 
+                            }
+                        );
+
+                    };
+
+
+                if (
+                    primaryImage &&
+                    !primaryImage.complete
+                ) {
+
+                    primaryImage.addEventListener(
+                        "load",
+                        finishChange,
+                        {
+                            once: true
                         }
+                    );
+
+
+                    primaryImage.addEventListener(
+                        "error",
+                        finishChange,
+                        {
+                            once: true
+                        }
+                    );
+
+                } else {
+
+                    finishChange();
+
+                }
+
+            },
+            changeDelay
+        );
+
+    }
+
+
+    /* =====================================================
+       12. PREVIOUS FIELD
+    ====================================================== */
+
+    if (previousField) {
+
+        previousField.addEventListener(
+            "click",
+            () => {
+
+                updateSpecialization(
+                    currentField - 1
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       13. NEXT FIELD
+    ====================================================== */
+
+    if (nextField) {
+
+        nextField.addEventListener(
+            "click",
+            () => {
+
+                updateSpecialization(
+                    currentField + 1
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       14. FIELD INDEX
+
+       Clicking one of the 10 rows changes
+       the large specialization card.
+    ====================================================== */
+
+    fieldIndexItems.forEach(
+        item => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    const index =
+                        Number(
+                            item.dataset.index
+                        );
+
+
+                    updateSpecialization(
+                        index,
+                        {
+                            scroll: true
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       15. DIRECTION OPTIONS
+
+       Each direction contains a data-fields value.
+
+       Example:
+       data-fields="0,7,8"
+
+       Clicking it goes to the FIRST specialization
+       connected to that direction.
+    ====================================================== */
+
+    directionOptions.forEach(
+        option => {
+
+            option.addEventListener(
+                "click",
+                () => {
+
+                    const fields =
+                        option.dataset.fields;
+
+
+                    if (!fields) {
+                        return;
+                    }
+
+
+                    const indexes =
+                        fields
+                            .split(",")
+                            .map(
+                                value =>
+                                    Number(
+                                        value.trim()
+                                    )
+                            )
+                            .filter(
+                                value =>
+                                    !Number.isNaN(
+                                        value
+                                    )
+                            );
+
+
+                    if (!indexes.length) {
+                        return;
+                    }
+
+
+                    updateSpecialization(
+                        indexes[0],
+                        {
+                            scroll: true
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       16. TOUCH IMAGE REVEAL
+
+       Desktop already uses CSS :hover.
+
+       On phones/tablets:
+       tap image -> show second image
+       tap again -> return
+    ====================================================== */
+
+    if (
+        showcaseVisual &&
+        isTouchDevice
+    ) {
+
+        showcaseVisual.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+
+                showcaseVisual.classList.toggle(
+                    "touch-reveal"
+                );
+
+
+                clearTimeout(
+                    touchRevealTimer
+                );
+
+
+                if (
+                    showcaseVisual.classList.contains(
+                        "touch-reveal"
+                    )
+                ) {
+
+                    touchRevealTimer =
+                        setTimeout(
+                            () => {
+
+                                showcaseVisual.classList.remove(
+                                    "touch-reveal"
+                                );
+
+                            },
+                            3500
+                        );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       17. KEYBOARD NAVIGATION
+
+       When the specialization area is visible:
+
+       LEFT ARROW  = previous
+       RIGHT ARROW = next
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key !== "ArrowLeft" &&
+                event.key !== "ArrowRight"
+            ) {
+                return;
+            }
+
+
+            if (!showcaseVisual) {
+                return;
+            }
+
+
+            const rect =
+                showcaseVisual
+                    .getBoundingClientRect();
+
+
+            const isNearViewport =
+                rect.bottom > 0 &&
+                rect.top <
+                    window.innerHeight;
+
+
+            if (!isNearViewport) {
+                return;
+            }
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                updateSpecialization(
+                    currentField - 1
+                );
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                updateSpecialization(
+                    currentField + 1
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       18. CURSOR TRAIL
+    ====================================================== */
+
+    function createCursorTrail() {
+
+        if (
+            !cursorTrail ||
+            isTouchDevice ||
+            prefersReducedMotion
+        ) {
+            return;
+        }
+
+
+        const totalCircles =
+            12;
+
+
+        const circles = [];
+
+
+        const mouse = {
+
+            x:
+                window.innerWidth / 2,
+
+            y:
+                window.innerHeight / 2
+
+        };
+
+
+        for (
+            let i = 0;
+            i < totalCircles;
+            i++
+        ) {
+
+            const circle =
+                document.createElement(
+                    "span"
+                );
+
+
+            circle.className =
+                "cursor-trail-circle";
+
+
+            const size =
+                Math.max(
+                    2.5,
+                    9 - i * 0.55
+                );
+
+
+            circle.style.width =
+                `${size}px`;
+
+
+            circle.style.height =
+                `${size}px`;
+
+
+            circle.style.opacity =
+                String(
+                    Math.max(
+                        0.08,
+                        0.55 -
+                        i * 0.035
+                    )
+                );
+
+
+            cursorTrail.appendChild(
+                circle
+            );
+
+
+            circles.push(
+                {
+
+                    element:
+                        circle,
+
+                    x:
+                        mouse.x,
+
+                    y:
+                        mouse.y
+
+                }
+            );
+
+        }
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouse.x =
+                    event.clientX;
+
+
+                mouse.y =
+                    event.clientY;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function animateTrail() {
+
+            let x =
+                mouse.x;
+
+
+            let y =
+                mouse.y;
+
+
+            circles.forEach(
+                (
+                    circle,
+                    index
+                ) => {
+
+                    circle.x +=
+                        (
+                            x -
+                            circle.x
+                        ) *
+                        (
+                            index === 0
+                                ? 0.32
+                                : 0.38
+                        );
+
+
+                    circle.y +=
+                        (
+                            y -
+                            circle.y
+                        ) *
+                        (
+                            index === 0
+                                ? 0.32
+                                : 0.38
+                        );
+
+
+                    circle.element.style.transform =
+                        `translate3d(
+                            ${circle.x}px,
+                            ${circle.y}px,
+                            0
+                        )
+                        translate(-50%, -50%)`;
+
+
+                    x =
+                        circle.x;
+
+
+                    y =
+                        circle.y;
+
+                }
+            );
+
+
+            requestAnimationFrame(
+                animateTrail
+            );
+
+        }
+
+
+        animateTrail();
+
+    }
+
+
+    createCursorTrail();
+
+
+    /* =====================================================
+       19. HERO TITLE ENTRANCE
+
+       Small entrance only.
+       NO MOVING MARQUEE.
+    ====================================================== */
+
+    const heroLines =
+        document.querySelectorAll(
+            ".hero-line"
+        );
+
+
+    if (
+        !prefersReducedMotion &&
+        heroLines.length
+    ) {
+
+        heroLines.forEach(
+            (
+                line,
+                index
+            ) => {
+
+                line.animate(
+                    [
+
+                        {
+
+                            opacity:
+                                0,
+
+                            transform:
+                                "translateY(70px)"
+
+                        },
+
+                        {
+
+                            opacity:
+                                1,
+
+                            transform:
+                                "translateY(0)"
+
+                        }
+
+                    ],
+                    {
+
+                        duration:
+                            1000,
+
+                        delay:
+                            120 +
+                            index * 100,
+
+                        easing:
+                            "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                        fill:
+                            "both"
 
                     }
                 );
@@ -1825,6 +2057,322 @@ document.addEventListener(
             }
         );
 
+    }
+
+
+    /* =====================================================
+       20. INDEX HOVER FOLLOW EFFECT
+
+       Very small movement only.
+       Keeps the design clean.
+    ====================================================== */
+
+    if (
+        !isTouchDevice &&
+        !prefersReducedMotion
+    ) {
+
+        fieldIndexItems.forEach(
+            item => {
+
+                item.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        const rect =
+                            item.getBoundingClientRect();
+
+
+                        const x =
+                            event.clientX -
+                            rect.left;
+
+
+                        const percentage =
+                            x /
+                            rect.width;
+
+
+                        const amount =
+                            (
+                                percentage -
+                                0.5
+                            ) * 5;
+
+
+                        item.style.transform =
+                            `translateX(
+                                ${amount}px
+                            )`;
+
+                    }
+                );
+
+
+                item.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        item.style.transform =
+                            "";
+
+                    }
+                );
+
+            }
+        );
 
     }
-);
+
+
+    /* =====================================================
+       21. DIRECTION CARD HOVER
+
+       Small lift only.
+    ====================================================== */
+
+    if (
+        !isTouchDevice &&
+        !prefersReducedMotion
+    ) {
+
+        directionOptions.forEach(
+            option => {
+
+                option.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        option.style.transform =
+                            "translateY(-4px)";
+
+                    }
+                );
+
+
+                option.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        option.style.transform =
+                            "";
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       22. PAGE TRANSITION
+    ====================================================== */
+
+    if (
+        pageTransition &&
+        !prefersReducedMotion
+    ) {
+
+        pageTransition.classList.add(
+            "entering"
+        );
+
+
+        setTimeout(
+            () => {
+
+                pageTransition.classList.remove(
+                    "entering"
+                );
+
+            },
+            850
+        );
+
+    }
+
+
+    pageLinks.forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        !href ||
+                        href.startsWith("#") ||
+                        link.target === "_blank"
+                    ) {
+                        return;
+                    }
+
+
+                    /* SAME PAGE */
+
+                    const destination =
+                        new URL(
+                            href,
+                            window.location.href
+                        );
+
+
+                    if (
+                        destination.href ===
+                        window.location.href
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        prefersReducedMotion ||
+                        !pageTransition
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    pageTransition.classList.remove(
+                        "entering"
+                    );
+
+
+                    pageTransition.classList.add(
+                        "leaving"
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                href;
+
+                        },
+                        650
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       23. INITIALIZE FIRST SPECIALIZATION
+
+       This guarantees the HTML and JS are synced.
+    ====================================================== */
+
+    function initializeSpecialization() {
+
+        const field =
+            specializations[0];
+
+
+        currentField =
+            0;
+
+
+        if (showcaseCounter) {
+
+            showcaseCounter.textContent =
+                `01 / ${String(
+                    specializations.length
+                ).padStart(2, "0")}`;
+
+        }
+
+
+        if (showcaseCategory) {
+
+            showcaseCategory.textContent =
+                field.category;
+
+        }
+
+
+        if (visualNumber) {
+
+            visualNumber.textContent =
+                field.number;
+
+        }
+
+
+        if (fieldTitle) {
+
+            fieldTitle.innerHTML =
+                field.title;
+
+        }
+
+
+        if (fieldDescription) {
+
+            fieldDescription.textContent =
+                field.description;
+
+        }
+
+
+        if (primaryImage) {
+
+            primaryImage.src =
+                field.image;
+
+
+            primaryImage.alt =
+                field.imageAlt;
+
+        }
+
+
+        if (secondaryImage) {
+
+            secondaryImage.src =
+                field.hoverImage;
+
+
+            secondaryImage.alt =
+                `${field.imageAlt} application`;
+
+        }
+
+
+        renderApplications(
+            field.applications
+        );
+
+
+        renderCareers(
+            field.careers
+        );
+
+
+        updateActiveIndex();
+
+    }
+
+
+    initializeSpecialization();
+
+
+});

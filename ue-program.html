@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en" data-theme="light">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -10,8 +12,11 @@
     >
 
     <title>
-        Computer Engineering at UE | UE Manila
+        Computer Engineering in UE | UE Manila
     </title>
+
+
+    <!-- GOOGLE FONTS -->
 
     <link
         rel="preconnect"
@@ -25,23 +30,41 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet"
     >
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- CSS -->
 
     <link
         rel="stylesheet"
         href="ue-program.css"
     >
 
+
+    <!-- LOAD SAVED THEME BEFORE PAGE APPEARS -->
+
     <script>
+
         (function () {
+
             const savedTheme =
                 localStorage.getItem("cpe-theme") || "light";
 
             document.documentElement.dataset.theme =
                 savedTheme;
+
         })();
+
     </script>
 
 </head>
@@ -50,1226 +73,1348 @@
 <body>
 
 
-<!-- =========================================================
-     PAGE TRANSITION
-========================================================= -->
-
-<div
-    class="page-transition"
-    id="pageTransition"
-></div>
-
-
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-
-<div class="topbar">
-
-    <div class="topbar-left">
-
-        <span class="status-dot"></span>
-
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
-
-    </div>
-
-
-    <div class="topbar-right">
-
-        <span>
-            BSCpE PROGRAM
-        </span>
-
-        <span id="clock">
-            MANILA 00:00:00
-        </span>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav>
-
-    <div class="nav-inner">
-
-        <a
-            href="index.html"
-            class="logo page-link"
-        >
-            CPE
-
-            <small>
-                UNIVERSITY OF THE EAST
-            </small>
-        </a>
-
-
-        <ul class="nav-links">
-
-            <li>
-                <a
-                    href="computer-engineering.html"
-                    class="page-link"
-                >
-                    CPE
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="ue-program.html"
-                    class="active"
-                >
-                    UE PROGRAM
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="specializations.html"
-                    class="page-link"
-                >
-                    SPECIALIZATIONS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="careers.html"
-                    class="page-link"
-                >
-                    CAREERS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="faculty.html"
-                    class="page-link"
-                >
-                    FACULTY
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="scpes.html"
-                    class="page-link"
-                >
-                    SCPES
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="nav-right">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle theme"
-            >
-                <span class="sun">☀</span>
-                <span class="moon">◐</span>
-            </button>
-
-
-            <a
-                href="index.html"
-                class="home-button page-link"
-            >
-                HOME ↗
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<main>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="ue-hero">
-
-    <div class="hero-meta reveal">
-
-        <span>
-            02 / COMPUTER ENGINEERING AT UE
-        </span>
-
-        <span>
-            UNIVERSITY OF THE EAST — MANILA
-        </span>
-
-    </div>
-
-
-    <div class="hero-title">
-
-        <span class="hero-line hero-line-one">
-            COMPUTER
-        </span>
-
-        <span class="hero-line hero-line-two">
-            ENGINEERING
-        </span>
-
-        <span class="hero-line hero-line-three">
-            <em>AT UE.</em>
-        </span>
-
-    </div>
-
-
-    <div class="hero-bottom">
-
-        <div class="hero-code reveal">
-            BSCpE
-        </div>
-
-
-        <div class="hero-description reveal">
-
-            <p>
-                Building engineering knowledge through
-                hardware, software, embedded systems,
-                networking, automation, intelligent
-                systems, research, and hands-on learning.
-            </p>
-
-
-            <button
-                class="explore-button"
-                id="exploreButton"
-            >
-                <span>
-                    EXPLORE THE PROGRAM
-                </span>
-
-                <span>
-                    ↓
-                </span>
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     MARQUEE
-========================================================= -->
-
-<div class="ue-marquee">
-
-    <div class="marquee-track">
-
-        <span>LEARN</span><i>✦</i>
-        <span>DESIGN</span><i>✦</i>
-        <span>BUILD</span><i>✦</i>
-        <span>PROGRAM</span><i>✦</i>
-        <span>CONNECT</span><i>✦</i>
-        <span>RESEARCH</span><i>✦</i>
-        <span>INNOVATE</span><i>✦</i>
-
-        <span>LEARN</span><i>✦</i>
-        <span>DESIGN</span><i>✦</i>
-        <span>BUILD</span><i>✦</i>
-        <span>PROGRAM</span><i>✦</i>
-        <span>CONNECT</span><i>✦</i>
-        <span>RESEARCH</span><i>✦</i>
-        <span>INNOVATE</span><i>✦</i>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     01 OVERVIEW
-========================================================= -->
-
-<section
-    class="content-section overview-section"
-    id="overview"
->
-
-    <div class="section-heading reveal">
-
-        <span class="section-number">
-            01
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                OVERVIEW OF THE PROGRAM
-            </span>
-
-            <h2>
-                ENGINEERING THE<br>
-                <em>DIGITAL WORLD.</em>
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="overview-layout">
-
-        <div class="overview-main reveal">
-
-            <p>
-                The Bachelor of Science in Computer
-                Engineering program at the University
-                of the East focuses on the integration
-                of computer hardware and software.
-            </p>
-
-        </div>
-
-
-        <div class="overview-side reveal">
-
-            <p>
-                Students explore areas such as embedded
-                systems, computer networking, automation,
-                and intelligent systems while developing
-                the knowledge and technical skills needed
-                for careers in the computing and
-                electronics industries.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="focus-strip reveal">
-
-        <span>HARDWARE</span>
-        <span>SOFTWARE</span>
-        <span>EMBEDDED</span>
-        <span>NETWORKS</span>
-        <span>AUTOMATION</span>
-        <span>INTELLIGENT SYSTEMS</span>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     02 PROGRAM OBJECTIVES
-========================================================= -->
-
-<section class="objectives-section">
-
-    <div class="objectives-heading reveal">
-
-        <span class="section-label">
-            02 / PROGRAM OBJECTIVES
-        </span>
-
-        <h2>
-            MORE THAN<br>
-            <em>TECHNICAL SKILLS.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="objective-grid">
-
-        <article class="objective-card reveal">
-
-            <span>01</span>
-
-            <div class="objective-symbol">
-                ENG
-            </div>
-
-            <h3>
-                ENGINEERING
-                KNOWLEDGE
-            </h3>
-
-            <p>
-                Prepare graduates with strong
-                engineering knowledge and
-                technical competence.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>02</span>
-
-            <div class="objective-symbol">
-                ETH
-            </div>
-
-            <h3>
-                ETHICAL
-                PRACTICE
-            </h3>
-
-            <p>
-                Develop ethical and socially
-                responsible computer engineers.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>03</span>
-
-            <div class="objective-symbol">
-                INN
-            </div>
-
-            <h3>
-                INNOVATIVE
-                THINKING
-            </h3>
-
-            <p>
-                Encourage innovation and the
-                development of solutions to
-                engineering problems.
-            </p>
-
-        </article>
-
-
-        <article class="objective-card reveal">
-
-            <span>04</span>
-
-            <div class="objective-symbol">
-                ∞
-            </div>
-
-            <h3>
-                LIFELONG
-                LEARNING
-            </h3>
-
-            <p>
-                Equip students for professional
-                practice, research, and
-                lifelong learning.
-            </p>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     03 SKILLS
-========================================================= -->
-
-<section class="content-section skills-section">
-
-    <div class="section-heading reveal">
-
-        <span class="section-number">
-            03
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                SKILLS DEVELOPED
-            </span>
-
-            <h2>
-                WHAT STUDENTS<br>
-                <em>LEARN TO DO.</em>
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="skills-list">
-
-        <div class="skill-row reveal">
-            <span>01</span>
-            <strong>
-                COMPUTER HARDWARE DESIGN
-                & TROUBLESHOOTING
-            </strong>
-            <i>HW</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>02</span>
-            <strong>
-                PROGRAMMING &
-                SOFTWARE DEVELOPMENT
-            </strong>
-            <i>SW</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>03</span>
-            <strong>
-                EMBEDDED SYSTEMS &
-                MICROCONTROLLERS
-            </strong>
-            <i>MCU</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>04</span>
-            <strong>
-                COMPUTER NETWORKING
-            </strong>
-            <i>NET</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>05</span>
-            <strong>
-                DIGITAL ELECTRONICS
-            </strong>
-            <i>01</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>06</span>
-            <strong>
-                PROBLEM-SOLVING &
-                CRITICAL THINKING
-            </strong>
-            <i>?</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>07</span>
-            <strong>
-                TEAMWORK &
-                COMMUNICATION
-            </strong>
-            <i>+</i>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>08</span>
-            <strong>
-                RESEARCH &
-                PROJECT MANAGEMENT
-            </strong>
-            <i>R&D</i>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     04 LEARNING EXPERIENCES
-========================================================= -->
-
-<section class="gallery-section">
-
-    <div class="gallery-heading reveal">
-
-        <div>
-
-            <span class="section-label">
-                04 / LEARNING EXPERIENCES
-            </span>
-
-            <h2>
-                LEARNING BY<br>
-                <em>DOING.</em>
-            </h2>
-
-        </div>
-
-
-        <p>
-            Select an image to open the feature viewer.
-            Once opened, use the arrows or swipe on your
-            phone to move between experiences.
-        </p>
-
-    </div>
-
+    <!-- =====================================================
+         PAGE TRANSITION
+    ====================================================== -->
 
     <div
-        class="feature-gallery"
-        data-gallery="learning"
-    >
-
-        <button
-            class="gallery-item gallery-large reveal"
-            data-image="assets/ue-learning-lecture.jpg"
-            data-title="Classroom Lectures"
-            data-subtitle="LEARNING EXPERIENCE / 01"
-            data-description="Students build their engineering foundation through classroom discussions, technical concepts, and problem-solving activities."
-        >
-
-            <img
-                src="assets/ue-learning-lecture.jpg"
-                alt="Computer Engineering classroom lecture"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>
-                    01
-                </span>
-
-                <h3>
-                    CLASSROOM<br>
-                    LECTURES
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item reveal"
-            data-image="assets/ue-learning-lab.jpg"
-            data-title="Laboratory Experiments"
-            data-subtitle="LEARNING EXPERIENCE / 02"
-            data-description="Laboratory activities allow students to apply concepts through practical experiments and engineering equipment."
-        >
-
-            <img
-                src="assets/ue-learning-lab.jpg"
-                alt="Computer Engineering laboratory experiment"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>02</span>
-
-                <h3>
-                    LABORATORY
-                    EXPERIMENTS
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item reveal"
-            data-image="assets/ue-learning-programming.jpg"
-            data-title="Hands-on Programming"
-            data-subtitle="LEARNING EXPERIENCE / 03"
-            data-description="Students develop programming skills through hands-on coding, software development, and computing exercises."
-        >
-
-            <img
-                src="assets/ue-learning-programming.jpg"
-                alt="Hands-on programming activity"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>03</span>
-
-                <h3>
-                    HANDS-ON
-                    PROGRAMMING
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item reveal"
-            data-image="assets/ue-learning-design.jpg"
-            data-title="Design Projects"
-            data-subtitle="LEARNING EXPERIENCE / 04"
-            data-description="Design projects challenge students to combine technical knowledge, creativity, teamwork, and engineering problem-solving."
-        >
-
-            <img
-                src="assets/ue-learning-design.jpg"
-                alt="Computer Engineering design project"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>04</span>
-
-                <h3>
-                    DESIGN
-                    PROJECTS
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item reveal"
-            data-image="assets/ue-learning-research.jpg"
-            data-title="Engineering Research"
-            data-subtitle="LEARNING EXPERIENCE / 05"
-            data-description="Students investigate engineering problems and explore possible technological solutions through research."
-        >
-
-            <img
-                src="assets/ue-learning-research.jpg"
-                alt="Engineering research activity"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>05</span>
-
-                <h3>
-                    ENGINEERING
-                    RESEARCH
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item reveal"
-            data-image="assets/ue-learning-internship.jpg"
-            data-title="Internship / OJT"
-            data-subtitle="LEARNING EXPERIENCE / 06"
-            data-description="Internship and OJT provide opportunities to experience professional engineering and computing environments."
-        >
-
-            <img
-                src="assets/ue-learning-internship.jpg"
-                alt="Computer Engineering internship"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>06</span>
-
-                <h3>
-                    INTERNSHIP
-                    / OJT
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="gallery-item gallery-wide reveal"
-            data-image="assets/ue-learning-capstone.jpg"
-            data-title="Capstone Project"
-            data-subtitle="LEARNING EXPERIENCE / 07"
-            data-description="The capstone project brings together engineering knowledge and skills in the development of a substantial project."
-        >
-
-            <img
-                src="assets/ue-learning-capstone.jpg"
-                alt="Computer Engineering capstone project"
-            >
-
-            <div class="gallery-overlay">
-
-                <span>07</span>
-
-                <h3>
-                    CAPSTONE
-                    PROJECT
-                </h3>
-
-                <i>VIEW ↗</i>
-
-            </div>
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     05 LABORATORIES
-========================================================= -->
-
-<section class="content-section laboratories-section">
-
-    <div class="section-heading reveal">
-
-        <span class="section-number">
-            05
-        </span>
-
-
-        <div>
-
-            <span class="section-label">
-                LABORATORIES & FACILITIES
-            </span>
-
-            <h2>
-                LB 211–212<br>
-                <em>INSIDE THE LAB.</em>
-            </h2>
-
-        </div>
-
-
-        <p class="section-note">
-            Replace these placeholders with the
-            exact laboratory names, descriptions,
-            equipment, and photos from your
-            official UE source.
-        </p>
-
-    </div>
-
-
-    <div
-        class="lab-gallery"
-        data-gallery="laboratory"
-    >
-
-        <button
-            class="lab-card lab-card-main reveal"
-            data-image="assets/ue-lab-1.jpg"
-            data-title="Computer Engineering Laboratory"
-            data-subtitle="LB 211–212 / FACILITY 01"
-            data-description="Add the official UE description of this laboratory here."
-        >
-
-            <img
-                src="assets/ue-lab-1.jpg"
-                alt="Computer Engineering laboratory"
-            >
-
-            <div class="lab-caption">
-
-                <span>
-                    LB 211–212
-                </span>
-
-                <h3>
-                    COMPUTER ENGINEERING
-                    LABORATORY
-                </h3>
-
-                <i>OPEN FEATURE ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="lab-card reveal"
-            data-image="assets/ue-lab-2.jpg"
-            data-title="Networking Laboratory"
-            data-subtitle="LB 211–212 / FACILITY 02"
-            data-description="Add the exact UE facility information here once you have the official source."
-        >
-
-            <img
-                src="assets/ue-lab-2.jpg"
-                alt="Networking laboratory"
-            >
-
-            <div class="lab-caption">
-
-                <span>
-                    FACILITY 02
-                </span>
-
-                <h3>
-                    NETWORKING
-                    LABORATORY
-                </h3>
-
-                <i>OPEN ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="lab-card reveal"
-            data-image="assets/ue-lab-3.jpg"
-            data-title="Embedded Systems Laboratory"
-            data-subtitle="LB 211–212 / FACILITY 03"
-            data-description="Add the exact UE facility information here once you have the official source."
-        >
-
-            <img
-                src="assets/ue-lab-3.jpg"
-                alt="Embedded systems laboratory"
-            >
-
-            <div class="lab-caption">
-
-                <span>
-                    FACILITY 03
-                </span>
-
-                <h3>
-                    EMBEDDED SYSTEMS
-                    LABORATORY
-                </h3>
-
-                <i>OPEN ↗</i>
-
-            </div>
-
-        </button>
-
-
-        <button
-            class="lab-card reveal"
-            data-image="assets/ue-lab-4.jpg"
-            data-title="Microprocessor Laboratory"
-            data-subtitle="LB 211–212 / FACILITY 04"
-            data-description="Add the exact UE facility information here once you have the official source."
-        >
-
-            <img
-                src="assets/ue-lab-4.jpg"
-                alt="Microprocessor laboratory"
-            >
-
-            <div class="lab-caption">
-
-                <span>
-                    FACILITY 04
-                </span>
-
-                <h3>
-                    MICROPROCESSOR
-                    LABORATORY
-                </h3>
-
-                <i>OPEN ↗</i>
-
-            </div>
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     06 STUDENT PROJECTS
-========================================================= -->
-<section class="projects-section">
-  <div class="projects-heading reveal"><span class="section-label">06 / STUDENT PROJECTS</span><h2>FROM IDEA<br><em>TO PROTOTYPE.</em></h2><p class="projects-intro">Move across a project to reveal its second visual. Tap a project to open it in the feature viewer.</p></div>
-  <div class="project-gallery" data-gallery="projects">
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-iot-2.jpg" data-title="IoT Systems" data-subtitle="STUDENT PROJECT / 01" data-description="Connected devices and sensor-based systems that collect, process, and exchange information.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-iot-2.jpg" alt="IoT Systems alternate view"><img class="project-image project-image-first" src="assets/ue-project-iot.jpg" alt="IoT Systems"><span class="project-number">01</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>01 / PROJECT</span><h3>IOT SYSTEMS</h3><p>Connected devices and sensor-based systems that collect, process, and exchange information.</p></div>
-    </button>
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-robotics-2.jpg" data-title="Robotics" data-subtitle="STUDENT PROJECT / 02" data-description="Projects combining hardware, sensors, programming, control, and automation.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-robotics-2.jpg" alt="Robotics alternate view"><img class="project-image project-image-first" src="assets/ue-project-robotics.jpg" alt="Robotics"><span class="project-number">02</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>02 / PROJECT</span><h3>ROBOTICS</h3><p>Projects combining hardware, sensors, programming, control, and automation.</p></div>
-    </button>
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-home-2.jpg" data-title="Smart Home Automation" data-subtitle="STUDENT PROJECT / 03" data-description="Systems that automate and monitor household devices using sensors, controllers, software, and connectivity.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-home-2.jpg" alt="Smart Home Automation alternate view"><img class="project-image project-image-first" src="assets/ue-project-home.jpg" alt="Smart Home Automation"><span class="project-number">03</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>03 / PROJECT</span><h3>SMART HOME</h3><p>Systems that automate and monitor household devices using sensors, controllers, software, and connectivity.</p></div>
-    </button>
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-embedded-2.jpg" data-title="Embedded System Applications" data-subtitle="STUDENT PROJECT / 04" data-description="Applications built around microcontrollers, sensors, actuators, and embedded software.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-embedded-2.jpg" alt="Embedded System Applications alternate view"><img class="project-image project-image-first" src="assets/ue-project-embedded.jpg" alt="Embedded System Applications"><span class="project-number">04</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>04 / PROJECT</span><h3>EMBEDDED SYSTEMS</h3><p>Applications built around microcontrollers, sensors, actuators, and embedded software.</p></div>
-    </button>
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-software-2.jpg" data-title="Software Projects" data-subtitle="STUDENT PROJECT / 05" data-description="Mobile or desktop software projects that apply programming, interface design, and system development.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-software-2.jpg" alt="Software Projects alternate view"><img class="project-image project-image-first" src="assets/ue-project-software.jpg" alt="Software Projects"><span class="project-number">05</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>05 / PROJECT</span><h3>SOFTWARE</h3><p>Mobile or desktop software projects that apply programming, interface design, and system development.</p></div>
-    </button>
-    <button class="project-card project-feature reveal" data-image="assets/ue-project-network-2.jpg" data-title="Networking Projects" data-subtitle="STUDENT PROJECT / 06" data-description="Projects involving network design, configuration, communication, and connected computer systems.">
-      <div class="project-image-layer"><img class="project-image project-image-second" src="assets/ue-project-network-2.jpg" alt="Networking Projects alternate view"><img class="project-image project-image-first" src="assets/ue-project-network.jpg" alt="Networking Projects"><span class="project-number">06</span><span class="project-view">VIEW PROJECT ↗</span></div>
-      <div class="project-info"><span>06 / PROJECT</span><h3>NETWORKING</h3><p>Projects involving network design, configuration, communication, and connected computer systems.</p></div>
-    </button>
-  </div>
-</section>
-
-<!-- =========================================================
-     07 RESEARCH & INNOVATION
-========================================================= -->
-<section class="content-section research-section">
-  <div class="section-heading reveal"><span class="section-number">07</span><div><span class="section-label">RESEARCH & INNOVATION</span><h2>THINK.<br>TEST.<br><em>CREATE.</em></h2></div><p class="section-note">Click a box to reveal its image set. Select any image to open the feature viewer and move through it with arrows or a swipe.</p></div>
-  <div class="research-accordion">
-    <article class="research-expand reveal">
-      <button class="research-trigger" type="button" aria-expanded="false"><span class="research-index">01</span><h3>UNDERGRADUATE RESEARCH</h3><span class="research-plus">+</span></button>
-      <div class="research-panel"><div class="research-panel-inner">
-        <div class="research-copy"><span class="section-label">RESEARCH / 01</span><h4>INVESTIGATE.<br>ANALYZE.<br>DISCOVER.</h4><p>Students explore engineering problems through systematic investigation, analysis, and experimentation.</p></div>
-        <div class="research-images" data-gallery="research-undergrad">
-          <button class="research-image research-image-large" data-image="assets/research-undergrad-1.jpg" data-title="UNDERGRADUATE RESEARCH" data-subtitle="RESEARCH / 01 / IMAGE 01" data-description="Students explore engineering problems through systematic investigation, analysis, and experimentation."><img src="assets/research-undergrad-1.jpg" alt="UNDERGRADUATE RESEARCH image 1"><span>01</span></button>
-          <button class="research-image " data-image="assets/research-undergrad-2.jpg" data-title="UNDERGRADUATE RESEARCH" data-subtitle="RESEARCH / 01 / IMAGE 02" data-description="Students explore engineering problems through systematic investigation, analysis, and experimentation."><img src="assets/research-undergrad-2.jpg" alt="UNDERGRADUATE RESEARCH image 2"><span>02</span></button>
-          <button class="research-image " data-image="assets/research-undergrad-3.jpg" data-title="UNDERGRADUATE RESEARCH" data-subtitle="RESEARCH / 01 / IMAGE 03" data-description="Students explore engineering problems through systematic investigation, analysis, and experimentation."><img src="assets/research-undergrad-3.jpg" alt="UNDERGRADUATE RESEARCH image 3"><span>03</span></button>
-        </div>
-      </div></div>
-    </article>
-    <article class="research-expand reveal">
-      <button class="research-trigger" type="button" aria-expanded="false"><span class="research-index">02</span><h3>CAPSTONE INNOVATIONS</h3><span class="research-plus">+</span></button>
-      <div class="research-panel"><div class="research-panel-inner">
-        <div class="research-copy"><span class="section-label">RESEARCH / 02</span><h4>DESIGN.<br>BUILD.<br>IMPROVE.</h4><p>Capstone projects bring multiple Computer Engineering skills together to create functional solutions.</p></div>
-        <div class="research-images" data-gallery="research-capstone">
-          <button class="research-image research-image-large" data-image="assets/research-capstone-1.jpg" data-title="CAPSTONE INNOVATIONS" data-subtitle="RESEARCH / 02 / IMAGE 01" data-description="Capstone projects bring multiple Computer Engineering skills together to create functional solutions."><img src="assets/research-capstone-1.jpg" alt="CAPSTONE INNOVATIONS image 1"><span>01</span></button>
-          <button class="research-image " data-image="assets/research-capstone-2.jpg" data-title="CAPSTONE INNOVATIONS" data-subtitle="RESEARCH / 02 / IMAGE 02" data-description="Capstone projects bring multiple Computer Engineering skills together to create functional solutions."><img src="assets/research-capstone-2.jpg" alt="CAPSTONE INNOVATIONS image 2"><span>02</span></button>
-          <button class="research-image " data-image="assets/research-capstone-3.jpg" data-title="CAPSTONE INNOVATIONS" data-subtitle="RESEARCH / 02 / IMAGE 03" data-description="Capstone projects bring multiple Computer Engineering skills together to create functional solutions."><img src="assets/research-capstone-3.jpg" alt="CAPSTONE INNOVATIONS image 3"><span>03</span></button>
-        </div>
-      </div></div>
-    </article>
-    <article class="research-expand reveal">
-      <button class="research-trigger" type="button" aria-expanded="false"><span class="research-index">03</span><h3>TECHNOLOGY DEVELOPMENT</h3><span class="research-plus">+</span></button>
-      <div class="research-panel"><div class="research-panel-inner">
-        <div class="research-copy"><span class="section-label">RESEARCH / 03</span><h4>DEVELOP.<br>CONNECT.<br>INNOVATE.</h4><p>Students apply computing, electronics, and engineering concepts in technology development.</p></div>
-        <div class="research-images" data-gallery="research-tech">
-          <button class="research-image research-image-large" data-image="assets/research-tech-1.jpg" data-title="TECHNOLOGY DEVELOPMENT" data-subtitle="RESEARCH / 03 / IMAGE 01" data-description="Students apply computing, electronics, and engineering concepts in technology development."><img src="assets/research-tech-1.jpg" alt="TECHNOLOGY DEVELOPMENT image 1"><span>01</span></button>
-          <button class="research-image " data-image="assets/research-tech-2.jpg" data-title="TECHNOLOGY DEVELOPMENT" data-subtitle="RESEARCH / 03 / IMAGE 02" data-description="Students apply computing, electronics, and engineering concepts in technology development."><img src="assets/research-tech-2.jpg" alt="TECHNOLOGY DEVELOPMENT image 2"><span>02</span></button>
-          <button class="research-image " data-image="assets/research-tech-3.jpg" data-title="TECHNOLOGY DEVELOPMENT" data-subtitle="RESEARCH / 03 / IMAGE 03" data-description="Students apply computing, electronics, and engineering concepts in technology development."><img src="assets/research-tech-3.jpg" alt="TECHNOLOGY DEVELOPMENT image 3"><span>03</span></button>
-        </div>
-      </div></div>
-    </article>
-    <article class="research-expand reveal">
-      <button class="research-trigger" type="button" aria-expanded="false"><span class="research-index">04</span><h3>ENGINEERING COMPETITIONS</h3><span class="research-plus">+</span></button>
-      <div class="research-panel"><div class="research-panel-inner">
-        <div class="research-copy"><span class="section-label">RESEARCH / 04</span><h4>COMPETE.<br>COLLABORATE.<br>CREATE.</h4><p>Engineering competitions let students demonstrate technical knowledge, teamwork, and projects.</p></div>
-        <div class="research-images" data-gallery="research-competition">
-          <button class="research-image research-image-large" data-image="assets/research-competition-1.jpg" data-title="ENGINEERING COMPETITIONS" data-subtitle="RESEARCH / 04 / IMAGE 01" data-description="Engineering competitions let students demonstrate technical knowledge, teamwork, and projects."><img src="assets/research-competition-1.jpg" alt="ENGINEERING COMPETITIONS image 1"><span>01</span></button>
-          <button class="research-image " data-image="assets/research-competition-2.jpg" data-title="ENGINEERING COMPETITIONS" data-subtitle="RESEARCH / 04 / IMAGE 02" data-description="Engineering competitions let students demonstrate technical knowledge, teamwork, and projects."><img src="assets/research-competition-2.jpg" alt="ENGINEERING COMPETITIONS image 2"><span>02</span></button>
-          <button class="research-image " data-image="assets/research-competition-3.jpg" data-title="ENGINEERING COMPETITIONS" data-subtitle="RESEARCH / 04 / IMAGE 03" data-description="Engineering competitions let students demonstrate technical knowledge, teamwork, and projects."><img src="assets/research-competition-3.jpg" alt="ENGINEERING COMPETITIONS image 3"><span>03</span></button>
-        </div>
-      </div></div>
-    </article>
-    <article class="research-expand reveal">
-      <button class="research-trigger" type="button" aria-expanded="false"><span class="research-index">05</span><h3>FACULTY + STUDENT COLLABORATION</h3><span class="research-plus">+</span></button>
-      <div class="research-panel"><div class="research-panel-inner">
-        <div class="research-copy"><span class="section-label">RESEARCH / 05</span><h4>SHARE.<br>EXPLORE.<br>BUILD.</h4><p>Research activities can bring students and faculty together in exploring computing and engineering ideas.</p></div>
-        <div class="research-images" data-gallery="research-collab">
-          <button class="research-image research-image-large" data-image="assets/research-collab-1.jpg" data-title="FACULTY + STUDENT COLLABORATION" data-subtitle="RESEARCH / 05 / IMAGE 01" data-description="Research activities can bring students and faculty together in exploring computing and engineering ideas."><img src="assets/research-collab-1.jpg" alt="FACULTY + STUDENT COLLABORATION image 1"><span>01</span></button>
-          <button class="research-image " data-image="assets/research-collab-2.jpg" data-title="FACULTY + STUDENT COLLABORATION" data-subtitle="RESEARCH / 05 / IMAGE 02" data-description="Research activities can bring students and faculty together in exploring computing and engineering ideas."><img src="assets/research-collab-2.jpg" alt="FACULTY + STUDENT COLLABORATION image 2"><span>02</span></button>
-          <button class="research-image " data-image="assets/research-collab-3.jpg" data-title="FACULTY + STUDENT COLLABORATION" data-subtitle="RESEARCH / 05 / IMAGE 03" data-description="Research activities can bring students and faculty together in exploring computing and engineering ideas."><img src="assets/research-collab-3.jpg" alt="FACULTY + STUDENT COLLABORATION image 3"><span>03</span></button>
-        </div>
-      </div></div>
-    </article>
-  </div>
-</section>
-
-<!-- =========================================================
-     08 ACADEMIC OPPORTUNITIES
-========================================================= -->
-
-<section class="opportunities-section">
-
-    <div class="opportunity-heading reveal">
-
-        <span class="section-label">
-            08 / ACADEMIC OPPORTUNITIES
-        </span>
-
-        <h2>
-            BEYOND THE<br>
-            <em>CLASSROOM.</em>
-        </h2>
-
-    </div>
-
-
-    <div class="opportunity-list">
-
-        <div class="opportunity-row reveal">
-            <span>01</span>
-            <strong>SEMINARS & WORKSHOPS</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>02</span>
-            <strong>INDUSTRY PARTNERSHIPS</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>03</span>
-            <strong>INTERNSHIP PROGRAMS</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>04</span>
-            <strong>STUDENT ORGANIZATIONS</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>05</span>
-            <strong>RESEARCH CONFERENCES</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>06</span>
-            <strong>COMPETITIONS</strong>
-            <i>↗</i>
-        </div>
-
-        <div class="opportunity-row reveal">
-            <span>07</span>
-            <strong>PROFESSIONAL CERTIFICATION OPPORTUNITIES</strong>
-            <i>↗</i>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FEATURE VIEWER
-========================================================= -->
-
-<div
-    class="feature-viewer"
-    id="featureViewer"
-    aria-hidden="true"
->
-
-    <div
-        class="viewer-backdrop"
-        id="viewerBackdrop"
+        class="page-transition"
+        id="pageTransition"
     ></div>
 
 
-    <div class="viewer-card">
+    <!-- =====================================================
+         CURSOR TRAIL
+    ====================================================== -->
 
-        <div class="viewer-top">
+    <div
+        class="cursor-trail"
+        id="cursorTrail"
+        aria-hidden="true"
+    ></div>
 
-            <span id="viewerSubtitle">
-                FEATURE / 01
-            </span>
+
+    <!-- =====================================================
+         NAVIGATION
+         SAME STRUCTURE AS FACULTY / SPECIALIZATION
+    ====================================================== -->
+
+    <nav class="main-navigation">
+
+        <div class="nav-inner">
 
 
-            <span
-                class="viewer-counter"
-                id="viewerCounter"
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo page-link"
+                aria-label="CPE Home"
             >
-                01 / 07
-            </span>
-
-
-            <button
-                class="viewer-close"
-                id="viewerClose"
-                aria-label="Close gallery"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="viewer-content">
-
-            <div class="viewer-image-wrap">
 
                 <img
-                    src=""
-                    alt=""
-                    id="viewerImage"
+                    src="assets/dark.png"
+                    alt="CPE UE Manila"
+                    class="nav-logo-image"
+                    id="navLogoImage"
                 >
 
-                <div class="viewer-image-number">
-                    UE / CPE
+            </a>
+
+
+            <!-- CENTER NAVIGATION -->
+
+            <ul class="nav-links">
+
+               
+
+
+                <li>
+
+                    <a
+                        href="ue-program.html"
+                        class="active"
+                        aria-current="page"
+                    >
+                        UE PROGRAM
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="specializations.html"
+                        class="page-link"
+                    >
+                        SPECIALIZATIONS
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="careers.html"
+                        class="page-link"
+                    >
+                        CAREERS
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="faculty.html"
+                        class="page-link"
+                    >
+                        FACULTY
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="scpes.html"
+                        class="page-link"
+                    >
+                        SCPES
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="nav-actions">
+
+
+                <!-- LIGHT / DARK MODE -->
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    title="Switch theme"
+                >
+
+                    <span
+                        class="theme-icon sun"
+                        aria-hidden="true"
+                    >
+                        ☀
+                    </span>
+
+                    <span
+                        class="theme-icon moon"
+                        aria-hidden="true"
+                    >
+                        ◐
+                    </span>
+
+                </button>
+
+
+                <!-- HOME -->
+
+                <a
+                    href="index.html"
+                    class="home-button page-link"
+                >
+
+                    <span>
+                        HOME
+                    </span>
+
+                    <span
+                        class="home-arrow"
+                        aria-hidden="true"
+                    >
+                        ↗
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-glow hero-glow-one"></div>
+
+            <div class="hero-glow hero-glow-two"></div>
+
+
+            <div class="hero-content">
+
+                <div class="hero-meta">
+
+                    <span>
+                        UE MANILA
+                    </span>
+
+                    <span class="hero-meta-line"></span>
+
+                    <span>
+                        COMPUTER ENGINEERING
+                    </span>
+
+                </div>
+
+
+                <h1>
+
+                    <span class="hero-line">
+                        COMPUTER
+                    </span>
+
+                    <span class="hero-line">
+                        ENGINEERING
+                    </span>
+
+                    <span class="hero-line hero-outline">
+                        AT UE
+                    </span>
+
+                </h1>
+
+
+                <div class="hero-bottom">
+
+                    <p>
+                        Discover the Computer Engineering program
+                        at the University of the East – Manila,
+                        where hardware, software, innovation, and
+                        engineering come together.
+                    </p>
+
+
+                    <button
+                        class="explore-button"
+                        id="exploreButton"
+                        type="button"
+                    >
+
+                        <span>
+                            EXPLORE PROGRAM
+                        </span>
+
+                        <span class="explore-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRAM INTRODUCTION
+        ================================================== -->
+
+        <section
+            class="section program-intro reveal"
+            id="overview"
+        >
+
+            <div class="section-number">
+                01
+            </div>
+
+
+            <div class="section-content">
+
+                <span class="eyebrow">
+                    THE PROGRAM
+                </span>
+
+
+                <h2>
+                    Computer Engineering
+                    <span>at UE Manila.</span>
+                </h2>
+
+
+                <div class="intro-layout">
+
+                    <div class="intro-lead">
+
+                        <p>
+                            The Computer Engineering program
+                            combines principles of electrical
+                            engineering and computer science
+                            to prepare students for the design,
+                            development, and application of
+                            modern computing technologies.
+                        </p>
+
+                    </div>
+
+
+                    <div class="intro-copy">
+
+                        <p>
+                            Students develop knowledge in
+                            programming, electronics, computer
+                            architecture, embedded systems,
+                            networking, and other areas of
+                            computer engineering.
+                        </p>
+
+                        <p>
+                            Through laboratory activities,
+                            technical projects, and collaborative
+                            work, students are given opportunities
+                            to apply engineering concepts to
+                            practical problems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROMOTION
+        ================================================== -->
+
+        <section class="promotion-section reveal">
+
+            <div class="promotion-container">
+
+
+                <!-- PROMOTION TEXT -->
+
+                <div class="promotion-copy">
+
+                    <span class="eyebrow light-label">
+                        UE COMPUTER ENGINEERING
+                    </span>
+
+
+                    <h2>
+                        Build.
+                        <br>
+                        Create.
+                        <br>
+                        <span>Innovate.</span>
+                    </h2>
+
+
+                    <p>
+                        A learning environment designed to
+                        develop technical skills, engineering
+                        thinking, creativity, collaboration,
+                        and innovation.
+                    </p>
+
+
+                    <a
+                        href="#program-objectives"
+                        class="promotion-link"
+                    >
+
+                        DISCOVER THE PROGRAM
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROMOTION IMAGE
+
+                     CHANGE THIS IMAGE:
+
+                     assets/ue-promotion.jpg
+                ================================================== -->
+
+                <div class="promotion-image-container">
+
+                    <img
+                        src="assets/ue-promotion.jpg"
+                        alt="UE Computer Engineering promotion"
+                        class="promotion-image"
+                        id="promotionImage"
+                    >
+
+                    <span class="promotion-image-label">
+                        UE / CPE / MANILA
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRAM OBJECTIVES
+        ================================================== -->
+
+        <section
+            class="section objectives-section reveal"
+            id="program-objectives"
+        >
+
+            <div class="section-number">
+                02
+            </div>
+
+
+            <div class="section-content">
+
+                <span class="eyebrow">
+                    PROGRAM OBJECTIVES
+                </span>
+
+
+                <div class="section-heading-row">
+
+                    <h2>
+                        Learning beyond
+                        <span>the classroom.</span>
+                    </h2>
+
+
+                    <p>
+                        The program develops students through
+                        technical knowledge, hands-on experience,
+                        problem-solving, and collaboration.
+                    </p>
+
+                </div>
+
+
+                <div class="objectives-list">
+
+
+                    <!-- OBJECTIVE 01 -->
+
+                    <article class="objective-card">
+
+                        <span class="objective-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Technical Foundation
+                            </h3>
+
+                            <p>
+                                Develop a strong foundation in
+                                computer hardware, software,
+                                electronics, programming, and
+                                engineering principles.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- OBJECTIVE 02 -->
+
+                    <article class="objective-card">
+
+                        <span class="objective-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Problem Solving
+                            </h3>
+
+                            <p>
+                                Apply analytical and engineering
+                                approaches to solve practical and
+                                technological problems.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- OBJECTIVE 03 -->
+
+                    <article class="objective-card">
+
+                        <span class="objective-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Design & Innovation
+                            </h3>
+
+                            <p>
+                                Create systems and solutions by
+                                combining hardware, software,
+                                creativity, and engineering design.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- OBJECTIVE 04 -->
+
+                    <article class="objective-card">
+
+                        <span class="objective-number">
+                            04
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Collaboration
+                            </h3>
+
+                            <p>
+                                Strengthen communication,
+                                teamwork, leadership, and
+                                professional responsibility.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SKILLS
+        ================================================== -->
+
+        <section class="skills-section reveal">
+
+            <div class="skills-heading">
+
+                <span class="eyebrow light-label">
+                    WHAT STUDENTS DEVELOP
+                </span>
+
+
+                <h2>
+                    Knowledge that
+                    <span>connects.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="skills-list">
+
+
+                <div class="skill-row">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Programming
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+
+                <div class="skill-row">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Hardware Design
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+
+                <div class="skill-row">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Embedded Systems
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+
+                <div class="skill-row">
+
+                    <span>
+                        04
+                    </span>
+
+                    <h3>
+                        Computer Networks
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+
+                <div class="skill-row">
+
+                    <span>
+                        05
+                    </span>
+
+                    <h3>
+                        Engineering Design
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+
+                <div class="skill-row">
+
+                    <span>
+                        06
+                    </span>
+
+                    <h3>
+                        Problem Solving
+                    </h3>
+
+                    <i>
+                        ↗
+                    </i>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LABORATORY / FACILITIES
+        ================================================== -->
+
+        <section class="section facilities-section reveal">
+
+            <div class="section-number">
+                03
+            </div>
+
+
+            <div class="section-content">
+
+                <span class="eyebrow">
+                    LEARNING ENVIRONMENT
+                </span>
+
+
+                <div class="section-heading-row">
+
+                    <h2>
+                        Explore.
+                        Experiment.
+                        <span>Build.</span>
+                    </h2>
+
+
+                    <p>
+                        Laboratory work gives students the
+                        opportunity to turn engineering concepts
+                        into working systems and prototypes.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="facility-gallery"
+                    data-gallery="facilities"
+                >
+
+
+                    <!-- =================================================
+                         IMAGE 01
+
+                         CHANGE:
+                         assets/lab1.jpg
+                    ================================================== -->
+
+                    <button
+                        class="gallery-item gallery-large"
+                        type="button"
+                        data-image="assets/lab1.jpg"
+                        data-title="Computer Engineering Laboratory"
+                        data-subtitle="UE MANILA / CPE"
+                        data-description="A learning space for laboratory exercises, programming, electronics, and engineering activities."
+                    >
+
+                        <img
+                            src="assets/lab1.jpg"
+                            alt="Computer Engineering laboratory"
+                        >
+
+                        <div class="gallery-overlay">
+
+                            <span>
+                                01
+                            </span>
+
+                            <strong>
+                                COMPUTER ENGINEERING LAB
+                            </strong>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+
+                    <!-- =================================================
+                         IMAGE 02
+
+                         CHANGE:
+                         assets/lab2.jpg
+                    ================================================== -->
+
+                    <button
+                        class="gallery-item"
+                        type="button"
+                        data-image="assets/lab2.jpg"
+                        data-title="Hands-On Learning"
+                        data-subtitle="UE MANILA / CPE"
+                        data-description="Students apply technical knowledge through laboratory activities and collaborative engineering work."
+                    >
+
+                        <img
+                            src="assets/lab2.jpg"
+                            alt="Hands-on laboratory work"
+                        >
+
+                        <div class="gallery-overlay">
+
+                            <span>
+                                02
+                            </span>
+
+                            <strong>
+                                HANDS-ON LEARNING
+                            </strong>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+
+                    <!-- =================================================
+                         IMAGE 03
+
+                         CHANGE:
+                         assets/lab3.jpg
+                    ================================================== -->
+
+                    <button
+                        class="gallery-item"
+                        type="button"
+                        data-image="assets/lab3.jpg"
+                        data-title="Engineering Projects"
+                        data-subtitle="UE MANILA / CPE"
+                        data-description="Projects allow students to combine hardware, software, and engineering design."
+                    >
+
+                        <img
+                            src="assets/lab3.jpg"
+                            alt="Computer Engineering project"
+                        >
+
+                        <div class="gallery-overlay">
+
+                            <span>
+                                03
+                            </span>
+
+                            <strong>
+                                ENGINEERING PROJECTS
+                            </strong>
+
+                            <i>
+                                ↗
+                            </i>
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECTS
+        ================================================== -->
+
+        <section class="projects-section reveal">
+
+            <div class="projects-header">
+
+                <div>
+
+                    <span class="eyebrow light-label">
+                        FROM CONCEPT TO PROTOTYPE
+                    </span>
+
+
+                    <h2>
+                        Student
+                        <span>Projects.</span>
+                    </h2>
+
+                </div>
+
+
+                <p>
+                    Students can integrate programming,
+                    electronics, networking, automation,
+                    and embedded systems through technical
+                    projects.
+                </p>
+
+            </div>
+
+
+            <div class="projects-list">
+
+
+                <!-- PROJECT 01 -->
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/project1.jpg"
+                            alt="Embedded Systems project"
+                        >
+
+                    </div>
+
+
+                    <div class="project-information">
+
+                        <span>
+                            01 / EMBEDDED SYSTEMS
+                        </span>
+
+                        <h3>
+                            Smart Systems
+                        </h3>
+
+                        <p>
+                            Design systems that combine sensors,
+                            microcontrollers, software, and
+                            physical components.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 02 -->
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/project2.jpg"
+                            alt="Internet of Things project"
+                        >
+
+                    </div>
+
+
+                    <div class="project-information">
+
+                        <span>
+                            02 / CONNECTIVITY
+                        </span>
+
+                        <h3>
+                            Internet of Things
+                        </h3>
+
+                        <p>
+                            Explore connected devices,
+                            communication technologies,
+                            monitoring, and automation.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 03 -->
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/project3.jpg"
+                            alt="Computer Engineering prototype"
+                        >
+
+                    </div>
+
+
+                    <div class="project-information">
+
+                        <span>
+                            03 / PROTOTYPING
+                        </span>
+
+                        <h3>
+                            Engineering Design
+                        </h3>
+
+                        <p>
+                            Transform engineering ideas into
+                            functional prototypes through
+                            iterative design and testing.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESEARCH
+        ================================================== -->
+
+        <section class="section research-section reveal">
+
+            <div class="section-number">
+                04
+            </div>
+
+
+            <div class="section-content">
+
+                <span class="eyebrow">
+                    RESEARCH & DEVELOPMENT
+                </span>
+
+
+                <div class="section-heading-row">
+
+                    <h2>
+                        Ideas become
+                        <span>solutions.</span>
+                    </h2>
+
+
+                    <p>
+                        Research encourages students to
+                        investigate problems, analyze information,
+                        and develop technology-based solutions.
+                    </p>
+
+                </div>
+
+
+                <div class="research-list">
+
+
+                    <!-- RESEARCH 01 -->
+
+                    <article class="research-item">
+
+                        <button
+                            class="research-trigger"
+                            type="button"
+                            aria-expanded="false"
+                        >
+
+                            <span>
+                                01
+                            </span>
+
+                            <strong>
+                                Embedded Systems
+                            </strong>
+
+                            <i>
+                                +
+                            </i>
+
+                        </button>
+
+
+                        <div class="research-content">
+
+                            <p>
+                                Development of hardware-software
+                                systems designed for specific
+                                applications and engineering
+                                environments.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- RESEARCH 02 -->
+
+                    <article class="research-item">
+
+                        <button
+                            class="research-trigger"
+                            type="button"
+                            aria-expanded="false"
+                        >
+
+                            <span>
+                                02
+                            </span>
+
+                            <strong>
+                                Internet of Things
+                            </strong>
+
+                            <i>
+                                +
+                            </i>
+
+                        </button>
+
+
+                        <div class="research-content">
+
+                            <p>
+                                Research involving connected
+                                devices, sensors, communication,
+                                monitoring, and intelligent
+                                automation.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- RESEARCH 03 -->
+
+                    <article class="research-item">
+
+                        <button
+                            class="research-trigger"
+                            type="button"
+                            aria-expanded="false"
+                        >
+
+                            <span>
+                                03
+                            </span>
+
+                            <strong>
+                                Robotics & Automation
+                            </strong>
+
+                            <i>
+                                +
+                            </i>
+
+                        </button>
+
+
+                        <div class="research-content">
+
+                            <p>
+                                Exploration of intelligent
+                                machines, control systems,
+                                automation, and engineering
+                                applications.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- RESEARCH 04 -->
+
+                    <article class="research-item">
+
+                        <button
+                            class="research-trigger"
+                            type="button"
+                            aria-expanded="false"
+                        >
+
+                            <span>
+                                04
+                            </span>
+
+                            <strong>
+                                Computing & Data
+                            </strong>
+
+                            <i>
+                                +
+                            </i>
+
+                        </button>
+
+
+                        <div class="research-content">
+
+                            <p>
+                                Investigation of computing
+                                methods, software systems,
+                                data analysis, and emerging
+                                technologies.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FINAL CTA
+        ================================================== -->
+
+        <section class="final-cta reveal">
+
+            <span class="eyebrow light-label">
+                UE MANILA / COMPUTER ENGINEERING
+            </span>
+
+
+            <h2>
+                Learn.
+                <br>
+                Build.
+                <br>
+                <span>Engineer the future.</span>
+            </h2>
+
+
+            <a
+                href="specializations.html"
+                class="cta-link page-link"
+            >
+
+                EXPLORE SPECIALIZATIONS
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         SAME STRUCTURE AS INDEX / FACULTY
+    ====================================================== -->
+
+    <footer class="cpe-footer reveal">
+
+
+        <!-- BACKGROUND IMAGE -->
+
+        <img
+            src="assets/footer.png"
+            alt=""
+            class="cpe-footer-pattern"
+            aria-hidden="true"
+        >
+
+
+        <!-- MAIN FOOTER CONTENT -->
+
+        <div class="cpe-footer-content">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="cpe-footer-brand">
+
+                <img
+                    src="assets/cpelogo.png"
+                    alt="Computer Engineering Logo"
+                    class="cpe-footer-logo"
+                >
+
+
+                <div class="cpe-footer-divider"></div>
+
+
+                <div class="cpe-footer-name">
+
+                    <span>
+                        University of the East - Manila
+                    </span>
+
+                    <strong>
+                        COMPUTER ENGINEERING
+                    </strong>
+
                 </div>
 
             </div>
 
 
-            <div class="viewer-information">
+            <!-- RIGHT SIDE -->
 
-                <span class="section-label">
-                    FEATURE
-                </span>
+            <div class="cpe-footer-social">
 
-                <h3 id="viewerTitle">
-                    Feature Title
-                </h3>
-
-                <p id="viewerDescription">
-                    Feature description.
-                </p>
+                <div class="cpe-footer-follow">
+                    follow us!
+                </div>
 
 
-                <div class="viewer-controls">
+                <div class="cpe-footer-icons">
 
-                    <button
-                        id="viewerPrev"
-                        aria-label="Previous image"
+
+                    <!-- FACEBOOK -->
+
+                    <a
+                        href="#"
+                        class="cpe-social-link"
+                        aria-label="Facebook"
                     >
-                        ← PREV
-                    </button>
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
 
 
-                    <button
-                        id="viewerNext"
-                        aria-label="Next image"
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="#"
+                        class="cpe-social-link"
+                        aria-label="Instagram"
                     >
-                        NEXT →
-                    </button>
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <!-- EMAIL -->
+
+                    <a
+                        href="mailto:"
+                        class="cpe-social-link"
+                        aria-label="Email"
+                    >
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </a>
 
                 </div>
 
@@ -1277,70 +1422,149 @@
 
         </div>
 
-    </div>
 
-</div>
+        <!-- FOOTER BOTTOM -->
+
+        <div class="cpe-footer-bottom">
+
+            <span>
+                CPE @ 2026 ALL RIGHTS RESERVED
+            </span>
+
+            <span>
+                BY: BALDOVINO | LANDAYAN
+            </span>
+
+        </div>
+
+    </footer>
 
 
-<!-- =========================================================
-     NEXT PAGE
-========================================================= -->
+    <!-- =====================================================
+         IMAGE VIEWER
+    ====================================================== -->
 
-<section class="next-section">
-
-    <span class="section-label">
-        CONTINUE EXPLORING
-    </span>
-
-
-    <a
-        href="specializations.html"
-        class="next-link page-link"
+    <div
+        class="image-viewer"
+        id="imageViewer"
+        aria-hidden="true"
     >
 
-        <span>
-            CPE
-            <em>SPECIALIZATIONS</em>
-        </span>
 
-        <span class="next-arrow">
-            →
-        </span>
+        <!-- BACKDROP -->
 
-    </a>
-
-</section>
+        <div
+            class="viewer-backdrop"
+            id="viewerBackdrop"
+        ></div>
 
 
-</main>
+        <!-- VIEWER CARD -->
+
+        <div class="viewer-modal">
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+            <!-- TOP -->
 
-<footer>
+            <div class="viewer-top">
 
-    <div class="footer-inner">
+                <span id="viewerNumber">
+                    UE CPE / 01
+                </span>
 
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
 
-        <span>
-            BACHELOR OF SCIENCE IN COMPUTER ENGINEERING
-        </span>
+                <button
+                    class="viewer-close"
+                    id="viewerClose"
+                    type="button"
+                    aria-label="Close image viewer"
+                >
+                    ×
+                </button>
 
-        <span>
-            CORE CPE © 2026
-        </span>
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="viewer-layout">
+
+
+                <!-- IMAGE -->
+
+                <div class="viewer-photo">
+
+                    <img
+                        id="viewerImage"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="viewer-information">
+
+                    <span
+                        class="viewer-subtitle"
+                        id="viewerSubtitle"
+                    >
+                        UE MANILA / CPE
+                    </span>
+
+
+                    <h2 id="viewerTitle">
+                        COMPUTER ENGINEERING
+                    </h2>
+
+
+                    <p id="viewerDescription"></p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="viewer-bottom">
+
+                <button
+                    id="viewerPrev"
+                    class="viewer-navigation"
+                    type="button"
+                >
+                    ← PREVIOUS
+                </button>
+
+
+                <span id="viewerCounter">
+                    01 / 03
+                </span>
+
+
+                <button
+                    id="viewerNext"
+                    class="viewer-navigation"
+                    type="button"
+                >
+                    NEXT →
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-</footer>
 
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
-<script src="ue-program.js"></script>
+    <script src="ue-program.js"></script>
 
 </body>
 

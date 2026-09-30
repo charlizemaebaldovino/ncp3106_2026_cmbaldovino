@@ -451,6 +451,16 @@ body::before {
 }
 
 
+.nav-logo-image {
+    display: block;
+
+    width: 180px;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+
 .logo small {
 
     max-width:
@@ -4907,6 +4917,26 @@ body.light-mode .deeper-card:hover {
 
 
 /* =========================================================
+   CURSOR TRAIL
+========================================================= */
+
+.cursor-trail-circle {
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    will-change: left, top;
+    transition: background-color .6s ease;
+}
+
+
+/* =========================================================
    HOVER
 ========================================================= */
 
@@ -4921,6 +4951,35 @@ body.light-mode .deeper-card:hover {
 
 .deeper-card:hover .deeper-arrow {
     transform: translateX(5px);
+}
+
+
+/* Match the home page's dark Dive Deeper section in light mode. */
+html[data-theme="light"] .go-deeper-section {
+    background: #08264a;
+    color: #fffaf0;
+}
+
+
+html[data-theme="light"] .go-deeper-section .go-deeper-label,
+html[data-theme="light"] .go-deeper-section .go-deeper-heading span,
+html[data-theme="light"] .go-deeper-section .deeper-number,
+html[data-theme="light"] .go-deeper-section .deeper-card-content h3,
+html[data-theme="light"] .go-deeper-section .deeper-card-content p,
+html[data-theme="light"] .go-deeper-section .deeper-arrow {
+    color: #fffaf0;
+}
+
+
+html[data-theme="light"] .go-deeper-section .deeper-card {
+    border-color: rgba(255, 250, 240, 0.28);
+    background: transparent;
+}
+
+
+html[data-theme="light"] .go-deeper-section .deeper-card:hover {
+    background: rgba(255, 250, 240, 0.08);
+    border-color: rgba(255, 250, 240, 0.72);
 }
 
 
@@ -5787,6 +5846,59 @@ section.go-deeper-section .deeper-card:hover .deeper-arrow {
 }
 
 
+/* Match the home page's dark Dive Deeper section in light mode. */
+html[data-theme="light"] .faculty-deeper-section {
+    background:
+        linear-gradient(
+            135deg,
+            #08264a 0%,
+            #0b5368 58%,
+            #075064 100%
+        );
+    color: #fffaf0;
+}
+
+
+html[data-theme="dark"] .faculty-deeper-section {
+    background:
+        linear-gradient(
+            135deg,
+            #020b2d 0%,
+            #032b45 52%,
+            #075064 100%
+        );
+    color: #fffaf0;
+}
+
+
+html[data-theme="light"] .faculty-deeper-label,
+html[data-theme="light"] .faculty-deeper-heading,
+html[data-theme="light"] .faculty-deeper-number,
+html[data-theme="light"] .faculty-deeper-content h3,
+html[data-theme="light"] .faculty-deeper-content p,
+html[data-theme="light"] .faculty-deeper-arrow {
+    color: #fffaf0;
+}
+
+
+html[data-theme="light"] .faculty-deeper-card {
+    border-color: rgba(255, 250, 240, 0.28);
+    background: rgba(255, 250, 240, 0.04);
+}
+
+
+html[data-theme="dark"] .faculty-deeper-card {
+    border-color: rgba(255, 250, 240, 0.18);
+    background: rgba(5, 55, 72, 0.34);
+}
+
+
+html[data-theme="light"] .faculty-deeper-card:hover {
+    background: rgba(255, 250, 240, 0.08);
+    border-color: rgba(255, 250, 240, 0.72);
+}
+
+
 /* =========================================================
    TABLET
 ========================================================= */
@@ -5909,3 +6021,39 @@ section.go-deeper-section .deeper-card:hover .deeper-arrow {
 
 }
 
+/* =========================================================
+   CURSOR TRAIL
+========================================================= */
+
+.cursor-trail-circle {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 99999;
+
+    opacity: 0;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* No cursor trail on touch devices */
+
+@media (pointer: coarse) {
+
+    .cursor-trail-circle {
+        display: none;
+    }
+
+}

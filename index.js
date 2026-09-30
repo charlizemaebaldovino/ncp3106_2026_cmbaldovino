@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sharedTitle = document.getElementById("sharedTitle");
     const heroTitleTarget = document.getElementById("heroTitleTarget");
+    const navLogoImage = document.querySelector(".nav-logo-image");
 
     const themeToggle = document.getElementById("themeToggle");
     const clock = document.getElementById("clock");
@@ -45,15 +46,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const LIGHT_VIDEO = "assets/light.mp4";
     const DARK_VIDEO = "assets/dark.mp4";
+    const LIGHT_NAV_LOGO = "assets/dark.png";
+    const DARK_NAV_LOGO = "assets/light.png";
 
     const TITLE_APPEAR_DELAY = 5200;
 
-    /*
-       Slightly quicker movement than the previous version.
-       It keeps the transition smooth without feeling slow.
-    */
+    const BLANK_GRADIENT_DURATION = 650;
+    const TYPE_SPEED = 58;
 
-    const TITLE_MOVE_DELAY = 500;
+    /* Stay for exactly 1 second after typing */
+    const TITLE_HOLD_DURATION = 1000;
+
     const TITLE_MOVE_DURATION = 1550;
     const INTRO_FADE_DURATION = 1050;
 
@@ -99,11 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return savedTheme;
         }
 
-        /*
-           Default theme:
-           LIGHT MODE
-        */
-
+        /* Start in light mode by default */
         return "light";
     }
 
@@ -120,7 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedTheme
         );
 
+        updateNavLogo(selectedTheme);
+
         if (save) {
+
             localStorage.setItem(
                 THEME_KEY,
                 selectedTheme
@@ -128,13 +130,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         /*
-           While the intro is still running,
-           switch the intro video with the theme.
+           Change intro video according to theme
+           only while intro is still active.
         */
 
         if (!introFinished) {
-            updateIntroVideo(selectedTheme);
+
+            updateIntroVideo(
+                selectedTheme
+            );
         }
+    }
+
+
+    function updateNavLogo(theme) {
+
+        if (!navLogoImage) {
+            return;
+        }
+
+        navLogoImage.src =
+            theme === "dark"
+                ? DARK_NAV_LOGO
+                : LIGHT_NAV_LOGO;
     }
 
 
@@ -164,26 +182,17 @@ document.addEventListener("DOMContentLoaded", () => {
             desiredSource
         );
 
-        try {
+        introVideo.load();
 
-            introVideo.load();
+        const playPromise = introVideo.play();
 
-            const playPromise = introVideo.play();
-
-            if (
-                playPromise &&
-                typeof playPromise.catch === "function"
-            ) {
-                playPromise.catch(() => {});
-            }
-
-        } catch (error) {
-
-            /*
-               Decorative video failure must never
-               stop the rest of the website.
-            */
-
+        if (
+            playPromise &&
+            typeof playPromise.catch === "function"
+        ) {
+            playPromise.catch(
+                () => {}
+            );
         }
     }
 
@@ -232,7 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const now = new Date();
+        const now =
+            new Date();
 
         const formatter =
             new Intl.DateTimeFormat(
@@ -272,26 +282,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         /*
-           During the intro, the title belongs directly
-           inside <body>.
+           During the intro, COMPUTER ENGINEERING
+           belongs directly inside body.
 
-           This gives it freedom to move from the center
-           of the screen into the hero.
+           This allows the SAME title to travel
+           from the center of the screen into
+           the homepage.
         */
 
-        if (sharedTitle.parentElement !== body) {
-            body.appendChild(sharedTitle);
+        if (
+            sharedTitle.parentElement !== body
+        ) {
+
+            body.appendChild(
+                sharedTitle
+            );
         }
 
-        sharedTitle.classList.remove("is-visible");
-        sharedTitle.classList.remove("title-landed");
 
-        sharedTitle.style.position = "fixed";
+        sharedTitle.classList.remove(
+            "is-visible"
+        );
 
-        sharedTitle.style.left = "50%";
-        sharedTitle.style.top = "50%";
+        sharedTitle.classList.remove(
+            "title-landed"
+        );
 
-        sharedTitle.style.width = "max-content";
+
+        sharedTitle.style.position =
+            "fixed";
+
+        sharedTitle.style.left =
+            "50%";
+
+        sharedTitle.style.top =
+            "50%";
+
+        sharedTitle.style.width =
+            "max-content";
 
         sharedTitle.style.transform =
             "translate(-50%, -50%)";
@@ -299,9 +327,11 @@ document.addEventListener("DOMContentLoaded", () => {
         sharedTitle.style.transformOrigin =
             "top left";
 
-        sharedTitle.style.opacity = "";
+        sharedTitle.style.opacity =
+            "";
 
-        titleLanded = false;
+        titleLanded =
+            false;
     }
 
 
@@ -353,6 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sharedTitle.style.position = "";
         sharedTitle.style.left = "";
         sharedTitle.style.top = "";
+
         sharedTitle.style.width = "";
         sharedTitle.style.height = "";
 
@@ -361,16 +392,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sharedTitle.style.opacity = "";
         sharedTitle.style.visibility = "";
+        sharedTitle.style.color = "";
     }
 
 
     /* =====================================================
        11. LAND TITLE
 
-       IMPORTANT:
-       This uses the SAME title from the intro.
-
-       No duplicate COMPUTER ENGINEERING title is created.
+       Uses the SAME COMPUTER ENGINEERING title.
+       There is no duplicate title.
     ====================================================== */
 
     function landSharedTitle() {
@@ -382,16 +412,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        /*
-           Move the actual title into its permanent
-           hero destination.
-        */
 
         heroTitleTarget.appendChild(
             sharedTitle
         );
 
+
         clearTitleInlineStyles();
+
 
         sharedTitle.classList.add(
             "is-visible"
@@ -401,24 +429,72 @@ document.addEventListener("DOMContentLoaded", () => {
             "title-landed"
         );
 
-        titleLanded = true;
+
+        titleLanded =
+            true;
+    }
+
+
+    function landSharedTitleAtMeasuredSize(finalRect) {
+
+        if (
+            !sharedTitle ||
+            !heroTitleTarget ||
+            !finalRect
+        ) {
+            return;
+        }
+
+        heroTitleTarget.appendChild(
+            sharedTitle
+        );
+
+        sharedTitle.classList.add(
+            "is-visible"
+        );
+
+        sharedTitle.classList.add(
+            "title-landed"
+        );
+
+        sharedTitle.style.position =
+            "relative";
+
+        sharedTitle.style.left =
+            "0";
+
+        sharedTitle.style.top =
+            "0";
+
+        sharedTitle.style.width =
+            `${finalRect.width}px`;
+
+        sharedTitle.style.height =
+            `${finalRect.height}px`;
+
+        sharedTitle.style.transform =
+            "none";
+
+        sharedTitle.style.color =
+            "";
+
+        titleLanded =
+            true;
     }
 
 
     /* =====================================================
        12. MEASURE FINAL TITLE
 
-       THIS IS THE IMPORTANT FIX.
+       Temporarily place COMPUTER ENGINEERING in its
+       real homepage position so we can measure the
+       exact destination.
 
-       The previous version estimated the final scale from
-       heroTitleTarget's width.
+       Then restore it to the intro position before
+       starting the animation.
 
-       That caused the animation to finish at one size and
-       then CSS changed the title to another size.
-
-       This version temporarily puts the title in its REAL
-       final state, measures it, and then restores the intro
-       state before animating.
+       This prevents the title from suddenly changing
+       size when it reaches the homepage.
     ====================================================== */
 
     function measureFinalTitle() {
@@ -430,9 +506,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
 
-        /*
-           Remember where the title currently lives.
-        */
 
         const originalParent =
             sharedTitle.parentElement;
@@ -440,38 +513,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const originalNextSibling =
             sharedTitle.nextSibling;
 
-        /*
-           Remember its current classes.
-        */
 
-        const hadVisibleClass =
-            sharedTitle.classList.contains(
-                "is-visible"
-            );
+        const originalClassName =
+            sharedTitle.className;
 
-        const hadLandedClass =
-            sharedTitle.classList.contains(
-                "title-landed"
-            );
-
-        /*
-           Remember current inline styles.
-        */
 
         const originalStyle =
             sharedTitle.getAttribute(
                 "style"
             );
 
+
         /*
-           Put the title into the exact final DOM position.
+           Temporarily move title into its actual
+           final destination.
         */
 
         heroTitleTarget.appendChild(
             sharedTitle
         );
 
+
         clearTitleInlineStyles();
+
 
         sharedTitle.classList.add(
             "is-visible"
@@ -481,29 +545,41 @@ document.addEventListener("DOMContentLoaded", () => {
             "title-landed"
         );
 
-        /*
-           Hide it only visually while measuring.
 
-           visibility:hidden still gives us the correct
-           dimensions and coordinates.
+        /*
+           Measure its REAL final dimensions.
         */
 
-        sharedTitle.style.visibility =
-            "hidden";
-
         const finalRect =
-            sharedTitle
-                .getBoundingClientRect();
+            sharedTitle.getBoundingClientRect();
+
+
+        const result = {
+
+            left:
+                finalRect.left,
+
+            top:
+                finalRect.top,
+
+            width:
+                finalRect.width,
+
+            height:
+                finalRect.height
+        };
+
 
         /*
-           Restore title to its original DOM location.
+           Restore the title to where it was
+           before measuring.
         */
 
         if (originalParent) {
 
             if (
                 originalNextSibling &&
-                originalNextSibling.parentElement ===
+                originalNextSibling.parentNode ===
                     originalParent
             ) {
 
@@ -520,25 +596,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        /*
-           Restore original classes.
-        */
 
-        if (!hadVisibleClass) {
-            sharedTitle.classList.remove(
-                "is-visible"
-            );
-        }
+        sharedTitle.className =
+            originalClassName;
 
-        if (!hadLandedClass) {
-            sharedTitle.classList.remove(
-                "title-landed"
-            );
-        }
-
-        /*
-           Restore the original inline styles exactly.
-        */
 
         if (originalStyle === null) {
 
@@ -554,166 +615,578 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-        return finalRect;
+
+        return result;
     }
 
 
     /* =====================================================
        13. MOVE TITLE TO HERO
 
-       FLIP animation:
+       Uses FLIP-style positioning:
+       FIRST = intro title position
+       LAST  = actual homepage title position
 
-       START
-       Centered COMPUTER ENGINEERING
-
-                   ↓
-
-       END
-       Lower-left hero title
-
-       The final title dimensions are measured first,
-       preventing the large jump after landing.
+       Then smoothly animates between them.
     ====================================================== */
 
-    function moveTitleToHero() {
+function moveTitleToHero() {
 
-        if (
-            !sharedTitle ||
-            !heroTitleTarget ||
-            titleLanded
-        ) {
-            return;
-        }
+    if (
+        !sharedTitle ||
+        !heroTitleTarget ||
+        titleLanded
+    ) {
+        return;
+    }
 
-        if (titleAnimation) {
 
-            titleAnimation.cancel();
-            titleAnimation = null;
-        }
+    if (titleAnimation) {
+        titleAnimation.cancel();
+        titleAnimation = null;
+    }
 
-        /*
-           The hero must be visible before its final
-           coordinates can be measured.
-        */
 
-        revealHome();
+    /*
+        GET CURRENT TYPING POSITION
+    */
+
+    const startRect =
+        sharedTitle.getBoundingClientRect();
+
+
+    /*
+        SHOW HOMEPAGE BEHIND INTRO
+    */
+
+    revealHome();
+
+
+    requestAnimationFrame(() => {
 
         requestAnimationFrame(() => {
 
+
+            /*
+                MOVE THE SAME TITLE
+                INTO THE REAL HERO
+            */
+
+            heroTitleTarget.appendChild(
+                sharedTitle
+            );
+
+
+            /*
+                REMOVE INTRO POSITIONING
+            */
+
+            sharedTitle.style.position = "";
+            sharedTitle.style.left = "";
+            sharedTitle.style.right = "";
+            sharedTitle.style.top = "";
+
+            sharedTitle.style.width = "";
+            sharedTitle.style.height = "";
+
+            sharedTitle.style.margin = "";
+            sharedTitle.style.padding = "";
+
+            sharedTitle.style.transform = "";
+            sharedTitle.style.transformOrigin = "";
+
+            sharedTitle.style.transition = "";
+            sharedTitle.style.animation = "";
+
+            sharedTitle.style.willChange = "";
+            sharedTitle.style.color = "";
+
+
+            /*
+                ACTIVATE FINAL HERO STYLE
+            */
+
+            sharedTitle.classList.add(
+                "is-visible"
+            );
+
+            sharedTitle.classList.add(
+                "title-landed"
+            );
+
+
+            /*
+                ==================================
+                FINAL TITLE POSITION ADJUSTMENT
+                ==================================
+
+                Negative = LEFT
+                Positive = RIGHT
+
+                Change ONLY this number if
+                you want to adjust it later.
+            */
+
+            const FINAL_TITLE_X = -300;
+
+
+           /*
+        FINAL HERO TITLE PLACEMENT
+
+        Move LEFT + slightly DOWN.
+     Percentage-based para responsive.
+        */
+
+        sharedTitle.style.position = "relative";
+
+        sharedTitle.style.left = "-8%";
+        sharedTitle.style.top = "45px";
+
+        /*
+        Slightly reduce the final title
+        para hindi tumawid sa center faces.
+        */
+
+        sharedTitle.style.width = "88%";
+            /*
+                WAIT UNTIL BROWSER APPLIES
+                THE NEW FINAL POSITION
+            */
+
             requestAnimationFrame(() => {
 
-                /*
-                   Current title position during intro.
-                */
-
-                const startRect =
-                    sharedTitle
-                        .getBoundingClientRect();
 
                 /*
-                   Measure the REAL final title itself,
-                   not just its destination container.
+                    GET THE REAL FINAL POSITION
+                    AFTER MOVING IT LEFT
                 */
 
                 const finalRect =
-                    measureFinalTitle();
+                    sharedTitle.getBoundingClientRect();
+
 
                 if (
-                    !finalRect ||
                     startRect.width <= 0 ||
                     startRect.height <= 0 ||
                     finalRect.width <= 0 ||
                     finalRect.height <= 0
                 ) {
 
-                    landSharedTitle();
+                    titleLanded = true;
                     return;
                 }
 
-                /*
-                   Freeze the title exactly where it
-                   currently appears.
 
-                   This lets us remove
-                   translate(-50%, -50%) without a jump.
+                /*
+                    CALCULATE DIFFERENCE BETWEEN
+                    TYPING POSITION AND
+                    FINAL HERO POSITION
                 */
 
-                sharedTitle.style.position =
-                    "fixed";
+                const deltaX =
+                    startRect.left -
+                    finalRect.left;
 
-                sharedTitle.style.left =
-                    `${startRect.left}px`;
+                const deltaY =
+                    startRect.top -
+                    finalRect.top;
 
-                sharedTitle.style.top =
-                    `${startRect.top}px`;
 
-                sharedTitle.style.width =
-                    `${startRect.width}px`;
+                /*
+                    CALCULATE SIZE DIFFERENCE
+                */
 
-                sharedTitle.style.transform =
-                    "translate3d(0, 0, 0) scale(1)";
+                const scaleX =
+                    startRect.width /
+                    finalRect.width;
+
+                const scaleY =
+                    startRect.height /
+                    finalRect.height;
+
+
+                /*
+                    FLIP TECHNIQUE
+
+                    Element is already physically
+                    in its FINAL position.
+
+                    Transform makes it LOOK like
+                    it is still in the typing position.
+                */
 
                 sharedTitle.style.transformOrigin =
                     "top left";
 
-                /*
-                   Calculate the movement from the current
-                   visual position to the REAL final title
-                   position.
-                */
+                sharedTitle.style.transform =
+                    `translate3d(
+                        ${deltaX}px,
+                        ${deltaY}px,
+                        0
+                    )
+                    scale(
+                        ${scaleX},
+                        ${scaleY}
+                    )`;
 
-                const deltaX =
-                    finalRect.left -
-                    startRect.left;
+                sharedTitle.style.willChange =
+                    "transform";
 
-                const deltaY =
-                    finalRect.top -
-                    startRect.top;
-
-                /*
-                   Because the final title may have a
-                   different CSS font size, use the actual
-                   final rendered dimensions.
-
-                   We use the smaller scale ratio so both
-                   words remain inside the target area.
-                */
-
-                const scaleX =
-                    finalRect.width /
-                    startRect.width;
-
-                const scaleY =
-                    finalRect.height /
-                    startRect.height;
-
-                const finalScale =
-                    Math.min(
-                        scaleX,
-                        scaleY
-                    );
 
                 /*
-                   Reduced-motion users skip the animation.
+                    FORCE BROWSER TO REGISTER
+                    STARTING POSITION
                 */
+
+                sharedTitle.getBoundingClientRect();
+
 
                 if (prefersReducedMotion) {
 
-                    landSharedTitle();
+                    sharedTitle.style.transform =
+                        "";
+
+                    sharedTitle.style.transformOrigin =
+                        "";
+
+                    sharedTitle.style.willChange =
+                        "";
+
+                    titleLanded = true;
+
                     return;
                 }
+
+
+                /*
+                    START SMOOTH MOVEMENT
+                */
+
+                requestAnimationFrame(() => {
+
+                    titleAnimation =
+                        sharedTitle.animate(
+                            [
+                                {
+                                    transform:
+                                        `translate3d(
+                                            ${deltaX}px,
+                                            ${deltaY}px,
+                                            0
+                                        )
+                                        scale(
+                                            ${scaleX},
+                                            ${scaleY}
+                                        )`
+                                },
+
+                                /*
+                                    SMALL MIDPOINT
+
+                                    Makes the movement feel
+                                    less robotic and more
+                                    naturally decelerated.
+                                */
+
+                                {
+                                    offset: 0.72,
+
+                                    transform:
+                                        `translate3d(
+                                            ${deltaX * 0.12}px,
+                                            ${deltaY * 0.12}px,
+                                            0
+                                        )
+                                        scale(
+                                            ${1 + (scaleX - 1) * 0.08},
+                                            ${1 + (scaleY - 1) * 0.08}
+                                        )`
+                                },
+
+                                /*
+                                    EXACT FINAL POSITION
+                                */
+
+                                {
+                                    transform:
+                                        "translate3d(0, 0, 0) scale(1, 1)"
+                                }
+                            ],
+
+                            {
+                                duration:
+                                    TITLE_MOVE_DURATION,
+
+                                easing:
+                                    "cubic-bezier(0.22, 1, 0.36, 1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+
+                    /*
+                        WHEN FINISHED:
+                        REMOVE ONLY THE TEMPORARY
+                        ANIMATION TRANSFORM.
+
+                        LEFT POSITION STAYS.
+                    */
+
+                    titleAnimation.onfinish =
+                        () => {
+
+                            titleAnimation = null;
+
+                            sharedTitle.style.transform =
+                                "";
+
+                            sharedTitle.style.transformOrigin =
+                                "";
+
+                            sharedTitle.style.willChange =
+                                "";
+
+                            titleLanded =
+                                true;
+                        };
+
+
+                    titleAnimation.oncancel =
+                        () => {
+
+                            titleAnimation = null;
+                        };
+
+                });
+
+            });
+
+        });
+
+    });
+}  function moveTitleToHero() {
+
+    if (
+        !sharedTitle ||
+        !heroTitleTarget ||
+        titleLanded
+    ) {
+        return;
+    }
+
+
+    if (titleAnimation) {
+        titleAnimation.cancel();
+        titleAnimation = null;
+    }
+
+
+    /*
+        1. Kunin muna ang EXACT position
+        kung saan natapos ang typing.
+    */
+
+    const startRect =
+        sharedTitle.getBoundingClientRect();
+
+
+    /*
+        2. Ihanda ang homepage sa likod.
+
+        Hindi natin babaguhin ang visual
+        position ng title dito.
+    */
+
+    revealHome();
+
+
+    requestAnimationFrame(() => {
+
+        requestAnimationFrame(() => {
+
+
+            /*
+                3. Ilagay NA AGAD ang SAME title
+                sa tunay nitong final container.
+
+                Important:
+                Ito na talaga ang final DOM position niya.
+            */
+
+            heroTitleTarget.appendChild(
+                sharedTitle
+            );
+
+
+            /*
+                Remove intro/fixed positioning.
+            */
+
+            sharedTitle.style.position = "";
+            sharedTitle.style.left = "";
+            sharedTitle.style.top = "";
+
+            sharedTitle.style.width = "";
+            sharedTitle.style.height = "";
+
+            sharedTitle.style.margin = "";
+            sharedTitle.style.padding = "";
+
+            sharedTitle.style.transform = "";
+            sharedTitle.style.transformOrigin = "";
+
+            sharedTitle.style.transition = "";
+            sharedTitle.style.animation = "";
+
+            sharedTitle.style.willChange = "";
+            sharedTitle.style.color = "";
+
+
+            /*
+                Activate the REAL final hero CSS.
+            */
+
+            sharedTitle.classList.add(
+                "is-visible"
+            );
+
+            sharedTitle.classList.add(
+                "title-landed"
+            );
+
+
+            /*
+                4. Ngayon kunin natin ang ACTUAL
+                final position niya.
+
+                Hindi estimate.
+                Hindi manually calculated position.
+
+                Ito mismo ang final rendered position.
+            */
+
+            const finalRect =
+                sharedTitle.getBoundingClientRect();
+
+
+            if (
+                startRect.width <= 0 ||
+                startRect.height <= 0 ||
+                finalRect.width <= 0 ||
+                finalRect.height <= 0
+            ) {
+
+                titleLanded = true;
+                return;
+            }
+
+
+            /*
+                5. Calculate kung gaano kalayo
+                ang intro position mula sa final position.
+            */
+
+            const deltaX =
+                startRect.left -
+                finalRect.left;
+
+            const deltaY =
+                startRect.top -
+                finalRect.top;
+
+
+            /*
+                Calculate original typing size
+                relative to final hero size.
+            */
+
+            const scaleX =
+                startRect.width /
+                finalRect.width;
+
+            const scaleY =
+                startRect.height /
+                finalRect.height;
+
+
+            /*
+                6. FLIP
+
+                Physically nasa FINAL position na siya.
+
+                Pero visually ibabalik muna natin
+                sa EXACT typing position.
+            */
+
+            sharedTitle.style.transformOrigin =
+                "top left";
+
+            sharedTitle.style.transform =
+                `translate3d(
+                    ${deltaX}px,
+                    ${deltaY}px,
+                    0
+                )
+                scale(
+                    ${scaleX},
+                    ${scaleY}
+                )`;
+
+            sharedTitle.style.willChange =
+                "transform";
+
+
+            /*
+                Force browser to paint this state.
+
+                So visually:
+                typed title stays EXACTLY where
+                typing finished.
+            */
+
+            sharedTitle.getBoundingClientRect();
+
+
+            if (prefersReducedMotion) {
+
+                sharedTitle.style.transform = "";
+                sharedTitle.style.willChange = "";
+
+                titleLanded = true;
+
+                return;
+            }
+
+
+            /*
+                7. Next frame:
+                animate FROM intro position
+                TO its REAL CSS position.
+            */
+
+            requestAnimationFrame(() => {
 
                 titleAnimation =
                     sharedTitle.animate(
                         [
                             {
                                 transform:
-                                    "translate3d(0, 0, 0) scale(1)"
+                                    `translate3d(
+                                        ${deltaX}px,
+                                        ${deltaY}px,
+                                        0
+                                    )
+                                    scale(
+                                        ${scaleX},
+                                        ${scaleY}
+                                    )`
                             },
 
                             {
                                 transform:
-                                    `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${finalScale})`
+                                    "translate3d(0, 0, 0) scale(1, 1)"
                             }
                         ],
                         {
@@ -721,7 +1194,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 TITLE_MOVE_DURATION,
 
                             easing:
-                                "cubic-bezier(.16, 1, .3, 1)",
+                                "cubic-bezier(0.16, 1, 0.3, 1)",
 
                             fill:
                                 "forwards"
@@ -734,18 +1207,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         titleAnimation = null;
 
+
                         /*
-                           The animated title is now visually
-                           sitting over its final destination.
+                            CRITICAL:
 
-                           Put it into the actual destination.
+                            Animation already ended at
+                            the REAL final position.
 
-                           Because we measured the exact final
-                           layout beforehand, there should be
-                           no size jump here.
+                            Kaya walang reparent.
+                            Walang recalculation.
+                            Walang teleport.
+                            Walang snap.
                         */
 
-                        landSharedTitle();
+                        sharedTitle.style.transform =
+                            "";
+
+                        sharedTitle.style.transformOrigin =
+                            "";
+
+                        sharedTitle.style.willChange =
+                            "";
+
+
+                        titleLanded =
+                            true;
                     };
 
 
@@ -758,7 +1244,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         });
-    }
+
+    });
+}
 
 
     /* =====================================================
@@ -771,13 +1259,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         intro.classList.add(
             "go-home"
         );
 
+
         clearTimeout(
             introHideTimer
         );
+
 
         introHideTimer =
             setTimeout(
@@ -787,7 +1278,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         "none";
 
                 },
-                INTRO_FADE_DURATION + 250
+
+                INTRO_FADE_DURATION +
+                250
             );
     }
 
@@ -795,26 +1288,198 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =====================================================
        15. INTRO SEQUENCE
 
+       FINAL FLOW:
+
        VIDEO
          ↓
-       COMPUTER ENGINEERING APPEARS
+       BLANK GRADIENT
          ↓
-       HERO REVEALS
+       TYPE "COMPUTER ENGINEERING"
          ↓
-       TITLE MOVES INTO FINAL POSITION
+       HOLD FOR 1 SECOND
          ↓
-       INTRO FADES
+       SAME TITLE MOVES TO HOME PAGE
          ↓
-       TITLE BECOMES PART OF HERO
+       HOME PAGE REVEALS
     ====================================================== */
 
-    function startIntroSequence() {
+
+    function wait(duration) {
+
+        return new Promise(
+            (resolve) => {
+
+                setTimeout(
+                    resolve,
+                    duration
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       TYPING ANIMATION
+    ====================================================== */
+
+    function typeSharedTitle() {
+
+        return new Promise(
+            (resolve) => {
+
+
+                if (!sharedTitle) {
+
+                    resolve();
+                    return;
+                }
+
+
+                const computer =
+                    sharedTitle.querySelector(
+                        ".computer"
+                    );
+
+                const engineering =
+                    sharedTitle.querySelector(
+                        ".engineering"
+                    );
+
+
+                /*
+                   Fallback if the existing spans
+                   cannot be found.
+                */
+
+                if (
+                    !computer ||
+                    !engineering
+                ) {
+
+                    showSharedTitle();
+
+                    resolve();
+                    return;
+                }
+
+
+                const computerText =
+                    "COMPUTER";
+
+                const engineeringText =
+                    "ENGINEERING";
+
+
+                /*
+                   Empty both words first.
+                */
+
+                computer.textContent =
+                    "";
+
+                engineering.textContent =
+                    "";
+
+
+                /*
+                   Reveal the title container while
+                   the words themselves are empty.
+                */
+
+                showSharedTitle();
+
+
+                let line = 0;
+                let index = 0;
+
+
+                function typeNext() {
+
+                    const text =
+                        line === 0
+                            ? computerText
+                            : engineeringText;
+
+
+                    const target =
+                        line === 0
+                            ? computer
+                            : engineering;
+
+
+                    if (
+                        index <
+                        text.length
+                    ) {
+
+                        target.textContent +=
+                            text[index];
+
+
+                        index += 1;
+
+
+                        setTimeout(
+                            typeNext,
+                            TYPE_SPEED
+                        );
+
+
+                        return;
+                    }
+
+
+                    /*
+                       COMPUTER finished.
+
+                       Small pause before ENGINEERING
+                       starts typing.
+                    */
+
+                    if (line === 0) {
+
+                        line = 1;
+                        index = 0;
+
+
+                        setTimeout(
+                            typeNext,
+                            120
+                        );
+
+
+                        return;
+                    }
+
+
+                    /*
+                       Both words finished.
+                    */
+
+                    resolve();
+                }
+
+
+                typeNext();
+            }
+        );
+    }
+
+
+    /* =====================================================
+       MAIN INTRO SEQUENCE
+    ====================================================== */
+
+    async function startIntroSequence() {
 
         if (introStarted) {
             return;
         }
 
-        introStarted = true;
+
+        introStarted =
+            true;
+
 
         clearTimeout(
             fallbackTimer
@@ -835,77 +1500,155 @@ document.addEventListener("DOMContentLoaded", () => {
 
             fadeIntroAway();
 
-            introFinished = true;
+
+            introFinished =
+                true;
+
 
             return;
         }
 
 
         /* -------------------------------------------------
-           1. SHOW COMPUTER ENGINEERING
+           STEP 1
+           VIDEO → BLANK GRADIENT
+
+           The intro remains on top.
+
+           Only the video disappears, therefore the
+           existing intro/page gradient becomes visible.
         -------------------------------------------------- */
 
-        showSharedTitle();
+        if (intro) {
+
+            intro.classList.add(
+                "blank-stage"
+            );
+
+        }
+
+
+        if (
+            introVideo &&
+            typeof introVideo.pause === "function"
+        ) {
+
+            /*
+               Pause the completed video.
+
+               CSS .blank-stage handles the visual
+               disappearance of the video.
+            */
+
+            introVideo.pause();
+        }
+
+
+        /*
+           Let the user actually SEE the clean
+           blank gradient before typing begins.
+        */
+
+        await wait(
+            BLANK_GRADIENT_DURATION
+        );
 
 
         /* -------------------------------------------------
-           2. REVEAL HERO BEHIND INTRO
+           STEP 2
+           TYPE COMPUTER ENGINEERING
+        -------------------------------------------------- */
+
+        await typeSharedTitle();
+
+
+        /* -------------------------------------------------
+           STEP 3
+           HOLD FOR EXACTLY 1 SECOND
+
+           Nothing moves yet.
+        -------------------------------------------------- */
+
+        await wait(
+            TITLE_HOLD_DURATION
+        );
+
+
+        /* -------------------------------------------------
+           STEP 4
+           PREPARE HOMEPAGE BEHIND THE GRADIENT
+
+           The intro is still covering the screen,
+           so the user still sees the gradient.
+
+           We reveal the site underneath only so
+           JavaScript can calculate the REAL final
+           title destination.
         -------------------------------------------------- */
 
         revealHome();
 
 
-        /* -------------------------------------------------
-           3. BEGIN TITLE MOVEMENT
-        -------------------------------------------------- */
+        await new Promise(
+            (resolve) => {
 
-        clearTimeout(
-            titleMoveTimer
+                requestAnimationFrame(
+                    () => {
+
+                        requestAnimationFrame(
+                            resolve
+                        );
+                    }
+                );
+            }
         );
-
-        titleMoveTimer =
-            setTimeout(
-                () => {
-
-                    moveTitleToHero();
-
-                    /*
-                       Fade the intro shortly after movement
-                       begins.
-
-                       This allows the new HELLO hero to
-                       appear underneath the moving title.
-                    */
-
-                    setTimeout(
-                        fadeIntroAway,
-                        140
-                    );
-
-                },
-                TITLE_MOVE_DELAY
-            );
 
 
         /* -------------------------------------------------
-           4. MARK INTRO COMPLETE
+           STEP 5
+           MOVE THE SAME COMPUTER ENGINEERING TITLE
+           FROM CENTER → HOME HERO
         -------------------------------------------------- */
 
-        clearTimeout(
-            introSequenceTimer
+        moveTitleToHero();
+
+
+        /* -------------------------------------------------
+           STEP 6
+           LET THE TITLE START MOVING ON THE CLEAN
+           GRADIENT FIRST.
+
+           This recreates the smoother feeling of
+           your older intro instead of immediately
+           showing the homepage.
+        -------------------------------------------------- */
+
+        await wait(
+            220
         );
 
-        introSequenceTimer =
-            setTimeout(
-                () => {
 
-                    introFinished = true;
+        /* -------------------------------------------------
+           STEP 7
+           GRADIENT FADES → HOME PAGE APPEARS
+        -------------------------------------------------- */
 
-                },
-                TITLE_MOVE_DELAY +
-                TITLE_MOVE_DURATION +
-                450
-            );
+        fadeIntroAway();
+
+
+        /* -------------------------------------------------
+           STEP 8
+           FINISH
+        -------------------------------------------------- */
+
+        await wait(
+            TITLE_MOVE_DURATION +
+            INTRO_FADE_DURATION
+        );
+
+
+        introFinished =
+            true;
     }
 
 
@@ -919,6 +1662,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fallbackTimer
         );
 
+
         fallbackTimer =
             setTimeout(
                 startIntroSequence,
@@ -929,18 +1673,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (introVideo) {
 
+
         /*
-           Preferred behavior:
-           transition when the intro video ends.
+           Main behavior:
+           wait for the video to finish naturally.
         */
 
         introVideo.addEventListener(
             "ended",
             () => {
 
+
                 clearTimeout(
                     fallbackTimer
                 );
+
 
                 startIntroSequence();
             }
@@ -949,16 +1696,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /*
            If the video fails to load,
-           the website still opens.
+           continue to the gradient intro.
         */
 
         introVideo.addEventListener(
             "error",
             () => {
 
+
                 clearTimeout(
                     fallbackTimer
                 );
+
 
                 fallbackTimer =
                     setTimeout(
@@ -970,13 +1719,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-           Backup in case autoplay or "ended"
-           doesn't fire.
+           Safety fallback in case autoplay or
+           the ended event fails.
         */
 
         scheduleIntroFallback();
 
     } else {
+
 
         fallbackTimer =
             setTimeout(
@@ -984,9 +1734,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 700
             );
     }
-
-
-    /* =====================================================
+        /* =====================================================
        17. DIRECT HASH OPENING
 
        Example:
@@ -1000,6 +1748,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const hash =
             window.location.hash;
 
+
         if (
             !hash ||
             hash === "#home"
@@ -1007,7 +1756,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         let target = null;
+
 
         try {
 
@@ -1021,13 +1772,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         if (!target) {
             return;
         }
 
+
         clearTimeout(
             fallbackTimer
         );
+
 
         revealHome();
 
@@ -1037,8 +1791,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fadeIntroAway();
 
+
         introStarted = true;
         introFinished = true;
+
 
         setTimeout(
             () => {
@@ -1100,9 +1856,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 return;
                             }
 
+
                             entry.target.classList.add(
                                 "show"
                             );
+
 
                             observer.unobserve(
                                 entry.target
@@ -1148,6 +1906,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "href"
                     );
 
+
                 link.classList.toggle(
                     "active",
                     href === `#${sectionId}`
@@ -1182,16 +1941,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                     a.intersectionRatio
                             );
 
+
                     if (
                         visibleSections.length === 0
                     ) {
                         return;
                     }
 
+
                     const sectionId =
                         visibleSections[0]
                             .target
                             .id;
+
 
                     if (sectionId) {
 
@@ -1251,6 +2013,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             "href"
                         );
 
+
                     if (
                         !href ||
                         href === "#"
@@ -1258,7 +2021,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
+
                     let target = null;
+
 
                     try {
 
@@ -1272,23 +2037,29 @@ document.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
+
                     if (!target) {
                         return;
                     }
 
+
                     event.preventDefault();
 
+
                     closeMobileMenu();
+
 
                     const nav =
                         document.querySelector(
                             "nav"
                         );
 
+
                     const navHeight =
                         nav
                             ? nav.offsetHeight
                             : 0;
+
 
                     const targetPosition =
                         target
@@ -1330,7 +2101,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         /*
                            URL update isn't essential.
                         */
-
                     }
                 }
             );
@@ -1351,13 +2121,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         menuButton.classList.add(
             "active"
         );
 
+
         mobileMenu.classList.add(
             "active"
         );
+
 
         menuButton.setAttribute(
             "aria-expanded",
@@ -1375,13 +2148,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         menuButton.classList.remove(
             "active"
         );
 
+
         mobileMenu.classList.remove(
             "active"
         );
+
 
         menuButton.setAttribute(
             "aria-expanded",
@@ -1399,10 +2175,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         const isOpen =
             mobileMenu.classList.contains(
                 "active"
             );
+
 
         if (isOpen) {
 
@@ -1433,6 +2211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (event) => {
 
             if (event.key === "Escape") {
+
                 closeMobileMenu();
             }
         }
@@ -1456,13 +2235,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
+
                     faqDetails.forEach(
                         (otherDetail) => {
 
                             if (
                                 otherDetail !== detail
                             ) {
-                                otherDetail.open = false;
+
+                                otherDetail.open =
+                                    false;
                             }
                         }
                     );
@@ -1493,9 +2275,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const trail = [];
 
+
         const mouse = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight / 2
+
+            x:
+                window.innerWidth / 2,
+
+            y:
+                window.innerHeight / 2
         };
 
 
@@ -1510,8 +2297,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "div"
                 );
 
+
             circle.className =
                 "cursor-trail-circle";
+
 
             const size =
                 Math.max(
@@ -1519,11 +2308,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     13 - i
                 );
 
+
             circle.style.width =
                 `${size}px`;
 
+
             circle.style.height =
                 `${size}px`;
+
 
             circle.style.opacity =
                 `${Math.max(
@@ -1531,16 +2323,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     0.28 - i * 0.03
                 )}`;
 
+
             body.appendChild(
                 circle
             );
 
+
             trail.push(
                 {
-                    element: circle,
+                    element:
+                        circle,
 
-                    x: mouse.x,
-                    y: mouse.y
+                    x:
+                        mouse.x,
+
+                    y:
+                        mouse.y
                 }
             );
         }
@@ -1550,20 +2348,27 @@ document.addEventListener("DOMContentLoaded", () => {
             "mousemove",
             (event) => {
 
-                mouse.x = event.clientX;
-                mouse.y = event.clientY;
+                mouse.x =
+                    event.clientX;
 
+                mouse.y =
+                    event.clientY;
             },
             {
-                passive: true
+                passive:
+                    true
             }
         );
 
 
         function animateCursor() {
 
-            let x = mouse.x;
-            let y = mouse.y;
+            let x =
+                mouse.x;
+
+            let y =
+                mouse.y;
+
 
             trail.forEach(
                 (point, index) => {
@@ -1573,24 +2378,33 @@ document.addEventListener("DOMContentLoaded", () => {
                             ? 0.30
                             : 0.24;
 
+
                     point.x +=
                         (x - point.x) *
                         followSpeed;
+
 
                     point.y +=
                         (y - point.y) *
                         followSpeed;
 
+
                     point.element.style.left =
                         `${point.x}px`;
+
 
                     point.element.style.top =
                         `${point.y}px`;
 
-                    x = point.x;
-                    y = point.y;
+
+                    x =
+                        point.x;
+
+                    y =
+                        point.y;
                 }
             );
+
 
             requestAnimationFrame(
                 animateCursor
@@ -1614,6 +2428,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 resizeTimer
             );
 
+
             resizeTimer =
                 setTimeout(
                     () => {
@@ -1626,8 +2441,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (
                             window.innerWidth > 900
                         ) {
+
                             closeMobileMenu();
                         }
+
 
                         /*
                            If the browser was resized during
@@ -1645,8 +2462,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (titleAnimation) {
 
                                 titleAnimation.cancel();
-                                titleAnimation = null;
+
+                                titleAnimation =
+                                    null;
                             }
+
 
                             landSharedTitle();
                         }
@@ -1654,10 +2474,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     150
                 );
-
         },
         {
-            passive: true
+            passive:
+                true
         }
     );
 
@@ -1674,20 +2494,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+
             clearTimeout(
                 fallbackTimer
             );
+
 
             clearTimeout(
                 titleMoveTimer
             );
 
+
             clearTimeout(
                 introSequenceTimer
             );
 
-            introStarted = true;
-            introFinished = true;
+
+            introStarted =
+                true;
+
+            introFinished =
+                true;
+
 
             revealHome();
 
@@ -1701,6 +2529,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 intro.classList.add(
                     "go-home"
                 );
+
 
                 intro.style.display =
                     "none";
@@ -1718,6 +2547,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const rect =
                         element
                             .getBoundingClientRect();
+
 
                     if (
                         rect.top <
@@ -1753,8 +2583,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+
             if (
-                introStarted &&
                 introFinished &&
                 !titleLanded
             ) {
@@ -1762,16 +2592,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (titleAnimation) {
 
                     titleAnimation.cancel();
-                    titleAnimation = null;
+
+                    titleAnimation =
+                        null;
                 }
+
 
                 landSharedTitle();
             }
         }
     );
-
-
-    /* =====================================================
+        /* =====================================================
        28. SAFETY FALLBACK
 
        The website should never remain permanently
@@ -1786,6 +2617,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (!introStarted) {
+
                 startIntroSequence();
             }
 
@@ -1795,122 +2627,1898 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       END
+       END MAIN SCRIPT
     ====================================================== */
 
 });
+
+
 /* =========================================================
    GLOBAL SCROLL REVEAL
-   ========================================================= */
+========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    /*
-       Main elements that will animate when they
-       enter the screen.
-    */
-    const revealSelectors = [
-        ".section-label",
-        ".section-title",
-        ".section-intro",
-
-        ".program-copy",
-        ".program-video",
-
-        ".deeper-card",
-
-        ".achievements-heading",
-
-        ".news-header",
-        ".news-card",
-
-        ".faq-heading",
-        ".faq-item",
-
-        ".cta-content",
-
-        ".cpe-footer-brand",
-        ".cpe-footer-social",
-    ];
-
-
-    const revealItems = document.querySelectorAll(
-        revealSelectors.join(",")
-    );
-
-
-    revealItems.forEach((item, index) => {
-
-        item.classList.add("scroll-reveal");
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
         /*
-           Small stagger.
-           We keep the delay short so the website
-           doesn't feel slow.
+           Main elements that will animate when they
+           enter the screen.
         */
-        const delay = (index % 4) * 70;
 
-        item.style.transitionDelay = `${delay}ms`;
-    });
+        const revealSelectors = [
+
+            ".section-label",
+            ".section-title",
+            ".section-intro",
+
+            ".program-copy",
+            ".program-video",
+
+            ".deeper-card",
+
+            ".achievements-heading",
+
+            ".news-header",
+            ".news-card",
+
+            ".faq-heading",
+            ".faq-item",
+
+            ".cta-content",
+
+            ".cpe-footer-brand",
+            ".cpe-footer-social"
+        ];
 
 
-    /*
-       Images get a softer scale + fade animation.
-    */
-    const revealImages = document.querySelectorAll(
-        ".program-video img, .news-card-image, .achievements-showcase img"
-    );
+        const revealItems =
+            document.querySelectorAll(
+                revealSelectors.join(",")
+            );
 
 
-    revealImages.forEach((image) => {
-        image.classList.add("scroll-reveal-image");
-    });
+        revealItems.forEach(
+            (item, index) => {
+
+                item.classList.add(
+                    "scroll-reveal"
+                );
+
+
+                /*
+                   Small stagger.
+
+                   Keep the delay short so the
+                   website doesn't feel slow.
+                */
+
+                const delay =
+                    (index % 4) * 70;
+
+
+                item.style.transitionDelay =
+                    `${delay}ms`;
+            }
+        );
+
+
+        /*
+           Images get a softer
+           scale + fade animation.
+        */
+
+        const revealImages =
+            document.querySelectorAll(
+                ".program-video img, " +
+                ".news-card-image, " +
+                ".achievements-showcase img"
+            );
+
+
+        revealImages.forEach(
+            (image) => {
+
+                image.classList.add(
+                    "scroll-reveal-image"
+                );
+            }
+        );
+
+
+        /* =================================================
+           OBSERVER
+        ================================================= */
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "is-visible"
+                                );
+
+
+                                /*
+                                   Animate only once.
+                                */
+
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:
+                        0.12,
+
+                    rootMargin:
+                        "0px 0px -40px 0px"
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                ".scroll-reveal, " +
+                ".scroll-reveal-image"
+            )
+            .forEach(
+                (item) => {
+
+                    revealObserver.observe(
+                        item
+                    );
+                }
+            );
+
+    }
+);
+
+
+/* =========================================================
+   CPE — VISIBLE INTERACTIVE ANIMATIONS
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const reduceMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+
+        if (reduceMotion) {
+            return;
+        }
+
+
+        /* =================================================
+           01. ELEMENTS
+        ================================================= */
+
+        const cards =
+            document.querySelectorAll(
+                ".deeper-card, " +
+                ".news-card, " +
+                ".faq-item"
+            );
+
+
+        const headings =
+            document.querySelectorAll(
+                ".section-label, " +
+                ".section-title, " +
+                ".achievements-heading, " +
+                ".news-header, " +
+                ".faq-heading"
+            );
+
+
+        const contentBlocks =
+            document.querySelectorAll(
+                ".section-intro, " +
+                ".program-copy, " +
+                ".program-video, " +
+                ".cta-content"
+            );
+
+
+        const images =
+            document.querySelectorAll(
+                ".news-card-image, " +
+                ".program-video img, " +
+                ".achievements-showcase img"
+            );
+
+
+        /* =================================================
+           02. CARD ENTRANCE ANIMATION
+        ================================================= */
+
+        cards.forEach(
+            (card, index) => {
+
+                let startX = 0;
+                let startY = 70;
+                let rotate = 0;
+
+
+                switch (index % 4) {
+
+                    case 0:
+
+                        startX = -70;
+                        startY = 40;
+                        rotate = -3;
+
+                        break;
+
+
+                    case 1:
+
+                        startX = 0;
+                        startY = 80;
+                        rotate = 2;
+
+                        break;
+
+
+                    case 2:
+
+                        startX = 70;
+                        startY = 40;
+                        rotate = 3;
+
+                        break;
+
+
+                    case 3:
+
+                        startX = 0;
+                        startY = 90;
+                        rotate = -2;
+
+                        break;
+                }
+
+
+                card.style.opacity =
+                    "0";
+
+
+                card.style.transform = `
+                    translate3d(
+                        ${startX}px,
+                        ${startY}px,
+                        0
+                    )
+                    rotate(${rotate}deg)
+                    scale(.94)
+                `;
+
+
+                const observer =
+                    new IntersectionObserver(
+                        (entries) => {
+
+                            entries.forEach(
+                                (entry) => {
+
+                                    if (
+                                        !entry.isIntersecting
+                                    ) {
+                                        return;
+                                    }
+
+
+                                    setTimeout(
+                                        () => {
+
+                                            card.animate(
+                                                [
+                                                    {
+                                                        opacity:
+                                                            0,
+
+                                                        transform: `
+                                                            translate3d(
+                                                                ${startX}px,
+                                                                ${startY}px,
+                                                                0
+                                                            )
+                                                            rotate(${rotate}deg)
+                                                            scale(.94)
+                                                        `
+                                                    },
+
+                                                    {
+                                                        opacity:
+                                                            1,
+
+                                                        transform: `
+                                                            translate3d(
+                                                                0,
+                                                                -8px,
+                                                                0
+                                                            )
+                                                            rotate(0deg)
+                                                            scale(1.015)
+                                                        `,
+
+                                                        offset:
+                                                            .78
+                                                    },
+
+                                                    {
+                                                        opacity:
+                                                            1,
+
+                                                        transform: `
+                                                            translate3d(
+                                                                0,
+                                                                0,
+                                                                0
+                                                            )
+                                                            rotate(0deg)
+                                                            scale(1)
+                                                        `
+                                                    }
+                                                ],
+                                                {
+                                                    duration:
+                                                        900,
+
+                                                    easing:
+                                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                                    fill:
+                                                        "forwards"
+                                                }
+                                            );
+
+
+                                            card.style.opacity =
+                                                "1";
+
+
+                                            card.style.transform =
+                                                "translate3d(0,0,0) scale(1)";
+
+                                        },
+                                        (index % 6) * 90
+                                    );
+
+
+                                    observer.unobserve(
+                                        card
+                                    );
+                                }
+                            );
+
+                        },
+                        {
+                            threshold:
+                                .15
+                        }
+                    );
+
+
+                observer.observe(
+                    card
+                );
+            }
+        );
+
+
+        /* =================================================
+           03. HEADING REVEAL
+        ================================================= */
+
+        const headingObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            const heading =
+                                entry.target;
+
+
+                            heading.animate(
+                                [
+                                    {
+                                        opacity:
+                                            0,
+
+                                        transform:
+                                            "translate3d(0, 55px, 0) scale(.94)"
+                                    },
+
+                                    {
+                                        opacity:
+                                            1,
+
+                                        transform:
+                                            "translate3d(0, -4px, 0) scale(1.01)",
+
+                                        offset:
+                                            .8
+                                    },
+
+                                    {
+                                        opacity:
+                                            1,
+
+                                        transform:
+                                            "translate3d(0, 0, 0) scale(1)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        850,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "both"
+                                }
+                            );
+
+
+                            headingObserver.unobserve(
+                                heading
+                            );
+                        }
+                    );
+
+                },
+                {
+                    threshold:
+                        .25
+                }
+            );
+
+
+        headings.forEach(
+            (heading) => {
+
+                headingObserver.observe(
+                    heading
+                );
+            }
+        );
+
+
+        /* =================================================
+           04. CONTENT REVEAL
+        ================================================= */
+
+        const contentObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            entry.target.animate(
+                                [
+                                    {
+                                        opacity:
+                                            0,
+
+                                        transform:
+                                            "translate3d(0, 70px, 0)"
+                                    },
+
+                                    {
+                                        opacity:
+                                            1,
+
+                                        transform:
+                                            "translate3d(0, 0, 0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        1000,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "both"
+                                }
+                            );
+
+
+                            contentObserver.unobserve(
+                                entry.target
+                            );
+                        }
+                    );
+
+                },
+                {
+                    threshold:
+                        .12
+                }
+            );
+
+
+        contentBlocks.forEach(
+            (block) => {
+
+                contentObserver.observe(
+                    block
+                );
+            }
+        );
+
+
+        /* =================================================
+           05. STRONGER CARD MOUSE TILT
+        ================================================= */
+
+        const desktopPointer =
+            window.matchMedia(
+                "(hover: hover) and (pointer: fine)"
+            ).matches;
+
+
+        if (desktopPointer) {
+
+            cards.forEach(
+                (card) => {
+
+                    let frame =
+                        null;
+
+
+                    card.addEventListener(
+                        "mousemove",
+                        (event) => {
+
+                            if (frame) {
+
+                                cancelAnimationFrame(
+                                    frame
+                                );
+                            }
+
+
+                            frame =
+                                requestAnimationFrame(
+                                    () => {
+
+                                        const rect =
+                                            card.getBoundingClientRect();
+
+
+                                        const x =
+                                            event.clientX -
+                                            rect.left;
+
+
+                                        const y =
+                                            event.clientY -
+                                            rect.top;
+
+
+                                        const centerX =
+                                            rect.width / 2;
+
+
+                                        const centerY =
+                                            rect.height / 2;
+
+
+                                        const rotateY =
+                                            (
+                                                (
+                                                    x -
+                                                    centerX
+                                                ) /
+                                                centerX
+                                            ) * 5;
+
+
+                                        const rotateX =
+                                            -(
+                                                (
+                                                    y -
+                                                    centerY
+                                                ) /
+                                                centerY
+                                            ) * 5;
+
+
+                                        card.style.transition =
+                                            "transform .12s ease-out";
+
+
+                                        card.style.transform = `
+                                            perspective(1100px)
+                                            translate3d(
+                                                0,
+                                                -10px,
+                                                0
+                                            )
+                                            scale(1.025)
+                                            rotateX(${rotateX}deg)
+                                            rotateY(${rotateY}deg)
+                                        `;
+                                    }
+                                );
+                        }
+                    );
+
+
+                    card.addEventListener(
+                        "mouseleave",
+                        () => {
+
+                            card.style.transition =
+                                "transform .65s cubic-bezier(.16, 1, .3, 1)";
+
+
+                            card.style.transform = `
+                                perspective(1100px)
+                                translate3d(
+                                    0,
+                                    0,
+                                    0
+                                )
+                                scale(1)
+                                rotateX(0deg)
+                                rotateY(0deg)
+                            `;
+                        }
+                    );
+                }
+            );
+        }
+
+
+        /* =================================================
+           06. IMAGE PARALLAX
+        ================================================= */
+
+        let parallaxFrame =
+            null;
+
+
+        function updateImageParallax() {
+
+            images.forEach(
+                (image) => {
+
+                    const rect =
+                        image.getBoundingClientRect();
+
+
+                    if (
+                        rect.bottom < 0 ||
+                        rect.top >
+                            window.innerHeight
+                    ) {
+                        return;
+                    }
+
+
+                    const viewportCenter =
+                        window.innerHeight / 2;
+
+
+                    const imageCenter =
+                        rect.top +
+                        rect.height / 2;
+
+
+                    const distance =
+                        imageCenter -
+                        viewportCenter;
+
+
+                    const movement =
+                        Math.max(
+                            -16,
+                            Math.min(
+                                16,
+                                distance * -.025
+                            )
+                        );
+
+
+                    image.style.transform =
+                        `translate3d(0, ${movement}px, 0) scale(1.035)`;
+                }
+            );
+
+
+            parallaxFrame =
+                null;
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (parallaxFrame) {
+                    return;
+                }
+
+
+                parallaxFrame =
+                    requestAnimationFrame(
+                        updateImageParallax
+                    );
+            },
+            {
+                passive:
+                    true
+            }
+        );
+
+
+        updateImageParallax();
+
+
+        /* =================================================
+           07. NEWS CARD IMAGE MOVEMENT
+        ================================================= */
+
+        document
+            .querySelectorAll(
+                ".news-card"
+            )
+            .forEach(
+                (card) => {
+
+                    const image =
+                        card.querySelector(
+                            ".news-card-image"
+                        );
+
+
+                    if (!image) {
+                        return;
+                    }
+
+
+                    card.addEventListener(
+                        "mouseenter",
+                        () => {
+
+                            image.animate(
+                                [
+                                    {
+                                        transform:
+                                            "scale(1.035)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "scale(1.075)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        650,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+                    );
+
+
+                    card.addEventListener(
+                        "mouseleave",
+                        () => {
+
+                            image.animate(
+                                [
+                                    {
+                                        transform:
+                                            "scale(1.075)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "scale(1.035)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        650,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+
+
+        /* =================================================
+           08. NAVIGATION CLICK FEEDBACK
+        ================================================= */
+
+        document
+            .querySelectorAll(
+                ".nav-links a"
+            )
+            .forEach(
+                (link) => {
+
+                    link.addEventListener(
+                        "click",
+                        () => {
+
+                            link.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translateY(0) scale(1)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translateY(-5px) scale(1.08)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translateY(0) scale(1)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        420,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)"
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+
+
+        /* =================================================
+           09. THEME BUTTON ROTATION
+        ================================================= */
+
+        const themeButton =
+            document.getElementById(
+                "themeToggle"
+            );
+
+
+        if (themeButton) {
+
+            themeButton.addEventListener(
+                "click",
+                () => {
+
+                    themeButton.animate(
+                        [
+                            {
+                                transform:
+                                    "rotate(0deg) scale(1)"
+                            },
+
+                            {
+                                transform:
+                                    "rotate(180deg) scale(.85)"
+                            },
+
+                            {
+                                transform:
+                                    "rotate(360deg) scale(1)"
+                            }
+                        ],
+                        {
+                            duration:
+                                650,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)"
+                        }
+                    );
+                }
+            );
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INTERACTIVE CARD HOVER
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const canHover =
+            window.matchMedia(
+                "(hover: hover) and (pointer: fine)"
+            ).matches;
+
+
+        if (!canHover) {
+            return;
+        }
+
+
+        /* =================================================
+           01. NEWS CARDS
+        ================================================= */
+
+        const newsCards =
+            document.querySelectorAll(
+                ".news-card"
+            );
+
+
+        newsCards.forEach(
+            (card) => {
+
+                const image =
+                    card.querySelector(
+                        "img"
+                    );
+
+
+                const title =
+                    card.querySelector(
+                        "h2, h3, .news-title, .card-title"
+                    );
+
+
+                const text =
+                    card.querySelector(
+                        "p, .news-description, .card-description"
+                    );
+
+
+                const arrow =
+                    card.querySelector(
+                        ".arrow, .card-arrow, .news-arrow"
+                    );
+
+
+                /* -----------------------------------------
+                   MOUSE ENTER
+                ----------------------------------------- */
+
+                card.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        /*
+                           DIM OTHER CARDS
+                        */
+
+                        newsCards.forEach(
+                            (otherCard) => {
+
+                                if (
+                                    otherCard !== card
+                                ) {
+
+                                    otherCard.animate(
+                                        [
+                                            {
+                                                opacity:
+                                                    1,
+
+                                                transform:
+                                                    "scale(1)"
+                                            },
+
+                                            {
+                                                opacity:
+                                                    0.55,
+
+                                                transform:
+                                                    "scale(.975)"
+                                            }
+                                        ],
+                                        {
+                                            duration:
+                                                400,
+
+                                            easing:
+                                                "ease",
+
+                                            fill:
+                                                "forwards"
+                                        }
+                                    );
+                                }
+                            }
+                        );
+
+
+                        /*
+                           ACTIVE CARD
+                        */
+
+                        card.animate(
+                            [
+                                {
+                                    transform:
+                                        "translateY(0) scale(1)"
+                                },
+
+                                {
+                                    transform:
+                                        "translateY(-10px) scale(1.025)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    550,
+
+                                easing:
+                                    "cubic-bezier(.16, 1, .3, 1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+
+                        /*
+                           IMAGE
+                        */
+
+                        if (image) {
+
+                            image.animate(
+                                [
+                                    {
+                                        transform:
+                                            "scale(1) translate3d(0,0,0)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "scale(1.08) translate3d(0,-8px,0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        750,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        /*
+                           TITLE
+                        */
+
+                        if (title) {
+
+                            title.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translate3d(0,0,0)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translate3d(8px,-3px,0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        450,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        /*
+                           DESCRIPTION
+                        */
+
+                        if (text) {
+
+                            text.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translateX(0)",
+
+                                        opacity:
+                                            0.75
+                                    },
+
+                                    {
+                                        transform:
+                                            "translateX(8px)",
+
+                                        opacity:
+                                            1
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        500,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        /*
+                           ARROW
+                        */
+
+                        if (arrow) {
+
+                            arrow.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translate3d(0,0,0) rotate(0deg)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translate3d(5px,-5px,0) rotate(-8deg)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        450,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+                    }
+                );
+
+
+                /* -----------------------------------------
+                   MOUSE LEAVE
+                ----------------------------------------- */
+
+                card.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        /*
+                           RESTORE ALL CARDS
+                        */
+
+                        newsCards.forEach(
+                            (otherCard) => {
+
+                                otherCard.animate(
+                                    [
+                                        {
+                                            opacity:
+                                                parseFloat(
+                                                    getComputedStyle(
+                                                        otherCard
+                                                    ).opacity
+                                                ),
+
+                                            transform:
+                                                getComputedStyle(
+                                                    otherCard
+                                                ).transform
+                                        },
+
+                                        {
+                                            opacity:
+                                                1,
+
+                                            transform:
+                                                "scale(1)"
+                                        }
+                                    ],
+                                    {
+                                        duration:
+                                            450,
+
+                                        easing:
+                                            "cubic-bezier(.16, 1, .3, 1)",
+
+                                        fill:
+                                            "forwards"
+                                    }
+                                );
+                            }
+                        );
+
+
+                        if (image) {
+
+                            image.animate(
+                                [
+                                    {
+                                        transform:
+                                            "scale(1.08) translate3d(0,-8px,0)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "scale(1) translate3d(0,0,0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        650,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        if (title) {
+
+                            title.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translate3d(8px,-3px,0)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translate3d(0,0,0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        500,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        if (text) {
+
+                            text.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translateX(8px)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translateX(0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        500,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+
+                        if (arrow) {
+
+                            arrow.animate(
+                                [
+                                    {
+                                        transform:
+                                            "translate3d(5px,-5px,0) rotate(-8deg)"
+                                    },
+
+                                    {
+                                        transform:
+                                            "translate3d(0,0,0) rotate(0deg)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        500,
+
+                                    easing:
+                                        "cubic-bezier(.16, 1, .3, 1)",
+
+                                    fill:
+                                        "forwards"
+                                }
+                            );
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+                if (false) {
+
+                card.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        /*
+                         * RESTORE ALL CARDS
+                         */
+
+                newsCards.forEach(
+                    (otherCard) => {
+
+                        otherCard.animate(
+                            [
+                                {
+                                    opacity:
+                                        parseFloat(
+                                            getComputedStyle(
+                                                otherCard
+                                            ).opacity
+                                        ),
+
+                                    transform:
+                                        getComputedStyle(
+                                            otherCard
+                                        ).transform
+                                },
+
+                                {
+                                    opacity:
+                                        1,
+
+                                    transform:
+                                        "scale(1)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    450,
+
+                                easing:
+                                    "cubic-bezier(.16, 1, .3, 1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * IMAGE BACK
+                 */
+
+                if (image) {
+
+                    image.animate(
+                        [
+                            {
+                                transform:
+                                    getComputedStyle(
+                                        image
+                                    ).transform
+                            },
+
+                            {
+                                transform:
+                                    "scale(1) translate3d(0,0,0)"
+                            }
+                        ],
+                        {
+                            duration:
+                                650,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)",
+
+                            fill:
+                                "forwards"
+                        }
+                    );
+
+                }
+
+
+                /*
+                 * TITLE BACK
+                 */
+
+                if (title) {
+
+                    title.animate(
+                        [
+                            {
+                                transform:
+                                    getComputedStyle(
+                                        title
+                                    ).transform
+                            },
+
+                            {
+                                transform:
+                                    "translate3d(0,0,0)"
+                            }
+                        ],
+                        {
+                            duration:
+                                450,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)",
+
+                            fill:
+                                "forwards"
+                        }
+                    );
+
+                }
+
+
+                /*
+                 * DESCRIPTION BACK
+                 */
+
+                if (text) {
+
+                    text.animate(
+                        [
+                            {
+                                transform:
+                                    getComputedStyle(
+                                        text
+                                    ).transform
+                            },
+
+                            {
+                                transform:
+                                    "translateX(0)"
+                            }
+                        ],
+                        {
+                            duration:
+                                450,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)",
+
+                            fill:
+                                "forwards"
+                        }
+                    );
+
+                }
+
+
+                /*
+                 * ARROW BACK
+                 */
+
+                if (arrow) {
+
+                    arrow.animate(
+                        [
+                            {
+                                transform:
+                                    getComputedStyle(
+                                        arrow
+                                    ).transform
+                            },
+
+                            {
+                                transform:
+                                    "translate(0,0) rotate(0deg)"
+                            }
+                        ],
+                        {
+                            duration:
+                                450,
+
+                            easing:
+                                "cubic-bezier(.16, 1, .3, 1)",
+
+                            fill:
+                                "forwards"
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    }
 
 
     /* =====================================================
-       OBSERVER
-    ===================================================== */
+       02. IMAGE FOLLOWS CURSOR INSIDE NEWS CARD
 
-    const revealObserver = new IntersectionObserver(
-        (entries) => {
+       Hindi buong card ang umiikot.
+       Yung IMAGE mismo ang slightly gumagalaw
+       depending on mouse position.
+    ====================================================== */
 
-            entries.forEach((entry) => {
+    newsCards.forEach(
+        (card) => {
 
-                if (entry.isIntersecting) {
+            const image =
+                card.querySelector(
+                    "img"
+                );
 
-                    entry.target.classList.add(
-                        "is-visible"
-                    );
 
-                    /*
-                       Stop observing after reveal.
-                       This means it animates only once.
-                    */
-                    revealObserver.unobserve(
-                        entry.target
-                    );
+            if (!image) {
+                return;
+            }
+
+
+            let animationFrame =
+                null;
+
+
+            card.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    if (animationFrame) {
+
+                        cancelAnimationFrame(
+                            animationFrame
+                        );
+                    }
+
+
+                    animationFrame =
+                        requestAnimationFrame(
+                            () => {
+
+                                const rect =
+                                    card.getBoundingClientRect();
+
+
+                                const mouseX =
+                                    event.clientX -
+                                    rect.left;
+
+
+                                const mouseY =
+                                    event.clientY -
+                                    rect.top;
+
+
+                                const percentX =
+                                    mouseX /
+                                    rect.width -
+                                    0.5;
+
+
+                                const percentY =
+                                    mouseY /
+                                    rect.height -
+                                    0.5;
+
+
+                                /*
+                                 * Maximum movement:
+                                 * around 10px only.
+                                 */
+
+                                const moveX =
+                                    percentX * 12;
+
+
+                                const moveY =
+                                    percentY * 12;
+
+
+                                image.style.transform = `
+                                    scale(1.08)
+                                    translate3d(
+                                        ${moveX}px,
+                                        ${moveY}px,
+                                        0
+                                    )
+                                `;
+
+                            }
+                        );
+
                 }
+            );
 
-            });
 
-        },
-        {
-            threshold: 0.12,
+            card.addEventListener(
+                "mouseleave",
+                () => {
 
-            rootMargin:
-                "0px 0px -40px 0px"
+                    image.style.transition =
+                        "transform .7s cubic-bezier(.16,1,.3,1)";
+
+
+                    image.style.transform =
+                        "scale(1) translate3d(0,0,0)";
+
+
+                    setTimeout(
+                        () => {
+
+                            image.style.transition =
+                                "";
+
+                        },
+                        700
+                    );
+
+                }
+            );
+
         }
     );
 
 
-    document
-        .querySelectorAll(
-            ".scroll-reveal, .scroll-reveal-image"
-        )
-        .forEach((item) => {
+    /* =====================================================
+       03. DEEPER / WHAT WE BUILD CARDS
 
-            revealObserver.observe(item);
+       Different effect para hindi
+       pare-pareho lahat.
+    ====================================================== */
 
-        });
-        
-});
+    const buildCards =
+        document.querySelectorAll(
+            ".deeper-card"
+        );
+
+
+    buildCards.forEach(
+        (card) => {
+
+            const image =
+                card.querySelector(
+                    "img"
+                );
+
+
+            const title =
+                card.querySelector(
+                    "h2, h3, .card-title"
+                );
+
+
+            /* ---------------------------------------------
+               MOUSE ENTER
+            --------------------------------------------- */
+
+            card.addEventListener(
+                "mouseenter",
+                () => {
+
+                    if (image) {
+
+                        image.animate(
+                            [
+                                {
+                                    transform:
+                                        "scale(1)"
+                                },
+
+                                {
+                                    transform:
+                                        "scale(1.06)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    700,
+
+                                easing:
+                                    "cubic-bezier(.16,1,.3,1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+
+
+                    if (title) {
+
+                        title.animate(
+                            [
+                                {
+                                    letterSpacing:
+                                        getComputedStyle(
+                                            title
+                                        ).letterSpacing
+                                },
+
+                                {
+                                    letterSpacing:
+                                        "0.03em"
+                                }
+                            ],
+                            {
+                                duration:
+                                    500,
+
+                                easing:
+                                    "cubic-bezier(.16,1,.3,1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* ---------------------------------------------
+               MOUSE LEAVE
+            --------------------------------------------- */
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    if (image) {
+
+                        image.animate(
+                            [
+                                {
+                                    transform:
+                                        getComputedStyle(
+                                            image
+                                        ).transform
+                                },
+
+                                {
+                                    transform:
+                                        "scale(1)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    650,
+
+                                easing:
+                                    "cubic-bezier(.16,1,.3,1)",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+
+
+                    if (title) {
+
+                        title.animate(
+                            [
+                                {
+                                    letterSpacing:
+                                        getComputedStyle(
+                                            title
+                                        ).letterSpacing
+                                },
+
+                                {
+                                    letterSpacing:
+                                        "normal"
+                                }
+                            ],
+                            {
+                                duration:
+                                    450,
+
+                                easing:
+                                    "ease",
+
+                                fill:
+                                    "forwards"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+

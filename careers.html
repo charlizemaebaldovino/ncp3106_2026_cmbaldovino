@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en" data-theme="light">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -10,10 +12,14 @@
     >
 
     <title>
-        Career & Job Opportunities | UE Computer Engineering
+        Careers | UE Computer Engineering
     </title>
 
-    <!-- GOOGLE FONTS -->
+
+    <!-- =====================================================
+         SPACE MONO
+    ====================================================== -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -26,18 +32,31 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet"
     >
 
-    <!-- CAREER PAGE CSS -->
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- CAREERS CSS -->
+
     <link
         rel="stylesheet"
         href="careers.css"
     >
 
-    <!-- APPLY SAVED THEME BEFORE PAGE LOAD -->
+
+    <!-- LOAD SAVED THEME -->
+
     <script>
+
         (function () {
 
             const savedTheme =
@@ -47,6 +66,7 @@
                 savedTheme;
 
         })();
+
     </script>
 
 </head>
@@ -55,183 +75,156 @@
 <body>
 
 
-<!-- =========================================================
-     PAGE TRANSITION
-========================================================= -->
+    <!-- =====================================================
+         PAGE TRANSITION
+    ====================================================== -->
 
-<div
-    class="page-transition"
-    id="pageTransition"
-></div>
-
-
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-
-<div class="topbar">
-
-    <div class="topbar-left">
-
-        <span class="dot"></span>
-
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
-
-    </div>
+    <div
+        class="page-transition"
+        id="pageTransition"
+    ></div>
 
 
-    <div class="topbar-right">
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
 
-        <span>
-            CAREER DIRECTORY
-        </span>
+    <nav class="main-navigation">
 
-        <span id="clock">
-            MANILA 00:00:00
-        </span>
-
-    </div>
-
-</div>
+        <div class="nav-inner">
 
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav>
-
-    <div class="nav-inner">
-
-        <!-- LOGO -->
-
-        <a
-            href="index.html"
-            class="logo page-link"
-        >
-
-            CPE
-
-            <small>
-                UNIVERSITY OF THE EAST
-            </small>
-
-        </a>
-
-
-        <!-- NAV LINKS -->
-
-        <ul class="nav-links">
-
-            <li>
-                <a
-                    href="computer-engineering.html"
-                    class="page-link"
-                >
-                    PROGRAM
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="specializations.html"
-                    class="page-link"
-                >
-                    SPECIALIZATIONS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="careers.html"
-                    class="active"
-                >
-                    CAREERS
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="faculty.html"
-                    class="page-link"
-                >
-                    FACULTY
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="scpes.html"
-                    class="page-link"
-                >
-                    SCPES
-                </a>
-            </li>
-
-        </ul>
-
-
-        <!-- RIGHT SIDE -->
-
-        <div class="nav-right">
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle dark mode"
-            >
-
-                <span class="sun">
-                    ☀
-                </span>
-
-                <span class="moon">
-                    ◐
-                </span>
-
-            </button>
-
+            <!-- LOGO -->
 
             <a
                 href="index.html"
-                class="home-button page-link"
+                class="logo page-link"
             >
-                HOME ↗
+
+                <img
+                    src="assets/dark.png"
+                    alt="CPE UE Manila"
+                    class="nav-logo-image"
+                >
+
             </a>
+
+
+            <!-- NAVIGATION LINKS -->
+
+            <ul class="nav-links">
+
+                
+
+                <li>
+                    <a
+                        href="ue-program.html"
+                        class="page-link"
+                    >
+                        UE PROGRAM
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="specializations.html"
+                        class="page-link"
+                    >
+                        SPECIALIZATIONS
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="careers.html"
+                        class="active"
+                    >
+                        CAREERS
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="faculty.html"
+                        class="page-link"
+                    >
+                        FACULTY
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="scpes.html"
+                        class="page-link"
+                    >
+                        SCPES
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="nav-right">
+
+                <span
+                    class="manila-clock"
+                    id="clock"
+                >
+                    MANILA 00:00:00
+                </span>
+
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                >
+
+                    <span class="sun">
+                        ☀
+                    </span>
+
+                    <span class="moon">
+                        ◐
+                    </span>
+
+                </button>
+
+
+                <a
+                    href="index.html"
+                    class="home-button page-link"
+                >
+                    HOME ↗
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
-
-</nav>
+    </nav>
 
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-<main>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="career-hero">
-
-    <div class="hero-grid">
+    <main>
 
 
-        <!-- LEFT -->
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
-        <div class="hero-main">
+        <section class="career-hero">
 
-            <div class="eyebrow reveal">
+            <div class="hero-top reveal">
 
                 <span>
-                    04 / CAREER PATHS
+                    03 / CAREER PATHS
                 </span>
 
                 <span>
@@ -241,966 +234,1212 @@
             </div>
 
 
-            <h1 class="career-title">
+            <div class="hero-content">
 
-                <span
-                    class="title-line title-career"
-                >
-                    CAREER
-                </span>
+                <div class="hero-title">
 
-                <span
-                    class="title-line title-job"
-                >
-                    & JOB
-                </span>
+                    <h1>
 
-                <span
-                    class="title-line title-opportunities"
-                >
-                    OPPORTUNITIES
-                </span>
+                        <span class="title-line">
+                            CAREER
+                        </span>
 
-            </h1>
+                        <span class="title-line">
+                            & JOB
+                        </span>
 
-        </div>
+                        <span class="title-line title-serif">
+                            OPPORTUNITIES
+                        </span>
+
+                    </h1>
+
+                </div>
 
 
-        <!-- RIGHT -->
+                <div class="hero-info reveal">
 
-        <aside class="hero-side reveal">
+                    <span class="hero-tag">
+                        [ FIND YOUR PATH ]
+                    </span>
 
-            <div class="side-number">
-                [ CAREERS ]
+                    <p>
+                        Computer Engineering opens opportunities
+                        across hardware, software, networks,
+                        intelligent systems, automation, cloud
+                        technologies, and emerging fields.
+                    </p>
+
+
+                    <button
+                        class="explore-button"
+                        id="exploreCareers"
+                        type="button"
+                    >
+
+                        <span>
+                            EXPLORE CAREERS
+                        </span>
+
+                        <span class="explore-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <p>
-                Computer Engineering opens pathways
-                across hardware, software, networks,
-                intelligent systems, cloud technologies,
-                robotics, research, and emerging fields.
-            </p>
-
-            <div class="hero-scroll">
-
-                <span>
-                    EXPLORE CAREERS
-                </span>
-
-                <span class="scroll-arrow">
-                    ↓
-                </span>
-
-            </div>
-
-        </aside>
-
-    </div>
-
-</section>
+        </section>
 
 
-<!-- =========================================================
-     MOVING CAREER STRIP
-========================================================= -->
+        <!-- =================================================
+             CAREER DIRECTORY
+        ================================================== -->
 
-<div class="career-marquee">
+        <section
+            class="careers-section"
+            id="careers"
+        >
 
-    <div class="career-marquee-track">
+            <div class="section-intro reveal">
 
-        <span>HARDWARE</span>
-        <span>✦</span>
-
-        <span>SOFTWARE</span>
-        <span>✦</span>
-
-        <span>NETWORKS</span>
-        <span>✦</span>
-
-        <span>EMBEDDED SYSTEMS</span>
-        <span>✦</span>
-
-        <span>ARTIFICIAL INTELLIGENCE</span>
-        <span>✦</span>
-
-        <span>ROBOTICS</span>
-        <span>✦</span>
-
-        <span>CYBERSECURITY</span>
-        <span>✦</span>
-
-        <span>CLOUD</span>
-        <span>✦</span>
-
-        <!-- DUPLICATE FOR LOOP -->
-
-        <span>HARDWARE</span>
-        <span>✦</span>
-
-        <span>SOFTWARE</span>
-        <span>✦</span>
-
-        <span>NETWORKS</span>
-        <span>✦</span>
-
-        <span>EMBEDDED SYSTEMS</span>
-        <span>✦</span>
-
-        <span>ARTIFICIAL INTELLIGENCE</span>
-        <span>✦</span>
-
-        <span>ROBOTICS</span>
-        <span>✦</span>
-
-        <span>CYBERSECURITY</span>
-        <span>✦</span>
-
-        <span>CLOUD</span>
-        <span>✦</span>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     INTRODUCTION
-========================================================= -->
-
-<section
-    class="career-intro"
-    id="career-list"
->
-
-    <div class="intro-number reveal">
-        01
-    </div>
-
-
-    <div class="intro-copy reveal">
-
-        <span class="section-label">
-            WHERE CAN CPE TAKE YOU?
-        </span>
-
-
-        <h2>
-
-            ONE DEGREE.<br>
-
-            <em>
-                MANY DIRECTIONS.
-            </em>
-
-        </h2>
-
-    </div>
-
-
-    <div class="intro-description reveal">
-
-        <p>
-            A Computer Engineering background combines
-            knowledge in hardware, software, electronics,
-            networks, and computing systems—creating
-            opportunities across a wide range of
-            technology careers.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CAREER CARDS
-========================================================= -->
-
-<section class="career-section">
-
-    <div class="career-grid">
-
-
-        <!-- 01 COMPUTER ENGINEER -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
+                <div class="section-index">
                     01
-                </span>
-
-                <span class="career-category">
-                    CORE CPE
-                </span>
-
-            </div>
+                </div>
 
 
-            <div class="career-icon">
-                CE
-            </div>
+                <div class="section-title">
+
+                    <span class="section-label">
+                        CAREER DIRECTORY
+                    </span>
+
+                    <h2>
+                        WHERE CAN
+                        <em>CPE TAKE YOU?</em>
+                    </h2>
+
+                </div>
 
 
-            <div class="career-content">
-
-                <h3>
-                    Computer Engineer
-                </h3>
-
-                <p>
-                    Designs, develops, tests, and maintains
-                    computer systems by integrating hardware
-                    and software solutions for various
-                    industries.
+                <p class="section-description">
+                    Explore possible career paths for
+                    Computer Engineering graduates.
+                    Hover over a card to reveal an image,
+                    then click it to learn more.
                 </p>
 
             </div>
 
 
-            <div class="career-bottom">
-                HARDWARE × SOFTWARE
-            </div>
+            <!-- =================================================
+                 CAREER CARDS
 
-        </article>
+                 IMPORTANT:
+                 THIS IS WHERE YOU CHANGE YOUR PICTURES.
 
+                 Example:
+                 assets/computer-engineer.jpg
 
-        <!-- 02 EMBEDDED SYSTEMS -->
+                 Put your actual images inside the assets folder
+                 and change the filenames below.
+            ================================================== -->
 
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    02
-                </span>
-
-                <span class="career-category">
-                    EMBEDDED
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                ES
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Embedded Systems Engineer
-                </h3>
-
-                <p>
-                    Develops hardware and software for
-                    embedded devices such as automotive
-                    systems, medical equipment, smart
-                    appliances, and industrial controllers.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                DEVICES × CONTROLLERS
-            </div>
-
-        </article>
-
-
-        <!-- 03 IOT -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    03
-                </span>
-
-                <span class="career-category">
-                    CONNECTED SYSTEMS
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                IoT
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    IoT Engineer
-                </h3>
-
-                <p>
-                    Designs and manages connected devices
-                    that communicate over the internet,
-                    enabling smart homes, cities, healthcare,
-                    and industrial automation.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                SENSORS × INTERNET
-            </div>
-
-        </article>
-
-
-        <!-- 04 SOFTWARE -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    04
-                </span>
-
-                <span class="career-category">
-                    SOFTWARE
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                &lt;/&gt;
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Software Engineer
-                </h3>
-
-                <p>
-                    Designs, develops, tests, and maintains
-                    software applications, operating systems,
-                    and computer programs that meet user
-                    and business needs.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                CODE × SYSTEMS
-            </div>
-
-        </article>
-
-
-        <!-- 05 HARDWARE -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    05
-                </span>
-
-                <span class="career-category">
-                    HARDWARE
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                HW
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Hardware Engineer
-                </h3>
-
-                <p>
-                    Designs, tests, and improves computer
-                    hardware components such as processors,
-                    circuit boards, memory devices, and
-                    computer peripherals.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                CIRCUITS × COMPONENTS
-            </div>
-
-        </article>
-
-
-        <!-- 06 NETWORK -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    06
-                </span>
-
-                <span class="career-category">
-                    NETWORKS
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                NET
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Network Engineer
-                </h3>
-
-                <p>
-                    Plans, installs, configures, and
-                    maintains computer networks to ensure
-                    secure, reliable, and efficient
-                    communication between systems.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                ROUTING × CONNECTIVITY
-            </div>
-
-        </article>
-
-
-        <!-- 07 SYSTEMS -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    07
-                </span>
-
-                <span class="career-category">
-                    SYSTEMS
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                SYS
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Systems Engineer
-                </h3>
-
-                <p>
-                    Integrates hardware, software, and
-                    network components into complete
-                    computer systems and ensures they
-                    function efficiently together.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                INTEGRATION × DESIGN
-            </div>
-
-        </article>
-
-
-        <!-- 08 CYBERSECURITY -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    08
-                </span>
-
-                <span class="career-category">
-                    SECURITY
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                SEC
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Cybersecurity Engineer
-                </h3>
-
-                <p>
-                    Protects computer systems and networks
-                    from cyber threats by implementing
-                    security measures, monitoring
-                    vulnerabilities, and responding to
-                    security incidents.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                DEFENSE × SECURITY
-            </div>
-
-        </article>
-
-
-        <!-- 09 DATA -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    09
-                </span>
-
-                <span class="career-category">
-                    DATA
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                DB
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Data Engineer
-                </h3>
-
-                <p>
-                    Designs and maintains data pipelines,
-                    databases, and data infrastructure that
-                    support analytics, reporting, and
-                    machine learning applications.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                DATA × INFRASTRUCTURE
-            </div>
-
-        </article>
-
-
-        <!-- 10 AI / ML -->
-
-        <article class="career-card career-card-featured reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    10
-                </span>
-
-                <span class="career-category">
-                    INTELLIGENCE
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                AI
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    AI / Machine Learning Engineer
-                </h3>
-
-                <p>
-                    Develops intelligent systems and machine
-                    learning models that enable computers
-                    to recognize patterns, make predictions,
-                    and automate decision-making.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                MODELS × AUTOMATION
-            </div>
-
-        </article>
-
-
-        <!-- 11 CLOUD -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    11
-                </span>
-
-                <span class="career-category">
-                    CLOUD
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                CLD
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Cloud Engineer
-                </h3>
-
-                <p>
-                    Builds, deploys, and manages cloud
-                    computing infrastructure and services,
-                    ensuring systems are scalable, secure,
-                    and highly available.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                CLOUD × INFRASTRUCTURE
-            </div>
-
-        </article>
-
-
-        <!-- 12 DEVOPS -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    12
-                </span>
-
-                <span class="career-category">
-                    DEVOPS
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                OPS
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    DevOps Engineer
-                </h3>
-
-                <p>
-                    Automates software development, testing,
-                    deployment, and system operations to
-                    improve collaboration and speed up
-                    software delivery.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                DEVELOP × DEPLOY
-            </div>
-
-        </article>
-
-
-        <!-- 13 ROBOTICS -->
-
-        <article class="career-card career-card-featured reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    13
-                </span>
-
-                <span class="career-category">
-                    ROBOTICS
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                ROB
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Robotics Engineer
-                </h3>
-
-                <p>
-                    Designs, programs, and tests robotic
-                    systems used in manufacturing,
-                    healthcare, agriculture, logistics,
-                    and automation.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                ROBOTS × AUTOMATION
-            </div>
-
-        </article>
-
-
-        <!-- 14 TECHNICAL SUPPORT -->
-
-        <article class="career-card reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    14
-                </span>
-
-                <span class="career-category">
-                    SUPPORT
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                TS
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Technical Support Engineer
-                </h3>
-
-                <p>
-                    Provides technical assistance by
-                    troubleshooting hardware, software,
-                    and network issues while helping users
-                    maintain computer systems.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                SOLVE × SUPPORT
-            </div>
-
-        </article>
-
-
-        <!-- 15 R&D -->
-
-        <article class="career-card career-card-wide reveal">
-
-            <div class="career-card-top">
-
-                <span class="career-number">
-                    15
-                </span>
-
-                <span class="career-category">
-                    RESEARCH + DEVELOPMENT
-                </span>
-
-            </div>
-
-
-            <div class="career-icon">
-                R&D
-            </div>
-
-
-            <div class="career-content">
-
-                <h3>
-                    Research and Development Engineer
-                </h3>
-
-                <p>
-                    Conducts research and develops new
-                    technologies, products, and innovative
-                    solutions in fields such as computing,
-                    electronics, AI, and robotics.
-                </p>
-
-            </div>
-
-
-            <div class="career-bottom">
-                RESEARCH × INNOVATION
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CLOSING SECTION
-========================================================= -->
-
-<section class="career-closing">
-
-    <div class="closing-top reveal">
-
-        <span class="section-label">
-            THE NEXT STEP
-        </span>
-
-        <span>
-            [ 15 PATHS / ONE FOUNDATION ]
-        </span>
-
-    </div>
-
-
-    <div class="closing-grid">
-
-        <h2 class="reveal">
-
-            BUILD YOUR<br>
-
-            <em>
-                OWN PATH.
-            </em>
-
-        </h2>
-
-
-        <div class="closing-copy reveal">
-
-            <p>
-                Computer Engineering does not limit you
-                to one role. The combination of hardware
-                and software knowledge allows you to
-                explore different areas of technology
-                and continue adapting as the industry
-                evolves.
-            </p>
-
-
-            <a
-                href="specializations.html"
-                class="next-page page-link"
+            <div
+                class="career-grid"
+                id="careerGrid"
             >
 
-                <span>
-                    EXPLORE SPECIALIZATIONS
-                </span>
 
-                <span>
-                    →
-                </span>
+                <!-- =============================================
+                     01 COMPUTER ENGINEER
 
-            </a>
+                     IMAGE:
+                     assets/computer-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="0"
+                    style="--career-image: url('assets/computer-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        01
+                    </span>
+
+                    <span class="card-category">
+                        CORE CPE
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Computer Engineer
+                        </h3>
+
+                        <p>
+                            Design and develop computer systems
+                            by combining hardware and software.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     02 EMBEDDED SYSTEMS ENGINEER
+
+                     IMAGE:
+                     assets/embedded-systems.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="1"
+                    style="--career-image: url('assets/embedded-systems.jpg');"
+                >
+
+                    <span class="card-number">
+                        02
+                    </span>
+
+                    <span class="card-category">
+                        EMBEDDED
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Embedded Systems Engineer
+                        </h3>
+
+                        <p>
+                            Develop specialized computing systems
+                            built directly into electronic devices.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     03 IOT ENGINEER
+
+                     IMAGE:
+                     assets/iot-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="2"
+                    style="--career-image: url('assets/iot-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        03
+                    </span>
+
+                    <span class="card-category">
+                        IOT
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            IoT Engineer
+                        </h3>
+
+                        <p>
+                            Create connected devices and systems
+                            that communicate through networks.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     04 SOFTWARE ENGINEER
+
+                     IMAGE:
+                     assets/software-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="3"
+                    style="--career-image: url('assets/software-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        04
+                    </span>
+
+                    <span class="card-category">
+                        SOFTWARE
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Software Engineer
+                        </h3>
+
+                        <p>
+                            Design, develop, test, and maintain
+                            software applications and systems.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     05 HARDWARE ENGINEER
+
+                     IMAGE:
+                     assets/hardware-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="4"
+                    style="--career-image: url('assets/hardware-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        05
+                    </span>
+
+                    <span class="card-category">
+                        HARDWARE
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Hardware Engineer
+                        </h3>
+
+                        <p>
+                            Design and test computer hardware,
+                            circuits, and electronic components.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     06 NETWORK ENGINEER
+
+                     IMAGE:
+                     assets/network-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="5"
+                    style="--career-image: url('assets/network-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        06
+                    </span>
+
+                    <span class="card-category">
+                        NETWORKS
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Network Engineer
+                        </h3>
+
+                        <p>
+                            Design and maintain reliable computer
+                            networks and communication systems.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     07 CYBERSECURITY ENGINEER
+
+                     IMAGE:
+                     assets/cybersecurity-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="6"
+                    style="--career-image: url('assets/cybersecurity-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        07
+                    </span>
+
+                    <span class="card-category">
+                        SECURITY
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Cybersecurity Engineer
+                        </h3>
+
+                        <p>
+                            Protect computer systems, networks,
+                            and digital information from threats.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     08 AI / ML ENGINEER
+
+                     IMAGE:
+                     assets/ai-ml-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="7"
+                    style="--career-image: url('assets/ai-ml-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        08
+                    </span>
+
+                    <span class="card-category">
+                        AI / ML
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            AI / ML Engineer
+                        </h3>
+
+                        <p>
+                            Develop intelligent systems using
+                            artificial intelligence and machine learning.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     09 ROBOTICS ENGINEER
+
+                     IMAGE:
+                     assets/robotics-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="8"
+                    style="--career-image: url('assets/robotics-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        09
+                    </span>
+
+                    <span class="card-category">
+                        ROBOTICS
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Robotics Engineer
+                        </h3>
+
+                        <p>
+                            Create robotic systems by combining
+                            electronics, programming, and automation.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     10 DATA ANALYST
+
+                     IMAGE:
+                     assets/data-analyst.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="9"
+                    style="--career-image: url('assets/data-analyst.jpg');"
+                >
+
+                    <span class="card-number">
+                        10
+                    </span>
+
+                    <span class="card-category">
+                        DATA
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Data Analyst
+                        </h3>
+
+                        <p>
+                            Analyze information and transform
+                            data into meaningful insights.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     11 QA ENGINEER
+
+                     IMAGE:
+                     assets/qa-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="10"
+                    style="--career-image: url('assets/qa-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        11
+                    </span>
+
+                    <span class="card-category">
+                        QUALITY
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            QA Engineer
+                        </h3>
+
+                        <p>
+                            Test software and systems to ensure
+                            quality, reliability, and performance.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     12 CLOUD ENGINEER
+
+                     IMAGE:
+                     assets/cloud-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="11"
+                    style="--career-image: url('assets/cloud-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        12
+                    </span>
+
+                    <span class="card-category">
+                        CLOUD
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Cloud Engineer
+                        </h3>
+
+                        <p>
+                            Build and maintain scalable computing
+                            infrastructure using cloud technologies.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     13 SYSTEMS ENGINEER
+
+                     IMAGE:
+                     assets/systems-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="12"
+                    style="--career-image: url('assets/systems-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        13
+                    </span>
+
+                    <span class="card-category">
+                        SYSTEMS
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Systems Engineer
+                        </h3>
+
+                        <p>
+                            Integrate hardware, software, and
+                            infrastructure into complete systems.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     14 AUTOMATION ENGINEER
+
+                     IMAGE:
+                     assets/automation-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="13"
+                    style="--career-image: url('assets/automation-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        14
+                    </span>
+
+                    <span class="card-category">
+                        AUTOMATION
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Automation Engineer
+                        </h3>
+
+                        <p>
+                            Develop automated systems that improve
+                            efficiency, control, and productivity.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                     15 FIRMWARE ENGINEER
+
+                     IMAGE:
+                     assets/firmware-engineer.jpg
+                ============================================== -->
+
+                <button
+                    class="career-card"
+                    type="button"
+                    data-career="14"
+                    style="--career-image: url('assets/firmware-engineer.jpg');"
+                >
+
+                    <span class="card-number">
+                        15
+                    </span>
+
+                    <span class="card-category">
+                        FIRMWARE
+                    </span>
+
+                    <div class="card-content">
+
+                        <h3>
+                            Firmware Engineer
+                        </h3>
+
+                        <p>
+                            Develop low-level software that controls
+                            and communicates directly with hardware.
+                        </p>
+
+                    </div>
+
+                    <span class="card-arrow">
+                        ↗
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CLOSING
+        ================================================== -->
+
+        <section class="career-closing reveal">
+
+            <span>
+                YOUR DIRECTION
+            </span>
+
+            <h2>
+                ONE FOUNDATION.
+                <em>MANY POSSIBILITIES.</em>
+            </h2>
+
+            <p>
+                Computer Engineering gives you the flexibility
+                to explore different industries while building
+                technologies that connect the physical and
+                digital worlds.
+            </p>
+
+        </section>
+              
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="cpe-footer reveal">
+
+
+        <!-- FOOTER BACKGROUND PATTERN -->
+
+        <img
+            src="assets/footer.png"
+            alt=""
+            class="cpe-footer-pattern"
+            aria-hidden="true"
+        >
+
+
+        <div class="cpe-footer-content">
+
+
+            <!-- =============================================
+                 LEFT SIDE
+            ============================================== -->
+
+            <div class="cpe-footer-brand">
+
+
+                <img
+                    src="assets/cpelogo.png"
+                    alt="Computer Engineering Logo"
+                    class="cpe-footer-logo"
+                >
+
+
+                <div class="cpe-footer-divider"></div>
+
+
+                <div class="cpe-footer-name">
+
+                    <span>
+                        University of the East - Manila
+                    </span>
+
+                    <strong>
+                        COMPUTER ENGINEERING
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RIGHT SIDE
+            ============================================== -->
+
+            <div class="cpe-footer-social">
+
+
+                <div class="cpe-footer-follow">
+                    follow us!
+                </div>
+
+
+                <div class="cpe-footer-icons">
+
+
+                    <!-- FACEBOOK -->
+
+                    <a
+                        href="https://www.facebook.com/uescpes"
+                        class="cpe-social-link"
+                        aria-label="Facebook"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="https://www.instagram.com/uescpes_official/"
+                        class="cpe-social-link"
+                        aria-label="Instagram"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <!-- EMAIL -->
+
+                    <a
+                        href="mailto:uescpes.official@gmail.com"
+                        class="cpe-social-link"
+                        aria-label="Email"
+                    >
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             FOOTER BOTTOM
+        ============================================== -->
+
+        <div class="cpe-footer-bottom">
+
+            <span>
+                CPE @ 2026 ALL RIGHTS RESERVED
+            </span>
+
+            <span>
+                BY: BALDOVINO | LANDAYAN
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         CAREER MODAL
+
+         Opens when a career card is clicked.
+    ====================================================== -->
+
+    <div
+        class="career-viewer"
+        id="careerViewer"
+        aria-hidden="true"
+    >
+
+
+        <!-- =============================================
+             MODAL BACKDROP
+        ============================================== -->
+
+        <div
+            class="career-backdrop"
+            id="careerBackdrop"
+        ></div>
+
+
+
+        <!-- =============================================
+             MODAL CONTAINER
+        ============================================== -->
+
+        <div
+            class="career-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="viewerTitle"
+        >
+
+
+            <!-- =========================================
+                 MODAL TOP
+            ========================================== -->
+
+            <div class="career-modal-top">
+
+
+                <div>
+
+                    <span id="viewerNumber">
+                        CAREER / 01
+                    </span>
+
+
+                    <span
+                        class="modal-counter"
+                        id="viewerCounter"
+                    >
+                        01 / 15
+                    </span>
+
+                </div>
+
+
+
+                <!-- CLOSE BUTTON -->
+
+                <button
+                    class="career-close"
+                    id="viewerClose"
+                    type="button"
+                    aria-label="Close career"
+                >
+
+                    <span>
+                        CLOSE
+                    </span>
+
+                    <strong>
+                        ×
+                    </strong>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 MODAL CONTENT
+            ========================================== -->
+
+            <div class="career-modal-layout">
+
+
+                <!-- =====================================
+                     CAREER IMAGE
+
+                     The image will be changed by JS
+                     depending on which career was clicked.
+                ====================================== -->
+
+                <div class="career-modal-photo">
+
+
+                    <img
+                        id="viewerImage"
+                        src=""
+                        alt=""
+                    >
+
+
+                    <span
+                        class="career-image-category"
+                        id="viewerCategory"
+                    >
+                        CORE CPE
+                    </span>
+
+
+                    <span class="career-image-code">
+                        CPE / UE
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =====================================
+                     CAREER INFORMATION
+                ====================================== -->
+
+                <div class="career-modal-info">
+
+
+                    <span class="career-modal-label">
+                        CAREER PATH
+                    </span>
+
+
+                    <h2 id="viewerTitle">
+                        Computer Engineer
+                    </h2>
+
+
+
+                    <!-- CAREER DETAILS -->
+
+                    <div class="career-information">
+
+
+                        <!-- ROLE -->
+
+                        <div class="career-detail">
+
+                            <span>
+                                ROLE
+                            </span>
+
+                            <p id="viewerRole">
+                                Design and develop computer systems.
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- FOCUS -->
+
+                        <div class="career-detail">
+
+                            <span>
+                                FOCUS
+                            </span>
+
+                            <p id="viewerFocus">
+                                Hardware and software integration.
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- ABOUT -->
+
+                        <div
+                            class="career-detail
+                                   career-description"
+                        >
+
+                            <span>
+                                ABOUT
+                            </span>
+
+                            <p id="viewerDescription">
+
+                                Computer Engineers work across
+                                hardware and software to create,
+                                improve, and maintain modern
+                                computing systems.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 MODAL BOTTOM NAVIGATION
+            ========================================== -->
+
+            <div class="career-modal-bottom">
+
+
+                <!-- PREVIOUS -->
+
+                <button
+                    id="previousCareer"
+                    class="career-navigation previous"
+                    type="button"
+                >
+
+                    <span class="career-navigation-arrow">
+                        ←
+                    </span>
+
+
+                    <span>
+
+                        <small>
+                            PREVIOUS
+                        </small>
+
+                        <strong id="previousCareerName">
+                            Firmware Engineer
+                        </strong>
+
+                    </span>
+
+                </button>
+
+
+
+                <!-- NEXT -->
+
+                <button
+                    id="nextCareer"
+                    class="career-navigation next"
+                    type="button"
+                >
+
+                    <span>
+
+                        <small>
+                            NEXT
+                        </small>
+
+                        <strong id="nextCareerName">
+                            Embedded Systems Engineer
+                        </strong>
+
+                    </span>
+
+
+                    <span class="career-navigation-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+            </div>
 
         </div>
 
     </div>
 
-</section>
 
 
-</main>
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
+    <script src="careers.js"></script>
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <div class="footer-inner">
-
-        <span>
-            UE MANILA / COMPUTER ENGINEERING
-        </span>
-
-        <span>
-            CAREER & JOB OPPORTUNITIES
-        </span>
-
-        <span>
-            CORE CPE © 2026
-        </span>
-
-    </div>
-
-</footer>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<script src="careers.js"></script>
 
 </body>
 

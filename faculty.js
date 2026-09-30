@@ -5,13 +5,15 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
     /* =====================================================
        01. ELEMENTS
     ====================================================== */
 
     const root =
         document.documentElement;
+
+    const body =
+        document.body;
 
     const themeToggle =
         document.getElementById("themeToggle");
@@ -28,17 +30,79 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageTransition =
         document.getElementById("pageTransition");
 
+    const navLogoImage =
+        document.querySelector(".nav-logo-image");
+
 
     /* =====================================================
-       02. THEME
+       02. SETTINGS
+    ====================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+    const supportsFinePointer =
+        window.matchMedia(
+            "(pointer: fine)"
+        ).matches;
+
+
+    /* =====================================================
+       03. THEME
     ====================================================== */
 
     const savedTheme =
-        localStorage.getItem("cpe-theme") || "light";
-
+        localStorage.getItem("cpe-theme") ||
+        "light";
 
     root.dataset.theme =
         savedTheme;
+
+
+    function updateNavLogo(theme) {
+
+        if (!navLogoImage) {
+            return;
+        }
+
+        navLogoImage.src =
+            theme === "dark"
+                ? "assets/light.png"
+                : "assets/dark.png";
+    }
+
+
+    updateNavLogo(savedTheme);
+
+
+    function animateThemeChange() {
+
+        if (
+            prefersReducedMotion ||
+            !document.body.animate
+        ) {
+            return;
+        }
+
+        document.body.animate(
+            [
+                {
+                    opacity: 0.88
+                },
+
+                {
+                    opacity: 1
+                }
+            ],
+            {
+                duration: 420,
+                easing:
+                    "cubic-bezier(0.22, 1, 0.36, 1)"
+            }
+        );
+    }
 
 
     if (themeToggle) {
@@ -47,32 +111,31 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                const currentTheme =
-                    root.dataset.theme;
-
                 const newTheme =
-                    currentTheme === "dark"
+                    root.dataset.theme === "dark"
                         ? "light"
                         : "dark";
 
-
                 root.dataset.theme =
                     newTheme;
-
 
                 localStorage.setItem(
                     "cpe-theme",
                     newTheme
                 );
 
+                updateNavLogo(
+                    newTheme
+                );
+
+                animateThemeChange();
             }
         );
-
     }
 
 
     /* =====================================================
-       03. MANILA CLOCK
+       04. MANILA CLOCK
     ====================================================== */
 
     function updateClock() {
@@ -81,10 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         const now =
             new Date();
-
 
         const manilaTime =
             new Intl.DateTimeFormat(
@@ -107,15 +168,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             ).format(now);
 
-
         clock.textContent =
             `MANILA ${manilaTime}`;
-
     }
 
 
     updateClock();
-
 
     setInterval(
         updateClock,
@@ -124,7 +182,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       04. EXPLORE FACULTY BUTTON
+       05. HERO ENTRANCE
+    ====================================================== */
+
+    function animateHero() {
+
+        if (prefersReducedMotion) {
+            return;
+        }
+
+        const heroElements = [
+            ...document.querySelectorAll(
+                ".faculty-hero .hero-top"
+            ),
+
+            ...document.querySelectorAll(
+                ".faculty-hero .title-line"
+            ),
+
+            ...document.querySelectorAll(
+                ".faculty-hero .hero-info"
+            )
+        ];
+
+
+        heroElements.forEach(
+            (element, index) => {
+
+                if (!element.animate) {
+                    return;
+                }
+
+                element.animate(
+                    [
+                        {
+                            opacity: 0,
+                            transform:
+                                "translate3d(0, 38px, 0)"
+                        },
+
+                        {
+                            opacity: 1,
+                            transform:
+                                "translate3d(0, 0, 0)"
+                        }
+                    ],
+                    {
+                        duration: 850,
+                        delay:
+                            100 + index * 90,
+
+                        easing:
+                            "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                        fill:
+                            "both"
+                    }
+                );
+            }
+        );
+    }
+
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                animateHero
+            );
+        }
+    );
+
+
+    /* =====================================================
+       06. EXPLORE FACULTY
     ====================================================== */
 
     if (
@@ -138,20 +269,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 facultySection.scrollIntoView({
                     behavior:
-                        "smooth",
+                        prefersReducedMotion
+                            ? "auto"
+                            : "smooth",
 
                     block:
                         "start"
                 });
-
             }
         );
-
     }
 
 
     /* =====================================================
-       05. SCROLL REVEAL
+       07. GENERAL SCROLL REVEAL
     ====================================================== */
 
     const revealElements =
@@ -162,40 +293,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const revealObserver =
         new IntersectionObserver(
-
             (entries, observer) => {
 
                 entries.forEach(
                     (entry) => {
 
                         if (
-                            entry.isIntersecting
+                            !entry.isIntersecting
                         ) {
-
-                            entry.target.classList.add(
-                                "visible"
-                            );
-
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
+                            return;
                         }
 
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
                     }
                 );
-
             },
-
             {
                 threshold:
-                    0.12,
+                    0.1,
 
                 rootMargin:
-                    "0px 0px -60px 0px"
+                    "0px 0px -45px 0px"
             }
-
         );
 
 
@@ -205,13 +330,283 @@ document.addEventListener("DOMContentLoaded", () => {
             revealObserver.observe(
                 element
             );
-
         }
     );
 
 
     /* =====================================================
-       06. FACULTY INFORMATION
+       08. FACULTY CARD STAGGER
+    ====================================================== */
+
+    const facultyCards =
+        document.querySelectorAll(
+            ".faculty-card"
+        );
+
+
+    const facultyCardObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                const visibleEntries =
+                    entries
+                        .filter(
+                            entry =>
+                                entry.isIntersecting
+                        )
+                        .sort(
+                            (a, b) => {
+
+                                return (
+                                    [...facultyCards]
+                                        .indexOf(a.target) -
+                                    [...facultyCards]
+                                        .indexOf(b.target)
+                                );
+                            }
+                        );
+
+
+                visibleEntries.forEach(
+                    (entry, index) => {
+
+                        const card =
+                            entry.target;
+
+                        if (
+                            !prefersReducedMotion &&
+                            card.animate
+                        ) {
+
+                            card.animate(
+                                [
+                                    {
+                                        opacity: 0,
+                                        transform:
+                                            "translate3d(0, 55px, 0)"
+                                    },
+
+                                    {
+                                        opacity: 1,
+                                        transform:
+                                            "translate3d(0, 0, 0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        750,
+
+                                    delay:
+                                        index * 110,
+
+                                    easing:
+                                        "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                                    fill:
+                                        "both"
+                                }
+                            );
+                        }
+
+                        observer.unobserve(
+                            card
+                        );
+                    }
+                );
+            },
+            {
+                threshold:
+                    0.12
+            }
+        );
+
+
+    facultyCards.forEach(
+        card => {
+
+            facultyCardObserver.observe(
+                card
+            );
+        }
+    );
+
+
+    /* =====================================================
+       09. FACULTY PHOTO REVEAL
+    ====================================================== */
+
+    const facultyPhotos =
+        document.querySelectorAll(
+            ".faculty-photo"
+        );
+
+
+    const photoObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        const photo =
+                            entry.target;
+
+                        if (
+                            !prefersReducedMotion &&
+                            photo.animate
+                        ) {
+
+                            photo.animate(
+                                [
+                                    {
+                                        clipPath:
+                                            "inset(0 0 100% 0)"
+                                    },
+
+                                    {
+                                        clipPath:
+                                            "inset(0 0 0% 0)"
+                                    }
+                                ],
+                                {
+                                    duration:
+                                        900,
+
+                                    easing:
+                                        "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                                    fill:
+                                        "both"
+                                }
+                            );
+                        }
+
+                        observer.unobserve(
+                            photo
+                        );
+                    }
+                );
+            },
+            {
+                threshold:
+                    0.12
+            }
+        );
+
+
+    facultyPhotos.forEach(
+        photo => {
+
+            photoObserver.observe(
+                photo
+            );
+        }
+    );
+
+
+    /* =====================================================
+       10. SUBTLE FACULTY IMAGE PARALLAX
+    ====================================================== */
+
+    if (
+        supportsFinePointer &&
+        !prefersReducedMotion
+    ) {
+
+        facultyCards.forEach(
+            card => {
+
+                const image =
+                    card.querySelector(
+                        ".faculty-photo img"
+                    );
+
+                if (!image) {
+                    return;
+                }
+
+
+                card.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        const rect =
+                            card.getBoundingClientRect();
+
+                        const x =
+                            (
+                                event.clientX -
+                                rect.left
+                            ) /
+                            rect.width -
+                            0.5;
+
+                        const y =
+                            (
+                                event.clientY -
+                                rect.top
+                            ) /
+                            rect.height -
+                            0.5;
+
+
+                        image.style.transform =
+                            `
+                            scale(1.045)
+                            translate3d(
+                                ${x * -10}px,
+                                ${y * -8}px,
+                                0
+                            )
+                            `;
+                    }
+                );
+
+
+                card.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        image.style.transform =
+                            "";
+
+                        image.style.transition =
+                            "transform 650ms cubic-bezier(0.16, 1, 0.3, 1)";
+
+
+                        setTimeout(
+                            () => {
+
+                                image.style.transition =
+                                    "";
+                            },
+                            680
+                        );
+                    }
+                );
+
+
+                card.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        image.style.transition =
+                            "transform 180ms ease-out";
+                    }
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       11. FACULTY INFORMATION
     ====================================================== */
 
     const facultyProfiles = {
@@ -246,7 +641,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             description:
                 "Focuses on embedded systems and Internet of Things technologies, including the integration of computing hardware, software, sensors, and connected devices."
-
         },
 
 
@@ -281,7 +675,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             description:
                 "Focuses on computer networking, logic circuits, and data communication technologies that allow computing systems and devices to communicate effectively."
-
         },
 
 
@@ -318,7 +711,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             description:
                 "Focuses on the mathematical and analytical side of Computer Engineering, including engineering data analysis, software design, and discrete mathematics."
-
         },
 
 
@@ -354,14 +746,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             description:
                 "Focuses on electronics, mixed-signal systems, and sensor technologies used to detect, measure, and process information in computer engineering applications."
-
         }
-
     };
 
 
     /* =====================================================
-       07. PROFILE ORDER
+       12. PROFILE ORDER
     ====================================================== */
 
     const profileOrder = [
@@ -375,9 +765,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeProfileIndex =
         0;
 
+    let profileAnimating =
+        false;
+
 
     /* =====================================================
-       08. PROFILE ELEMENTS
+       13. PROFILE ELEMENTS
     ====================================================== */
 
     const profileViewer =
@@ -447,7 +840,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       09. RENDER PROFILE
+       14. RENDER PROFILE
     ====================================================== */
 
     function renderProfile(
@@ -458,7 +851,6 @@ document.addEventListener("DOMContentLoaded", () => {
             facultyProfiles[
                 profileKey
             ];
-
 
         if (!profile) {
             return;
@@ -475,7 +867,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             profileNumber.textContent =
                 profile.number;
-
         }
 
 
@@ -486,7 +877,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             profileImage.alt =
                 profile.name;
-
         }
 
 
@@ -494,7 +884,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             profileRole.textContent =
                 profile.role;
-
         }
 
 
@@ -502,7 +891,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             profileName.textContent =
                 profile.name;
-
         }
 
 
@@ -510,92 +898,177 @@ document.addEventListener("DOMContentLoaded", () => {
 
             profileCounter.textContent =
                 profile.counter;
-
         }
 
 
-        /* ================================================
-           SPECIALIZATIONS
-        ================================================= */
+        /* SPECIALIZATIONS */
 
         if (profileSpecializations) {
 
             profileSpecializations.innerHTML =
                 "";
 
-
             profile.specializations.forEach(
-                (specialization) => {
+                specialization => {
 
                     const tag =
                         document.createElement(
                             "span"
                         );
 
-
                     tag.textContent =
                         specialization;
-
 
                     profileSpecializations.appendChild(
                         tag
                     );
-
                 }
             );
-
         }
 
 
-        /* ================================================
-           COURSES
-        ================================================= */
+        /* COURSES */
 
         if (profileCourses) {
 
             profileCourses.innerHTML =
                 "";
 
-
             profile.courses.forEach(
-                (course) => {
+                course => {
 
                     const item =
                         document.createElement(
                             "li"
                         );
 
-
                     item.textContent =
                         course;
-
 
                     profileCourses.appendChild(
                         item
                     );
-
                 }
             );
-
         }
 
-
-        /* ================================================
-           DESCRIPTION
-        ================================================= */
 
         if (profileDescription) {
 
             profileDescription.textContent =
                 profile.description;
-
         }
-
     }
 
 
     /* =====================================================
-       10. OPEN PROFILE
+       15. PROFILE CONTENT ELEMENTS
+    ====================================================== */
+
+    function getProfileTextElements() {
+
+        return [
+            profileNumber,
+            profileRole,
+            profileName,
+            profileSpecializations,
+            profileCourses,
+            profileDescription,
+            profileCounter
+        ].filter(Boolean);
+    }
+
+
+    /* =====================================================
+       16. PROFILE OPEN ANIMATION
+    ====================================================== */
+
+    function animateProfileOpen() {
+
+        if (prefersReducedMotion) {
+            return;
+        }
+
+
+        if (
+            profileImage &&
+            profileImage.animate
+        ) {
+
+            profileImage.animate(
+                [
+                    {
+                        opacity: 0,
+                        transform:
+                            "scale(1.08)"
+                    },
+
+                    {
+                        opacity: 1,
+                        transform:
+                            "scale(1)"
+                    }
+                ],
+                {
+                    duration:
+                        850,
+
+                    easing:
+                        "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                    fill:
+                        "both"
+                }
+            );
+        }
+
+
+        const elements =
+            getProfileTextElements();
+
+
+        elements.forEach(
+            (element, index) => {
+
+                if (!element.animate) {
+                    return;
+                }
+
+                element.animate(
+                    [
+                        {
+                            opacity: 0,
+                            transform:
+                                "translate3d(0, 24px, 0)"
+                        },
+
+                        {
+                            opacity: 1,
+                            transform:
+                                "translate3d(0, 0, 0)"
+                        }
+                    ],
+                    {
+                        duration:
+                            650,
+
+                        delay:
+                            100 + index * 55,
+
+                        easing:
+                            "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                        fill:
+                            "both"
+                    }
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       17. OPEN PROFILE
     ====================================================== */
 
     function openProfile(
@@ -623,44 +1096,115 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        document.body.classList.add(
+        body.classList.add(
             "profile-open"
         );
 
+
+        requestAnimationFrame(
+            () => {
+
+                requestAnimationFrame(
+                    animateProfileOpen
+                );
+            }
+        );
     }
 
 
     /* =====================================================
-       11. CLOSE PROFILE
+       18. CLOSE PROFILE
     ====================================================== */
 
     function closeProfile() {
 
-        if (!profileViewer) {
+        if (
+            !profileViewer ||
+            !profileViewer.classList.contains(
+                "active"
+            )
+        ) {
             return;
         }
 
 
-        profileViewer.classList.remove(
-            "active"
-        );
+        if (
+            prefersReducedMotion ||
+            !profileViewer.animate
+        ) {
+
+            profileViewer.classList.remove(
+                "active"
+            );
+
+            profileViewer.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            body.classList.remove(
+                "profile-open"
+            );
+
+            return;
+        }
 
 
-        profileViewer.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+        const animation =
+            profileViewer.animate(
+                [
+                    {
+                        opacity: 1,
+                        transform:
+                            "translate3d(0, 0, 0)"
+                    },
+
+                    {
+                        opacity: 0,
+                        transform:
+                            "translate3d(0, 20px, 0)"
+                    }
+                ],
+                {
+                    duration:
+                        280,
+
+                    easing:
+                        "ease-in",
+
+                    fill:
+                        "forwards"
+                }
+            );
 
 
-        document.body.classList.remove(
-            "profile-open"
-        );
+        animation.onfinish =
+            () => {
 
+                profileViewer.classList.remove(
+                    "active"
+                );
+
+                profileViewer.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                body.classList.remove(
+                    "profile-open"
+                );
+
+                profileViewer.style.opacity =
+                    "";
+
+                profileViewer.style.transform =
+                    "";
+            };
     }
 
 
     /* =====================================================
-       12. PROFILE BUTTONS
+       19. CLICK FACULTY CARDS
     ====================================================== */
 
     const profileButtons =
@@ -670,7 +1214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     profileButtons.forEach(
-        (button) => {
+        button => {
 
             button.addEventListener(
                 "click",
@@ -680,67 +1224,51 @@ document.addEventListener("DOMContentLoaded", () => {
                         button.dataset
                             .profileButton;
 
-
                     openProfile(
                         profileKey
                     );
-
                 }
             );
-
         }
     );
 
 
-    /* =====================================================
-       13. CLICKING FACULTY IMAGE/CARD
-    ====================================================== */
-
-    const facultyCards =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             ".faculty-card[data-profile]"
+        )
+        .forEach(
+            card => {
+
+                const photo =
+                    card.querySelector(
+                        ".faculty-photo"
+                    );
+
+                if (!photo) {
+                    return;
+                }
+
+
+                photo.style.cursor =
+                    "pointer";
+
+
+                photo.addEventListener(
+                    "click",
+                    () => {
+
+                        openProfile(
+                            card.dataset.profile
+                        );
+                    }
+                );
+            }
         );
 
 
-    facultyCards.forEach(
-        (card) => {
-
-            const photo =
-                card.querySelector(
-                    ".faculty-photo"
-                );
-
-
-            if (!photo) {
-                return;
-            }
-
-
-            photo.addEventListener(
-                "click",
-                () => {
-
-                    const profileKey =
-                        card.dataset.profile;
-
-
-                    openProfile(
-                        profileKey
-                    );
-
-                }
-            );
-
-
-            photo.style.cursor =
-                "pointer";
-
-        }
-    );
-
-
     /* =====================================================
-       14. CLOSE EVENTS
+       20. CLOSE EVENTS
     ====================================================== */
 
     if (profileClose) {
@@ -749,7 +1277,6 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             closeProfile
         );
-
     }
 
 
@@ -759,12 +1286,247 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             closeProfile
         );
-
     }
 
 
     /* =====================================================
-       15. PREVIOUS PROFILE
+       21. ANIMATED PROFILE CHANGE
+    ====================================================== */
+
+    function changeProfile(
+        direction
+    ) {
+
+        if (profileAnimating) {
+            return;
+        }
+
+
+        const nextIndex =
+            (
+                activeProfileIndex +
+                direction +
+                profileOrder.length
+            ) %
+            profileOrder.length;
+
+
+        const nextKey =
+            profileOrder[
+                nextIndex
+            ];
+
+
+        if (prefersReducedMotion) {
+
+            renderProfile(
+                nextKey
+            );
+
+            return;
+        }
+
+
+        profileAnimating =
+            true;
+
+
+        const textElements =
+            getProfileTextElements();
+
+
+        const exitX =
+            direction > 0
+                ? -35
+                : 35;
+
+        const enterX =
+            direction > 0
+                ? 35
+                : -35;
+
+
+        /* IMAGE EXIT */
+
+        if (
+            profileImage &&
+            profileImage.animate
+        ) {
+
+            profileImage.animate(
+                [
+                    {
+                        opacity: 1,
+                        transform:
+                            "translate3d(0, 0, 0) scale(1)"
+                    },
+
+                    {
+                        opacity: 0,
+                        transform:
+                            `translate3d(${exitX}px, 0, 0) scale(1.025)`
+                    }
+                ],
+                {
+                    duration:
+                        280,
+
+                    easing:
+                        "ease-in",
+
+                    fill:
+                        "forwards"
+                }
+            );
+        }
+
+
+        /* TEXT EXIT */
+
+        textElements.forEach(
+            (element, index) => {
+
+                if (!element.animate) {
+                    return;
+                }
+
+                element.animate(
+                    [
+                        {
+                            opacity: 1,
+                            transform:
+                                "translate3d(0, 0, 0)"
+                        },
+
+                        {
+                            opacity: 0,
+                            transform:
+                                `translate3d(${exitX}px, 0, 0)`
+                        }
+                    ],
+                    {
+                        duration:
+                            220,
+
+                        delay:
+                            index * 15,
+
+                        easing:
+                            "ease-in",
+
+                        fill:
+                            "forwards"
+                    }
+                );
+            }
+        );
+
+
+        setTimeout(
+            () => {
+
+                renderProfile(
+                    nextKey
+                );
+
+
+                /* IMAGE ENTER */
+
+                if (
+                    profileImage &&
+                    profileImage.animate
+                ) {
+
+                    profileImage.animate(
+                        [
+                            {
+                                opacity: 0,
+                                transform:
+                                    `translate3d(${enterX}px, 0, 0) scale(1.035)`
+                            },
+
+                            {
+                                opacity: 1,
+                                transform:
+                                    "translate3d(0, 0, 0) scale(1)"
+                            }
+                        ],
+                        {
+                            duration:
+                                550,
+
+                            easing:
+                                "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                            fill:
+                                "both"
+                        }
+                    );
+                }
+
+
+                /* TEXT ENTER */
+
+                const newTextElements =
+                    getProfileTextElements();
+
+
+                newTextElements.forEach(
+                    (element, index) => {
+
+                        if (!element.animate) {
+                            return;
+                        }
+
+                        element.animate(
+                            [
+                                {
+                                    opacity: 0,
+                                    transform:
+                                        `translate3d(${enterX}px, 0, 0)`
+                                },
+
+                                {
+                                    opacity: 1,
+                                    transform:
+                                        "translate3d(0, 0, 0)"
+                                }
+                            ],
+                            {
+                                duration:
+                                    480,
+
+                                delay:
+                                    index * 45,
+
+                                easing:
+                                    "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                                fill:
+                                    "both"
+                            }
+                        );
+                    }
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        profileAnimating =
+                            false;
+                    },
+                    650
+                );
+
+            },
+            300
+        );
+    }
+
+
+    /* =====================================================
+       22. PREVIOUS / NEXT
     ====================================================== */
 
     if (profilePrev) {
@@ -773,34 +1535,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                activeProfileIndex--;
-
-
-                if (
-                    activeProfileIndex < 0
-                ) {
-
-                    activeProfileIndex =
-                        profileOrder.length - 1;
-
-                }
-
-
-                renderProfile(
-                    profileOrder[
-                        activeProfileIndex
-                    ]
+                changeProfile(
+                    -1
                 );
-
             }
         );
-
     }
 
-
-    /* =====================================================
-       16. NEXT PROFILE
-    ====================================================== */
 
     if (profileNext) {
 
@@ -808,39 +1549,21 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                activeProfileIndex++;
-
-
-                if (
-                    activeProfileIndex >=
-                    profileOrder.length
-                ) {
-
-                    activeProfileIndex =
-                        0;
-
-                }
-
-
-                renderProfile(
-                    profileOrder[
-                        activeProfileIndex
-                    ]
+                changeProfile(
+                    1
                 );
-
             }
         );
-
     }
 
 
     /* =====================================================
-       17. KEYBOARD CONTROLS
+       23. KEYBOARD
     ====================================================== */
 
     document.addEventListener(
         "keydown",
-        (event) => {
+        event => {
 
             if (
                 !profileViewer ||
@@ -848,88 +1571,126 @@ document.addEventListener("DOMContentLoaded", () => {
                     "active"
                 )
             ) {
-
                 return;
-
             }
 
 
-            /* ESCAPE */
-
             if (
-                event.key ===
-                "Escape"
+                event.key === "Escape"
             ) {
 
                 closeProfile();
-
             }
 
-
-            /* LEFT */
 
             if (
-                event.key ===
-                "ArrowLeft"
+                event.key === "ArrowLeft"
             ) {
 
-                activeProfileIndex--;
-
-
-                if (
-                    activeProfileIndex < 0
-                ) {
-
-                    activeProfileIndex =
-                        profileOrder.length - 1;
-
-                }
-
-
-                renderProfile(
-                    profileOrder[
-                        activeProfileIndex
-                    ]
+                changeProfile(
+                    -1
                 );
-
             }
 
-
-            /* RIGHT */
 
             if (
-                event.key ===
-                "ArrowRight"
+                event.key === "ArrowRight"
             ) {
 
-                activeProfileIndex++;
-
-
-                if (
-                    activeProfileIndex >=
-                    profileOrder.length
-                ) {
-
-                    activeProfileIndex =
-                        0;
-
-                }
-
-
-                renderProfile(
-                    profileOrder[
-                        activeProfileIndex
-                    ]
+                changeProfile(
+                    1
                 );
-
             }
-
         }
     );
 
 
     /* =====================================================
-       18. PAGE TRANSITIONS
+       24. FOOTER REVEAL
+    ====================================================== */
+
+    const footer =
+        document.querySelector(
+            ".index-footer"
+        );
+
+    const footerTitle =
+        document.querySelector(
+            ".footer-big-title"
+        );
+
+
+    if (
+        footer &&
+        footerTitle
+    ) {
+
+        const footerObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            if (
+                                !prefersReducedMotion &&
+                                footerTitle.animate
+                            ) {
+
+                                footerTitle.animate(
+                                    [
+                                        {
+                                            opacity: 0,
+                                            transform:
+                                                "translate3d(0, 70px, 0)"
+                                        },
+
+                                        {
+                                            opacity: 1,
+                                            transform:
+                                                "translate3d(0, 0, 0)"
+                                        }
+                                    ],
+                                    {
+                                        duration:
+                                            1000,
+
+                                        easing:
+                                            "cubic-bezier(0.16, 1, 0.3, 1)",
+
+                                        fill:
+                                            "both"
+                                    }
+                                );
+                            }
+
+
+                            footerObserver.disconnect();
+                        }
+                    );
+                },
+                {
+                    threshold:
+                        0.18
+                }
+            );
+
+
+        footerObserver.observe(
+            footer
+        );
+    }
+
+
+    /* =====================================================
+       25. PAGE TRANSITIONS
     ====================================================== */
 
     const pageLinks =
@@ -939,11 +1700,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     pageLinks.forEach(
-        (link) => {
+        link => {
 
             link.addEventListener(
                 "click",
-                (event) => {
+                event => {
 
                     const destination =
                         link.getAttribute(
@@ -951,49 +1712,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         );
 
 
-                    /* ========================================
-                       IGNORE EMPTY LINKS
-                    ========================================= */
-
                     if (
                         !destination ||
                         destination === "#" ||
                         destination.startsWith(
-                            "javascript:"
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    /* ========================================
-                       IGNORE NEW TAB LINKS
-                    ========================================= */
-
-                    if (
-                        link.target ===
-                        "_blank"
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    /* ========================================
-                       SAME PAGE HASH
-                    ========================================= */
-
-                    if (
-                        destination.startsWith(
                             "#"
-                        )
+                        ) ||
+                        destination.startsWith(
+                            "javascript:"
+                        ) ||
+                        link.target === "_blank"
                     ) {
-
                         return;
-
                     }
 
 
@@ -1005,7 +1735,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         pageTransition.classList.add(
                             "active"
                         );
-
                     }
 
 
@@ -1014,20 +1743,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             window.location.href =
                                 destination;
-
                         },
                         620
                     );
-
                 }
             );
-
         }
     );
 
 
     /* =====================================================
-       19. RESET TRANSITION WHEN RETURNING WITH BACK BUTTON
+       26. BACK BUTTON FIX
     ====================================================== */
 
     window.addEventListener(
@@ -1039,15 +1765,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 pageTransition.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
 
 
     /* =====================================================
-       20. IMAGE LOADING
+       27. IMAGE LOADING
     ====================================================== */
 
     const facultyImages =
@@ -1057,18 +1781,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     facultyImages.forEach(
-        (image) => {
+        image => {
 
-            if (
-                image.complete
-            ) {
+            if (image.complete) {
 
                 image.classList.add(
                     "loaded"
                 );
 
                 return;
-
             }
 
 
@@ -1079,12 +1800,273 @@ document.addEventListener("DOMContentLoaded", () => {
                     image.classList.add(
                         "loaded"
                     );
-
                 }
             );
-
         }
     );
 
+
+    /* =====================================================
+       28. CURSOR TRAIL
+       LIGHT MODE = NAVY
+       DARK MODE  = CREAM
+    ====================================================== */
+
+    if (supportsFinePointer) {
+
+        const TRAIL_COUNT =
+            14;
+
+        const circles =
+            [];
+
+
+        let mouseX =
+            window.innerWidth / 2;
+
+        let mouseY =
+            window.innerHeight / 2;
+
+        let mouseActive =
+            false;
+
+
+        /* CREATE CIRCLES */
+
+        for (
+            let i = 0;
+            i < TRAIL_COUNT;
+            i++
+        ) {
+
+            const circle =
+                document.createElement(
+                    "div"
+                );
+
+
+            circle.className =
+                "cursor-trail-circle";
+
+
+            circle.style.position =
+                "fixed";
+
+            circle.style.left =
+                "0";
+
+            circle.style.top =
+                "0";
+
+            circle.style.width =
+                "12px";
+
+            circle.style.height =
+                "12px";
+
+            circle.style.borderRadius =
+                "50%";
+
+            circle.style.pointerEvents =
+                "none";
+
+            circle.style.zIndex =
+                "99999";
+
+            circle.style.opacity =
+                "0";
+
+            circle.style.willChange =
+                "transform, opacity";
+
+
+            body.appendChild(
+                circle
+            );
+
+
+            circles.push({
+                element:
+                    circle,
+
+                x:
+                    mouseX,
+
+                y:
+                    mouseY
+            });
+        }
+
+
+        /* =============================================
+           CURSOR COLOR
+        ============================================== */
+
+        function updateCursorColor() {
+
+            const theme =
+                root.dataset.theme ||
+                "light";
+
+
+            const cursorColor =
+                theme === "dark"
+                    ? "#fffcf3"
+                    : "#0f1a2b";
+
+
+            circles.forEach(
+                circle => {
+
+                    circle.element.style.background =
+                        cursorColor;
+                }
+            );
+        }
+
+
+        updateCursorColor();
+
+
+        const themeObserver =
+            new MutationObserver(
+                updateCursorColor
+            );
+
+
+        themeObserver.observe(
+            root,
+            {
+                attributes:
+                    true,
+
+                attributeFilter: [
+                    "data-theme"
+                ]
+            }
+        );
+
+
+        /* =============================================
+           MOUSE POSITION
+        ============================================== */
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    event.clientX;
+
+                mouseY =
+                    event.clientY;
+
+                mouseActive =
+                    true;
+            },
+            {
+                passive:
+                    true
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseleave",
+            () => {
+
+                mouseActive =
+                    false;
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseenter",
+            () => {
+
+                mouseActive =
+                    true;
+            }
+        );
+
+
+        /* =============================================
+           CURSOR ANIMATION
+        ============================================== */
+
+        function animateCursorTrail() {
+
+            let x =
+                mouseX;
+
+            let y =
+                mouseY;
+
+
+            circles.forEach(
+                (circle, index) => {
+
+                    circle.x +=
+                        (x - circle.x) *
+                        0.32;
+
+                    circle.y +=
+                        (y - circle.y) *
+                        0.32;
+
+
+                    const scale =
+                        1 -
+                        (
+                            index /
+                            circles.length
+                        ) *
+                        0.65;
+
+
+                    const opacity =
+                        mouseActive
+                            ? 0.34 *
+                              (
+                                  1 -
+                                  index /
+                                  circles.length
+                              )
+                            : 0;
+
+
+                    circle.element.style.transform =
+                        `
+                        translate3d(
+                            ${circle.x - 6}px,
+                            ${circle.y - 6}px,
+                            0
+                        )
+                        scale(${scale})
+                        `;
+
+
+                    circle.element.style.opacity =
+                        opacity;
+
+
+                    x =
+                        circle.x;
+
+                    y =
+                        circle.y;
+                }
+            );
+
+
+            requestAnimationFrame(
+                animateCursorTrail
+            );
+        }
+
+
+        animateCursorTrail();
+    }
 
 });
