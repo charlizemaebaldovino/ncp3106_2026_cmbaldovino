@@ -308,10 +308,7 @@ body::before {
         var(--navy);
 
     transform:
-        scaleY(0);
-
-    transform-origin:
-        bottom;
+        translateY(100%);
 
 }
 
@@ -320,8 +317,8 @@ body::before {
 
     animation:
         pageTransitionIn
-        .75s
-        var(--transition)
+        .65s
+        cubic-bezier(.77, 0, .18, 1)
         forwards;
 
 }
@@ -332,7 +329,7 @@ body::before {
     from {
 
         transform:
-            scaleY(0);
+            translateY(100%);
 
     }
 
@@ -340,10 +337,143 @@ body::before {
     to {
 
         transform:
-            scaleY(1);
+            translateY(0);
 
     }
 
+}
+
+
+.page-transition {
+    display: none;
+}
+
+
+/* Match the Specializations navigation spacing. */
+.main-navigation {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+
+.main-navigation .nav-inner {
+    width: min(1460px, 94vw);
+    min-height: 84px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 28px;
+}
+
+
+.main-navigation .logo,
+.main-navigation .nav-logo-image {
+    width: 180px;
+    height: 70px;
+}
+
+
+.main-navigation .logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+
+.main-navigation .nav-logo-image {
+    object-fit: contain;
+    object-position: left center;
+}
+
+
+.main-navigation .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 1.5vw, 27px);
+}
+
+
+.main-navigation .nav-links a {
+    padding: 32px 0;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.045em;
+    white-space: nowrap;
+}
+
+
+.main-navigation .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+.main-navigation .clock,
+.main-navigation .nav-clock,
+.main-navigation .manila-clock {
+    font-size: 7px;
+    font-weight: 500;
+    color: var(--text-soft);
+    white-space: nowrap;
+}
+
+
+.main-navigation .theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+.main-navigation .home-button {
+    min-height: 0;
+    padding: 11px 15px;
+    font-size: 8px;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+
+@media (max-width: 850px) {
+
+    .main-navigation {
+        position: relative;
+    }
+
+    .main-navigation .nav-inner {
+        width: 92vw;
+        min-height: 74px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .main-navigation .logo,
+    .main-navigation .nav-logo-image {
+        width: 140px;
+        height: 55px;
+    }
+
+    .main-navigation .nav-links {
+        display: none;
+    }
+
+    .main-navigation .clock,
+    .main-navigation .nav-clock,
+    .main-navigation .manila-clock {
+        display: none;
+    }
 }
 
 
@@ -2546,7 +2676,7 @@ main {
         relative;
 
     min-height:
-        600px;
+        500px;
 
     overflow:
         hidden;
@@ -2617,7 +2747,7 @@ main {
 .profile-modal-info {
 
     padding:
-        55px 45px;
+        38px 38px;
 
 }
 
@@ -2652,13 +2782,13 @@ main {
 .profile-modal-info h2 {
 
     margin:
-        12px 0 25px;
+        8px 0 18px;
 
     font-size:
         clamp(
-            38px,
-            4.2vw,
-            68px
+            34px,
+            3.6vw,
+            58px
         );
 
     font-weight:
@@ -2689,7 +2819,7 @@ main {
 .profile-detail {
 
     padding:
-        22px 0;
+        15px 0;
 
     border-bottom:
         1px solid
@@ -2827,7 +2957,7 @@ main {
 .profile-modal-bottom {
 
     min-height:
-        65px;
+        74px;
 
     padding:
         0 25px;
@@ -2860,17 +2990,22 @@ main {
 
 .profile-navigation {
 
+    min-width: 130px;
+
     padding:
-        15px 0;
+        12px 16px;
 
     border:
-        0;
+        1px solid
+        var(--border-strong);
+
+    border-radius: 999px;
 
     background:
-        transparent;
+        var(--opposite);
 
     color:
-        var(--text);
+        var(--opposite-text);
 
     font-family:
         "Space Mono",
@@ -2884,6 +3019,29 @@ main {
 
     cursor:
         pointer;
+
+    transition:
+        background-color .3s ease,
+        color .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.profile-navigation:hover {
+
+    border-color:
+        var(--text);
+
+    background:
+        var(--text);
+
+    color:
+        var(--bg);
+
+    transform:
+        translateY(-2px);
 
 }
 
@@ -6056,4 +6214,97 @@ html[data-theme="light"] .faculty-deeper-card:hover {
         display: none;
     }
 
+}
+
+.cpe-join-us {
+    width: min(100%, 280px); min-height: 48px; display: flex;
+    align-items: center; justify-content: space-between; margin-top: 22px;
+    padding: 0 18px; border: 1px solid rgba(255, 250, 240, .72);
+    border-radius: 999px; color: #fffaf0; font: 700 9px "Space Mono", monospace;
+    letter-spacing: .12em; text-transform: uppercase;
+    transition: background-color .3s ease, color .3s ease, transform .3s ease;
+}
+.cpe-join-us span { font-size: 20px; transition: transform .3s ease; }
+.cpe-join-us:hover { background: #fffaf0; color: #06153b; transform: translateY(-3px); }
+.cpe-join-us:hover span { transform: translate(3px, -3px); }
+
+.cpe-join-us { font-size: 11px; }
+.nav-links a { font-size: 9px !important; }
+.home-button { font-size: 8px !important; }
+
+
+/* Final navbar match with Specializations. */
+.main-navigation {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+}
+
+
+.main-navigation .nav-inner {
+    width: min(1460px, 94vw) !important;
+    min-height: 84px !important;
+    margin: auto !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    gap: 28px !important;
+}
+
+
+.main-navigation .nav-brand,
+.main-navigation .logo,
+.main-navigation .nav-logo,
+.main-navigation .nav-logo-image {
+    width: 180px !important;
+    min-width: 180px !important;
+    height: 70px !important;
+}
+
+
+.main-navigation .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(14px, 1.5vw, 27px) !important;
+}
+
+
+.main-navigation .nav-links a {
+    padding: 32px 0 !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    font-family: "Inter", Arial, sans-serif !important;
+    line-height: normal !important;
+    letter-spacing: 0.045em !important;
+}
+
+
+.main-navigation .nav-right {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+}
+
+
+.main-navigation .nav-clock {
+    font-size: 7px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+
+.main-navigation .theme-toggle {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+}
+
+
+.main-navigation .home-button {
+    min-height: 0 !important;
+    padding: 11px 15px !important;
+    font-size: 8px !important;
 }

@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const introVideoSource = document.getElementById("introVideoSource");
 
     const site = document.getElementById("site");
+    const pageTransition = document.getElementById("pageTransition");
 
     const sharedTitle = document.getElementById("sharedTitle");
     const heroTitleTarget = document.getElementById("heroTitleTarget");
@@ -220,6 +221,45 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleTheme
         );
     }
+
+
+    document
+        .querySelectorAll("a.page-link-transition-disabled")
+        .forEach(
+            (link) => {
+
+                link.addEventListener(
+                    "click",
+                    (event) => {
+
+                        const destination =
+                            link.getAttribute("href");
+
+                        if (
+                            !destination ||
+                            destination.startsWith("#") ||
+                            link.target === "_blank" ||
+                            !pageTransition
+                        ) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+                        pageTransition.classList.add(
+                            "is-leaving"
+                        );
+
+                        window.setTimeout(
+                            () => {
+                                window.location.href = destination;
+                            },
+                            650
+                        );
+                    }
+                );
+            }
+        );
 
 
     /* =====================================================

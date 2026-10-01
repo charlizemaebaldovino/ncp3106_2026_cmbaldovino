@@ -768,6 +768,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let profileAnimating =
         false;
 
+    let profileCloseAnimation =
+        null;
+
 
     /* =====================================================
        13. PROFILE ELEMENTS
@@ -1080,6 +1083,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        if (profileCloseAnimation) {
+            profileCloseAnimation.cancel();
+            profileCloseAnimation = null;
+        }
+
+        if (profileViewer.getAnimations) {
+            profileViewer
+                .getAnimations({ subtree: true })
+                .forEach(
+                    (animation) => animation.cancel()
+                );
+        }
+
+        profileViewer.style.opacity = "";
+        profileViewer.style.transform = "";
+
         renderProfile(
             profileKey
         );
@@ -1150,7 +1169,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        const animation =
+        if (profileCloseAnimation) {
+            profileCloseAnimation.cancel();
+        }
+
+        profileCloseAnimation =
             profileViewer.animate(
                 [
                     {
@@ -1178,8 +1201,10 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        animation.onfinish =
+        profileCloseAnimation.onfinish =
             () => {
+
+                profileCloseAnimation = null;
 
                 profileViewer.classList.remove(
                     "active"
@@ -1530,76 +1555,42 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     if (profilePrev) {
-
         profilePrev.addEventListener(
             "click",
-            () => {
-
-                changeProfile(
-                    -1
-                );
-            }
+            () => changeProfile(-1)
         );
     }
 
 
     if (profileNext) {
-
         profileNext.addEventListener(
             "click",
-            () => {
-
-                changeProfile(
-                    1
-                );
-            }
+            () => changeProfile(1)
         );
     }
 
 
-    /* =====================================================
-       23. KEYBOARD
-    ====================================================== */
-
     document.addEventListener(
         "keydown",
-        event => {
+        (event) => {
 
             if (
                 !profileViewer ||
-                !profileViewer.classList.contains(
-                    "active"
-                )
+                !profileViewer.classList.contains("active")
             ) {
                 return;
             }
 
-
-            if (
-                event.key === "Escape"
-            ) {
-
+            if (event.key === "Escape") {
                 closeProfile();
             }
 
-
-            if (
-                event.key === "ArrowLeft"
-            ) {
-
-                changeProfile(
-                    -1
-                );
+            if (event.key === "ArrowLeft") {
+                changeProfile(-1);
             }
 
-
-            if (
-                event.key === "ArrowRight"
-            ) {
-
-                changeProfile(
-                    1
-                );
+            if (event.key === "ArrowRight") {
+                changeProfile(1);
             }
         }
     );
@@ -1695,7 +1686,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pageLinks =
         document.querySelectorAll(
-            "a.page-link"
+            "a.page-link-transition-disabled"
         );
 
 

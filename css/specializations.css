@@ -433,11 +433,7 @@ html[data-theme="dark"]
         32px 0;
 
     font-size:
-        clamp(
-            7px,
-            0.6vw,
-            9px
-        );
+        9px;
 
     font-weight: 700;
 
@@ -3123,6 +3119,23 @@ span:nth-child(2) {
    19. TABLET
 ========================================================= */
 
+.cpe-join-us {
+    width: min(100%, 280px); min-height: 48px; display: flex;
+    align-items: center; justify-content: space-between; margin-top: 22px;
+    padding: 0 18px; border: 1px solid rgba(255, 250, 240, .72);
+    border-radius: 999px; color: #fffaf0; font: 700 9px "Space Mono", monospace;
+    letter-spacing: .12em; text-transform: uppercase;
+    transition: background-color .3s ease, color .3s ease, transform .3s ease;
+}
+.cpe-join-us span { font-size: 20px; transition: transform .3s ease; }
+.cpe-join-us:hover { background: #fffaf0; color: #06153b; transform: translateY(-3px); }
+.cpe-join-us:hover span { transform: translate(3px, -3px); }
+
+.cpe-join-us { font-size: 11px; }
+.nav-links a { font-size: 9px !important; }
+.nav-clock { font-size: 7px !important; }
+.home-button { font-size: 8px !important; }
+
 @media (max-width: 1100px) {
 
     .nav-links {
@@ -3134,7 +3147,7 @@ span:nth-child(2) {
 
     .nav-links a {
 
-        font-size: 7px;
+        font-size: 9px !important;
 
     }
 
@@ -4033,4 +4046,9 @@ span:nth-child(2) {
 
     }
 
+}
+
+
+.page-transition {
+    display: none;
 }

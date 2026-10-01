@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Computer Engineer",
         role: "Computer Engineering",
         focus: "Hardware / Software / Systems",
-        image: "assets/computer-engineer.jpg",
+        image: "../assets/computer-engineer.jpg",
         short:
             "Designs and develops integrated computer hardware and software systems.",
         description:
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Embedded Systems Engineer",
         role: "Embedded Systems",
         focus: "Hardware / Firmware / Microcontrollers",
-        image: "assets/embedded-systems1.jpg",
+        image: "../assets/embedded-systems1.jpg",
         short:
             "Creates dedicated computing systems for smart devices and machines.",
         description:
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "IoT Engineer",
         role: "Internet of Things",
         focus: "Devices / Sensors / Connectivity",
-        image: "assets/iot-engineer1.jpg",
+        image: "../assets/iot-engineer1.jpg",
         short:
             "Builds connected devices that communicate and exchange real-world data.",
         description:
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Software Engineer",
         role: "Software Engineering",
         focus: "Programming / Applications / Systems",
-        image: "assets/software-engineer1.jpg",
+        image: "../assets/software-engineer1.jpg",
         short:
             "Develops applications, platforms, and software-based computing solutions.",
         description:
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Hardware Engineer",
         role: "Computer Hardware",
         focus: "Electronics / Circuits / Computer Systems",
-        image: "assets/hardware-engineer1.jpg",
+        image: "../assets/hardware-engineer1.jpg",
         short:
             "Designs and tests electronic components and computer hardware.",
         description:
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Network Engineer",
         role: "Computer Networks",
         focus: "Infrastructure / Routing / Connectivity",
-        image: "assets/network-engineer1.jpg",
+        image: "../assets/network-engineer1.jpg",
         short:
             "Builds and maintains reliable communication and network infrastructures.",
         description:
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Cybersecurity Engineer",
         role: "Cybersecurity",
         focus: "Security / Networks / Systems",
-        image: "assets/cybersecurity-engineer.jpg",
+        image: "../assets/cybersecurity-engineer.jpg",
         short:
             "Protects systems, networks, and information against digital threats.",
         description:
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "AI / Machine Learning Engineer",
         role: "Artificial Intelligence",
         focus: "AI / Machine Learning / Data",
-        image: "assets/ai-ml-engineer1.jpg",
+        image: "../assets/ai-ml-engineer1.jpg",
         short:
             "Develops intelligent systems that learn from data and recognize patterns.",
         description:
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Robotics Engineer",
         role: "Robotics",
         focus: "Automation / Sensors / Control",
-        image: "assets/robotics-engineer1.jpg",
+        image: "../assets/robotics-engineer1.jpg",
         short:
             "Combines electronics, programming, sensors, and control to build robots.",
         description:
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Data Analyst",
         role: "Data Analytics",
         focus: "Data / Analysis / Insights",
-        image: "assets/data-analyst1.jpg",
+        image: "../assets/data-analyst1.jpg",
         short:
             "Transforms raw data into useful information and meaningful insights.",
         description:
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Quality Assurance Engineer",
         role: "Quality Assurance",
         focus: "Testing / Validation / Quality",
-        image: "assets/qa-engineer.jpg",
+        image: "../assets/qa-engineer.jpg",
         short:
             "Tests systems and software to maintain reliability and product quality.",
         description:
@@ -188,12 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     {
-        number: "12",
         category: "CLOUD",
         title: "Cloud Engineer",
         role: "Cloud Computing",
         focus: "Cloud / Infrastructure / Services",
-        image: "assets/cloud-engineer1.jpg",
+        image: "../assets/cloud-engineer1.jpg",
         short:
             "Develops and maintains scalable cloud infrastructure and computing services.",
         description:
@@ -206,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Systems Engineer",
         role: "Systems Engineering",
         focus: "Integration / Infrastructure / Systems",
-        image: "assets/systems-engineer.jpg",
+        image: "../assets/systems-engineer.jpg",
         short:
             "Integrates hardware, software, networks, and services into complete systems.",
         description:
@@ -219,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Automation Engineer",
         role: "Automation and Control",
         focus: "Control / Sensors / Automation",
-        image: "assets/automation-engineer1.jpg",
+        image: "../assets/automation-engineer1.jpg",
         short:
             "Creates automated systems using sensors, controllers, and software.",
         description:
@@ -232,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "Firmware Engineer",
         role: "Firmware Engineering",
         focus: "Firmware / Hardware / Embedded Systems",
-        image: "assets/firmware-engineer.jpg",
+        image: "../assets/firmware-engineer.jpg",
         short:
             "Develops low-level software that directly controls computer hardware.",
         description:
@@ -1182,7 +1181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pageLinks =
         document.querySelectorAll(
-            ".page-link"
+            ".page-link-transition-disabled"
         );
 
 

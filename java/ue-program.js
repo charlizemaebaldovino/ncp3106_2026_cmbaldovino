@@ -28,6 +28,11 @@ document.addEventListener(
                 "navLogoImage"
             );
 
+        const clock =
+            document.getElementById(
+                "clock"
+            );
+
         const navigation =
             document.querySelector(
                 ".main-navigation"
@@ -167,6 +172,37 @@ document.addEventListener(
 
         setTheme(
             savedTheme
+        );
+
+
+        function updateClock() {
+
+            if (!clock) {
+                return;
+            }
+
+            const time =
+                new Intl.DateTimeFormat(
+                    "en-GB",
+                    {
+                        timeZone: "Asia/Manila",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false
+                    }
+                ).format(new Date());
+
+            clock.textContent =
+                `MANILA ${time}`;
+        }
+
+
+        updateClock();
+
+        setInterval(
+            updateClock,
+            1000
         );
 
 
@@ -1521,7 +1557,7 @@ if (
 
         const pageLinks =
             document.querySelectorAll(
-                "a.page-link"
+                "a.page-link-transition-disabled"
             );
 
 

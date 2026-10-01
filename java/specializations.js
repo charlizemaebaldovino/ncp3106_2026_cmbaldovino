@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pageLinks =
         document.querySelectorAll(
-            ".page-link"
+            ".page-link-transition-disabled"
         );
 
 

@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const introVideoSource = document.getElementById("introVideoSource");
 
     const site = document.getElementById("site");
+    const pageTransition = document.getElementById("pageTransition");
 
     const sharedTitle = document.getElementById("sharedTitle");
     const heroTitleTarget = document.getElementById("heroTitleTarget");
@@ -229,6 +230,41 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleTheme
         );
     }
+
+
+    document
+        .querySelectorAll(".deeper-card-transition-disabled")
+        .forEach(
+            (link) => {
+
+                link.addEventListener(
+                    "click",
+                    (event) => {
+
+                        if (
+                            prefersReducedMotion ||
+                            !pageTransition
+                        ) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+                        pageTransition.classList.add(
+                            "is-leaving"
+                        );
+
+                        window.setTimeout(
+                            () => {
+                                window.location.href =
+                                    link.getAttribute("href");
+                            },
+                            650
+                        );
+                    }
+                );
+            }
+        );
 
 
     /* =====================================================
@@ -1925,20 +1961,47 @@ function moveTitleToHero() {
         }
 
 
+        const sectionVisibility =
+            new Map();
+
+
+        sections.forEach(
+            (section) => {
+                sectionVisibility.set(
+                    section,
+                    0
+                );
+            }
+        );
+
+
         const observer =
             new IntersectionObserver(
                 (entries) => {
 
+                    entries.forEach(
+                        (entry) => {
+                            sectionVisibility.set(
+                                entry.target,
+                                entry.isIntersecting
+                                    ? entry.intersectionRatio
+                                    : 0
+                            );
+                        }
+                    );
+
+
                     const visibleSections =
-                        entries
+                        Array.from(
+                            sectionVisibility.entries()
+                        )
                             .filter(
-                                (entry) =>
-                                    entry.isIntersecting
+                                ([, ratio]) =>
+                                    ratio > 0
                             )
                             .sort(
                                 (a, b) =>
-                                    b.intersectionRatio -
-                                    a.intersectionRatio
+                                    b[1] - a[1]
                             );
 
 
@@ -1950,9 +2013,7 @@ function moveTitleToHero() {
 
 
                     const sectionId =
-                        visibleSections[0]
-                            .target
-                            .id;
+                        visibleSections[0][0].id;
 
 
                     if (sectionId) {
@@ -1972,7 +2033,7 @@ function moveTitleToHero() {
                         ],
 
                     rootMargin:
-                        "-20% 0px -55% 0px"
+                        "-15% 0px -55% 0px"
                 }
             );
 
@@ -1989,6 +2050,66 @@ function moveTitleToHero() {
 
 
     setupNavigationObserver();
+
+
+    function updateActiveNavigationFromScroll() {
+
+        const nav =
+            document.querySelector("nav");
+
+        const activationLine =
+            (nav ? nav.offsetHeight : 0) +
+            window.innerHeight * 0.28;
+
+        let activeSection = null;
+
+        sections.forEach(
+            (section) => {
+                const top =
+                    section.getBoundingClientRect().top;
+
+                if (
+                    top <= activationLine &&
+                    (
+                        !activeSection ||
+                        top >
+                            activeSection.getBoundingClientRect().top
+                    )
+                ) {
+                    activeSection = section;
+                }
+            }
+        );
+
+        if (activeSection) {
+            setActiveNavigation(
+                activeSection.id
+            );
+        }
+    }
+
+
+    let activeNavigationFrame = null;
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (activeNavigationFrame) {
+                return;
+            }
+
+            activeNavigationFrame =
+                requestAnimationFrame(
+                    () => {
+                        updateActiveNavigationFromScroll();
+                        activeNavigationFrame = null;
+                    }
+                );
+        },
+        { passive: true }
+    );
+
+    updateActiveNavigationFromScroll();
 
 
     /* =====================================================
@@ -2044,6 +2165,14 @@ function moveTitleToHero() {
 
 
                     event.preventDefault();
+
+                    if (
+                        href.startsWith("#")
+                    ) {
+                        setActiveNavigation(
+                            href.slice(1)
+                        );
+                    }
 
 
                     closeMobileMenu();
@@ -3524,52 +3653,6 @@ document.addEventListener(
                     );
                 }
             );
-
-
-        /* =================================================
-           09. THEME BUTTON ROTATION
-        ================================================= */
-
-        const themeButton =
-            document.getElementById(
-                "themeToggle"
-            );
-
-
-        if (themeButton) {
-
-            themeButton.addEventListener(
-                "click",
-                () => {
-
-                    themeButton.animate(
-                        [
-                            {
-                                transform:
-                                    "rotate(0deg) scale(1)"
-                            },
-
-                            {
-                                transform:
-                                    "rotate(180deg) scale(.85)"
-                            },
-
-                            {
-                                transform:
-                                    "rotate(360deg) scale(1)"
-                            }
-                        ],
-                        {
-                            duration:
-                                650,
-
-                            easing:
-                                "cubic-bezier(.16, 1, .3, 1)"
-                        }
-                    );
-                }
-            );
-        }
 
     }
 );
