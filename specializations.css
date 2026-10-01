@@ -1,0 +1,4054 @@
+/* =========================================================
+   SPECIALIZATIONS.CSS
+   UE COMPUTER ENGINEERING
+
+   SAME VISUAL SYSTEM AS:
+   - INDEX
+   - FACULTY
+   - CAREERS
+
+   IMPORTANT:
+   - Same light/dark gradient theme
+   - Same CPE footer
+   - No background grid
+   - No moving text
+   - Existing JS animations preserved
+   - Sections moved closer together
+========================================================= */
+
+
+/* =========================================================
+   01. ROOT
+========================================================= */
+
+:root {
+
+    --cream: #fffaf0;
+    --navy: #071f3f;
+
+    --text: #071f3f;
+
+    --muted:
+        rgba(7, 31, 63, 0.62);
+
+    --line:
+        rgba(7, 31, 63, 0.14);
+
+    --line-strong:
+        rgba(7, 31, 63, 0.26);
+
+    --glass:
+        rgba(255, 255, 255, 0.20);
+
+    --glass-hover:
+        rgba(255, 255, 255, 0.38);
+
+    --nav-bg:
+        rgba(255, 250, 240, 0.72);
+
+    --gradient:
+        linear-gradient(
+            135deg,
+            #fffaf0 0%,
+            #edf4ef 48%,
+            #d9ebe7 100%
+        );
+
+    --ease:
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+
+}
+
+
+/* =========================================================
+   02. DARK MODE
+========================================================= */
+
+html[data-theme="dark"] {
+
+    --text: #fffaf0;
+
+    --muted:
+        rgba(255, 250, 240, 0.64);
+
+    --line:
+        rgba(255, 250, 240, 0.13);
+
+    --line-strong:
+        rgba(255, 250, 240, 0.27);
+
+    --glass:
+        rgba(255, 255, 255, 0.045);
+
+    --glass-hover:
+        rgba(255, 255, 255, 0.085);
+
+    --nav-bg:
+        rgba(3, 22, 45, 0.76);
+
+    --gradient:
+        linear-gradient(
+            135deg,
+            #03162d 0%,
+            #072b3b 50%,
+            #0c4850 100%
+        );
+
+}
+
+
+/* =========================================================
+   03. RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+        var(--gradient);
+
+    background-attachment:
+        fixed;
+
+    color:
+        var(--text);
+
+    font-family:
+        "Inter",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    transition:
+        background 0.55s ease,
+        color 0.45s ease;
+
+}
+
+
+body,
+button,
+a,
+input,
+textarea,
+select {
+
+    font-family:
+        "Inter",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+button {
+
+    color: inherit;
+
+}
+
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+}
+
+
+ul {
+
+    list-style: none;
+
+}
+
+
+img {
+
+    display: block;
+
+    max-width: 100%;
+
+}
+
+
+em {
+
+    font-style: normal;
+
+}
+
+
+/* =========================================================
+   04. PAGE TRANSITION
+========================================================= */
+
+.page-transition {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999999;
+
+    background:
+        #071f3f;
+
+    transform:
+        translateY(100%);
+
+    pointer-events: none;
+
+}
+
+
+html[data-theme="dark"]
+.page-transition {
+
+    background:
+        #fffaf0;
+
+}
+
+
+.page-transition.entering {
+
+    animation:
+        pageEnter
+        0.8s
+        cubic-bezier(
+            0.77,
+            0,
+            0.18,
+            1
+        )
+        forwards;
+
+}
+
+
+.page-transition.leaving {
+
+    pointer-events: auto;
+
+    animation:
+        pageLeave
+        0.7s
+        cubic-bezier(
+            0.77,
+            0,
+            0.18,
+            1
+        )
+        forwards;
+
+}
+
+
+@keyframes pageEnter {
+
+    from {
+
+        transform:
+            translateY(0);
+
+    }
+
+    to {
+
+        transform:
+            translateY(-100%);
+
+    }
+
+}
+
+
+@keyframes pageLeave {
+
+    from {
+
+        transform:
+            translateY(100%);
+
+    }
+
+    to {
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   05. NAVIGATION
+========================================================= */
+
+.main-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    background:
+        var(--nav-bg);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+}
+
+
+.nav-inner {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    min-height:
+        84px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap:
+        28px;
+
+}
+
+
+/* =========================================================
+   NAV LOGO
+========================================================= */
+
+.nav-brand {
+
+    width: 180px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    overflow: hidden;
+
+}
+
+
+.nav-logo {
+
+    width: 180px;
+    height: 70px;
+
+    object-fit: contain;
+
+    object-position:
+        left center;
+
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap:
+        clamp(
+            14px,
+            1.5vw,
+            27px
+        );
+
+}
+
+
+.nav-links a {
+
+    position: relative;
+
+    display: block;
+
+    padding:
+        32px 0;
+
+    font-size:
+        9px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.045em;
+
+    white-space: nowrap;
+
+}
+
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 23px;
+
+    width: 100%;
+    height: 1px;
+
+    background:
+        currentColor;
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        right;
+
+    transition:
+        transform
+        0.35s ease;
+
+}
+
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+
+    transform:
+        scaleX(1);
+
+    transform-origin:
+        left;
+
+}
+
+
+/* =========================================================
+   NAV RIGHT
+========================================================= */
+
+.nav-right {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+}
+
+
+.nav-clock {
+
+    font-size: 7px;
+
+    font-weight: 500;
+
+    color:
+        var(--muted);
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-toggle {
+
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 50%;
+
+    background:
+        transparent;
+
+    color:
+        var(--text);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.theme-toggle:hover {
+
+    background:
+        var(--glass-hover);
+
+    transform:
+        rotate(12deg);
+
+}
+
+
+.theme-toggle span {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+html[data-theme="light"]
+.theme-toggle .sun {
+
+    opacity: 1;
+
+}
+
+
+html[data-theme="light"]
+.theme-toggle .moon {
+
+    opacity: 0;
+
+    transform:
+        translateY(18px);
+
+}
+
+
+html[data-theme="dark"]
+.theme-toggle .sun {
+
+    opacity: 0;
+
+    transform:
+        translateY(-18px);
+
+}
+
+
+html[data-theme="dark"]
+.theme-toggle .moon {
+
+    opacity: 1;
+
+}
+
+
+/* =========================================================
+   HOME BUTTON
+========================================================= */
+
+.home-button {
+
+    padding:
+        11px 15px;
+
+    border:
+        1px solid
+        var(--line-strong);
+
+    border-radius:
+        100px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.home-button:hover {
+
+    background:
+        #071f3f;
+
+    color:
+        #fffaf0;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+html[data-theme="dark"]
+.home-button:hover {
+
+    background:
+        #fffaf0;
+
+    color:
+        #071f3f;
+
+}
+
+
+/* =========================================================
+   06. HERO
+========================================================= */
+
+.hero {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    min-height:
+        calc(
+            100vh - 84px
+        );
+
+    margin: auto;
+
+    padding:
+        38px 0 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+/* =========================================================
+   HERO META
+========================================================= */
+
+.hero-meta {
+
+    padding-bottom:
+        15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    gap: 25px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero-title {
+
+    margin:
+        clamp(
+            45px,
+            5vw,
+            80px
+        )
+        0
+        clamp(
+            40px,
+            5vw,
+            70px
+        );
+
+}
+
+
+.hero-line {
+
+    display: block;
+
+    font-size:
+        clamp(
+            72px,
+            11.4vw,
+            175px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.79;
+
+    letter-spacing:
+        -0.08em;
+
+}
+
+
+.hero-line-two {
+
+    padding-left:
+        clamp(
+            40px,
+            12vw,
+            185px
+        );
+
+}
+
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
+.hero-bottom {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto;
+
+    gap:
+        50px;
+
+    align-items: end;
+
+}
+
+
+.hero-description {
+
+    max-width:
+        470px;
+
+}
+
+
+.hero-description > span {
+
+    display: block;
+
+    margin-bottom:
+        12px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+.hero-description p {
+
+    margin: 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        clamp(
+            12px,
+            1vw,
+            15px
+        );
+
+    font-weight: 400;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
+
+.explore-button {
+
+    min-width:
+        220px;
+
+    padding:
+        15px 18px;
+
+    border:
+        1px solid
+        var(--line-strong);
+
+    border-radius:
+        100px;
+
+    background:
+        transparent;
+
+    color:
+        var(--text);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    gap: 35px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.explore-button:hover {
+
+    background:
+        #071f3f;
+
+    color:
+        #fffaf0;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+html[data-theme="dark"]
+.explore-button:hover {
+
+    background:
+        #fffaf0;
+
+    color:
+        #071f3f;
+
+}
+
+
+/* =========================================================
+   07. INTRO SECTION
+
+   CLOSER TO HERO / SHOWCASE
+========================================================= */
+
+.intro-section {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    margin: auto;
+
+    padding:
+        80px 0 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        55px
+        minmax(
+            0,
+            1fr
+        )
+        minmax(
+            260px,
+            0.45fr
+        );
+
+    gap:
+        clamp(
+            22px,
+            3.5vw,
+            55px
+        );
+
+    align-items: end;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.intro-number {
+
+    align-self: start;
+
+    color:
+        var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+}
+
+
+.section-label {
+
+    display: block;
+
+    margin-bottom:
+        16px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+.intro-main h2 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            44px,
+            5.2vw,
+            80px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.94;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+.intro-description {
+
+    margin: 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        clamp(
+            12px,
+            1vw,
+            15px
+        );
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   08. SHOWCASE SECTION
+========================================================= */
+
+.showcase-section {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    margin: auto;
+
+    padding:
+        20px 0 75px;
+
+}
+
+
+.showcase-top {
+
+    min-height:
+        44px;
+
+    padding-bottom:
+        14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* =========================================================
+   SHOWCASE LAYOUT
+========================================================= */
+
+.showcase-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(
+            0,
+            1.05fr
+        )
+        minmax(
+            360px,
+            0.95fr
+        );
+
+    gap:
+        clamp(
+            20px,
+            2.5vw,
+            38px
+        );
+
+    padding-top:
+        24px;
+
+    align-items: stretch;
+
+}
+
+
+/* =========================================================
+   09. SHOWCASE VISUAL
+========================================================= */
+
+.showcase-visual {
+
+    position: relative;
+
+    min-height:
+        620px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        20px;
+
+    background:
+        var(--glass);
+
+    isolation: isolate;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   SHOWCASE IMAGES
+
+   IMPORTANT:
+   JS DOES NOT NEED TO CHANGE.
+========================================================= */
+
+.showcase-image-primary,
+.showcase-image-secondary {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    will-change:
+        transform,
+        opacity;
+
+}
+
+
+.showcase-image-secondary {
+
+    z-index: 1;
+
+    transform:
+        scale(1.07);
+
+    transition:
+        transform
+        0.8s
+        var(--ease),
+        opacity
+        0.55s ease;
+
+}
+
+
+.showcase-image-primary {
+
+    z-index: 2;
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    transition:
+        opacity
+        0.55s
+        var(--ease),
+        transform
+        0.8s
+        var(--ease);
+
+}
+
+
+/* =========================================================
+   IMAGE HOVER REVEAL
+
+   DESKTOP
+========================================================= */
+
+.showcase-visual:hover
+.showcase-image-primary {
+
+    opacity: 0;
+
+    transform:
+        scale(1.035);
+
+}
+
+
+.showcase-visual:hover
+.showcase-image-secondary {
+
+    transform:
+        scale(1);
+
+}
+
+
+/* =========================================================
+   IMAGE TOUCH REVEAL
+
+   USED BY JS
+========================================================= */
+
+.showcase-visual.touch-reveal
+.showcase-image-primary {
+
+    opacity: 0;
+
+    transform:
+        scale(1.035);
+
+}
+
+
+.showcase-visual.touch-reveal
+.showcase-image-secondary {
+
+    transform:
+        scale(1);
+
+}
+
+
+/* =========================================================
+   SWITCHING STATE
+
+   USED BY:
+   showcaseVisual.classList.add("switching")
+========================================================= */
+
+.showcase-visual.switching
+.showcase-image-primary {
+
+    opacity: 0;
+
+    transform:
+        scale(1.045);
+
+}
+
+
+.showcase-visual.switching
+.showcase-image-secondary {
+
+    opacity: 0;
+
+    transform:
+        scale(1.045);
+
+}
+
+
+/* =========================================================
+   VISUAL OVERLAY
+========================================================= */
+
+.visual-overlay {
+
+    position: absolute;
+
+    z-index: 4;
+
+    inset:
+        auto 0 0 0;
+
+    padding:
+        85px 22px 20px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content:
+        space-between;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(
+                3,
+                22,
+                45,
+                0.76
+            ),
+            transparent
+        );
+
+    color:
+        #fffaf0;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+    transition:
+        opacity
+        0.4s ease;
+
+}
+
+
+.showcase-visual:hover
+.visual-overlay,
+.showcase-visual.touch-reveal
+.visual-overlay {
+
+    opacity: 0;
+
+}
+
+
+/* =========================================================
+   REVEAL LABEL
+========================================================= */
+
+.visual-reveal-label {
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 20px;
+    bottom: 20px;
+
+    padding:
+        10px 14px;
+
+    border-radius:
+        100px;
+
+    background:
+        #fffaf0;
+
+    color:
+        #071f3f;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity 0.4s ease,
+        transform
+        0.5s
+        var(--ease);
+
+}
+
+
+.visual-reveal-label span,
+.visual-reveal-label strong {
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.showcase-visual:hover
+.visual-reveal-label,
+.showcase-visual.touch-reveal
+.visual-reveal-label {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   10. SHOWCASE CONTENT
+========================================================= */
+
+.showcase-content {
+
+    min-height:
+        620px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        20px;
+
+    background:
+        var(--glass);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+}
+
+
+.showcase-content-inner {
+
+    flex: 1;
+
+    padding:
+        clamp(
+            30px,
+            3.5vw,
+            50px
+        );
+
+    transition:
+        opacity
+        0.3s ease,
+        transform
+        0.4s
+        var(--ease);
+
+}
+
+
+/* =========================================================
+   CHANGING STATE
+
+   USED BY:
+   showcaseContent.classList.add("changing")
+========================================================= */
+
+.showcase-content-inner.changing,
+#showcaseContent.changing {
+
+    opacity: 0;
+
+    transform:
+        translateY(18px);
+
+}
+
+
+/* =========================================================
+   FIELD LABEL
+========================================================= */
+
+.showcase-field-label {
+
+    display: block;
+
+    margin-bottom:
+        24px;
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* =========================================================
+   FIELD TITLE
+========================================================= */
+
+#fieldTitle {
+
+    margin:
+        0 0 25px;
+
+    font-size:
+        clamp(
+            42px,
+            4.4vw,
+            68px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.91;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+/* =========================================================
+   FIELD DESCRIPTION
+========================================================= */
+
+.field-description {
+
+    max-width:
+        550px;
+
+    margin:
+        0 0 27px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        clamp(
+            12px,
+            1vw,
+            15px
+        );
+
+    font-weight: 400;
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   FIELD DETAILS
+========================================================= */
+
+.field-detail {
+
+    padding:
+        18px 0;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.detail-label {
+
+    display: block;
+
+    margin-bottom:
+        13px;
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.tag-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+}
+
+
+.tag-list span {
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        100px;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+
+}
+
+
+.tag-list span:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        var(--glass-hover);
+
+}
+
+
+/* =========================================================
+   CAREER LIST
+========================================================= */
+
+.career-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.career-list span {
+
+    position: relative;
+
+    padding:
+        10px 0
+        10px 18px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    font-size:
+        11px;
+
+    font-weight: 600;
+
+    transition:
+        padding-left
+        0.3s ease;
+
+}
+
+
+.career-list span:last-child {
+
+    border-bottom: 0;
+
+}
+
+
+.career-list span::before {
+
+    content: "↗";
+
+    position: absolute;
+
+    left: 0;
+
+    color:
+        var(--muted);
+
+}
+
+
+.career-list span:hover {
+
+    padding-left:
+        23px;
+
+}
+
+
+/* =========================================================
+   11. SHOWCASE CONTROLS
+========================================================= */
+
+.showcase-controls {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.showcase-controls button {
+
+    min-height:
+        66px;
+
+    padding:
+        16px 20px;
+
+    border: 0;
+
+    background:
+        transparent;
+
+    color:
+        var(--text);
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.3s ease,
+        padding 0.3s
+        var(--ease);
+
+}
+
+
+.showcase-controls button:first-child {
+
+    text-align: left;
+
+}
+
+
+.showcase-controls button:last-child {
+
+    text-align: right;
+
+    border-left:
+        1px solid
+        var(--line);
+
+}
+
+
+.showcase-controls button:hover {
+
+    background:
+        var(--glass-hover);
+
+}
+
+
+.showcase-controls button:first-child:hover {
+
+    padding-left:
+        15px;
+
+}
+
+
+.showcase-controls button:last-child:hover {
+
+    padding-right:
+        15px;
+
+}
+
+
+/* =========================================================
+   12. INDEX SECTION
+
+   REDUCED GAP
+========================================================= */
+
+.index-section {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    margin: auto;
+
+    padding:
+        70px 0 75px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.index-heading {
+
+    margin-bottom:
+        36px;
+
+}
+
+
+.index-heading h2 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            44px,
+            5.2vw,
+            80px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.94;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+/* =========================================================
+   FIELD INDEX
+========================================================= */
+
+.field-index {
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.field-index-item {
+
+    width: 100%;
+
+    min-height:
+        82px;
+
+    padding:
+        15px 8px;
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        minmax(
+            0,
+            1fr
+        )
+        200px
+        30px;
+
+    gap: 18px;
+
+    align-items: center;
+
+    border: 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        transparent;
+
+    color:
+        var(--text);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        padding
+        0.4s
+        var(--ease),
+        background
+        0.35s ease;
+
+}
+
+
+.field-index-item:hover,
+.field-index-item.active {
+
+    padding-left:
+        18px;
+
+    padding-right:
+        18px;
+
+    background:
+        var(--glass-hover);
+
+}
+
+
+.index-number {
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.field-index-item strong {
+
+    font-size:
+        clamp(
+            16px,
+            1.5vw,
+            23px
+        );
+
+    font-weight: 700;
+
+    letter-spacing:
+        -0.03em;
+
+}
+
+
+.index-category {
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.field-index-item i {
+
+    justify-self: end;
+
+    font-size: 20px;
+
+    font-style: normal;
+
+    transition:
+        transform
+        0.35s
+        var(--ease);
+
+}
+
+
+.field-index-item:hover i,
+.field-index-item.active i {
+
+    transform:
+        translate(
+            4px,
+            -4px
+        );
+
+}
+
+
+/* =========================================================
+   13. DIRECTION SECTION
+========================================================= */
+
+.direction-section {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    margin: auto;
+
+    padding:
+        70px 0 75px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.direction-heading {
+
+    margin-bottom:
+        36px;
+
+}
+
+
+.direction-heading h2 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            44px,
+            5.2vw,
+            80px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.94;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+/* =========================================================
+   DIRECTION LAYOUT
+
+   THIS MATCHES PART 1 HTML
+========================================================= */
+
+.direction-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        0.58fr
+        1.42fr;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        20px;
+
+    overflow: hidden;
+
+    background:
+        var(--glass);
+
+}
+
+
+/* =========================================================
+   DIRECTION CENTER
+========================================================= */
+
+.direction-center {
+
+    min-height:
+        520px;
+
+    padding:
+        35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-right:
+        1px solid
+        var(--line);
+
+    text-align: center;
+
+}
+
+
+.direction-center span {
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.direction-center strong {
+
+    margin:
+        12px 0;
+
+    font-size:
+        clamp(
+            100px,
+            12vw,
+            180px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.8;
+
+    letter-spacing:
+        -0.1em;
+
+}
+
+
+/* =========================================================
+   DIRECTION OPTIONS
+========================================================= */
+
+.direction-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+}
+
+
+.direction-option {
+
+    min-height:
+        260px;
+
+    padding:
+        25px;
+
+    border: 0;
+
+    border-right:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        transparent;
+
+    color:
+        var(--text);
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background
+        0.35s ease,
+        transform
+        0.4s
+        var(--ease);
+
+}
+
+
+.direction-option:nth-child(2n) {
+
+    border-right: 0;
+
+}
+
+
+.direction-option:nth-last-child(-n + 2) {
+
+    border-bottom: 0;
+
+}
+
+
+.direction-option:hover {
+
+    background:
+        var(--glass-hover);
+
+}
+
+
+.direction-option > span {
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.direction-option h3 {
+
+    margin-top: auto;
+
+    font-size:
+        clamp(
+            35px,
+            4vw,
+            58px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.87;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+.direction-option p {
+
+    margin-top:
+        17px;
+
+    color:
+        var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    line-height: 1.65;
+
+}
+
+
+/* =========================================================
+   14. VISUAL STRIP
+========================================================= */
+
+.visual-strip {
+
+    width: 100%;
+
+    padding:
+        70px
+        max(
+            3vw,
+            calc(
+                (100vw - 1460px) / 2
+            )
+        )
+        80px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+/* =========================================================
+   VISUAL STRIP HEADING
+========================================================= */
+
+.visual-strip-heading {
+
+    margin-bottom:
+        36px;
+
+}
+
+
+.visual-strip-heading > span {
+
+    display: block;
+
+    margin-bottom:
+        15px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+.visual-strip-heading h2 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            44px,
+            5.2vw,
+            80px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.94;
+
+    letter-spacing:
+        -0.06em;
+
+}
+
+
+/* =========================================================
+   VISUAL STRIP IMAGES
+========================================================= */
+
+.visual-strip-images {
+
+    height:
+        clamp(
+            420px,
+            44vw,
+            630px
+        );
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap: 8px;
+
+}
+
+
+.strip-image {
+
+    position: relative;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border-radius:
+        16px;
+
+}
+
+
+.strip-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(
+                3,
+                22,
+                45,
+                0.62
+            ),
+            transparent 60%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.strip-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        grayscale(0.72)
+        brightness(0.78);
+
+    transition:
+        transform
+        0.8s
+        var(--ease),
+        filter
+        0.55s ease;
+
+}
+
+
+.strip-image:hover img {
+
+    transform:
+        scale(1.055);
+
+    filter:
+        grayscale(0)
+        brightness(0.88);
+
+}
+
+
+.strip-image span {
+
+    position: absolute;
+
+    z-index: 2;
+
+    left: 18px;
+    bottom: 18px;
+
+    color:
+        #fffaf0;
+
+    font-size:
+        clamp(
+            20px,
+            2.3vw,
+            35px
+        );
+
+    font-weight: 700;
+
+    letter-spacing:
+        -0.04em;
+
+    writing-mode:
+        vertical-rl;
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+/* =========================================================
+   15. NEXT SECTION
+========================================================= */
+
+.next-section {
+
+    width:
+        min(
+            1460px,
+            94vw
+        );
+
+    margin: auto;
+
+    padding:
+        70px 0 80px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.next-meta {
+
+    padding-bottom:
+        14px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    gap: 20px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    color:
+        var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* =========================================================
+   NEXT LINK
+========================================================= */
+
+.next-link {
+
+    position: relative;
+
+    display: block;
+
+    padding:
+        48px 0 20px;
+
+    overflow: hidden;
+
+}
+
+
+.next-link span {
+
+    display: block;
+
+    font-size:
+        clamp(
+            58px,
+            9vw,
+            135px
+        );
+
+    font-weight: 700;
+
+    line-height: 0.78;
+
+    letter-spacing:
+        -0.075em;
+
+    transition:
+        transform
+        0.45s
+        var(--ease);
+
+}
+
+
+.next-link span:nth-child(2) {
+
+    padding-left:
+        9vw;
+
+}
+
+
+.next-link span:nth-child(3) {
+
+    text-align: right;
+
+}
+
+
+.next-link i {
+
+    position: absolute;
+
+    top: 50%;
+    right: 2%;
+
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            85px
+        );
+
+    font-style: normal;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        transform
+        0.4s
+        var(--ease);
+
+}
+
+
+.next-link:hover
+span:first-child {
+
+    transform:
+        translateX(12px);
+
+}
+
+
+.next-link:hover
+span:nth-child(2) {
+
+    transform:
+        translateX(-12px);
+
+}
+
+
+.next-link:hover i {
+
+    transform:
+        translateY(-50%)
+        translate(
+            7px,
+            -7px
+        );
+
+}
+
+
+/* =========================================================
+   16. SCROLL REVEAL
+
+   USED BY JS:
+   .reveal -> .visible
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(28px);
+
+    transition:
+        opacity
+        0.75s
+        var(--ease),
+        transform
+        0.8s
+        var(--ease);
+
+}
+
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   17. CURSOR TRAIL
+========================================================= */
+
+.cursor-trail {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99998;
+
+    pointer-events: none;
+
+}
+
+
+.cursor-trail-circle {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    border-radius: 50%;
+
+    background:
+        var(--text);
+
+    pointer-events: none;
+
+    will-change: transform;
+
+}
+
+
+/* =========================================================
+   18. FOOTER
+
+   SAME COMPONENT AS INDEX / FACULTY / CAREERS
+========================================================= */
+
+.cpe-footer {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 380px;
+
+    padding:
+        90px 60px 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            #07596a 0%,
+            #073d59 45%,
+            #07153e 100%
+        );
+
+    color:
+        #fffdf2;
+
+}
+
+
+/* =========================================================
+   FOOTER BACKGROUND IMAGE
+========================================================= */
+
+.cpe-footer-pattern {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    opacity: 0.22;
+
+    pointer-events: none;
+
+    user-select: none;
+
+}
+
+
+/* =========================================================
+   FOOTER CONTENT
+========================================================= */
+
+.cpe-footer-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+
+}
+
+
+/* =========================================================
+   FOOTER BRAND
+========================================================= */
+
+.cpe-footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 36px;
+
+}
+
+
+.cpe-footer-logo {
+
+    width:
+        clamp(
+            260px,
+            18vw,
+            340px
+        );
+
+    height: auto;
+
+    object-fit: contain;
+
+}
+
+
+.cpe-footer-divider {
+
+    width: 2px;
+    height: 80px;
+
+    flex-shrink: 0;
+
+    background:
+        #fffdf2;
+
+}
+
+
+.cpe-footer-name {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    color:
+        #fffdf2;
+
+}
+
+
+.cpe-footer-name span {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(
+            20px,
+            1.45vw,
+            28px
+        );
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    letter-spacing:
+        -0.03em;
+
+}
+
+
+.cpe-footer-name strong {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(
+            28px,
+            2vw,
+            40px
+        );
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing:
+        -0.045em;
+
+    color:
+        #fffdf2;
+
+}
+
+
+/* =========================================================
+   FOOTER SOCIAL
+========================================================= */
+
+.cpe-footer-social {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-right: 20px;
+
+}
+
+
+.cpe-footer-follow {
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size:
+        clamp(
+            38px,
+            3vw,
+            58px
+        );
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    color:
+        #fffdf2;
+
+    transform:
+        rotate(-4deg);
+
+}
+
+
+.cpe-footer-icons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.cpe-social-link {
+
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        #fffdf2;
+
+    color:
+        #001c49;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+
+}
+
+
+.cpe-social-link i {
+
+    font-size: 30px;
+
+}
+
+
+.cpe-social-link:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+    background:
+        #001c49;
+
+    color:
+        #fffdf2;
+
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.cpe-footer-bottom {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    margin-top: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color:
+        #fffdf2;
+
+}
+
+
+.cpe-footer-bottom span {
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing:
+        0.04em;
+
+    color:
+        #fffdf2;
+
+}
+
+
+/* =========================================================
+   19. TABLET
+========================================================= */
+
+.cpe-join-us {
+    width: min(100%, 280px); min-height: 48px; display: flex;
+    align-items: center; justify-content: space-between; margin-top: 22px;
+    padding: 0 18px; border: 1px solid rgba(255, 250, 240, .72);
+    border-radius: 999px; color: #fffaf0; font: 700 9px "Space Mono", monospace;
+    letter-spacing: .12em; text-transform: uppercase;
+    transition: background-color .3s ease, color .3s ease, transform .3s ease;
+}
+.cpe-join-us span { font-size: 20px; transition: transform .3s ease; }
+.cpe-join-us:hover { background: #fffaf0; color: #06153b; transform: translateY(-3px); }
+.cpe-join-us:hover span { transform: translate(3px, -3px); }
+
+.cpe-join-us { font-size: 11px; }
+.nav-links a { font-size: 9px !important; }
+.nav-clock { font-size: 7px !important; }
+.home-button { font-size: 8px !important; }
+
+@media (max-width: 1100px) {
+
+    .nav-links {
+
+        gap: 13px;
+
+    }
+
+
+    .nav-links a {
+
+        font-size: 9px !important;
+
+    }
+
+
+    .intro-section {
+
+        grid-template-columns:
+            50px
+            1fr;
+
+    }
+
+
+    .intro-description {
+
+        grid-column: 2;
+
+        max-width: 560px;
+
+    }
+
+
+    .showcase-layout {
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap: 20px;
+
+    }
+
+
+    .showcase-visual,
+    .showcase-content {
+
+        min-height: 560px;
+
+    }
+
+
+    .field-index-item {
+
+        grid-template-columns:
+            50px
+            1fr
+            150px
+            25px;
+
+    }
+
+
+    .direction-layout {
+
+        grid-template-columns:
+            0.5fr
+            1.5fr;
+
+    }
+
+
+    .direction-center {
+
+        min-height: 470px;
+
+    }
+
+
+    .visual-strip-images {
+
+        height: 720px;
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+
+    .cpe-footer {
+
+        min-height: auto;
+
+        padding:
+            80px
+            40px
+            25px;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width: 220px;
+
+    }
+
+
+    .cpe-footer-brand {
+
+        gap: 25px;
+
+    }
+
+
+    .cpe-footer-divider {
+
+        height: 65px;
+
+    }
+
+
+    .cpe-social-link {
+
+        width: 62px;
+        height: 62px;
+
+    }
+
+
+    .cpe-social-link i {
+
+        font-size: 25px;
+
+    }
+
+}
+
+
+/* =========================================================
+   20. MOBILE NAV / TABLET STACK
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .main-nav {
+
+        position: relative;
+
+    }
+
+
+    .nav-inner {
+
+        width: 92vw;
+
+        min-height: 74px;
+
+        display: flex;
+
+        justify-content:
+            space-between;
+
+        gap: 12px;
+
+    }
+
+
+    .nav-brand,
+    .nav-logo {
+
+        width: 140px;
+        height: 55px;
+
+    }
+
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+
+    .nav-clock {
+
+        display: none;
+
+    }
+
+
+    .hero {
+
+        min-height: auto;
+
+        padding:
+            35px 0 65px;
+
+    }
+
+
+    .hero-title {
+
+        margin:
+            60px 0;
+
+    }
+
+
+    .hero-line {
+
+        font-size:
+            clamp(
+                60px,
+                16vw,
+                105px
+            );
+
+    }
+
+
+    .hero-line-two {
+
+        padding-left:
+            6vw;
+
+    }
+
+
+    .hero-bottom {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 28px;
+
+    }
+
+
+    .explore-button {
+
+        width: 100%;
+
+    }
+
+
+    .intro-section {
+
+        padding:
+            60px 0 45px;
+
+        display: block;
+
+    }
+
+
+    .intro-number {
+
+        margin-bottom:
+            24px;
+
+    }
+
+
+    .intro-description {
+
+        margin-top:
+            25px;
+
+    }
+
+
+    .showcase-section {
+
+        padding:
+            15px 0 60px;
+
+    }
+
+
+    .showcase-layout {
+
+        display: block;
+
+        padding-top:
+            20px;
+
+    }
+
+
+    .showcase-visual {
+
+        min-height:
+            70vw;
+
+        max-height:
+            680px;
+
+    }
+
+
+    .showcase-content {
+
+        min-height: 0;
+
+        margin-top:
+            18px;
+
+    }
+
+
+    .index-section,
+    .direction-section {
+
+        padding:
+            55px 0 65px;
+
+    }
+
+
+    .direction-layout {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .direction-center {
+
+        min-height:
+            330px;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid
+            var(--line);
+
+    }
+
+
+    .direction-center strong {
+
+        font-size:
+            clamp(
+                100px,
+                25vw,
+                160px
+            );
+
+    }
+
+
+    .next-section {
+
+        padding:
+            55px 0 65px;
+
+    }
+
+}
+
+
+/* =========================================================
+   21. MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .hero {
+
+        width: 90vw;
+
+    }
+
+
+    .hero-meta {
+
+        font-size: 7px;
+
+    }
+
+
+    .hero-meta span:last-child {
+
+        display: none;
+
+    }
+
+
+    .hero-line {
+
+        font-size:
+            clamp(
+                52px,
+                17vw,
+                88px
+            );
+
+    }
+
+
+    .hero-line-two {
+
+        padding-left: 0;
+
+    }
+
+
+    .intro-section,
+    .showcase-section,
+    .index-section,
+    .direction-section,
+    .next-section {
+
+        width: 90vw;
+
+    }
+
+
+    .intro-main h2,
+    .index-heading h2,
+    .direction-heading h2,
+    .visual-strip-heading h2 {
+
+        font-size:
+            clamp(
+                38px,
+                12vw,
+                58px
+            );
+
+    }
+
+
+    .showcase-visual {
+
+        min-height:
+            110vw;
+
+        max-height:
+            620px;
+
+        border-radius:
+            16px;
+
+    }
+
+
+    .showcase-content {
+
+        border-radius:
+            16px;
+
+    }
+
+
+    .showcase-content-inner {
+
+        padding:
+            28px 22px;
+
+    }
+
+
+    #fieldTitle {
+
+        font-size:
+            clamp(
+                38px,
+                12vw,
+                58px
+            );
+
+    }
+
+
+    .field-index-item {
+
+        min-height: 76px;
+
+        grid-template-columns:
+            38px
+            1fr
+            25px;
+
+        gap: 9px;
+
+    }
+
+
+    .index-category {
+
+        display: none;
+
+    }
+
+
+    .field-index-item strong {
+
+        font-size:
+            clamp(
+                14px,
+                4.5vw,
+                20px
+            );
+
+    }
+
+
+    .direction-options {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .direction-option {
+
+        min-height:
+            220px;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid
+            var(--line);
+
+    }
+
+
+    .direction-option:nth-child(2n),
+    .direction-option:nth-last-child(-n + 2) {
+
+        border-bottom:
+            1px solid
+            var(--line);
+
+    }
+
+
+    .direction-option:last-child {
+
+        border-bottom: 0;
+
+    }
+
+
+    .visual-strip {
+
+        padding:
+            55px 5vw
+            65px;
+
+    }
+
+
+    .visual-strip-images {
+
+        height: auto;
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .strip-image {
+
+        height:
+            min(
+                110vw,
+                520px
+            );
+
+    }
+
+
+    .strip-image span {
+
+        writing-mode:
+            initial;
+
+        transform: none;
+
+    }
+
+
+    .next-link {
+
+        padding:
+            40px 0 10px;
+
+    }
+
+
+    .next-link span {
+
+        font-size:
+            clamp(
+                50px,
+                17vw,
+                80px
+            );
+
+    }
+
+
+    .next-link span:nth-child(2) {
+
+        padding-left: 0;
+
+    }
+
+
+    /* =====================================================
+       FOOTER MOBILE
+    ====================================================== */
+
+    .cpe-footer {
+
+        min-height: auto;
+
+        padding:
+            65px
+            24px
+            22px;
+
+    }
+
+
+    .cpe-footer-content {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap: 45px;
+
+    }
+
+
+    .cpe-footer-brand {
+
+        width: 100%;
+
+        gap: 18px;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width: 180px;
+
+    }
+
+
+    .cpe-footer-divider {
+
+        height: 55px;
+
+    }
+
+
+    .cpe-footer-social {
+
+        align-items:
+            flex-start;
+
+        padding-right: 0;
+
+    }
+
+
+    .cpe-footer-follow {
+
+        font-size: 42px;
+
+    }
+
+
+    .cpe-social-link {
+
+        width: 58px;
+        height: 58px;
+
+    }
+
+
+    .cpe-social-link i {
+
+        font-size: 23px;
+
+    }
+
+
+    .cpe-footer-bottom {
+
+        margin-top:
+            55px;
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap: 10px;
+
+    }
+
+
+    .cpe-footer-bottom span {
+
+        font-size: 9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   22. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .nav-inner {
+
+        width: 90vw;
+
+    }
+
+
+    .nav-brand,
+    .nav-logo {
+
+        width: 125px;
+        height: 50px;
+
+    }
+
+
+    .theme-toggle {
+
+        width: 36px;
+        height: 36px;
+
+    }
+
+
+    .home-button {
+
+        padding:
+            9px 11px;
+
+        font-size: 7px;
+
+    }
+
+
+    .hero {
+
+        padding-top:
+            25px;
+
+    }
+
+
+    .hero-title {
+
+        margin:
+            50px 0;
+
+    }
+
+
+    .showcase-controls button {
+
+        min-height:
+            60px;
+
+        padding:
+            13px;
+
+        font-size: 7px;
+
+    }
+
+
+    .visual-overlay {
+
+        padding:
+            70px 15px 15px;
+
+    }
+
+
+    .visual-overlay span:last-child {
+
+        display: none;
+
+    }
+
+
+    .visual-reveal-label {
+
+        left: 14px;
+        bottom: 14px;
+
+    }
+
+
+    .cpe-footer {
+
+        padding:
+            55px
+            20px
+            20px;
+
+    }
+
+
+    .cpe-footer-brand {
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .cpe-footer-logo {
+
+        width: 155px;
+
+    }
+
+
+    .cpe-footer-divider {
+
+        display: none;
+
+    }
+
+
+    .cpe-footer-name {
+
+        width: 100%;
+
+    }
+
+
+    .cpe-footer-name span {
+
+        font-size: 16px;
+
+    }
+
+
+    .cpe-footer-name strong {
+
+        font-size: 24px;
+
+    }
+
+}
+
+
+/* =========================================================
+   23. REDUCED MOTION
+========================================================= */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    * {
+
+        scroll-behavior:
+            auto !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+    }
+
+
+    .reveal {
+
+        opacity: 1;
+
+        transform: none;
+
+    }
+
+}
+
+
+.page-transition {
+    display: none;
+}
